@@ -1,4 +1,4 @@
-import { showModal, toast } from '../../tool/tool.js'
+import { showModal, toast, backPage } from '../../tool/tool.js'
 import API from '../../api/index.js'
 Page({
 
@@ -6,20 +6,64 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data: {},
+    type: 0, // 页面种类 0： 编辑商品   1： 商品详情
+    data: {},  
     supplierNo: '',
-  },
+    json: {}  // 被修改的商品数据
+  }, 
 
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     let data = JSON.parse(options.data)
-    console.log(data)
-    this.setData({ data })
+    let type = 'type' in options ? JSON.parse(options.type) : 1
+    console.log(data, type)
+    this.setData({ data, type })
+  },
+// 点击编辑商品
+  editConfirmClick () {
+    const _this = this
+    wx.showModal({
+      title: '提示',
+      content: '确认编辑此内容？',
+      success(res) {
+        if (res.confirm) {
+          _this.updateItemNote()
+        }
+      }
+    })
+  },
+// 绑定编辑商品的 input
+  bindInputData (e) {
+    console.log(e)
+    let inputName =  e.target.dataset.inputname
+    let value = e.detail.value
+    this.setData({ [`json.${inputName}`]: value })
+    console.log(this.data.json)
+  },
+// 编辑商品请求
+  updateItemNote () {
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
+    const itemNo = this.data.data.itemNo
+    let json = this.data.json
+    console.log(Object.keys(json).length == 0, json, Object.keys(json).length)
+    if (Object.keys(json).length == 0) return showModal({ content: '商品未编辑' })
+    json = JSON.stringify(json)
+    
+    API.updateItemNote({
+      data: { platform, token, username, supplierNo, itemNo, appNote: json },
+      success (res) {
+        console.log(res)
+        if (res.code == 0) toast('编辑成功')
+        backPage()
+      }
+    })
   },
 
+// 上下架
   upOrDownClick (e) {
     const _this = this
     wx.showModal({

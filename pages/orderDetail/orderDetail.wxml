@@ -39,10 +39,110 @@
 <TextItems wx:if="{{detailData.memo}}" texrItemData="{{[{label: '店主留言：', content: detailData.memo}]}}" />
 <TextItems texrItemData="{{[{label: '商品信息'}]}}" />
 
-<!-- 商品信息区域 -->
+<!-- 商品表格 -->
 
+<view class="sale-data-table">
+  <view class="item" id="title-name">商品名称</view>
+  <view class="item">数量</view>
+  <view class="item">小计</view>
+</view>
 
-<view class="goods-card-box" wx:for="{{detailData.details}}" wx:key="index">
+<view class="goods-card-box" wx:for="{{detailData.details}}" wx:key="index" bindtap="showGoodDetailCardClick" data-currentIndex="{{index}}">
+  <block>
+    <view class="good-detail">
+      <view class="table-item">
+        <view class="table-name">
+          <TextItems 
+            boxStyle="border: 0rpx;"
+            itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+            labelStyle="color: #5C5C5C;"  
+            texrItemData="{{[{label: '', content: item.itemName}]}}" 
+          />
+          <TextItems 
+            boxStyle="border: 0rpx;"
+            itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;" 
+            labelStyle="color: #5C5C5C;"  
+            texrItemData="{{[{label: '条码：', content: item.itemSubno}]}}" 
+          />
+        </view>
+        <view class="num"> {{item.realQty + item.unitNo}}</view>
+        <view class="allPrice"> {{'￥'+item.subAmt}}</view>
+      </view>
+      <!-- <view class="image-box">
+        <image src="{{item.imgImg}}"/>
+        <view>
+          <TextItems 
+            boxStyle="border: 0rpx;"
+            itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+            labelStyle="color: #5C5C5C;"  
+            contentStyle="white-space: nowrap;"
+            texrItemData="{{[{label: '包装规格：', content: item.itemSize}, {label: '要货数量：', content: item.realQty + item.unitNo}]}}" 
+          />
+          <TextItems 
+            boxStyle="border: 0rpx;"
+            itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+            labelStyle="color: #5C5C5C;"  
+            contentStyle="color: #FF4E3E;"
+            texrItemData="{{[{label: '单价：', content: '￥'+item.validPrice}]}}" 
+          />
+        </view>
+      </view> -->
+    </view>
+  </block>
+  
+</view>
+
+<view class="print-order-box" wx:if="{{isShowGoodDetailDialog}}" bindtap="hideDlalogClick">
+  <view class="goods-card-box" style="background: #fff;width:85%;border-radius:10rpx;"> 
+  <block>
+    <view class="image-box">
+      <image src="{{detailData.details[currentGoodIndex].imgImg}}"/>
+    </view>
+    <view class="good-detail">
+      <view class="item">
+        <TextItems 
+          boxStyle="border: 0rpx;"
+          itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;" 
+          labelStyle="color: #5C5C5C;"  
+          texrItemData="{{[{label: '条码：', content: detailData.details[currentGoodIndex].itemSubno}]}}" 
+        />
+        <TextItems 
+          boxStyle="border: 0rpx;"
+          itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+          labelStyle="color: #5C5C5C;"  
+          texrItemData="{{[{label: '品名：', content: detailData.details[currentGoodIndex].itemName}]}}" 
+        />
+        <TextItems 
+          boxStyle="border: 0rpx;"
+          itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+          labelStyle="color: #5C5C5C;"  
+          contentStyle="white-space: nowrap;"
+          texrItemData="{{[{label: '包装规格：', content:detailData.details[currentGoodIndex].itemSize}, {label: '要货数量：', content:detailData.details[currentGoodIndex].realQty +detailData.details[currentGoodIndex].unitNo}]}}" 
+        />
+        <TextItems 
+          boxStyle="border: 0rpx;"
+          itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+          labelStyle="color: #5C5C5C;"  
+          contentStyle="color: #FF4E3E;"
+          texrItemData="{{[{label: '单价：', content: '￥'+detailData.details[currentGoodIndex].validPrice}]}}" 
+        />
+        <TextItems 
+          boxStyle="border: 0rpx;"
+          itemStyle="font-size: 24rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
+          labelStyle="color: #5C5C5C;"  
+          contentStyle="color: #FF4E3E;"
+          texrItemData="{{[{label: '总价：', content: '￥'+detailData.details[currentGoodIndex].subAmt}]}}" 
+        />
+      </view>
+    </view>
+  </block>
+  
+</view>
+</view>
+
+<!-- 商品信息区域(换成了上面商品的表格) -->
+
+<!-- <view class="goods-card-box" wx:for="{{detailData.details}}" wx:key="index">
   <block>
     <view class="image-box">
       <image src="{{item.imgImg}}"/>
@@ -86,11 +186,11 @@
     </view>
   </block>
   
-</view>
+</view> -->
 
 
 <TextItems 
-  texrItemData="{{[{label: '订单总额：', content: '￥'+detailData.sheetAmt}, {label: '配送数量：', content: detailData.sheetQty}]}}"
+  texrItemData="{{[{label: '订单总额：', content: '￥'+detailData.sheetAmt}, {label: '商品总数：', content: detailData.sheetQty}]}}"
   contentStyle="color: #FF4E3E;"
 />
 <!-- <TextItems wx:if="{{orderStatu == 2}}" texrItemData="{{[{label: '下单时间：', content: '05-08 15:16'}]}}" />

@@ -2,11 +2,12 @@
 <view class="good-card-box">
   <view class="good-img-box" bindtap='toDetailClick' data-goodItem="{{index}}">
     <image src="{{goodsData.picUrl}}" />
+    <view style="display: none;" class="edit-good" catchtap="editGoodClick" data-goodItem="{{index}}">编辑</view>
   </view>
   <view class="good-props-box">
     <view class="main-info">
       <view class="main">
-        <view class="name">{{goodsData.itemName }}</view>
+        <view class="name">{{goodsData.modifyMonth}}月) {{goodsData.itemName}}</view>
         <view class="item">
           <view class="label">商品条码：</view>
           <view class="content">{{goodsData.itemSubno}}</view>

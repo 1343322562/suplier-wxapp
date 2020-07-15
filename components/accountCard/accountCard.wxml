@@ -16,10 +16,10 @@
     </view>
   </view>
   <view class="order-info">
-    <view class="item" wx:if="{{data.sheetQty}}">
+    <!-- <view class="item" wx:if="{{data.sheetQty}}">
       <text class="label">订单数量：</text>
       <text class="content">{{data.sheetQty}}</text>
-    </view>
+    </view> -->
     <view class="item" wx:if="{{data.sheetAmt}}">
       <text class="label">金额：</text>
       <text class="content">￥{{data.sheetAmt}} </text>

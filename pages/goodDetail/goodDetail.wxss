@@ -55,4 +55,41 @@
     height: 140rpx;
     width: 140rpx;
     margin-right: 30rpx;
+    background: #eee;
+
 }
+
+
+
+/* 修改商品 Dialog */
+.print-order-box {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .print-order {
+    width: 570rpx;
+    background-color: #fff;
+    padding: 0rpx 32rpx 28rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .print-order .title {
+    width: 100%;
+    text-align: center;
+    font-size: 36rpx;
+    color: #080808;
+    height: 100rpx;
+    line-height: 100rpx;
+  }

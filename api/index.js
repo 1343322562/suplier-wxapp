@@ -12,6 +12,7 @@ export default {
   updateSheetStatus: (param) => ajax.post(`match/updateSheetStatus.do`, param),  // 修改订单状态信息
 
   searchGoodsItemCls: (param) => ajax.post(`match/searchItemCls.do`, param),         // 查询商品类别
+  updateItemNote: (param) => ajax.post(`match/updateItemNote.do`, param),         // 修改商品信息
   supplierItemSearch: (param) => ajax.post(`match/supplierItemSearch.do`, param),    // 分类商品
   updateItemStatus: (param) => ajax.post(`match/updateItemStatus.do`, param),        // 上下架
   updateItemPrice: (param) => ajax.post(`match/updateItemPrice.do`, param),        // 修改商品价格

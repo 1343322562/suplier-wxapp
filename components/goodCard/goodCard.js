@@ -57,6 +57,11 @@ Component({
     selectedClick (e) {
       let page = getCurrentPages().reverse()[0]
       page.seleted(e)
+    },
+    // 跳转编辑商品页
+    editGoodClick (e) {
+      let page = getCurrentPages().reverse()[0]
+      page.editGoodClick(e)
     }
   }
 })

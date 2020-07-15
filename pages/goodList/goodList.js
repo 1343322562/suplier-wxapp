@@ -150,6 +150,14 @@ Page({
     let data = JSON.stringify(goodsData[index]) 
     goPage('../goodDetail/goodDetail?data=' + data)
   },
+  // 跳转编辑商品页
+  editGoodClick (e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.gooditem
+    let goodsData = this.data.goodsData
+    let data = JSON.stringify(goodsData[index]) 
+    goPage('../goodDetail/goodDetail?data=' + data +'&type=' + 0)
+  },
   // 选中 商品
   seleted(e) {
     console.log(e)
@@ -367,9 +375,11 @@ Page({
         console.log(res)
         let goodsData = res.data.itemData
         goodsData.forEach((item, i) => {
-          goodsData[i].checkbox = 0
-          goodsData[i].profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(2)
-          goodsData[i].picUrl = basePicUrl + item.itemNo + '/' + item.picUrl
+          goodsData[i].checkbox = 0 
+          goodsData[i].profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(2)  // 毛利率
+          goodsData[i].picUrl = basePicUrl + item.itemNo + '/' + item.picUrl  // 图片地址
+          let month = item.modifyDate.slice(5,7)
+          goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
         _this.setData({ goodsData })
         wx.hideLoading()

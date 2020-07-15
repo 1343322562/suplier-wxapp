@@ -19,7 +19,16 @@ padding: 24rpx 6rpx 24rpx 18rpx;
   align-items: start;
 }
 
-
+.edit-good{
+  font-size: 26rpx;
+  border: 1rpx solid #666666;
+  text-align: center;
+  width: 74rpx;
+  margin-left: 10rpx;
+  border-radius: 7rpx;
+  color: #666666;
+  
+}
 .good-card-box .good-img-box{
   
 }
@@ -28,6 +37,7 @@ padding: 24rpx 6rpx 24rpx 18rpx;
   height: 100rpx;
     width: 100rpx;
     margin-right: 24rpx;
+    background: #eee;
 }
 
 .good-props-box {

@@ -10,6 +10,19 @@ Page({
     detailData: {},       // 详细数据
     isShowEnterCarDialog: true, // 是否显示装车 Dialog
     driverArr: [],        // 司机信息
+    isShowGoodDetailDialog: false,  // 是否显示 商品详情
+    currentGoodIndex: ''   // 当前商品 index
+  },
+
+  // 隐藏商品 Dialog
+  hideDlalogClick () {
+    this.setData({ isShowGoodDetailDialog: false })
+  },
+  // 显示商品详情 Dialog
+  showGoodDetailCardClick (e) {
+    console.log('showGoodDetailCardClick', e)
+    let currentGoodIndex = e.currentTarget.dataset.currentindex
+    this.setData({ currentGoodIndex, isShowGoodDetailDialog: true })
   },
 
   // 复制单号

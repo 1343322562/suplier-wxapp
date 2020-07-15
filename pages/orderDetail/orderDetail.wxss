@@ -6,6 +6,26 @@
 .navbar {
   position: absolute
 }
+.sale-data-table {
+  padding: 25rpx 2%;
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx;
+}
+#title-name{
+  flex: 1;
+  text-align: start;
+  padding-left: 30rpx;
+}
+
+.sale-data-table .item{
+  width: 170rpx;
+  text-align: center;
+  font-size: 29rpx;
+  color: #4d4d4d;
+}
 
 /* 头部区域 */
 .custom-info-box {
@@ -124,8 +144,10 @@ border-radius: 6rpx;
   height: 120rpx;
   width: 120rpx;
 }
-.goods-card-box .good-detail{
-  
+.goods-card-box .good-detail {
+  width: 100%;
+}
+.item{
 }
 
 
@@ -211,4 +233,22 @@ border-radius: 6rpx;
   line-height: 62rpx;
   text-align: center;
   color: #245FF7;
+}
+
+.good-detail .table-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table-name {
+  line-height: 29rpx;
+  width: 58%;
+}
+.table-item .allPrice{
+  color: #FF4E3E;
+  width: 17%;
+}
+.table-item .num{
+  color: #5C5C5C;
+  width: 19%;
 }
