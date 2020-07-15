@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "components/Navbar/Navbar",
+    "components/SaleDataTable/SaleDataTable",
+    "pages/saleDataSeach/saleDataSeach",
+    "pages/goodDetail/goodDetail",
+    "pages/accountStatement/accountStatement",
+    "components/accountCard/accountCard",
+    "pages/myStaff/myStaff",
+    "pages/addStaff/addStaff",
+    "pages/orderStatu/orderStatu",
+    "pages/goodList/goodList",
+    "pages/editRoleData/editRoleData",
+    "pages/orderDetail/orderDetail",
+    "pages/accountSeach/accountSeach",
+    "pages/driverTransStatu/driverTransStatu",
+    "pages/scanCodePay/scanCodePay",
+    "pages/booth/booth",
+    "pages/paymentRes/paymentRes"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 30000,
+    "downloadFile": 30000
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

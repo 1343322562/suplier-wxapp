@@ -1,0 +1,48 @@
+<!--pages/saleDataSeach/saleDataSeach.wxml-->
+<Navbar title='对账单据数据查询' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' />
+
+<view class="select-time-box">
+  <image class="icon" src="../../images/time.png" />
+  <view class="label">时间区间:</view>
+  <view class="picker"></view>
+  <view class="timer" bindtap="showSelectedTime">{{months[value[1]]}}-{{days[value[2]]}}</view>
+  <view class="span">-</view>
+  <view class="timer" bindtap="showSelectedTime">{{months[value[4]]}}-{{days[value[5]]}}</view>
+  <button class="btn" type="primary" size="mini" bindtap="seachSubmit">搜索</button>
+</view>
+
+<SaleTable saleTitleData="{{saleTitleData}}" saleData="{{saleData}}" />
+
+
+<!-- 时间选择区域 -->
+<view class="selecter-time-conainer" wx:if="{{selected}}">
+  <view class="selecter-time-box">
+    <view class="btn-box">
+      <text bindtap='close'>取消</text>
+      <text bindtap='come'>确定</text>
+    </view>
+    <picker-view indicator-style="height: 50px;" style="margin: 0 8%; width: 84%; height: 300px;" value="{{value}}" bindchange="bindChange">
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+
+  <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 12px;font-weight: 100;">至</view>
+
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+</picker-view>
+  </view>
+</view>

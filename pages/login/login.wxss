@@ -1,0 +1,117 @@
+/* pages/login/login.wxss */
+page{
+  font-family: 'PingFang SC-Medium';
+  font-size: 34rpx;
+}
+.login-container {
+  margin-top: 117rpx;
+  padding: 0 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  letter-spacing: 1rpx;
+}
+
+.selecter-title {
+  color: #FF4E3E;
+}
+
+.select-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-top: 32rpx;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.selected-checkbox{
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #FF4E3E;
+  margin-right: 18rpx;
+  position: relative;
+  transform: scale(.9);
+}
+.selected-checkbox::after {
+  content: '';
+  display: inline-block;
+  height: 19rpx;
+  border-radius: 50%;
+  width: 19rpx;
+  background-color: #FF4E3E; 
+  position: absolute;
+  margin-top: 6rpx;
+  margin-left: 6rpx;
+}
+
+.checkbox-item {
+  position: relative;
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #999999;
+  margin-right: 18rpx;
+  transform: scale(.9);
+}
+
+.login-form {
+  width: 100%;
+  margin-top: 50rpx;
+}
+
+.input {
+  display: inline-block;
+  font-size: 32rpx;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #cccccc;
+  width: 94%;
+  margin: 20rpx 3%;
+  position: relative;
+}
+
+.switch-password{
+  position: absolute;
+  height: 32rpx;
+  width: 32rpx;
+  top: 25rpx;
+  right: 35rpx;
+}
+
+.login-btn {
+  height: 80rpx;
+  width: 600rpx;
+  margin-top: 110rpx;
+}
+
+.zksr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 280rpx;
+  position: absolute;
+  bottom: 20rpx;
+}
+
+.zksr .line {
+  height: 2rpx;
+  width: 60rpx;
+  background-color: #888787;
+}
+
+.zksr .content {
+  font-size: 24rpx;
+  color: #888787;
+}
+
+
+

@@ -1,0 +1,50 @@
+/* components/SaleDataTable/SaleDataTable.wxss */
+.sale-data-table {
+  padding: 25rpx 2%;
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx;
+}
+
+.sale-data-table .item{
+  width: 170rpx;
+  text-align: center;
+  font-size: 29rpx;
+  color: #4d4d4d;
+}
+
+.table-box {
+  border-top: 1rpx dashed #DBDBDB;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.table-box .item{
+  color: #808080;
+  height: 64rpx;
+  line-height: 64rpx;
+  white-space: nowrap;
+}
+
+.boss-table-box {
+  border-top: 1rpx solid #f5f5f5;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.boss-table-box .item{
+  color: #585a58;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+}
+
+.wait {
+  color: #ff4e3e !important;
+}
+
+.success {
+  color: #36bb5c !important;
+}

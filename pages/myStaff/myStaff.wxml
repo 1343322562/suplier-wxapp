@@ -1,0 +1,49 @@
+<!--pages/myStaff/myStaff.wxml-->
+<!-- 导航栏 -->
+<!-- <Navbar title='新增员工' background='#fff' titleStyle='color: #000;' leftIconStyle='black' /> -->
+<Navbar leftIconText='我的员工' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' titleStyle='text-align: start;padding-left: 70rpx;' />
+
+<SelectNavbar bind:myevent="selectNav" selectItemArray="{{['库管员', '司机']}}" selectedNavIndex='{{selectedNav}}' />
+
+<!-- 卡片区域 -->
+<view class="" >
+  <view class="received-info-box" wx:for='{{receivedData}}' wx:if="{{selectedNav == (item.duty - 1)}}">
+    <view class="item" >
+      <view class="label">员工姓名：</view>
+      
+      <view class="content">{{item.name}} <image bindtap="callPhoneClick" wx:if="{{item.title == '联系方式'}}" src="../../images/ph.png" class="phone" /> </view>
+    </view>
+
+    <view class="item">
+      <view class="label">联系方式：</view>
+      
+      <view class="content">{{item.mobile}} <image bindtap="callPhoneClick" wx:if="{{item.title == '联系方式'}}" src="../../images/ph.png" class="phone" /> </view>
+    </view>
+
+    <view class="item">
+      <view class="label">角色：</view>
+      
+      <view class="content">{{item.dutyName}} <image bindtap="callPhoneClick" wx:if="{{item.title == '联系方式'}}" src="../../images/ph.png" class="phone" /> </view>
+    </view>
+
+    <view class="item" wx:if="{{item.licensePlate}}">
+      <view class="label">车牌号码：</view>
+      
+      <view class="content">{{item.licensePlate}} <image bindtap="callPhoneClick" wx:if="{{item.title == '联系方式'}}" src="../../images/ph.png" class="phone" /> </view>
+    </view>
+
+    <view class="item">
+      <view class="label">状 态：</view>
+      <view class="status" bindtap="roleSelect">
+        <view class="checkbox" data-items='{{[item, 1]}}'>
+          <view class="{{item.enabled == 1 ? 'selected-checkbox' : 'checkbox-item'}}" /> 启用
+        </view>
+        <view class="checkbox content" data-items='{{[item, 0]}}'>
+          <view class="{{item.enabled == 0 ? 'selected-checkbox' : 'checkbox-item'}}" /> 禁用
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<button bindtap="addStaff" style='height: 80rpx;width: 600rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);color: #fff;font-weight: 100;line-height: 52rpx;font-size: 30rpx;border-radius: 55rpx;letter-spacing: 1rpx;position: fixed;bottom: 150rpx;left: 10.5%;'>新增员工</button>

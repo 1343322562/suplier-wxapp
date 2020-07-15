@@ -1,0 +1,10 @@
+<!--components/CheckBox/checkBox.wxml-->
+  
+  <view class="container">
+  <view class="select-box" bindtap='roleSelect'>
+    <view class="checkbox"  data-selecter='{{index}}' wx:for="{{checkBoxData}}">
+        <view class="{{selected == currentIndex ? 'selected-checkbox' : 'checkbox-item'}}"/>
+        {{item}}
+    </view>
+  </view>
+  </view>

@@ -1,0 +1,19 @@
+/* pages/paymentRes/paymentRes.wxss */
+.container {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.resText {
+  color: #1C1B1B;
+  font-size: 33rpx;
+  text-align: cener;
+}
+
+.item-box {
+  padding-left: 20rpx;
+  margin-top: 50rpx;
+}

@@ -1,0 +1,22 @@
+<!--components/orderStatuBottom/orderStatuBottom.wxml-->
+<view class="res-box">
+  <view class="info-box">
+    <view class="checkbox" wx:if="{{isShowAllSelect}}">
+      <radio bindtap='allSlected' value='all' color='#FF4E3E' checked='{{isAllSelected}}' class="all-selected" />
+      <view class="content">全选</view>
+    </view>
+    <view class="item" wx:if="{{isShowAccount}}">
+      <view class="title">总单据：</view>
+      <view class="content">{{data[0]}}</view>
+    </view>
+    <view class="item" wx:if="{{isShowNum}}">
+      <view class="title">总数量：</view>
+      <view class="content">{{data[2]}}</view>
+    </view>
+    <view class="item" style="{{priceItemStyle}}" wx:if="{{isShowPrice}}">
+      <view class="title">总金额：</view>
+      <view class="content" style="{{priceContentStyle}}">￥{{data[1]}}</view>
+    </view>
+  </view>
+  <slot />
+</view>

@@ -1,0 +1,56 @@
+<Navbar title='个人资料' background='#fff' leftIconStyle='black' titleStyle='color: #000;' leftIconText='返回' />
+
+<view class="form-box">
+  <view class="item">
+    <label>姓 名：</label>
+    <input disabled value="{{fromData.linkMan}}" bindinput="getFormData" data-type="name" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>电话号码：</label>
+    <input disabled value="{{fromData.supplierTel}}" bindinput="getFormData" data-type="phone" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>仓库名称：</label>
+    <input disabled value="{{fromData.warehouse}}" bindinput="getFormData" data-type="warehouse" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>公司名称：</label>
+    <input disabled value="{{fromData.supplierName}}" bindinput="getFormData" data-type="supplierName" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+  <!-- <view class="item">
+    <label>提现账户：</label>
+    <input value="{{fromData.card + '  ' + fromData.cardNo}}" bindinput="getFormData" data-type="phone" placeholder='请输入' placeholder-style='color: #999999;'></input>
+  </view> -->
+  <view class="item">
+    <label>订单起送：</label>
+    <input disabled value=" ￥{{fromData.minDeliveryMomey}}" bindinput="getFormData" data-type="amount" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>承诺送货时间：</label>
+    <input disabled value="{{fromData.serviceTime}}小时" bindinput="getFormData" data-type="transTime" placeholder='' placeholder-style='color: #999999;'></input>
+  </view>
+</view>
+
+<view class="localtion-info">
+  <view class="item">
+    <image src="../../images/q.png" />
+    <view class="content">供货范围</view>
+  </view>
+  <view class="item">
+    <image class="ximg" src="../../images/x.png" />
+    <view class="content">供货仓位置</view>
+  </view>
+</view>
+<!-- 
+<image class="map" src="../../images/map.png" /> -->
+<map 
+  class="map"
+  longitude="{{markers.longitude}}"
+  latitude="{{markers.latitude}}"
+  markers="{{[markers]}}"
+  scale="16"
+  circles="{{[circle]}}"
+/>
+
+<!-- <map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;"></map> -->
+<button bindtap="backLoginClick" style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 60rpx;background: linear-gradient(to bottom right, #FF796D, #FF4E3E);" type='primary'>退出登录</button>

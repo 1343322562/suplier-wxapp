@@ -1,0 +1,68 @@
+/* pages/editRoleData/editRoleData.wxss */
+.form-box {
+    padding: 5rpx 3%;
+    width: 94%;
+    border-top: 8rpx solid #f5f5f5;
+}
+.form-box .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 0;
+    width: 100%;
+    font-size: 28rpx;
+    color: #010101;
+    letter-spacing: 2rpx;
+    border-top: 1rpx solid #f5f5f5;
+    align-items: center;
+}
+
+.form-box .item input{
+    min-width: 120rpx;
+    flex: 1;
+}
+.form-box .item label{
+    min-width: 135rpx;
+    color: #333333;
+}
+.phone {
+  margin-left:15rpx; 
+}
+
+/* 位置 */
+.localtion-info {
+    display: flex;
+    width: 94%;
+    padding: 20rpx 3%;
+    border-top:7rpx solid #f5f5f5;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.localtion-info  .item{
+    width: 190rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.localtion-info  .item image{
+    height: 8rpx;
+    width: 18rpx;
+}
+
+.localtion-info  .item .ximg{
+    height: 36rpx;
+    width:  36rpx;
+}
+
+.localtion-info  .item .content{
+    color: #333333;
+    font-size: 28rpx;
+}
+
+.map {
+  height: 400rpx;
+  max-width: 700rpx;
+width: 94%;
+margin: 10rpx 3%;
+}

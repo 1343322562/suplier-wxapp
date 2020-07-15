@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "SaleTable": "../../components/SaleDataTable/SaleDataTable",
+    "AccountCard": "../../components/accountCard/accountCard",
+    "SelectNavbar": "../../components/selectNavbar/selectNavbar",
+    "BillBottom": "../../components/BillBottom/BillBottom"
+  },
+  "navigationStyle": "custom"
+}

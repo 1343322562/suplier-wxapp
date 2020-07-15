@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "SaleTable": "../../components/SaleDataTable/SaleDataTable"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,200 @@
+page {
+  font-family: PingFang SC-Medium, PingFang SC-Medium-SC-Medium;
+  font-weight: SC-Medium;
+}
+
+.top-container {
+  background: linear-gradient(to bottom right, rgb(255, 128, 117), rgb(250, 79, 63));
+  font-size: 28rpx;
+}
+
+/* 商铺卡片 */
+.shop-box, .sales-info-box {
+  margin: 0 3%;
+  width: 94%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+}
+
+.left-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+.shop-pic {
+  height: 70rpx;
+  width: 79rpx;
+  background-color: #fff;
+  padding: 25rpx;
+  border-radius: 50%;
+}
+
+.info-box {
+  margin-left: 30rpx;
+  letter-spacing: 1rpx;
+  font-weight: 100;
+  line-height: 38rpx;
+  font-size: 29rpx;
+}
+
+.user-name {
+  font-size: 31rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+}
+
+.shop-name {
+  
+}
+
+.left-info {
+}
+
+.phone {
+
+}
+
+.card {
+
+}
+
+/* 销售信息 */
+.sales-info-box {
+  margin: 64rpx 6% 0;
+  padding-bottom: 40rpx;
+  width: 88%;
+}
+.sales-info-box .sales-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 100;
+}
+.sales-info-box .sales-item .number{
+  font-weight: 400;
+  font-size: 36rpx;
+}
+.sales-info-box .sales-item .text{
+  font-size: 28rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+
+/* 导航 items 区域 */
+
+.nav-conainer {
+  width: 92%;
+  margin: 4rpx 4% 38rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-start;
+}
+
+.nav-conainer .item {
+  font-size: 28rpx;
+  color: #333333;
+  text-align: center;
+  flex: 0 0 25%;
+  margin-top: 30rpx;
+}
+
+.nav-conainer .item .img {
+  height: 84rpx;
+  width: 84rpx;
+} 
+
+.nav-conainer .item .text {
+  height: 48rpx;
+  line-height: 48rpx;
+  letter-spacing: 1rpx;
+}  
+
+/* 销售数据区域 */
+
+.sales-data-title-box, .sale-nav-box ,.sale-data-table{
+  border-top: 8rpx solid #f5f5f5;
+  padding: 25rpx 4%;
+  width: 92%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-data-title-box .left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-data-title-box .sale-icon {
+  height: 36rpx;
+  width: 36rpx;
+}
+
+.sales-data-title-box .left .title{
+  margin-left: 20rpx;
+  font-size: 32rpx;
+  letter-spacing: 1rpx;
+}
+
+
+.sale-nav-box {
+  border-top: 2rpx solid #f5f5f5;
+  justify-content: center;
+  padding: 0;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 0 auto;
+}
+
+.sale-nav-box .time-box{
+  width: 370rpx;
+  display: flex;
+  justify-content: space-between;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.sale-nav-box .time-box .time{
+  
+  padding: 0 5rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  letter-spacing: 2rpx;
+}
+
+.sale-nav-box .time-box .active{
+  height: 70rpx;
+  line-height: 70rpx;
+  letter-spacing: 1rpx;
+  color: #ff5a00;
+  padding: 0 5rpx;
+  border-bottom: 4rpx solid #ff5a00;
+}
+
+.sale-data-table {
+  border-top: 2rpx;
+}
+
+.sale-data-table .item{
+  width: 170rpx;
+  text-align: center;
+  font-size: 29rpx;
+  color: #4d4d4d;
+}
+
+.table-box {
+  border-top: 1rpx dashed #DBDBDB;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.table-box .item{
+  color: #808080;
+  height: 64rpx;
+  line-height: 64rpx;
+}

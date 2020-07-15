@@ -1,0 +1,86 @@
+/* pages/myStaff/myStaff.wxss */
+
+page {
+}
+
+.phone {
+  height: 31rpx;
+  width: 24rpx;
+  position: absolute;
+  right: -45rpx;
+  top: 5rpx;
+}
+
+.received-info-box {
+  width: 100%;
+  border-top: 6rpx solid #f5f5f5;
+  padding: 18rpx 0;
+  position: relative;
+}
+
+.received-info-box .item {
+  display: flex;
+  padding: 2rpx 32rpx;
+  align-items: center;
+}
+
+.received-info-box .item .label {
+  font-size: 28rpx;
+  font-family: PingFang SC-Medium, PingFang SC-Medium-SC-Medium;
+  font-weight: SC-Medium;
+  color: #666;
+  width: 130rpx;
+  white-space: nowrap;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44rpx;
+  line-height: 44rpx;
+  margin-right: 48rpx;
+}
+
+.selected-checkbox {
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #ff4e3e;
+  margin-right: 18rpx;
+  position: relative;
+  transform: scale(0.9);
+}
+
+.selected-checkbox::after {
+  content: '';
+  display: inline-block;
+  height: 19rpx;
+  border-radius: 50%;
+  width: 19rpx;
+  background-color: #ff4e3e;
+  position: absolute;
+  margin-top: 6rpx;
+  margin-left: 6rpx;
+}
+
+.checkbox-item {
+  position: relative;
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #999;
+  margin-right: 18rpx;
+  transform: scale(0.9);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.content {
+  font-size: 30rpx;
+  position: relative;
+}

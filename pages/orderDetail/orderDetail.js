@@ -1,0 +1,203 @@
+import { goPage, showModal, toast } from '../../tool/tool.js'
+import API from '../../api/index.js'
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    supplyFlag: '',       // 当前订单状态
+    bounding: {},         // 胶囊信息
+    detailData: {},       // 详细数据
+    isShowEnterCarDialog: true, // 是否显示装车 Dialog
+    driverArr: [],        // 司机信息
+  },
+
+  // 复制单号
+  copySheetNoClick: function (e) {
+    console.log(e)
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.sheetno,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            toast('复制单号成功')
+          }
+        })
+      }
+    })
+  },
+  // 打印拣货单
+  print () {
+    console.log('dayin')
+    let detailData = [this.data.detailData]
+    let data = JSON.stringify(detailData)
+    goPage('../booth/booth?data=' + data)
+  },
+
+  // 拨打电话
+  callPhoneClick () {
+    wx.makePhoneCall({ phoneNumber: 12345674 })
+  },
+  // 装车
+
+  entetCarClick(e) {
+    let type = e.target.dataset.type  // 1. 装车
+    if (type == 0) return this.setData({ isShowEnterCarDialog: false })
+    let driverArr = this.data.driverArr
+    let detailData = this.data.detailData
+    let sheetNo = detailData.sheetNo  // 单号
+    let routeMan =       // 司机电话
+    driverArr.forEach((item, i) => {
+      if (item.selected == 1) return routeMan = item.mobile
+    })
+
+    this.sheetEntrucking(sheetNo, routeMan)
+  },
+
+  // 选择司机使事件
+  selectDriver(e) {
+    console.log(e)
+    let index = e.target.dataset.index
+    let driverArr = this.data.driverArr
+    driverArr.forEach((item, i) => {
+      driverArr[i].selected = 0
+    })
+    driverArr[index].selected = 1
+    this.setData({ driverArr })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    wx.showLoading({ title: '请稍候..' })
+    let data = JSON.parse(options.data)
+    console.log(data)
+    // 更新订单状态(已查看)
+    if (data.supplyFlag == 1) this.updateSheetStatus(data.sheetNo)
+    // 获取员工（司机）
+    if (data.supplyFlag == 3) this.getSupplierEmployment()
+    // 获取胶囊信息
+    const APP = getApp().globalData
+    this.setData({
+      bounding: APP.bounding
+    })
+    // 获取当前订单状态
+    let { supplyFlag } = data
+    console.log(options)
+    this.setData({ supplyFlag })
+    // 获取订单详情
+    this.getOrderDetail(data.sheetNo)
+  },
+
+  // 装车请求
+  sheetEntrucking(sheetNo, routeMan) {
+    const _this = this
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    console.log('装车参数,', sheetNo, routeMan)
+    API.sheetEntrucking({
+      data: { platform, token, username, supplierNo, sheetNo, routeMan },
+      success(res) {
+        console.log(res)
+        _this.setData({ isShowEnterCarDialog: false })
+        if (res.code == 0) toast('装车成功')
+        setTimeout(() => { wx.redirectTo({ url: '../orderStatu/orderStatu?nav=' + 2 })}, 500)
+        
+      }
+    })
+  },
+
+  // 司机请求
+  getSupplierEmployment() {
+    const _this = this
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.getSupplierEmployment({
+      data: { platform, token, username, supplierNo, duty: 2 },
+      success(res) {
+        console.log(res)
+        let data = res.data
+        let driverArr = []
+        data.forEach(item => {
+          if (item.enabled == 1 && item.duty == 2) driverArr.push(item)
+        })
+        _this.setData({ driverArr })
+      }
+    })
+  },
+  // 改变订单状态请求
+  updateSheetStatus(sheetNo, _this = this) {
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.updateSheetStatus({
+      data: { platform, token, username, supplierNo, sheetNo, printFlag: 0 },
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+  // 获取订单详情
+  getOrderDetail (sheetNo) {
+    const _this = this
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.searchOrderDetailData({
+      data: { sheetNo, platform, token, username, supplierNo },
+      success(res) {
+        console.log(res)
+        _this.setData({ detailData: res.data[0] })
+      },
+      complete(){
+        wx.hideLoading()
+      }
+    })
+  },
+  makeCar(){
+    this.setData({ isShowEnterCarDialog: true })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})

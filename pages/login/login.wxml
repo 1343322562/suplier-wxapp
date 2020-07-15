@@ -1,0 +1,69 @@
+<!--pages/login/login.wxml-->
+
+<!-- 导航栏 -->
+<Navbar 
+  title='登录'
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  leftIconStyle="{{null}}"
+  isShowLeftIcon="{{false}}"
+/>
+
+<view class='login-container'>
+  <view class="selecter-title">请选择登录角色</view>
+  <!-- 角色选择区域 -->
+  <view class="select-box" bindtap='roleSelect'>
+    <view class="checkbox"  data-selecter='0'>
+        <view class="{{selected == 0 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+        老板
+    </view>
+    <view class="checkbox" data-selecter='1'>
+        <view class="{{selected == 1 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+        库管员
+    </view>
+    <view class="checkbox" data-selecter='2'>
+        <view class="{{selected == 2 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+        司机
+    </view>
+  </view>
+
+  <!-- 表单区域 -->
+  <form class="login-form">
+    <input 
+      data-name='text'
+      bindinput="binding"
+      class="input"
+      type='text' 
+      placeholder='请输入手机号码'
+      placeholder-style='margin-left: 18rpx;'
+      maxlength='12' 
+      value="{{text}}"
+    >
+    </input>
+    <input wx:if="{{selected==0 || selected==1}}"
+      data-name='password'
+      bindinput="binding"
+      class="input"
+      type='password' 
+      placeholder='请输入密码'
+      placeholder-style='margin-left: 18rpx;'
+      maxlength='12'
+      value="{{password}}"
+    >
+      <image mode="aspectFit" class="switch-password" src='../../images/login_pw.png'/>
+    </input>
+  </form>
+
+  <!-- <image bindtap="submit" class="login-btn" src='../../images/sign in.png'/> -->
+  <button bindtap="submit" style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 160rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);" type='primary'>登录</button>
+
+  
+  <!-- <image class="zksr" src='../../images/zk.png'/> -->
+  <view class="zksr">
+    <view class="line" />
+    <view class="content">中科商软</view>
+    <view class="line" />
+  </view>
+
+</view>
+
+

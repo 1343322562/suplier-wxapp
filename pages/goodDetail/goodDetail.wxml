@@ -1,0 +1,113 @@
+<!-- pages/goodDetail/goodDetail.wxml -->
+<Navbar title='商品详情' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' />
+<view class="good-detail-container">
+  <view class="input-box">
+    <label>商品条码：</label>
+    <input disabled value='{{data.itemSubno}}'></input>
+  </view>
+  <view class="input-box">
+    <label>商品货号：</label>
+    <input disabled value='{{data.itemNo}}'></input>
+  </view>
+  <view class="input-box">
+    <label>商品名称：</label>
+    <input class="good-name" disabled value='{{data.itemName}}'></input>
+  </view>
+  <view class="input-box">
+    <label>入驻商名称：</label>
+    <input disabled value='{{data.supplierName}}'></input>
+  </view>
+  <view class="input-box">
+    <label>入驻商编号：</label>
+    <input disabled value='{{supplierNo}}'></input>
+  </view>
+  <view class="input-box">
+    <label>供应商编号：</label>
+    <input disabled value='{{data.deliveryType}}'></input>
+  </view>
+  <view class='good-props'>
+    <view class="input-box">
+      <label>进 货 价：</label>
+      <input disabled value='￥{{data.price}}'></input>
+    </view>
+    <view class="input-box">
+      <label>建议零售价：</label>
+      <input disabled value='￥{{data.salePrice}}'></input>
+    </view>
+  </view>
+  <view class='good-props'>
+    <view class="input-box">
+      <label>毛 利 率：</label>
+      <input disabled value='{{data.profit}}'></input>
+    </view>
+  </view>
+  <view class='good-props'>
+    <view class="input-box">
+      <label>类别：</label>
+      <input disabled value='{{data.itemClsno}}'></input>
+    </view>
+  </view>
+  <view class='good-props'>
+    <view class="input-box" wx:if="{{data.minSupplyQty}}">
+      <label>单次起订：</label>
+      <input disabled value='{{data.minSupplyQty + data.unit}}'></input>
+    </view>
+    <view class="input-box" wx:if="{{data.minSupplyQty}}">
+      <label>单次限购：</label>
+      <input disabled value='{{data.maxSupplyQty + data.unit}}'></input>
+    </view>
+  </view>
+  <view class='good-props'>
+    <view class="input-box">
+      <label>配送规格：</label>
+      <input disabled value='{{data.supplySpec + data.unit}}'></input>
+    </view>
+    <view class="input-box">
+      <label>库存数量：</label>
+      <input disabled value='{{data.stockQty + data.unit}}'></input>
+    </view>
+  </view>
+  <!-- <view class='good-props'>
+    <view class="input-box">
+      <label>商品规格：</label>
+      <input disabled value='{{data.supplySpec}}'></input>
+    </view>
+    <view class="input-box">
+      <label>配送方式：</label>
+      <input disabled value='A0002'></input>
+    </view>
+  </view> -->
+  <!-- <view class='good-props'>
+    <view class="input-box">
+      <label>保质期(天)：</label>
+      <input disabled value='A0002'></input>
+    </view>
+  </view> -->
+  <view class='good-pic'>
+    <view class="input-box">
+      <label>商品图片：</label>
+      <view class="pic-box">
+        <image src="{{data.picUrl}}"/>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view bindtap="upOrDownClick">
+  <button 
+    data-status="1"
+    wx:if="{{data.status == 0}}" 
+    style="background: #ff7164;height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 180rpx;" 
+    type='primary'
+  >
+    上架</button>
+
+  <button 
+    data-status="0"
+    wx:if="{{data.status == 1}}" 
+    style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 180rpx;" 
+    type='primary'
+  >
+    下架</button>
+</view>
+

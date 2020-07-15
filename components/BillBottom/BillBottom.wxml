@@ -1,0 +1,15 @@
+<!--components/BillBottom/BillBottom.wxml-->
+<view class="order-res-box">
+  <view class="all-order-info" style="{{itemStyle}}">
+    <view class="label">总单据：</view>
+    <view class="content">{{billData[0]}}</view>
+  </view>
+  <view class="all-order-info" style="{{itemStyle}}" wx:if="{{billData.length > 2}}">
+    <view class="label">总数量：</view>
+    <view class="content">{{billData[1]}}</view>
+  </view>
+  <view class="all-order-info" style="{{itemStyle}}">
+    <view class="label">总金额：</view>
+    <view class="content">￥{{billData.length > 2 ? billData[2] : billData[1]}}</view>
+  </view>
+</view>

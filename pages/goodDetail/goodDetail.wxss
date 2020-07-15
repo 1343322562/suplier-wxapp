@@ -1,0 +1,58 @@
+/* pages/goodDetail/goodDetail.wxss */
+.good-detail-container {
+    width: 96%;
+    margin: 2%;
+    font-size: 31rpx;
+}
+
+.input-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5rpx;
+
+}
+
+.input-box label{
+    color: #666666;
+    min-width: 142rpx;
+    display: flex;
+    justify-content: space-between;
+}
+.input-box input{
+    color: #030303;
+    border-bottom: 1rpx solid #E6E6E6;
+    flex: 1;
+    padding: 6rpx;
+
+}
+.good-name {
+    font-size: 32rpx;
+    font-weight: 700;
+    letter-spacing: 5rpx;
+}
+
+.good-props {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: justify;
+    margin-top: 5rpx;
+}
+
+
+.good-props .input-box:nth-child(2){
+    margin-left: 32rpx;
+}
+
+.good-pic .input-box{
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20rpx;
+}
+.pic-box image{
+    height: 140rpx;
+    width: 140rpx;
+    margin-right: 30rpx;
+}

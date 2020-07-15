@@ -1,0 +1,30 @@
+.navbar-box {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    font-size: 34rpx;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 3rpx;
+    z-index: 10000;
+}
+.title {
+    position: relative;
+}
+
+.back {
+  height: 45rpx;
+  width: 45rpx;
+  display: inline-block;
+  position: absolute;
+  left: 5rpx;
+  top: 10rpx;
+}
+
+.back-text {
+  left: 50rpx;
+height: auto;
+width: auto;
+top: -1rpx;
+
+}

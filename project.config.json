@@ -1,0 +1,191 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"preloadBackgroundData": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.11.3",
+	"appid": "wx214f112d62d0a7cc",
+	"projectname": "wxapp",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/saleDataSeach/saleDataSeach",
+					"pathName": "pages/saleDataSeach/saleDataSeach",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/goodDetail/goodDetail",
+					"pathName": "pages/goodDetail/goodDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/accountStatement/accountStatement",
+					"pathName": "pages/accountStatement/accountStatement",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/myStaff/myStaff",
+					"pathName": "pages/myStaff/myStaff",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addStaff/addStaff",
+					"pathName": "pages/addStaff/addStaff",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderStatu/orderStatu",
+					"pathName": "pages/orderStatu/orderStatu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/goodList/goodList",
+					"pathName": "pages/goodList/goodList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/editRoleData/editRoleData",
+					"pathName": "pages/editRoleData/editRoleData",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderDetail/orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/driverTransStatu/driverTransStatu",
+					"pathName": "pages/driverTransStatu/driverTransStatu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/scanCodePay/scanCodePay",
+					"pathName": "pages/scanCodePay/scanCodePay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/saleDataSeach/saleDataSeach",
+					"pathName": "pages/saleDataSeach/saleDataSeach",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "pages/booth/booth",
+					"pathName": "pages/booth/booth",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "paymentRes",
+					"pathName": "pages/paymentRes/paymentRes",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/accountSeach/accountSeach",
+					"pathName": "pages/accountSeach/accountSeach",
+					"scene": null
+				}
+			]
+		}
+	}
+}

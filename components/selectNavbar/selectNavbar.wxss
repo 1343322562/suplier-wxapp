@@ -1,0 +1,30 @@
+/* components/selectNavbar/selectNavbar.wxss */
+.statu-navbar-box {
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+.statu-navbar-box .item-box {
+  position: fixed;
+  width: 80%;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-around;
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #3b3939;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+  background: #fff;
+z-index: 10000;
+}
+
+.statu-navbar-box .item-box .item {
+}
+
+.statu-navbar-box .item-box .selected {
+  color: #ff5a00;
+  border-bottom: 5rpx solid #ff5a00;
+  font-weight: bold;
+}

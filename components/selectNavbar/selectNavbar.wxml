@@ -1,0 +1,13 @@
+<!--components/selectNavbar/selectNavbar.wxml-->
+<view class="statu-navbar-box"> 
+  <view class="item-box" bindtap="selectNavs">
+    <view 
+      style="{{itemStyle}}" 
+      class="item {{selectedNavIndex==index?'selected':''}}" 
+      data-index="{{index}}" 
+      wx:for="{{selectItemArray}}"
+      wx:key="index"
+    >{{item}}</view>
+  </view>
+</view>
+<view style="height: 88rpx;width: 100%;"></view>

@@ -1,0 +1,100 @@
+<!-- 导航栏 -->
+<Navbar 
+  title='{{selectedNav == 0 ? "送货中" : "配送完成"}}'
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  leftIconText='退出'
+/>
+
+<SelectNavbar 
+  bind:myevent="selectNav" 
+  selectItemArray="{{['送货中','配送完成']}}" 
+  selectedNavIndex='{{selectedNav}}' 
+/>
+<SelectNavbar 
+  wx:if="{{selectedNav == 1}}"
+  itemStyle="border: 1px solid #f5f5f5;font-size: 26rpx;height: 70rpx;line-height: 70rpx;"
+  bind:myevent="selectNav2" 
+  selectItemArray="{{['全部订单','在线支付','现金支付']}}" 
+  selectedNavIndex='{{selectedNav2}}' 
+/>
+
+
+<!-- 底边栏 -->
+<!-- <BillBottom  billData="{{[1, 20, 325.25]}}" wx:if="{{selectedNav == 0}}"  /> -->
+
+
+<OrderStatuBottom 
+  isShowAllSelect="{{false}}"
+  isShowAccount="{{false}}"
+  isShowNum="{{false}}"
+  priceItemStyle="display: flex; align-items: center;padding-left:10rpx;"
+  priceContentStyle="font-size: 36rpx;"
+  wx:if="{{selectedNav == 1 && selectedNav2 == 2}}"  
+  data="{{[0, allSheetAmt[0]]}}"
+>
+  <button bindtap='showPaymentDialogClick' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#FFB910, #FF8200);">交款</button>
+</OrderStatuBottom>
+
+
+
+<!-- 单据卡片 -->
+<!-- 配送中 -->
+<AccountCard 
+  wx:if="{{(item.supplyFlag == 31 && selectedNav == 0) || (selectedNav == 1 && selectedNav2 == 0 && item.supplyFlag == 5) || (selectedNav == 1 && selectedNav2 == 1 && item.supplyFlag == 5 && item.payWay != 'XJ') || (selectedNav == 1 && selectedNav2 == 2 && item.supplyFlag == 5 && item.payWay == 'XJ') && item.tmsPayFlag == 0}}"
+  wx:key='index' 
+  wx:for='{{orderData}}' 
+  data='{{item}}' 
+  checkbox="{{3}}" 
+>
+  <view bindtap="transportEndClick" data-index="{{index}}" class="transportEnd" data-acctFlag="{{item.acctFlag}}" wx:if="{{item.supplyFlag == 31}}">送货完成</view>
+</AccountCard>
+
+<!-- 配送完成 -->
+<!-- <AccountCard bindtap="" data='{{complateData}}' wx:if="{{selectedNav == 1 && selectedNav2 == 2}}" checkbox="{{3}}">
+</AccountCard> -->
+
+
+<!-- 交款 Dialog -->
+<view class="print-order-box" wx:if="{{isShowPaymentDialog}}" catchtap="closeDialogClick">
+  <view id="payment-box" class="print-order">
+    <view class="payment-item">
+      <label>提交日期：</label>
+      <input disabled value="{{paymentValueObj.date}}"></input>
+    </view>
+    <view class="payment-item">
+      <label>司 机：</label>
+      <input disabled value="{{paymentValueObj.driver}}"></input>
+    </view>
+    <view class="payment-item">
+      <label>应缴金额：</label>
+      <input disabled value="{{allSheetAmt[0]}}"></input>
+    </view>
+    <view class="payment-item">
+      <label>实缴金额：</label>
+      <input bindinput="paymentValue" placeholder="请输入" data-type="actPrice" value="{{paymentValueObj.actPrice}}"></input>
+    </view>
+    <view class="payment-item">
+      <label>差异金额：</label>
+      <input disabled value="{{paymentValueObj.actPrice > allSheetAmt[0] ? '0' : allSheetAmt[0] - paymentValueObj.actPrice}}"></input>
+    </view>
+    <textarea bindinput="paymentValue" data-type="textArea" value="{{paymentValueObj.textArea}}" placeholder="请输入差异原因" focus="{{focus}}" />
+    
+    <view class="btn-box" bindtap="submitPaymentClick">
+      <view class="cancel" data-type="0">取消</view>
+      <view class="confirm" data-type="1">提交</view>
+    </view>
+  </view>
+</view>
+<BillBottom itemStyle="flex-direction: column;align-items: end;" wx:if="{{selectedNav == 0}}" billData="{{billData}}" />
+
+
+<!-- 收款 Dialog -->
+<view class="print-order-box" wx:if="{{isShowCollectDialog}}" catchtap="closeDialogClick">
+  <view class="print-order" catchtap="toPayClick">
+    <view class="title">请选择收款方式</view>
+    <view class="btn wx" data-payType="0">微信收款</view>
+    <view class="btn zfb" data-payType="1">支付宝收款</view>
+    <view class="btn cash" data-payType="2">现金收款</view>
+  </view>
+</view>
+<!-- <BillBottom itemStyle="flex-direction: column;align-items: end;" wx:if="{{selectedNav == 0}}" billData="{{[2, 28, 40000]}}" /> -->

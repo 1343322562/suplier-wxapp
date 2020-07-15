@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "TextItems": "../../components/textItems/textItems",
+    "OrderStatuBottom": "../../components/orderStatuBottom/orderStatuBottom",
+    "BillBottom": "../../components/BillBottom/BillBottom",
+    "SelectNavbar": "../../components/selectNavbar/selectNavbar"
+  },
+  "navigationStyle": "custom"
+}

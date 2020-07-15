@@ -1,0 +1,123 @@
+/* pages/addStaff/addStaff.wxss */
+.form-box {
+    padding: 5rpx 3%;
+    width: 94%;
+    border-top: 8rpx solid #f5f5f5;
+}
+.form-box .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 0;
+    width: 100%;
+    font-size: 28rpx;
+    color: #151414;
+    letter-spacing: 2rpx;
+    border-top: 1rpx solid #f5f5f5;
+}
+
+.form-box .item input{
+    min-width: 120rpx;
+    width: 190rpx;
+    text-align: end;
+}
+
+
+
+/* 状态选择区域 */
+
+.items .label {
+  font-size: 29rpx;
+  font-family: PingFang SC-Medium, PingFang SC-Medium-SC-Medium;
+  font-weight: SC-Medium;
+  color: #666;
+  width: 130rpx;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  font-size: 29rpx;
+  justify-content: end
+}
+
+.content {
+  font-size: 30rpx;
+}
+
+.selected-checkbox{
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #FF4E3E;
+  position: relative;
+  transform: scale(.9);
+  margin-right: 18rpx;
+
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44rpx;
+  line-height: 44rpx;
+  margin-left: 15rpx;
+}
+
+.selected-checkbox::after {
+  content: '';
+  display: inline-block;
+  height: 19rpx;
+  border-radius: 50%;
+  width: 19rpx;
+  background-color: #FF4E3E; 
+  position: absolute;
+  margin-top: 6rpx;
+  margin-left: 6rpx;
+}
+
+.checkbox-item {
+  position: relative;
+  border-radius: 50%;
+  height: 30rpx;
+  width: 30rpx;
+  border: 1px solid #999999;
+  margin-right: 18rpx;
+  transform: scale(.9);
+}
+
+/* 选择角色弹出框 */
+.selecter-time-conainer {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  background-color: rgba(0,0,0,.4);
+  display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.selecter-time-box {
+  height: 340rpx;
+  width: 560rpx;
+  background-color: #ffffff;
+  padding: 52rpx 66rpx 82rpx;
+  box-sizing: border-box;
+}
+
+.selecter-time-box .title{
+  font-size: 37rpx;
+  color: #181716;
+  height: 92rpx;
+  line-height: 92rpx;
+}
+
+.selecter-time-box .role{
+  font-size: 31rpx;
+  color: #302f2f;
+  height: 60rpx;
+  line-height: 60rpx;
+}

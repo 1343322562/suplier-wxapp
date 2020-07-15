@@ -1,0 +1,48 @@
+<!--components/accountCard/accountCard.wxml-->
+<view class="collect-statu-card">
+  <view class="shop">
+    <image src="{{baseImgUrl + data.branchNo + '.jpg'}}" alt="../../images/def.png"/>
+    <view class="newOrder"  wx:if="{{data.supplyFlag == 1 && isShowNewOrderSign}}" />
+    <view class="shop-info">
+      <view class="top">
+        <view class="name">{{data.branchName}}</view>
+        <radio wx:if="{{(data.supplyFlag == 1 || data.supplyFlag == 2 || data.supplyFlag == 3) && isShowCheckbox}}" data-index="{{index}}" catch:tap='selected' value='all' color='#FF4E3E' checked='{{checkbox || allCheckbox}}' class="all-selected" />
+        <view class="statu" wx:if="{{data.supplyFlag == 4}}">已取消</view>
+        <view class="statu" wx:if="{{data.supplyFlag == 5}}">已完成</view>
+        <image wx:if="{{data.supplyFlag == 4 || data.supplyFlag == 5}}" src="../../images/back2.png" />
+        <slot />
+      </view>
+      <view class="adress">{{data.address}}</view>
+    </view>
+  </view>
+  <view class="order-info">
+    <view class="item" wx:if="{{data.sheetQty}}">
+      <text class="label">订单数量：</text>
+      <text class="content">{{data.sheetQty}}</text>
+    </view>
+    <view class="item" wx:if="{{data.sheetAmt}}">
+      <text class="label">金额：</text>
+      <text class="content">￥{{data.sheetAmt}} </text>
+      <text class="active" wx:if="{{data.acctFlag == 0}}">(未付款)</text>
+      <text class="" wx:if="{{data.acctFlag == 1}}">(无需付款)</text>
+      <text class="" wx:if="{{data.acctFlag == 2}}">(已付款)</text>
+      <text class="" wx:if="{{data.acctFlag == 3}}">(付款中)</text>
+    </view>
+    <view class="item" wx:if="{{data.sendMan}}">
+      <text class="label">司机：</text>
+      <text class="content">{{data.sendMan}}</text>
+    </view>
+    <view class="item" wx:if="{{data.createDate}}">
+      <text class="label">下单时间：</text>
+      <text class="content">{{data.createDate}}</text>
+    </view>
+    <view class="item" wx:if="{{data.sheetNo}}">
+      <text class="label">订单号：</text>
+      <text class="content">{{data.sheetNo}}</text>
+    </view>
+    <view class="item" wx:if="{{data.memo}}">
+      <text class="label">备注：</text>
+      <text class="content">{{data.memo}}</text>
+    </view>
+  </view>
+</view>

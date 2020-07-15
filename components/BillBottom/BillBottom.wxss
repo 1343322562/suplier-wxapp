@@ -1,0 +1,39 @@
+/* components/BillBottom/BillBottom.wxss */
+.order-res-box {
+  height: 100rpx;
+  width: 100%;
+  background: linear-gradient(to bottom right, #ff796d, #ff4e3e);
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10%;
+  width: 80%;
+  z-index: 1000;
+}
+
+.received-info-box button {
+  width: 160rpx;
+  height: 46rpx;
+  border-radius: 24rpx;
+  position: absolute;
+  right: 22rpx;
+  top: 23rpx;
+  font-size: 29rpx;
+  font-weight: 100;
+  padding: 0;
+  line-height: 46rpx;
+}
+
+.order-res-box .all-order-info {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 31rpx;
+  z-index: 1000;
+}
+
+.order-res-box .all-order-info .content {
+  font-size: 33rpx;
+}

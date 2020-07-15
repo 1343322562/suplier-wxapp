@@ -1,0 +1,57 @@
+<!--components/goodCard/goodCard.wxml-->
+<view class="good-card-box">
+  <view class="good-img-box" bindtap='toDetailClick' data-goodItem="{{index}}">
+    <image src="{{goodsData.picUrl}}" />
+  </view>
+  <view class="good-props-box">
+    <view class="main-info">
+      <view class="main">
+        <view class="name">{{goodsData.itemName }}</view>
+        <view class="item">
+          <view class="label">商品条码：</view>
+          <view class="content">{{goodsData.itemSubno}}</view>
+        </view>
+      </view>
+      <view class="status">
+        <view class="content" wx:if='{{goodsData.status == 0}}'>未上架</view>
+        <view class="content" style="color: #02B972;" wx:if='{{goodsData.status == 1}}'>已上架</view>
+        <radio 
+          data-index="{{index}}" 
+          bindtap="selectedClick"
+          value='all' 
+          style="transform:scale(.7);" 
+          color='#FF4E3E' 
+          checked='{{goodsData.checkbox || isAllSelected}}' 
+          class="all-selected" 
+        />
+      </view>
+    </view>
+    <view class="good-price">
+      <view class="price-box">
+        <view class="item">
+          <view class="label">售 价：</view>
+          <view class="content">￥{{goodsData.salePrice}}
+            <view catch:tap="editPrice" class="tag" data-index="{{index}}">修改</view>
+          </view>
+        </view>
+        <view class="item">
+          <view class="label">进货价：</view>
+          <view class="content">￥{{goodsData.price}}</view>
+        </view>
+        <view class="item">
+          <view class="label">库 存：</view>
+          <view class="content">{{goodsData.stockQty}}
+            <view class="tag" catch:tap="editStock" data-index="{{index}}">修改</view>
+          </view>
+        </view>
+      </view>
+      <view class="profit-box">
+        <view class="item">
+          <view class="label">毛利率：</view>
+          <view class="content">{{goodsData.profit}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

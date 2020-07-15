@@ -1,0 +1,190 @@
+<!--pages/orderStatu/orderStatu.wxml-->
+<!-- 导航栏区域 -->
+<Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText='返回'>
+  <view class="nav-seach-bar-box">
+    <image src='../../images/search.png' bindtap="searchOrder"/>
+    <input 
+      type="text"
+      class="nav-seach-bar"
+      placeholder='请输入订单号或客户名称' 
+      placeholder-style='font-size: 26rpx;'
+      value="{{searchValue}}"
+      bindinput="inputBindValue"
+      confirm-type="搜索"
+      bindconfirm="searchOrder"
+    />
+  </view>
+</Navbar>
+
+<!-- 订单状态导航栏 -->
+
+<SelectNavbar 
+  bind:myevent="selectNav" 
+  selectItemArray="{{['新订单','待装车','已装车','配送完成']}}" 
+  selectedNavIndex='{{selectedNav}}' 
+/>
+
+
+
+
+<!-- 0：新订单 -->
+
+<!-- 
+  新订单 (item.supplyFlag == 1 || item.supplyFlag == 2) && selectedNav == 0 
+  待装车 item.supplyFlag == 3 && selectedNav == 1
+  已装车 item.supplyFlag == 31 && selectedNav == 2
+  配送完成 (item.supplyFlag == 4 || item.supplyFlag == 5) && selectedNav == 3
+ -->
+ <!-- 3：配送完成 -->
+<!-- 时间选择搜索 -->
+<view class="select-time-box" wx:if="{{selectedNav == 3}}">
+  <image class="icon" src="../../images/time.png" />
+  <view class="label">时间区间:</view>
+  <view class="picker"></view>
+  <view class="timer" bindtap="showSelectedTime">{{months[value[1]]}}-{{days[value[2]]}}</view>
+  <view class="span">-</view>
+  <view class="timer" bindtap="showSelectedTime">{{months[value[4]]}}-{{days[value[5]]}}</view>
+  <button class="btn" type="primary" size="mini" bindtap="seachSubmit">搜索</button>
+</view>
+
+<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 3}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "数量 ", content: "5"},{name: "完成时间", content: "05-08 09:06"},{name: "金额 ", content: "￥ 300.26"}]}}' 
+/> -->
+
+<!-- 时间选择区域 -->
+<view class="selecter-time-conainer" wx:if="{{selected && selectedNav == 3}}">
+  <view class="selecter-time-box">
+    <view class="btn-box">
+      <text bindtap='close'>取消</text>
+      <text bindtap='come'>确定</text>
+    </view>
+    <picker-view indicator-style="height: 50px;" style="margin: 0 8%; width: 84%; height: 300px;" value="{{value}}" bindchange="bindChange">
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+
+  <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 12px;font-weight: 100;">至</view>
+
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+</picker-view>
+  </view>
+</view>
+
+<BillBottom wx:if="{{selectedNav == 3}}" billData="{{successCarInfo}}" />
+<AccountCard 
+  bindtap='toGoodDetailClick'
+  wx:for='{{orderData}}'
+  wx:key='index'
+  index='{{index}}'
+  data='{{item}}' 
+  wx:if="{{((item.supplyFlag == 1 || item.supplyFlag == 2) && selectedNav == 0) || (item.supplyFlag == 3 && selectedNav == 1) || (item.supplyFlag == 31 && selectedNav == 2) || ((item.supplyFlag == 4 || item.supplyFlag == 5) && selectedNav == 3)}}" 
+  checkbox="{{item.checkbox}}"
+  allCheckbox="{{isAllSelected}}"
+  data-index="{{index}}"
+  bind:myCheckbox="{{myCheckbox}}"
+>
+  <view wx:if="{{item.supplyFlag == 31}}" class="backCar" catchtap="backCar" data-index="{{index}}">撤销装车</view>
+</AccountCard>
+
+<!-- <AccountCard 
+  bindtap='toGoodDetailClick'
+  data='{{[{name: "数量", content: "10"},{name: "金额", content: "￥320 (已付款)"},{name: "下单时间", content: "05-03 08:03"},{name: "店主留言", content: "尽快发货 , 谢谢 ! ! ."}]}}' 
+  wx:if="{{selectedNav == 0}}"  
+  checkbox="{{1}}"
+/> -->
+
+<OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 0}}" data='{{newOrderInfo}}'  catch:tap='allSelected'>
+  <button catch:tap='print' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abdf);">打印</button>
+  <!-- // showPrintDialog -->
+</OrderStatuBottom>
+
+<!-- 1：待装车 -->
+
+<OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 1}}" data='{{waitCarInfo}}' catch:tap="allSelected">
+  <button catch:tap='showEnterCarDialog' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg, #FF8200, #FFB910);">装车</button>
+</OrderStatuBottom>
+
+<!-- 2：已装车 -->
+
+<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 2}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "装车时间", content: "05-03 08:03"},{name: "金额 ", content: "￥ 300.26"},{name: "数量 ", content: "5"},{name: "店主留言", content: "尽快发货谢谢"}]}}' checkbox="{{3}}"
+>
+  <view class="backCar">撤销装车</view>
+</AccountCard> -->
+
+<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 2}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "装车时间", content: "05-03 08:03"},{name: "金额 ", content: "￥ 300.26"},{name: "数量 ", content: "5"},{name: "店主留言", content: "尽快发货谢谢"}]}}' checkbox="{{3}}"
+>
+  <view class="backCar">撤销装车</view>
+</AccountCard> -->
+
+<BillBottom wx:if="{{selectedNav == 2}}" billData="{{comeCarInfo}}" />
+
+
+
+<!-- 拣货单打印区域 -->
+<view class="print-order-box" wx:if="{{printDialog}}">
+  <view class="print-order">
+    <view class="title">XXX平台拣货单</view>
+    <view class="order-info">
+      <view class="label">客户：</view>
+      <view class="content">胜利路 - A点</view>
+    </view>
+    <view class="order-info">
+      <view class="label">单号：</view>
+      <view class="content">20200507161725632</view>
+    </view>
+    
+    <view class="line">******************************************************************</view>
+    <view class="good-info-box">
+      <view class="good-info">
+      <view class="label">沙宣洗发水750ml</view>
+      <view class="content">x2瓶</view>
+    </view>
+     <view class="good-info">
+      <view class="label">沙宣洗发水750ml沙宣洗发水750ml沙宣洗发水750ml</view>
+      <view class="content">x2瓶</view>
+    </view>
+    </view>
+    <view class="line">******************************************************************</view>
+    <view class="res-number">
+      <view class="label">总数量：</view>
+      <view class="content">6</view>
+    </view>
+    
+    <view class="sign">拣货人签字：</view>
+
+    
+  <view class="print-confirm" bindtap="print">
+    <view class="cancle" data-res="0">取消</view>
+    <view class="confirm" data-res="1" >确定</view>
+  </view>
+  </view>
+</view>
+
+<!-- 选择司机 Dialog -->
+<view class="print-order-box" wx:if="{{ selectedNav == 1 && isShowEnterCarDialog}}">
+  <view class="print-order" >
+    <view class="title">请选择配送司机</view>
+    <view bindtap="selectDriver" class="d-container">
+      <view class="car-tag {{item.selected == 1 ? 'selecedD' : ''}}" wx:for="{{driverArr}}" wx:key="index" data-index="{{index}}">{{item.name}}</view>
+    </view>
+    
+
+    <view class="print-confirm" bindtap="entetCarClick">
+      <view class="cancle" data-type="0">取消</view>
+      <view class="confirm" data-type="1" >确定</view>
+  </view>
+  </view>
+</view>

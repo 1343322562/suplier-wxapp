@@ -1,0 +1,46 @@
+<Navbar title='新增员工' background='#fff' leftIconStyle='black' titleStyle='color: #000;' leftIconText='返回' />
+
+<view class="form-box">
+  <view class="item">
+    <label>员工姓名</label>
+    <input value="{{name}}" bindinput="getFormData" data-type="name" placeholder='请输入' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>联系方式</label>
+    <input value="{{phone}}"  bindinput="getFormData" data-type="phone" placeholder='请输入' placeholder-style='color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label>角色</label>
+    <input bindtap="showSelectRole" value="{{role}}" bindinput="getFormData" data-type="role" disabled placeholder='请选择 > ' placeholder-style='padding-left: 20rpx;color: #999999;'></input>
+  </view>
+  <view class="item">
+    <label class="label">状态</label>
+    <view class="status" bindtap="statuSelect" >
+      <view class="checkbox" data-selecter='1'>
+        <view class="{{selected == 1 ? 'selected-checkbox' : 'checkbox-item'}}" /> 启用
+      </view>
+      <view class="checkbox content" data-selecter='0'>
+        <view class="{{selected == 0 ? 'selected-checkbox' : 'checkbox-item'}}" /> 禁用
+      </view>
+    </view>
+  </view>
+  <view class="item"  wx:if='{{role != "司机"}}'>
+    <label>账户密码</label>
+    <input value="{{password}}"  bindinput="getFormData" data-type="password" placeholder='请输入' placeholder-style='color: #999999;'></input>
+  </view>
+  <view wx:if='{{role == "司机"}}' class="item">
+    <label>车牌</label>
+    <input value="{{licensePlate}}"  bindinput="getFormData" data-type="licensePlate" placeholder='请输入' placeholder-style='color: #999999;'></input>
+  </view>
+</view>
+
+
+<button bindtap="addStaff" style='height: 80rpx;width: 600rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);color: #fff;font-weight: 100;line-height: 52rpx;font-size: 30rpx;border-radius: 55rpx;letter-spacing: 1rpx;position: fixed;bottom: 150rpx;left: 10.5%;'>保存</button>
+
+<view class="selecter-time-conainer" wx:if="{{isShowRoleDialog}}">
+  <view class="selecter-time-box" bindtap="roleSelect">
+    <view class="title">员工角色</view>
+    <view class="role" data-role="0">库管员</view>
+    <view class="role" data-role="1">司机</view>
+  </view>
+</view>

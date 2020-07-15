@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "CheckBox": "../../components/CheckBox/checkBox",
+    "TextItems": "../../components/textItems/textItems"
+  },
+  "navigationStyle": "custom"
+}

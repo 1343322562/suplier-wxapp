@@ -1,0 +1,149 @@
+/* components/goodCard/goodCard.wxss */
+.right{
+  flex: 1;
+  display: block;
+}
+
+.good-card-box {
+margin-left: 8rpx;
+background-color: #fff;
+display: flex;
+padding: 24rpx 6rpx 24rpx 18rpx;
+}
+
+.good-props-box .main-info .main:nth-child(1) .item{
+  display: flex;
+  font-size: 28rpx;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+
+.good-card-box .good-img-box{
+  
+}
+
+.good-card-box .good-img-box image{
+  height: 100rpx;
+    width: 100rpx;
+    margin-right: 24rpx;
+}
+
+.good-props-box {
+  width: 100%;
+
+}
+
+.good-props-box .main-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+
+.good-props-box .main-info .main .name{
+  
+
+  width: 290rpx;
+  text-overflow: ellipsis;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  overflow: hidden;      
+  word-break: break-all;   
+}
+
+.good-props-box .main-info .main .name{
+  color: #1C1B1B;
+font-size: 30rpx;
+
+
+}
+
+.item {
+display: flex;
+font-size: 29rpx;
+align-items: center;
+}
+
+.item .label{
+  font-size: 29rpx;
+  color: #666666;
+  min-width: 85rpx;
+  display: inline-block;
+  letter-spacing: 2rpx;
+  min-width: 110rpx;
+   white-space: nowrap;
+}
+
+.item .content{
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+.status .content{
+  font-size: 29rpx;
+  color: #FF4E3E;
+  white-space: nowrap;
+}
+
+.good-price {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.price-box{
+  
+  flex: 1;
+}
+
+.price-box .item{
+  padding: 10rpx 0;
+}
+.price-box .item .content{
+  position: relative;
+  width: 150rpx;
+min-width: 170rpx;
+}
+.profit-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 18rpx;
+
+}
+
+.profit-box .item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+.profit-box .item .content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.tag {
+  height: 32rpx;
+  line-height: 32rpx;
+  width: 50rpx;
+  border:1rpx solid #245FF7;
+  color: #245FF7;
+  font-size: 27rpx;
+  text-align: center;
+  padding: 0 8rpx;
+  border-radius: 5rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  white-space: nowrap;
+}

@@ -1,0 +1,15 @@
+<!--components/SaleDataTable/SaleDataTable.wxml-->
+<view class="sale-data-table">
+  <view class="item" wx:for='{{saleTitleData}}'>{{item}}</view>
+</view>
+
+
+<view class="sale-data-table {{(item.statu == 1 || item.statu == 2) ? 'boss-table-box' : 'table-box'}}" wx:for='{{saleData}}' wx:key='index'>
+  <view class="item">{{item.createDate}}</view>
+  <view class="item">{{item.totalAmt}}</view>
+  <view class="item" wx:if="{{item.totalXjAmt || item.totalXjAmt == 0}}">{{item.totalXjAmt}}</view>
+  <view class="item" wx:if="{{item.totalOnlinePayAmt || item.totalOnlinePayAmt == 0}}">{{item.totalOnlinePayAmt}}</view>
+  <view id="{{item.checkFlag == '未对账' ? 'wait' : 'success' }}" class="item" wx:if="{{item.checkFlag}}">{{item.checkFlag}}</view>
+  <view class="item" wx:if="{{item.totalOrder}}">{{item.totalOrder}}</view>
+  <view class="item" wx:if="{{item.totalQty}}">{{item.totalQty}}</view>
+</view>

@@ -1,0 +1,36 @@
+/* components/orderStatuBottom/orderStatuBottom.wxss */
+.res-box {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    height: 100rpx;
+    z-index: 1000;
+    background-color: #fff;
+  }
+  .res-box .info-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 26rpx;
+  }
+  
+  .res-box .info-box .item .title{
+    font-size: 29rpx;
+    color: #5A5858;
+  }
+  
+  .res-box .info-box .item .content{
+    font-size: 32rpx;
+    color: 30rpx;
+  }
+  
+  .res-box .info-box .checkbox{
+    font-size: 28rpx;
+    color: #1C1B1B;
+  }
+  .res-box .info-box .checkbox .all-selected{
+    transform: scale(.8);
+  }

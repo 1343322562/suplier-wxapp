@@ -1,0 +1,92 @@
+<!--pages/accountStatement/accountStatement.wxml-->
+
+<!-- 导航栏 -->
+<Navbar
+  leftIconText='对账单据'
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)'
+  titleStyle='text-align: start;padding-left: 70rpx;'
+  
+>
+  <view class="nav-seach-bar-box" bindtap="toAccountSeachClick">
+    <image src='../../images/seachIcon.png' />
+    <input 
+      type="text"
+      class="nav-seach-bar"
+      placeholder='对账查询' 
+      placeholder-style='color: #FF4E3E;font-size: 26rpx;'
+      disabled
+    />
+  </view>
+</Navbar>
+
+<!-- 订单状态导航栏区域 -->
+<SelectNavbar 
+  bind:myevent="selectNav" 
+  selectItemArray="{{['未交款','待收款','已交款','在线支付']}}" 
+  selectedNavIndex='{{selectedNav}}' 
+/>
+
+
+<!-- 0：未交款 3.在线支付-->
+<AccountCard
+  wx:if="{{(selectedNav == 0 && item.acctFlag == 0) || (selectedNav == 3 && item.payWay != null && item.payWay != 'XJ')}}"
+  wx:for="{{orderData}}"
+  wx:key="index"
+  data='{{item}}' 
+  index='{{index}}'
+  data-index="{{index}}"
+  isShowCheckbox="{{false}}"
+  isShowNewOrderSign="{{false}}"
+/>
+
+
+<!-- 1.待收款  2：已交款 -->
+<view class="" >
+  <view 
+    class="received-info-box" 
+    wx:for="{{receivedData}}" 
+    wx:key="index"
+    wx:if="{{(selectedNav == 1 && item.tmsCollectFlag == 0) || (selectedNav == 2 && item.tmsCollectFlag == 1)}}"
+  >
+    <button
+      data-sheetNo="{{item.sheetNo}}"
+      wx:if="{{item.tmsCollectFlag == 0}}"
+      bindtap="confirmCollectionClick" 
+      type="primary" 
+      style="width: 160rpx;">确认收款</button>
+    <view class="item" >
+      <view class="label">交款日期：</view>
+      <view class="content">{{item.receiptDate}}</view>
+    </view>
+    <view class="item">
+      <view class="label">司 机：</view>
+      <view class="content">{{item.routeSendMan}}</view>
+    </view>
+    <view class="item">
+      <view class="label">单 号：</view>
+      <view class="content">￥{{item.sheetNo}}</view>
+    </view>
+    <view class="item">
+      <view class="label">应收金额：</view>
+      <view class="content">￥{{item.shouldAmt}}</view>
+    </view>
+    <view class="item">
+      <view class="label">实交金额：</view>
+      <view class="content">￥{{item.sheetAmt}}</view>
+    </view>
+    <view class="item">
+      <view class="label">差异金额：</view>
+      <view class="content">￥{{item.cyAmt}}</view>
+    </view>
+    <view class="item" wx:if="{{item.memo}}">
+      <view class="label">差异原因：</view>
+      <view class="content">{{item.memo}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 3：在线支付 -->
+
+<!-- <AccountCard data='[{name: "下单时间", content: "05-05 08:03"}]' wx:if="{{selectedNav == 3}}" /> -->
+
+<BillBottom billData="{{resBottom}}" />

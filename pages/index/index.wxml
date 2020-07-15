@@ -1,0 +1,90 @@
+<view class='top-container' style="padding-top: {{bounding.top + bounding.height + 5}}px;">
+<!-- 商户卡片区域 -->
+  <view class='shop-box' bindtap="toShopDataClick">
+      <view class="left-info">
+        <image class="shop-pic" src="../../images/Default_Avatar.png" />
+        <view class="info-box">
+          <view class="user-name">{{shopData.linkMan}} <text class="phone">{{shopData.supplierTel}}</text> </view>
+          <view class="shop-name">{{shopData.supplierName}}</view>
+          <view class="card">仓库：{{shopData.warehouse}}</view>
+        </view>
+      </view>
+      <view class="right-icon">></view>
+  </view>
+
+  <!-- 销售信息区域 -->
+  <view class="sales-info-box">
+    <view class="sales-item">
+      <view class="number">{{todaySaleData[0]}}</view>
+      <view class="text">当日销售额</view>
+    </view>
+    <view class="sales-item">
+      <view class="number">{{todaySaleData[1]}}</view>
+      <view class="text">当日订单数</view>
+    </view>
+    <view class="sales-item">
+      <view class="number">{{todaySaleData[2]}}</view>
+      <view class="text">当日销售数量</view>
+    </view>
+  </view>
+</view>
+
+<!-- 导航 items 区域 -->
+
+<view class="nav-conainer" bindtap="toPage">
+  <view class="item" wx:if="{{roleNo == 0 || roleNo == 1}}">
+    <image class="img" data-name="orderStatu0" src='../../images/nav_new_order@2x.png' />
+    <view class="text">新订单</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0 || roleNo == 1}}">
+    <image class="img" data-name="orderStatu1" src='../../images/nav_dai@2x.png' />
+    <view class="text">待装车</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0 || roleNo == 1}}">
+    <image class="img" data-name="orderStatu2" src='../../images/nav_yi@2x.png' />
+    <view class="text">已装车</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0 || roleNo == 1}}">
+    <image class="img" data-name="orderStatu3" src='../../images/nav_pei@2x.png' />
+    <view class="text">配送完成</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0}}">
+    <image class="img" data-name="accountStatement" src='../../images/nav_duizhang@2x.png' />
+    <view class="text">对账单据</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0 || roleNo == 1}}">
+    <image class="img" data-name="goodList" src='../../images/nav_shang@2x.png' />
+    <view class="text">商品管理</view>
+  </view>
+  <view class="item" wx:if="{{roleNo == 0}}">
+    <image class="img" data-name="myStaff" src='../../images/nav_my@2x.png' />
+    <view class="text">我的员工</view>
+  </view>
+  
+  <view class="item" wx:if="{{roleNo == 2}}">
+    <image class="img" data-name="driver" src='../../images/nav_dai@2x.png' />
+    <view class="text">配送状态</view>
+  </view>
+</view>
+
+<!-- 销售数据区域 -->
+
+<view class="sales-data-title-box">
+  <view class="left">
+    <image class="sale-icon" src='../../images/Sales data.png' />
+    <view class="title">销售数据</view>
+  </view>
+  <image bindtap="goPageSaleDataSeach" class="sale-icon" src='../../images/time.png' />
+</view>
+
+<view class="sale-nav-box">
+  <view class="time-box" bindtap="seachSaleData">
+    <view class="{{saleDataTimeId == 0 ? 'active' : 'time'}}" data-timeId="0">近7天</view>
+    <view class="{{saleDataTimeId == 1 ? 'active' : 'time'}}" data-timeId="1">近30天</view>
+  </view>
+</view>
+
+<SaleTable 
+  saleTitleData="{{saleTitleData}}"
+  saleData="{{saleTableData}}" 
+/>
