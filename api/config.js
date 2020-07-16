@@ -48,7 +48,7 @@ export default {
           param.success(response.data)
         }
       },
-      fail: param.error,
+      fail: param.error || function () { wx.hideLoading(); wx.showModal({ content: '请求超时，请检查网络重试' }) },
       complete: param.complete
     }
     wx.request(request)

@@ -9,10 +9,40 @@ Page({
     type: 0, // 页面种类 0： 编辑商品   1： 商品详情
     data: {},  
     supplierNo: '',
-    json: {}  // 被修改的商品数据
+    json: {},  // 被修改的商品数据
+    // 修改商品信息 Dialog
+    editDialogValueObj: {
+      name: '',
+      inputName: '',
+      inputValue: ''
+    },
+    isShowEditDialog: false
   }, 
 
-  
+  editConfirm (e) {
+    let type = e.target.dataset.type
+    if (type == 0) return this.setData({ isShowEditDialog: false })
+    this.updateItemNote()
+  },
+// 绑定 Dialog 信息
+  commitEditData (e) {
+    let inputValue = e.detail.value
+    this.setData({ ['editDialogValueObj.inputValue']: inputValue })
+    const editDialogValueObj = this.data.editDialogValueObj
+    const inputName = editDialogValueObj.inputName
+    const appNote = { [inputName]: inputValue}
+    console.log(appNote)
+  },
+// 显示 修改信息 Dialog
+  showEditDialogClick (e) {
+    console.log(e)
+    const name = e.currentTarget.dataset.name
+    const inputName = e.target.dataset.inputname
+    const inputValue = this.data.data[inputName]
+    const editDialogValueObj = { name, inputName, inputValue }
+    console.log(editDialogValueObj)
+    this.setData({ editDialogValueObj, isShowEditDialog: true })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -47,14 +77,17 @@ Page({
 // 编辑商品请求
   updateItemNote () {
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
+    const editDialogValueObj = this.data.editDialogValueObj
+    const inputName = editDialogValueObj.inputName
+    const inputValue = editDialogValueObj.inputValue
+    if (inputValue == '') return toast('修改值不能为空')
+    if (inputValue == this.data.data[inputName]) return toast('请输入修改值')
+
+    const appNote = { [inputName]: inputValue}
     const itemNo = this.data.data.itemNo
-    let json = this.data.json
-    console.log(Object.keys(json).length == 0, json, Object.keys(json).length)
-    if (Object.keys(json).length == 0) return showModal({ content: '商品未编辑' })
-    json = JSON.stringify(json)
-    
+    console.log(itemNo, appNote)
     API.updateItemNote({
-      data: { platform, token, username, supplierNo, itemNo, appNote: json },
+      data: { platform, token, username, supplierNo, itemNo, appNote },
       success (res) {
         console.log(res)
         if (res.code == 0) toast('编辑成功')

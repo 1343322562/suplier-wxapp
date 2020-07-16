@@ -55,12 +55,14 @@ Page({
 
     // 查询对应data
     if (index == 1) this.searchOrderByCollectionFlag(0)
+    console.log(1)
     if (index == 2) this.searchOrderByCollectionFlag(1)
-
+    console.log(2)
 
     // 计算对应结算信息
     if (index == 0 || index == 3) this.resBottom(this.data.orderData)
     if (index == 1 || index == 2) this.resBottom(this.data.receivedData)
+    console.log(3)
   },
   // 跳转单据查询页
   toAccountSeachClick () {
@@ -95,6 +97,7 @@ Page({
   // 查询收款信息（待收款、已交款）
   searchOrderByCollectionFlag(tmsCollectionFlag, startDate = tim(7), endDate = tim(0)) {
     const _this = this
+    console.log(tmsCollectionFlag)
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     console.log('platform:', platform, 'token:', token, 'username:', username, 'supplierNo:', supplierNo, 'tmsCollectionFlag:', tmsCollectionFlag, 'startDate:', startDate,'endDate:', endDate)
     API.searchOrderByCollectionFlag({

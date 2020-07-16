@@ -1,4 +1,4 @@
-import { goPage, showModal, toast } from '../../tool/tool.js'
+import { goPage, showModal, toast, backPage } from '../../tool/tool.js'
 import API from '../../api/index.js'
 Page({
   /**
@@ -86,7 +86,7 @@ Page({
     let data = JSON.parse(options.data)
     console.log(data)
     // 更新订单状态(已查看)
-    if (data.supplyFlag == 1) this.updateSheetStatus(data.sheetNo)
+    if (data.supplyFlag == 1) this.updateSheetStatus(0, data.sheetNo)
     // 获取员工（司机）
     if (data.supplyFlag == 3) this.getSupplierEmployment()
     // 获取胶囊信息
@@ -118,6 +118,11 @@ Page({
       }
     })
   },
+  // 不打印，直接出库
+  warehouseOut () {
+    let sheetNo = this.data.detailData['sheetNo']
+    this.updateSheetStatus(1, sheetNo)
+  },
 
   // 司机请求
   getSupplierEmployment() {
@@ -137,12 +142,20 @@ Page({
     })
   },
   // 改变订单状态请求
-  updateSheetStatus(sheetNo, _this = this) {
+  updateSheetStatus(printFlag, sheetNo, _this = this) {
+    if (printFlag == 1) wx.showLoading({ title: '出库中' })
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.updateSheetStatus({
-      data: { platform, token, username, supplierNo, sheetNo, printFlag: 0 },
+      data: { platform, token, username, supplierNo, sheetNo, printFlag},
       success(res) {
+        if (res.code == 0 && printFlag == 1) {
+          toast('出库成功')
+          backPage()
+        }
         console.log(res)
+      },
+      complete () {
+        setTimeout(() => { wx.hideLoading() }, 500)
       }
     })
   },

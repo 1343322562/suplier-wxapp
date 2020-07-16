@@ -355,6 +355,7 @@ Page({
   },
   onLoad(options) {
     const writeData = JSON.parse(options.data)
+    console.log(writeData)
     let sheetNo = ''
     writeData.forEach(t => {
       if (sheetNo == '') {

@@ -74,10 +74,25 @@ Page({
   // 时间级联框，改变时触发
   bindChange(e) {
     console.log(e.detail.value)
+    let oldValue = this.data.value
     let value = e.detail.value
-    this.setData({
-      value
-    })
+    // 月份联动 （最多31天）
+    if (oldValue[1] != value[1] && value[1] != value[4]) {
+      value[4] = value[1] + 1
+      if (value[2] < value[5]) value[5] = value[2]
+    } else if (oldValue[4] != value[4] && value[1] != value[4]) {
+      value[1] = value[4] - 1
+      if (value[2] < value[5]) value[2] = value[5]
+    }
+
+    // 日期联动 (最多31天)
+    if (oldValue[2] != value[2] && oldValue[1] != value[4] && value[2] < value[5]) {
+      value[5] = value[2]
+    } else if (oldValue[5] != value[5] && oldValue[1] != value[4] && value[2] < value[5]) {
+      value[2] = value[5]
+    }
+
+    this.setData({ value })
   },
   // 选择 item Checkbox
   myCheckbox(checkbox, index) {
@@ -89,15 +104,14 @@ Page({
       if (i == index) {
         orderData[index].checkbox = Number(checkbox)
         console.log(orderData[i])
-      }
+      } 
       if (orderData[i].checkbox == 0) {
         isAllSelected = false
         console.log('asdasdads')
       }
     })
-    this.setData({ isAllSelected })
-    this.resOrPrint(orderData, this)
-    orderData[index].checkbox
+    this.resOrPrint(orderData, this, isAllSelected)
+    // this.setData({ isAllSelected })
   },
   // 关闭时间选择框
   close(e) {
@@ -157,6 +171,9 @@ Page({
     })
   },
   come() {
+    
+    let value = this.data.value
+    if (value[0] < value[3] && (value[1] < 11 || value[4] > 0)) return showModal({ content: '日期区间因在1个月之内' })
     this.setData({
       selected: !this.data.selected
     })
@@ -221,6 +238,8 @@ Page({
   // 点击搜索
   seachSubmit() {
     let { days, months, years, value} = this.data
+    if (value[0] < value[3] && (value[1] < 11 || value[4] > 0)) return showModal({ content: '日期区间因在1个月之内' })
+
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     let startDate = years[value[0]] + '-' + months[value[1]] + '-' + days[value[2]]
     let endDate = years[value[3]] + '-' + months[value[4]] + '-' + days[value[5]]
@@ -245,6 +264,8 @@ Page({
 
   // 导航栏选择事件，传递给子组件
   selectNav(e) {
+    this.allSelected(true)  // 切换导航栏，使订单都为未选择状态
+
     console.log(e, this)
     let index = e.detail.index
     this.setData({ selectedNav: index, isAllSelected: false })
@@ -254,6 +275,7 @@ Page({
   // 是否全选
   allSelected(e , orderDatas) {
     console.log(e)
+    console.log('全选')
     console.log('asd', e, typeof(e))
     let isAllSelected = (e || this.data.isAllSelected) ? false : true
     if (typeof (e) == 'object') isAllSelected = !this.data.isAllSelected
@@ -267,8 +289,8 @@ Page({
       }
     })
     console.log(orderData)
-    this.resOrPrint(orderData)
-    this.setData({ isAllSelected, orderData })
+    this.resOrPrint(orderData, this, isAllSelected)
+    // this.setData({ isAllSelected, orderData })
   },
 
   // 显示拣货单 Dialog
@@ -293,6 +315,8 @@ Page({
   onShow: function () {
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     this.searchOrderStatusData(platform, token, username, supplierNo)
+    
+    setTimeout(() => { wx.hideLoading() }, 1500)
   },
 
   // 请求新订单
@@ -339,21 +363,20 @@ Page({
         
         _this.allSelected(true ,orderData)   // 每个 item 添加 checkbox ，进入页面就全选
         // _this.resOrPrint(orderData, _this)
-        wx.hideLoading()
       }
     })
   },
 
   // 打印结算区域
-  resOrPrint(orderData, _this = this) {
+  resOrPrint(orderData, _this = this, isAllSelected = false) {
     let [order, allAmt, allSheetQty] = [0,0,0]     // 新订单
     let [worder, wallAmt, wallSheetQty] = [0,0,0]  // 待装车
     let [corder, callAmt] = [0,0,0]                // 配送中
     let [sorder, sallAmt] = [0,0,0]                // 已完成
     const selectedNav = this.data.selectedNav
     orderData.forEach((item, i) => {
-      console.log(item.checkbox, item)
-      // if ('checkbox' in orderData) orderData[i].checkbox = 0    // 检查有无 checkbox 控件字段
+      // console.log(item.checkbox, item)
+      if (!('checkbox' in item)) orderData[i].checkbox = 0    // 检查有无 checkbox 控件字段
       orderData[i].createDate = orderData[i].createDate.slice(0, 19)
       // 订单结算区域计算
       if (selectedNav == 0 && item.supplyFlag == 1 || item.supplyFlag == 2) { 
@@ -365,7 +388,7 @@ Page({
         worder++; wallSheetQty = wallSheetQty + Number(item.sheetQty); wallAmt = Number(wallAmt) + Number(item.sheetAmt)
       }
       // 已装车和待装车不用判断是否选中
-      console.log(selectedNav == 2 && item.supplyFlag == 31)
+      // console.log(selectedNav == 2 && item.supplyFlag == 31)
       if (selectedNav == 2 && item.supplyFlag == 31) {
         corder++; callAmt = Number(callAmt) + Number(item.sheetAmt)
       }
@@ -374,6 +397,7 @@ Page({
       }
     })
     _this.setData({
+      isAllSelected,
       orderData,
       newOrderInfo: [order, Number(allAmt).toFixed(2), allSheetQty],
       waitCarInfo: [worder, Number(wallAmt).toFixed(2), wallSheetQty],
@@ -381,13 +405,19 @@ Page({
       successCarInfo: [sorder, Number(sallAmt).toFixed(2)]
     })
   },
+  // 出库
   updateSheetStatus(sheetNo, _this = this) {
+    wx.showLoading()
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    console.log(platform, token, username, supplierNo, sheetNo)
     API.updateSheetStatus({
       data: { platform, token, username, supplierNo, sheetNo, printFlag: 1 },
       success(res) {
         if (res.code == 0) toast('更新状态成功')
         console.log(res)
+      },
+      complete() {
+        setTimeout(() => { wx.hideLoading() }, 500)
       }
     })
   },
@@ -396,7 +426,8 @@ Page({
   // 打印单据 ,跳转链接蓝牙页面
   print (e) {
     console.log(e)
-    let res = e.target.dataset.res
+    let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
+    // let res = e.target.dataset.res
     let orderData = this.data.orderData
     let sheetNo = ''  // 请求单号
     orderData.forEach((item,i) => {
@@ -408,16 +439,17 @@ Page({
         }
       }
     })
+    if (sheetNo == '') return showModal({ content: '请选择单据' }) 
     console.log(sheetNo)
-    // this.updateSheetStatus(sheetNo)  // 测试的改变订单状态
-    // return
-    this.searchOrderDetailData(sheetNo)
-    if (res == 0) {
-      this.setData({ printDialog: false })
-    } else if (res == 1) {
-      console.log('打印')
-      this.setData({ printDialog: false })
-    }
+    if (type == 1) return this.updateSheetStatus(sheetNo) // 直接出库
+
+    this.searchOrderDetailData(sheetNo) // 请求单据详情，并跳转蓝牙打印页
+    // if (res == 0) {
+    //   this.setData({ printDialog: false })
+    // } else if (res == 1) {
+    //   console.log('打印')
+    //   this.setData({ printDialog: false })
+    // }
   },
   // 查询订单详情
   searchOrderDetailData(sheetNo) {
@@ -434,6 +466,10 @@ Page({
     })
   },
 
+  // 不打印订单直接出库
+  warehouseOut () {
+    this.updateSheetStatus(sheetNo)
+  },
   // 请求司机信息
   getSupplierEmployment(){
     const _this = this
@@ -481,7 +517,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.showLoading({ title: '刷新中....' })
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    this.searchOrderStatusData(platform, token, username, supplierNo)
+    setTimeout(() => { wx.hideLoading() }, 1000)
   },
 
   /**

@@ -1,8 +1,8 @@
 <!-- pages/goodDetail/goodDetail.wxml -->
 <Navbar title='{{type == 1 ? "商品详情" : "编辑商品"}}' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' />
 <view class="good-detail-container">
-  <view class="input-box">
-    <label>商品条码：</label>
+  <view class="input-box" data-name='商品条码' bindtap="showEditDialogClick">
+    <label id="edit-label">商品条码：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
@@ -11,8 +11,8 @@
       data-inputName="itemSubno"
     ></input>
   </view>
-  <view class="input-box">
-    <label>商品货号：</label>
+  <view class="input-box" data-name='商品货号' bindtap="showEditDialogClick">
+    <label id="edit-label">商品货号：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
@@ -21,8 +21,8 @@
       data-inputName="itemNo"
     ></input>
   </view>
-  <view class="input-box">
-    <label>商品名称：</label>
+  <view class="input-box" data-name='商品名称' bindtap="showEditDialogClick">
+    <label id="edit-label">商品名称：</label>
     <input 
       class="good-name" 
       disabled="{{type == 1 ? true : false}}" 
@@ -30,17 +30,24 @@
       data-inputName="itemName"
     ></input>
   </view>
-  <view class="input-box">
-    <label>入驻商名称：</label>
+  
+  <view class="input-box" data-name='商品日期'>
+    <label>商品日期：</label>
+    <input disabled value='{{data}}'>
+    </input>
+  </view>
+
+  <view class="input-box" data-name='入驻商名称'>
+    <label> 入驻商名称：</label>
     <input 
       bindinput='bindInputData' 
-      disabled="{{type == 1 ? true : false}}" 
+      disabled
       value='{{data.supplierName}}'
       data-inputName="supplierName"
     ></input>
   </view>
-  <view class="input-box">
-    <label>入驻商编号：</label>
+  <view class="input-box" data-name='入驻商编号' bindtap="showEditDialogClick" wx:if="{{data.supplierNo}}">
+    <label> 入驻商编号：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
@@ -50,13 +57,8 @@
     >
     </input>
   </view>
-  <view class="input-box">
-    <label>最后修改时间：</label>
-    <input disabled value='{{data.modifyDate}}'>
-    </input>
-  </view>
-  <!-- <view class="input-box">
-    <label>供应商编号：</label>
+  <!-- <view class="input-box" bindtap="showEditDialogClick">
+    <label> data-name=''供应商编号：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
@@ -66,8 +68,8 @@
     ></input>
   </view> -->
   <view class='good-props'>
-    <view class="input-box">
-      <label>进 货 价(￥)：</label>
+    <view class="input-box" data-name='进 货 价(￥)' bindtap="showEditDialogClick">
+      <label id="edit-label">进 货 价(￥)：</label>
       <input 
         bindinput='bindInputData' 
         disabled="{{type == 1 ? true : false}}" 
@@ -75,8 +77,8 @@
         data-inputName="price"
       ></input>
     </view>
-    <view class="input-box">
-      <label>建议零售价(￥)：</label>
+    <view class="input-box" data-name='建议零售价(￥)' bindtap="showEditDialogClick">
+      <label id="edit-label">建议零售价(￥)：</label>
       <input 
         bindinput='bindInputData' 
         disabled="{{type == 1 ? true : false}}" 
@@ -86,30 +88,30 @@
     </view>
   </view>
   <view class='good-props'>
-    <view class="input-box">
+    <view class="input-box" data-name='毛 利 率'>
       <label>毛 利 率：</label>
       <input 
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.profit}}'
         data-inputName="profit"     
       ></input>
     </view>
   </view>
   <view class='good-props'>
-    <view class="input-box">
+    <view class="input-box" data-name='类别'>
       <label>类别：</label>
       <input 
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.itemClsno}}'
         data-inputName="itemClsno"
      ></input>
     </view>
   </view>
   <view class='good-props'>
-    <view class="input-box">
-      <label>单位：</label>
+    <view class="input-box" data-name='单位' bindtap="showEditDialogClick">
+      <label id="edit-label">单位：</label>
       <input 
         bindinput='bindInputData' 
         disabled="{{type == 1 ? true : false}}" 
@@ -119,8 +121,8 @@
     </view>
   </view>
   <view class='good-props'>
-    <view class="input-box" wx:if="{{data.minSupplyQty}}">
-      <label>单次起订：</label>
+    <view class="input-box" data-name='单次起订' bindtap="showEditDialogClick" wx:if="{{data.minSupplyQty}}">
+      <label id="edit-label">单次起订：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
@@ -129,8 +131,8 @@
         data-inputName="minSupplyQty"
       ></input>
     </view>
-    <view class="input-box" wx:if="{{data.minSupplyQty}}">
-      <label>单次限购：</label>
+    <view class="input-box" data-name='单次限购' bindtap="showEditDialogClick" wx:if="{{data.minSupplyQty}}">
+      <label id="edit-label">单次限购：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
@@ -141,8 +143,8 @@
     </view>
   </view>
   <view class='good-props'>
-    <view class="input-box">
-      <label>配送规格：</label>
+    <view class="input-box" data-name='配送规格' bindtap="showEditDialogClick">
+      <label id="edit-label">配送规格：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
@@ -151,8 +153,8 @@
         data-inputName="supplySpec"
       ></input>
     </view>
-    <view class="input-box">
-      <label>库存数量：</label>
+    <view class="input-box" data-name='库存数量' bindtap="showEditDialogClick">
+      <label id="edit-label">库存数量：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
@@ -174,12 +176,22 @@
 </view>
 
 <!-- 修改商品信息 Dialog -->
-<!-- <view class="print-order-box" wx:if="{{ supplyFlag == 3 && isShowEnterCarDialog}}">
+<view class="print-order-box" wx:if="{{isShowEditDialog}}">
   <view class="print-order" >
-    <view class="title">{{}}</view>
-    <input></input>
+    <view class="title">修改{{editDialogValueObj.name}}</view>
+    <input
+      value="{{editDialogValueObj.inputValue}}" 
+      data-inputName="{{editDialogValueObj.inputName}}"
+      bindinput="commitEditData"
+      class="edit-dialog-input"
+    />
+    
+    <view class="confirm-edit" bindtap="editConfirm">
+			<button data-type="0" style="background:#fff;height: 90rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #676767;font-weight:400;">取消</button>
+			<button data-type="1" style="background:#fff;height: 90rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #08B018;font-weight:400;">确认</button>
+		</view>
   </view>
-</view> -->
+</view>
 
 <!-- btn 区域 -->
 <view bindtap="upOrDownClick">

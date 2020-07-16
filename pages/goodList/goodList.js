@@ -12,6 +12,7 @@ Page({
     // http://mmj.zksr.cn:8888/
     // http://39.98.164.194/upload/images/bdSupplierItem/
     // http://erp.yxdinghuo.com/
+    // https://ch.zksr.cn/
     pageSize: 10,     // 当前数据量
     selectedNav: 0,          // 导航栏当前选中项
     isAllSelected: 0,        // 是否全选 1: 全选
@@ -285,10 +286,10 @@ Page({
   // 修改库存请求
   updateItemStock(stockQty, itemNo) {
     const _this = this
-    console.log(stockQty)
+    console.log(stockQty, itemNo)
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.updateItemStock({
-      data: { platform, token, username, supplierNo, itemNo, stockQty: stockQty },
+      data: { platform, token, username, supplierNo, itemNo, stockQty },
       success(res) {
         console.log(res)
         if (res.code == 0) toast('修改库存成功')
@@ -327,7 +328,6 @@ Page({
         let currentStock = this.data.currentStock
         this.updateItemStock(toNum - currentStock, itemNo)
       }
-      toast('修改成功')
       this.setData({ isShowEditDialog: false })
     }
   },
@@ -355,7 +355,7 @@ Page({
   },
 
   // 查询(请求)商品
-  supplierItemSearch(obj, _this, pageSize) {
+  supplierItemSearch(obj, _this = this, pageSize) {
     const basePicUrl = this.data.basePicUrl
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     console.log(obj, supplierNo)
@@ -376,13 +376,14 @@ Page({
         let goodsData = res.data.itemData
         goodsData.forEach((item, i) => {
           goodsData[i].checkbox = 0 
-          goodsData[i].profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(2)  // 毛利率
+          let profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(4)  // 毛利率
+          goodsData[i].profit = profit == 1.0000 ? '100%' : (profit.slice(2)/100 + '%') 
           goodsData[i].picUrl = basePicUrl + item.itemNo + '/' + item.picUrl  // 图片地址
           let month = item.modifyDate.slice(5,7)
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
         _this.setData({ goodsData })
-        wx.hideLoading()
+        setTimeout(() => { wx.hideLoading() }, 500)
       },
       error(res) {
         console.log(res)
@@ -451,7 +452,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showLoading({ title: '刷新中' })
+    let selectedNav = this.data.selectedNav
+    let status = -1
+    let itemClsNo = this.data.currentSliderCls
+    if (selectedNav == 1) {
+      status = 1
+    } else if (selectedNav == 2) {
+      status = 0
+    }
 
+    this.supplierItemSearch({ status, itemClsNo })
   },
 
   /**

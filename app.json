@@ -28,8 +28,8 @@
     "enablePullDownRefresh": true
   },
   "networkTimeout": {
-    "request": 30000,
-    "downloadFile": 30000
+    "request": 5000,
+    "downloadFile": 5000
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

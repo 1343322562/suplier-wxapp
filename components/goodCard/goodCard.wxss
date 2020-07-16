@@ -5,10 +5,11 @@
 }
 
 .good-card-box {
-margin-left: 8rpx;
-background-color: #fff;
-display: flex;
-padding: 24rpx 6rpx 24rpx 18rpx;
+  margin-left: 8rpx;
+  background-color: #fff;
+  display: flex;
+  padding: 24rpx 6rpx 24rpx 18rpx;
+  border-top: 6rpx solid #eee;
 }
 
 .good-props-box .main-info .main:nth-child(1) .item{
@@ -35,9 +36,10 @@ padding: 24rpx 6rpx 24rpx 18rpx;
 
 .good-card-box .good-img-box image{
   height: 100rpx;
-    width: 100rpx;
-    margin-right: 24rpx;
-    background: #eee;
+  width: 100rpx;
+  margin-right: 24rpx;
+  background: url("data:image/jpg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCABkAGQDAREAAhEBAxEB/8QAGwABAAMBAQEBAAAAAAAAAAAAAAMEBgUHAgj/xAAwEAABAwICCQMCBwAAAAAAAAAAAQIDBAUREhQWITFBUVSS4QYjYUJxEyIyM4GRwf/EABgBAQEBAQEAAAAAAAAAAAAAAAABAwIE/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAESAhH/2gAMAwEAAhEDEQA/AP1YehkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFugt09xlWOFG7NrnLsREJblJE9xstTbWtfJlexVwzM5/OInWnVjmlQAAAAAAAA6NptT7pK9qLljan5n79vBCW5WRWrKOahmWGZMHJuXgqc0HPSK5R3PTdzhoZZo51ytlwwfwxTHf/AGcd8rKv+ortSz0ejwyNkc5UVVbtRETbvJxytrKGjkAAAAAABLBTyVMzIYkxe5cEQ5HoNvoY7dSshj4bXO5rxUytaPm426G5Q5JEwcn6XpvaolyWMJW0U1DMsMyYLwXgqc0NuemasUSRxPlz5WOdlTM7DgicQIwAAAAAAANp6dtWiQ6RKnvyJsRfpaY99OpHeOVAKdfb4bjAsUqfZyb0Us6yvjC1VsqKSqbTuZi564MVNz/sbc9MstlabUy3UmRyNdK/9xefx9jG3TWRk71bVttUqMb7L9rF/wA/g15unFjmnSAAAAA7np21aZPpEqexEuxF+t3g476WRtjJ0AAAEbo2uc1ytRVbuVd6ASAUrnQsuFK+F2xd7XcncC83JXn0sT4JXxSJhI1cFT5N3CMAAAAaGn9TpSwshiokSNqYImfwZ4XSbXB/Rt7/AAMLs1wf0be/wMGzXB/Rt7/AwbNcH9G3v8DBs1wf0be/wMGzXB/Rt7/AwbNcH9G3v8DBtx7rcW3KZs2j/hSYYOVHY48uB3JlLVAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==");
+  background-size: 100%;
 }
 
 .good-props-box {

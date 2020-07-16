@@ -30,8 +30,6 @@ page {
 }
 #showSliderTwo {
   display: block;
-  transition-property: all;
-  transition-duration: 1s;
 }
 #hideSliderTwo {
   display: none;
@@ -42,9 +40,11 @@ page {
   margin: 0 5rpx 0 20rpx;
 }
 #se-active {
-  color: #FF4E3E;
-  transition-property: all;
-  transition-duration: 1s;
+  color: #333;
+  background-color: #fff;
+  transition: padding .5s;
+  padding-left: 25rpx;
+
 }
 .inputActive {
   border:0rpx ;
@@ -66,7 +66,7 @@ page {
   letter-spacing: 3rpx;
   width: 170rpx;
 position: fixed;
-
+background: #eee;
 }
 .slide-bar .first-item .first {
   min-height: 50rpx;
@@ -76,10 +76,10 @@ background: #fff;
 padding: 10rpx 0;
 color: #0D0B0B;
 font-size: 28rpx;
-border-left: 6rpx solid #aaa;
+border-left: 9rpx solid #aaa;
 }
 .slide-bar .first-item .first-active {
-  border-left: 4rpx solid #FF4E3E;
+  border-left: 9rpx solid #FF4E3E;
   color: #FF4E3E;
 }
 
@@ -88,18 +88,17 @@ border-left: 6rpx solid #aaa;
 }
 
 .slide-bar .first-item .second-item .second{
-padding-left: 20rpx;
-min-height: 39rpx;
-line-height: 39rpx;
-background: #fff;
-border-top: 1rpx solid #f5f5f5;
-color: #6A6666;
-font-size: 26rpx;
-padding: 13rpx 0rpx 13rpx 10rpx;
-white-space: nowrap;
-text-overflow: ellipsis;
-overflow: hidden;
-
+  padding-left: 20rpx;
+  min-height: 39rpx;
+  line-height: 46rpx;
+  background: #eee;
+  border-top: 1rpx solid #f5f5f5;
+  color: #6A6666;
+  font-size: 26rpx;
+  padding: 13rpx 0rpx 13rpx 10rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;  
 }
 
 /* 商品卡片 */
@@ -168,13 +167,9 @@ align-items: center;
 
 .slider-transi {
   height: 0;
-  transition-property: all;
-  transition-duration: 1s;
 }
 .slider-transition {
   height: auto;
-  transition-property: all;
-  transition-duration: 1s;
 }
 
 .item .content{

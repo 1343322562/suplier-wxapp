@@ -11,7 +11,7 @@
 .sale-data-table .item{
   width: 170rpx;
   text-align: center;
-  font-size: 29rpx;
+  font-size: 28rpx;
   color: #4d4d4d;
 }
 
