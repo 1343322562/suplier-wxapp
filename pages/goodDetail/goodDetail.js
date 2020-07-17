@@ -6,8 +6,7 @@ Page({
    */
   data: {
     type: 0, // 页面种类 0： 编辑商品   1： 商品详情
-    data: {},  
-    supplierNo: '',
+    data: {},
     json: {},  // 被修改的商品数据
     // 修改商品信息 Dialog
     editDialogValueObj: {
@@ -17,6 +16,7 @@ Page({
     },
     isShowEditDialog: false
   }, 
+  
   // 编辑商品
   editConfirm (e) {
     let type = e.target.dataset.type

@@ -1,0 +1,31 @@
+<!--pages/goodSearch/goodSearch.wxml-->
+<Navbar title='搜索' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' />
+<view class="search-bar-container">
+  <view class="nav-seach-bar-box">
+		<image src='../../images/search.png' bindtap="searchOrder" />
+		<input type="text" class="nav-seach-bar" placeholder='请输入订单号或客户名称' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="搜索" bindconfirm="searchOrder" />
+	</view>
+  <button bindtap="searchOrder" style="margin: 0 40rpx;" type="primary" size="mini">搜索</button>
+</view>
+
+
+<GoodCard 
+  wx:if="{{goodsData.length != 0}}" 
+  isAllSelected="{{isAllSelected}}" 
+  wx:for="{{goodsData}}" 
+  wx:key="index" 
+  goodsData="{{item}}" 
+  index="{{index}}" 
+/>
+
+<!-- 底边栏 -->
+	<view class="bottom-bar-box">
+		<view class="checkbox-box">
+			<radio bindtap='allSelected' value='all' color='#FF4E3E' checked='{{isAllSelected}}' class="all-selected" />
+			<view class="content">全选</view>
+		</view>
+		<view class="botton-box">
+			<button bindtap="downClick" style="padding: 0;background: #02b972;height: 64rpx;font-size: 26rpx;line-height: 65rpx;margin: 0 0 0 28rpx;width: 140rpx;color: #fff;font-weight: 100;border-radius: 50rpx;">下架</button>
+			<button bindtap="upClick" style="padding: 0;background: #ff7164;height: 64rpx;font-size: 26rpx;line-height: 65rpx;margin: 0 0 0 28rpx;width: 140rpx;color: #fff;font-weight: 100;border-radius: 50rpx;">上架</button>
+		</view>
+	</view>

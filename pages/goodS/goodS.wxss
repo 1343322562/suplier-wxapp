@@ -61,13 +61,12 @@ page {
   min-height: 90vh;
   width: 170rpx;
   background-color: #fff;
-  margin-top: 5rpx;
 }
 .slide-bar .first-item{
   letter-spacing: 3rpx;
   width: 170rpx;
-  position: fixed;
-  background: #eee;
+position: fixed;
+background: #eee;
 }
 .slide-bar .first-item .first {
   min-height: 50rpx;

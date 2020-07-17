@@ -1,0 +1,56 @@
+/* pages/goodSearch/goodSearch.wxss */
+
+.search-bar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25rpx 0;
+  border: 1rpx solid #ddd;
+}
+
+.nav-seach-bar-box {
+  background: #fff;
+  height: 65rpx;
+  width: 500rpx;
+  border-radius: 50rpx;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: #181716;
+  font-size: 31rpx;
+  border: 1rpx solid #aaa;
+  flex: 1;
+  margin-left: 32rpx;
+}
+.nav-seach-bar-box image {
+  height: 35rpx;
+  width: 35rpx;
+  margin: 0 15rpx 0 20rpx;
+}
+
+
+
+/* 底边篮 */
+.bottom-bar-box {
+  position: fixed;
+  bottom: 0;
+  height: 108rpx;
+  width: 94%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3%;
+}
+
+.bottom-bar-box .checkbox-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-bar-box .botton-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -2,35 +2,35 @@
 <Navbar title='{{type == 1 ? "商品详情" : "编辑商品"}}' background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' />
 <view class="good-detail-container">
   <view class="input-box" data-name='商品条码' data-inputName="itemSubno" bindtap="showEditDialogClick">
-    <label id="edit-label">商品条码：</label>
+    <label>商品条码：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
-      disabled="{{type == 1 ? true : false}}" 
+      disabled
       value='{{data.itemSubno}}'
     ></input>
   </view>
   <view class="input-box" data-name='商品货号' data-inputName="itemNo" bindtap="showEditDialogClick">
-    <label id="edit-label">商品货号：</label>
+    <label>商品货号：</label>
     <input 
       type="number"
       bindinput='bindInputData' 
-      disabled="{{type == 1 ? true : false}}" 
+      disabled
       value='{{data.itemNo}}'
     ></input>
   </view>
   <view class="input-box" data-name='商品名称' data-inputName="itemName" bindtap="showEditDialogClick">
-    <label id="edit-label">商品名称：</label>
+    <label>商品名称：</label>
     <input 
       class="good-name" 
-      disabled="{{type == 1 ? true : false}}" 
+      disabled
       value='{{data.itemName}}'
     ></input>
   </view>
   
   <view wx:if="{{data.appNote}}" class="input-box" data-name='商品日期'>
     <label>商品日期：</label>
-    <input disabled value='{{data.appNote}}'>
+    <input disabled="{{type == 1 ? true : false}}" value='{{data.appNote}}'>
     </input>
   </view>
 
@@ -69,7 +69,7 @@
       <label id="edit-label">进 货 价(￥)：</label>
       <input 
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled="{{type == 1 ? true : false}}"
         value='{{data.price}}'
       ></input>
     </view>
@@ -105,46 +105,46 @@
   </view>
   <view class='good-props'>
     <view class="input-box" data-name='单位' data-inputName="unit" bindtap="showEditDialogClick">
-      <label id="edit-label">单位：</label>
+      <label>单位：</label>
       <input 
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.unit}}'
      ></input>
     </view>
   </view>
   <view class='good-props'>
     <view class="input-box" data-name='单次起订' data-inputName="minSupplyQty" bindtap="showEditDialogClick" wx:if="{{data.minSupplyQty}}">
-      <label id="edit-label">单次起订：</label>
+      <label>单次起订：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.minSupplyQty}}'
       ></input>
     </view>
     <view class="input-box" data-name='单次限购' data-inputName="maxSupplyQty" bindtap="showEditDialogClick" wx:if="{{data.minSupplyQty}}">
-      <label id="edit-label">单次限购：</label>
+      <label>单次限购：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.maxSupplyQty}}'
       ></input>
     </view>
   </view>
   <view class='good-props'>
     <view class="input-box" data-name='配送规格' data-inputName="supplySpec" bindtap="showEditDialogClick">
-      <label id="edit-label">配送规格：</label>
+      <label>配送规格：</label>
       <input 
         type="number"
         bindinput='bindInputData' 
-        disabled="{{type == 1 ? true : false}}" 
+        disabled
         value='{{data.supplySpec}}'
       ></input>
     </view>
     <view class="input-box" data-name='库存数量' data-inputName="stockQty" bindtap="showEditDialogClick">
-      <label id="edit-label">库存数量：</label>
+      <label>库存数量：</label>
       <input 
         type="number"
         bindinput='bindInputData' 

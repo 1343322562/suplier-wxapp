@@ -33,7 +33,6 @@ Page({
       success: function (res) {
         wx.getClipboardData({
           success: function (res) {
-            toast('复制单号成功')
           }
         })
       }
