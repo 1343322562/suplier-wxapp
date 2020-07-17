@@ -89,7 +89,7 @@ Page({
       data: { platform, token, username, supplierNo, itemNo, appNote: inputValue },
       success (res) {
         console.log(res)
-        if (res.code == 0) toast('编辑成功')
+        if (res.code == 0) toast('编辑成功');
         backPage()
       }
     })
