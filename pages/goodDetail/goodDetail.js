@@ -1,7 +1,6 @@
 import { showModal, toast, backPage } from '../../tool/tool.js'
 import API from '../../api/index.js'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -18,7 +17,7 @@ Page({
     },
     isShowEditDialog: false
   }, 
-
+  // 编辑商品
   editConfirm (e) {
     let type = e.target.dataset.type
     if (type == 0) return this.setData({ isShowEditDialog: false })
@@ -37,7 +36,7 @@ Page({
   showEditDialogClick (e) {
     console.log(e)
     const name = e.currentTarget.dataset.name
-    const inputName = e.target.dataset.inputname
+    const inputName = e.currentTarget.dataset.inputname
     const inputValue = this.data.data[inputName]
     const editDialogValueObj = { name, inputName, inputValue }
     console.log(editDialogValueObj)
@@ -87,7 +86,7 @@ Page({
     const itemNo = this.data.data.itemNo
     console.log(itemNo, appNote)
     API.updateItemNote({
-      data: { platform, token, username, supplierNo, itemNo, appNote },
+      data: { platform, token, username, supplierNo, itemNo, appNote: inputValue },
       success (res) {
         console.log(res)
         if (res.code == 0) toast('编辑成功')

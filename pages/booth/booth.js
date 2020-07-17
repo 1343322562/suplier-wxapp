@@ -36,6 +36,12 @@ function str2ab(str) {
 
 Page({
   data: {
+    // 固定的设备
+    fixedDevices: {
+      deviceId: "DC:0D:30:46:9A:00",
+      name: "JLP352-9A00",
+      localName: "JLP352-9A00"
+    },   
     devices: [],
     connected: false,
     chs: [],
@@ -88,6 +94,7 @@ Page({
     wx.onBLEConnectionStateChange((res) => {
       // 该方法回调中可以用于处理连接意外断开等异常情况
       console.log('onBLEConnectionStateChange', `device ${res.deviceId} state has changed, connected: ${res.connected}`)
+      if (res.deviceId != 'DC:0D:30:46:9A:00') return showModal({ content: '设备有误' })
       this.setData({
         connected: res.connected
       })
@@ -118,18 +125,21 @@ Page({
       return
     }
     this._discoveryStarted = true
+    console.log(this.data.devices)
     let num = this.data.devices.length
     wx.startBluetoothDevicesDiscovery({
       success: (res) => {
-        if (num == 0) {
-          showModal({
-            content: '当前无可用设备',
-          })
-        } else if (num == 1) {
-          showModal({
-            content: '搜索成功，请连接打印设备',
-          })
-        }
+        wx.showLoading({ title: '连接中...' })
+        // console.log(res)
+        // if (num == 0) {
+        //   showModal({
+        //     content: '当前无可用设备',
+        //   })
+        // } else if (num == 1) {
+        //   showModal({
+        //     content: '搜索成功，请连接打印设备',
+        //   })
+        // }
         
         console.log('startBluetoothDevicesDiscovery success', res)
         this.onBluetoothDeviceFound()
@@ -158,25 +168,37 @@ Page({
         const data = {}
         if (idx === -1) {
           data[`devices[${foundDevices.length}]`] = device
+          // this.data.devices[foundDevices.length] = data[`devices[${foundDevices.length}]`]
         } else {
           data[`devices[${idx}]`] = device
+          // this.data.devices[idx] = data[`devices[${idx}]`]
         }
+        console.log(data)
         this.setData(data)
       })
     })
   },
   createBLEConnection(e) {
+    this.openBluetoothAdapter()   // 打开并搜索蓝牙
     const ds = e.currentTarget.dataset
     const deviceId = ds.deviceId
     const name = ds.name
-    this._createBLEConnection(deviceId, name)
+    console.log(deviceId, name)
+    console.log(this.data.devices)
+    setTimeout(() => {
+      this._createBLEConnection(deviceId, name) // 连接蓝牙设备  
+    }, 1000)
+    console.log('连接蓝牙设备')
   },
   _createBLEConnection(deviceId, name) {
+    console.log('进入连接', deviceId, name)
     wx.showLoading()
     wx.createBLEConnection({
       deviceId,
-      success: () => {
+      success: (res) => {
         console.log('createBLEConnection success');
+        wx.hideLoading()
+        if (res) toast('连接设备成功')
         this.setData({
           connected: true,
           name,
@@ -189,10 +211,11 @@ Page({
         })
       },
       complete() {
-        wx.hideLoading()
       },
       fail: (res) => {
         console.log('createBLEConnection fail', res)
+        wx.hideLoading()
+        if (res) toast('连接设备失败')
       }
     })
     this.stopBluetoothDevicesDiscovery()
@@ -207,6 +230,7 @@ Page({
       canWrite: false,
     })
   },
+  // 获取蓝牙设备所有服务
   getBLEDeviceServices(deviceId) {
     wx.getBLEDeviceServices({
       deviceId,
@@ -311,11 +335,11 @@ Page({
             let printNum = _this.data.printNum
             _this.data.printNum = printNum + 1
             console.log(printNum)
+            
             if (printNum >= 1) return
             setTimeout(() => {
               _this.updateSheetStatus(sheetNo, _this)
-            }, 1000)
-            
+            }, 800)
           }  
       },
       fail(res) {
@@ -371,7 +395,7 @@ Page({
       sheetNo
     })
     this.data.sheetNo = sheetNo
-    this.openBluetoothAdapter()
+    // this.openBluetoothAdapter()   // 一进入页面就搜索蓝牙
   },
   createBLEConnectionWithDeviceId(e) {
     // 小程序在之前已有搜索过某个蓝牙设备，并成功建立连接，可直接传入之前搜索获取的 deviceId 直接尝试连接该设备

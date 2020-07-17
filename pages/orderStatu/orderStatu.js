@@ -423,7 +423,7 @@ Page({
   },
 
 
-  // 打印单据 ,跳转链接蓝牙页面
+  // 打印单据 ,跳转链接蓝牙页面(或出库)
   print (e) {
     console.log(e)
     let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
@@ -440,7 +440,7 @@ Page({
       }
     })
     if (sheetNo == '') return showModal({ content: '请选择单据' }) 
-    console.log(sheetNo)
+    console.log(sheetNo, type)
     if (type == 1) return this.updateSheetStatus(sheetNo) // 直接出库
 
     this.searchOrderDetailData(sheetNo) // 请求单据详情，并跳转蓝牙打印页
@@ -464,11 +464,6 @@ Page({
         goPage('../booth/booth?data=' + data)
       } 
     })
-  },
-
-  // 不打印订单直接出库
-  warehouseOut () {
-    this.updateSheetStatus(sheetNo)
   },
   // 请求司机信息
   getSupplierEmployment(){

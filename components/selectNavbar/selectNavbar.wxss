@@ -21,6 +21,7 @@ z-index: 10000;
 }
 
 .statu-navbar-box .item-box .item {
+  padding: 0 20rpx;
 }
 
 .statu-navbar-box .item-box .selected {

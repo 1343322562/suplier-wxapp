@@ -174,7 +174,7 @@ Page({
     }
   },
   // 上下架商品请求
-  updateItemStatus (status, itemNo, _this) {
+  updateItemStatus (status, itemNo, _this = this) {
     console.log(status, itemNo)
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
     API.updateItemStatus({
@@ -182,6 +182,8 @@ Page({
       success(res) {
         console.log(res)
         if (res.code == 0) toast('操作成功')
+        _this.supplierItemSearch({ status: _this.data.selectedNav - 1, itemClsNo: _this.data.currentSliderCls }, _this)
+        _this.setData({ isAllSelected: 0 })
       }
     })
   },
@@ -208,7 +210,6 @@ Page({
         itemNo = itemNo.join(',')
         // 发起上下架请求, 并重新请求数据
         _this.updateItemStatus('1', itemNo, _this)
-        _this.supplierItemSearch({ status: _this.data.selectedNav - 1, itemClsNo: _this.data.currentSliderCls }, _this)
       }
     })
   },
@@ -230,7 +231,6 @@ Page({
         itemNo = itemNo.join(',')
         // 发起上下架请求, 并重新请求数据
         _this.updateItemStatus('0', itemNo, _this)
-        _this.supplierItemSearch({ status: _this.data.selectedNav - 1, itemClsNo: _this.data.currentSliderCls }, _this)
       }
     })
   },

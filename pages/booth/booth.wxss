@@ -19,8 +19,14 @@
 
 .device-item {
   border-bottom: 1rpx solid #EEE;
-  padding: 10rpx;
+  padding: 20rpx 40rpx;
   color: #666;
+}
+
+.item-name {
+  font-size: 31rpx;
+  line-height: 80rpx;
+  height: 80rpx;
 }
 
 .device-item-hover {

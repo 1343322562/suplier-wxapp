@@ -3,19 +3,19 @@
 <view class="form-box">
   <view class="item">
     <label>姓 名：</label>
-    <input disabled value="{{fromData.linkMan}}" bindinput="getFormData" data-type="name" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value="{{fromData.linkMan}}" bindinput="getFormData" data-type="name" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
   <view class="item">
     <label>电话号码：</label>
-    <input disabled value="{{fromData.supplierTel}}" bindinput="getFormData" data-type="phone" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value="{{fromData.supplierTel}}" bindinput="getFormData" data-type="phone" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
   <view class="item">
     <label>仓库名称：</label>
-    <input disabled value="{{fromData.warehouse}}" bindinput="getFormData" data-type="warehouse" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value="{{fromData.warehouse}}" bindinput="getFormData" data-type="warehouse" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
   <view class="item">
     <label>公司名称：</label>
-    <input disabled value="{{fromData.supplierName}}" bindinput="getFormData" data-type="supplierName" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value="{{fromData.supplierName}}" bindinput="getFormData" data-type="supplierName" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
   <!-- <view class="item">
     <label>提现账户：</label>
@@ -23,11 +23,11 @@
   </view> -->
   <view class="item">
     <label>订单起送：</label>
-    <input disabled value=" ￥{{fromData.minDeliveryMomey}}" bindinput="getFormData" data-type="amount" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value=" ￥{{fromData.minDeliveryMomey}}" bindinput="getFormData" data-type="amount" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
   <view class="item">
     <label>承诺送货时间：</label>
-    <input disabled value="{{fromData.serviceTime}}小时" bindinput="getFormData" data-type="transTime" placeholder='' placeholder-style='color: #999999;'></input>
+    <input disabled value="{{fromData.serviceTime}}小时" bindinput="getFormData" data-type="transTime" placeholder='暂无信息' placeholder-style='color: #999999;'></input>
   </view>
 </view>
 

@@ -104,5 +104,6 @@
 }
 
 .all-selected {
-  transform: scale(.8);
+  padding: 0rpx 0 55rpx 25rpx;
+
 }

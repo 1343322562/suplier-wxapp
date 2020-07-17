@@ -20,7 +20,7 @@
           data-index="{{index}}" 
           bindtap="selectedClick"
           value='all' 
-          style="transform:scale(.7);" 
+          style="transform:scale(.8);" 
           color='#FF4E3E' 
           checked='{{goodsData.checkbox || isAllSelected}}' 
           class="all-selected" 

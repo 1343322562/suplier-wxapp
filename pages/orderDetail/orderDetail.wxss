@@ -57,7 +57,7 @@
   font-size: 30rpx;
   padding-bottom: 2rpx;
   min-width: 90rpx;
-
+  white-space: nowrap;
 }
 .custom-info-box .main-info .item .name~.content{
   font-size: 30rpx;
@@ -92,7 +92,7 @@ min-height: 130rpx;
 
 .custom-info-box .order-statu .statu{
   white-space: nowrap;
-
+  padding-left: 12rpx;
 } 
 
 .tag{
