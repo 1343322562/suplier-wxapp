@@ -82,11 +82,11 @@ Page({
     if (inputValue == '') return toast('修改值不能为空')
     if (inputValue == this.data.data[inputName]) return toast('请输入修改值')
 
-    const appNote = { [inputName]: inputValue}
+    const appNote = inputValue
     const itemNo = this.data.data.itemNo
     console.log(itemNo, appNote)
     API.updateItemNote({
-      data: { platform, token, username, supplierNo, itemNo, appNote: inputValue },
+      data: { platform, token, username, supplierNo, itemNo, appNote },
       success (res) {
         console.log(res)
         if (res.code == 0) toast('编辑成功')

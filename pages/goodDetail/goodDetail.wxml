@@ -29,7 +29,7 @@
   </view>
   
   <view wx:if="{{data.appNote}}" class="input-box" data-name='商品日期'>
-    <label>商品日期：</label>
+    <label>商品批注：</label>
     <input disabled value='{{data.appNote}}'>
     </input>
   </view>
