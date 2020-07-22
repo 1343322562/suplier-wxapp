@@ -1,3 +1,4 @@
+import { toast } from "../tool/tool"
 
 export default {
   baseURL: 'https://ch.zksr.cn/', 
@@ -21,6 +22,7 @@ export default {
       data: requestObj ,
       success:  (response) => {
         console.log(response, url)
+        // if (response.statusCode == 404) return wx.showModal({ content: '请求丢失' })
         // const data = (typeof response === 'object' ? response.data : response)
         if ((url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
           wx.setStorageSync('isWxLogin', true)

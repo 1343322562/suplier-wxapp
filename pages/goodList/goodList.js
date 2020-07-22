@@ -383,7 +383,7 @@ Page({
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
         _this.setData({ goodsData })
-        setTimeout(() => { wx.hideLoading() }, 500)
+        setTimeout(() => { wx.hideLoading() }, 800)
       },
       error(res) {
         console.log(res)
@@ -419,6 +419,23 @@ Page({
       }
     })
   },
+
+  // 监听页面滚动事件
+  // onPageScroll: function (e) {
+  //   console.log(e)
+  //   const query = wx.createSelectorQuery();
+  //   const currentHeight = wx.getSystemInfoSync().windowHeight    // 获取当前设备窗口的高度
+  //   const bottomPosition  // 当前节点位于屏幕上边的位置
+  //   query.select('.dsa').boundingClientRect()
+  //   query.exec(function(res){
+  //     console.log(res, currentHeight)
+  //     bottomPosition = res[0].top       
+  //   })
+
+  //   if (bottomPosition - currentHeight < 500) {
+
+  //   }
+  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

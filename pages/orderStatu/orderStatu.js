@@ -307,13 +307,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({ title: '请稍候..' })
+    options.nav != 3 && wx.showLoading({ title: '请稍候..' })
     console.log(options)
     let selectedNav = options.nav
     this.setData({ selectedNav })
   },
   
   onShow: function (e) {
+    console.log(1)
     if (this.data.selectedNav == 3) return
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     this.searchOrderStatusData(platform, token, username, supplierNo)

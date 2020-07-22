@@ -35,8 +35,10 @@
 		<view class="null" wx:if="{{goodsData.length == 0}}">
 			此分类暂无商品 ~~~
 		</view>
-
+		<!-- <view class="asd">asd</view> -->
 		<GoodCard wx:if="{{selectedNav == 0 || item.status != selectedNav - 1}}" isAllSelected="{{isAllSelected}}" wx:for="{{goodsData}}" wx:key="index" goodsData="{{item}}" index="{{index}}" />
+		<!-- <view class="dsa">dsa</view> -->
+
 		<!-- <view class="good-card-box">
       <view class="good-img-box">
         <image src="../../images/goodImg.jpg"/>

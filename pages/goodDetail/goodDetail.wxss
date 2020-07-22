@@ -1,4 +1,12 @@
 /* pages/goodDetail/goodDetail.wxss */
+.edit-icon {
+    height: 45rpx;
+    width: 45rpx;
+    position: absolute;
+    right: 28rpx;
+    top: 10rpx;
+}
+
 .good-detail-container {
     width: 96%;
     margin: 2%;
@@ -14,7 +22,7 @@
 }
 
 .input-box label{
-    color: #888888;
+    color: #666666;
     min-width: 142rpx;
     display: flex;
     justify-content: space-between;
