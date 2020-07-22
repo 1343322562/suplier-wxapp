@@ -13,8 +13,8 @@ export const backPage = (delta = 1) => {
 export const toast = (title = '完成') => {
   wx.showToast({
     title: title,
-    icon: 'success',
-    duration: 2000
+    icon: 'none',
+    duration: 1500
   });
 }
 

@@ -22,15 +22,31 @@ Page({
       success(res) {
         if (res.code) {
           console.log(res.code)
-          let appid = 'wx214f112d62d0a7cc'
-          let js_code = res.code
-          console.log( js_code, appid)
+
+          // wx.request({
+          //   url: `https://ch.zksr.cn/zksr-match/match/getOpenId.do?js_code=${res.code}&appid=wx214f112d62d0a7cc&secret=934f7412723d20bfbe31361fc0223c47&grant_type=authorization_code`,
+          //   success: function(res){
+          //     console.log(res)
+          //   },
+          //   complete: function(res) {
+          //     console.log(res)
+          //   }
+          // })
+          // wx.request({
+          //   url: `https://api.weixin.qq.com/sns/jscode2session?js_code=${res.code}&appid=wx214f112d62d0a7cc&secret=934f7412723d20bfbe31361fc0223c47&grant_type=authorization_code`,
+          //   success: function(res){
+          //     console.log(res)
+          //   },
+          //   complete: function(res) {
+          //     console.log(res)
+          //   }
+          // })
           // 发起网络请求
           API.getOpenId({
             data: {
-              js_code,
-              appid,
-              secret: '934f7412723d20bfbe31361fc0223c47'
+              js_code: res.code,
+              appid: "wx214f112d62d0a7cc",
+              secret: "934f7412723d20bfbe31361fc0223c47"
             },
             success(res) {
               const openId = res.data.openid
@@ -38,14 +54,14 @@ Page({
               wx.setStorageSync('openId', openId)
             },
             complete (res){
-              console.log(res, js_code, appid)
+              console.log(res, res.code)
             }
           })
         } else {
           showModal({
             title: '提示',
             content: '获取信息失败'
-          })
+        })
         }
       }
     })

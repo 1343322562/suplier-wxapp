@@ -10,35 +10,16 @@
 <SelectNavbar bind:myevent="selectNav" selectItemArray="{{['全部','已上架','未上架']}}" selectedNavIndex='{{selectedNav}}' />
 
 <view class="good-list-container">
-	<!-- 侧边栏 -->
-	<view class='slide-bar'>
-		<scroll-view style="height: 80vh;" scroll-y class="first-item" bindtap="selectSlider">
-			<block wx:for="{{slider}}" wx:key="index">
-				<view class="first {{index == selecSliderObj.index ? 'first-active' : ''}}" data-one="{{index}}" data-two="{{0}}">{{item.clsName}}</view>
-				<view class="slider-transi {{index == selecSliderObj.index ? 'slider-transition' : ''}}">
-					<view class="second-item" wx:for="{{item.second}}" wx:key="index" wx:for-item="t" wx:for-index="ind" wx:key="ind" id="{{index == selecSliderObj.index ? 'showSliderTwo' : 'hideSliderTwo'}}">
-						<view class="second" id="{{ind == selecSliderObj.ind && index == selecSliderObj.index ? 'se-active' : ''}}" data-two="{{ind}}" data-one="{{index}}">{{t.clsName}}
-						</view>
-
-					</view>
-				</view>
-
-			</block>
-			<view style="height: 110rpx;width: 100rpx;"></view>
-		</scroll-view>
-	</view>
 	<!-- 商品卡片 -->
 
 	<!-- 0：全部 -->
 	<view class='right'>
 		<!-- <GoodCard wx:if="{{selectedNav == 2 || selectedNav == 0}}" isAllSelected="{{isAllSelected}}" bind:isShowEditDialogClick='isShowEditDialogClick' /> -->
-		<view class="null" wx:if="{{goodsData.length == 0}}">
-			此分类暂无商品 ~~~
+		<view class="null" wx:if="{{goodsData.length == 0 && searchValue}}">
+		暂无商品
 		</view>
-		<!-- <view class="asd">asd</view> -->
-		<GoodCard wx:if="{{selectedNav == 0 || item.status != selectedNav - 1}}" isAllSelected="{{isAllSelected}}" wx:for="{{goodsData}}" wx:key="index" goodsData="{{item}}" index="{{index}}" />
-		<!-- <view class="dsa">dsa</view> -->
 
+		<GoodCard wx:if="{{selectedNav == 0 || item.status != selectedNav - 1}}" isAllSelected="{{isAllSelected}}" wx:for="{{goodsData}}" wx:key="index" goodsData="{{item}}" index="{{index}}" />
 		<!-- <view class="good-card-box">
       <view class="good-img-box">
         <image src="../../images/goodImg.jpg"/>

@@ -24,11 +24,6 @@ Page({
       subNum: '',
       toNum: ''
     },
-    slider:[
-      {a: '休闲零食', t: ['冰棒', '辣条']},
-      {a: '休闲零食', t: ['冰棒', '辣条']}
-    ], // 侧边栏
-    currentSliderCls: '',    // 当前所选中的类别编号
     isShowEditPriceDialog: false,   // 显示修改价格 Dialog
     editStockFocus: {
       addNum: false,
@@ -39,10 +34,6 @@ Page({
       price: '',     // 进价
       salePrice: ''  // 售价 
     },
-    selecSliderObj: {  // 选择侧边栏
-      index: 0,  // 1
-      ind: 0,    // 2
-    },         
     inputActive: '',     //  修改框的选中态
     currentStock: '',    //  当前商品库存
     currentIndex: ''  //  当前选中商品(修改库存/价格)
@@ -55,15 +46,11 @@ Page({
   },
   searchOrder() {
     let value = this.data.searchValue
-    let index = this.data.selecSliderObj.index
-    let ind = this.data.selecSliderObj.ind
-    let slider = this.data.slider
     const _this = this
 
     // 重新请求商品，刷新页面
     _this.supplierItemSearch({
       status: _this.data.selectedNav,
-      itemClsNo: slider[index].second[ind].clsNo,
       condition: value
     }, _this)
   },
@@ -77,13 +64,9 @@ Page({
       success (res) {
         console.log(res)
         if (res.code == 0) toast('修改价格成功')
-        let index = _this.data.selecSliderObj.index
-        let ind = _this.data.selecSliderObj.ind
-        let slider = _this.data.slider
         // 重新请求商品，刷新页面
         _this.supplierItemSearch({
           status: this.data.selectedNav,
-          itemClsNo: slider[index].second[ind].clsNo,
         }, _this)
       }
     })
@@ -124,25 +107,6 @@ Page({
     this.updateItemPrice(itemNo, editPriceInputVal)
     this.setData({ isShowEditPriceDialog: false })
   },
-  // 选择侧边栏
-  selectSlider (e) {
-    console.log(2)
-    this.setData({goodsData: [], pageSize: 10})
-    const _this = this
-    let data = e.target.dataset
-    let index = 'one' in data ? data.one : ''
-    let ind = 'two' in data ? data.two : ''
-    let currentSliderCls
-    let status = this.data.selectedNav
-    status = status > 0 ? status - 1 : ''
-    if (index !== '') this.setData({ ['selecSliderObj.index']: index })
-    if (ind !== '') {
-      currentSliderCls = this.data.slider[index].second[ind].clsNo
-      _this.setData({ ['selecSliderObj.ind']: ind, currentSliderCls })
-      console.log(currentSliderCls)
-    }
-    this.supplierItemSearch({ status, itemClsNo: currentSliderCls}, _this)
-  },
   // 跳转详情页
   toDetailClick (e) {
     console.log(e)
@@ -182,7 +146,7 @@ Page({
       success(res) {
         console.log(res)
         if (res.code == 0) toast('操作成功')
-        _this.supplierItemSearch({ status: _this.data.selectedNav - 1, itemClsNo: _this.data.currentSliderCls }, _this)
+        _this.supplierItemSearch({ status: _this.data.selectedNav - 1 }, _this)
         _this.setData({ isAllSelected: 0 })
       }
     })
@@ -293,12 +257,8 @@ Page({
       success(res) {
         console.log(res)
         if (res.code == 0) toast('修改库存成功')
-        let index = _this.data.selecSliderObj.index
-        let ind = _this.data.selecSliderObj.ind
-        let slider = _this.data.slider
         _this.supplierItemSearch({  
-          status: this.data.selectedNav, 
-          itemClsNo: slider[index].second[ind].clsNo,
+          status: this.data.selectedNav
         }, _this)
       }
     })
@@ -348,11 +308,7 @@ Page({
     }
   },
 
-  onLoad: function (options) {
-    wx.showLoading({ title: '请稍候..' })
-    const _this = this
-    this.searchGoodsItemCls(_this) // 查询侧边栏
-  },
+  onLoad: function (options) {},
 
   // 查询(请求)商品
   supplierItemSearch(obj, _this = this, pageSize) {
@@ -383,7 +339,7 @@ Page({
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
         _this.setData({ goodsData })
-        setTimeout(() => { wx.hideLoading() }, 800)
+        setTimeout(() => { wx.hideLoading() }, 500)
       },
       error(res) {
         console.log(res)
@@ -391,51 +347,6 @@ Page({
       }
     })
   },
-
-  // 请求商品类别
-  searchGoodsItemCls (_this) {
-    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
-    API.searchGoodsItemCls({
-      data: { platform, token, username, supplierNo },
-      success (res) {
-        console.log(res)
-        let data = res.data
-        let firstCls = data.firstCls
-        let secondCls = data.secondCls
-
-        firstCls.forEach((item,i) => {
-          firstCls[i].second = []
-          secondCls.forEach((t, index) => {
-            if (item.clsNo == t.clsParent) { 
-              firstCls[i]['second'].push(t)
-            }
-          })
-        })
-        console.log(firstCls)
-        _this.setData({ slider: firstCls })
-
-        _this.supplierItemSearch({ status: 0, itemClsNo: firstCls[0].second[0].clsNo },  _this)
-        
-      }
-    })
-  },
-
-  // 监听页面滚动事件
-  // onPageScroll: function (e) {
-  //   console.log(e)
-  //   const query = wx.createSelectorQuery();
-  //   const currentHeight = wx.getSystemInfoSync().windowHeight    // 获取当前设备窗口的高度
-  //   const bottomPosition  // 当前节点位于屏幕上边的位置
-  //   query.select('.dsa').boundingClientRect()
-  //   query.exec(function(res){
-  //     console.log(res, currentHeight)
-  //     bottomPosition = res[0].top       
-  //   })
-
-  //   if (bottomPosition - currentHeight < 500) {
-
-  //   }
-  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -472,14 +383,12 @@ Page({
     wx.showLoading({ title: '刷新中' })
     let selectedNav = this.data.selectedNav
     let status = -1
-    let itemClsNo = this.data.currentSliderCls
     if (selectedNav == 1) {
       status = 1
     } else if (selectedNav == 2) {
       status = 0
     }
-
-    this.supplierItemSearch({ status, itemClsNo })
+    this.supplierItemSearch({ status })
   },
 
   /**
@@ -489,14 +398,11 @@ Page({
     if (this.data.searchValue) return
     let pageSize = this.data.pageSize
     const _this = this
-    let index = _this.data.selecSliderObj.index
-    let ind = _this.data.selecSliderObj.ind
-    let slider = _this.data.slider
     
     // 重新请求商品，刷新页面
     _this.supplierItemSearch({
       status: this.data.selectedNav,
-      itemClsNo: slider[index].second[ind].clsNo,
+      condition: _this.data.searchValue
     }, _this ,pageSize)
     pageSize = pageSize + 10
     this.setData({ pageSize })

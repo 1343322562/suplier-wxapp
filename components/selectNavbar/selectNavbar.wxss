@@ -17,7 +17,8 @@
   font-size: 30rpx;
   letter-spacing: 1rpx;
   background: #fff;
-z-index: 10000;
+  z-index: 10000;
+  box-shadow: 0rpx 4rpx 15rpx #ddd
 }
 
 .statu-navbar-box .item-box .item {

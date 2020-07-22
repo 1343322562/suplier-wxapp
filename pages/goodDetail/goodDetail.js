@@ -6,8 +6,7 @@ Page({
    */
   data: {
     type: 0, // 页面种类 0： 编辑商品   1： 商品详情
-    data: {},  
-    supplierNo: '',
+    data: {},
     json: {},  // 被修改的商品数据
     // 修改商品信息 Dialog
     editDialogValueObj: {
@@ -17,6 +16,7 @@ Page({
     },
     isShowEditDialog: false
   }, 
+  
   // 编辑商品
   editConfirm (e) {
     let type = e.target.dataset.type
@@ -61,6 +61,7 @@ Page({
       success(res) {
         if (res.confirm) {
           _this.updateItemNote()
+          this.setData({ isShowEditDialog: false })
         }
       }
     })
@@ -75,6 +76,7 @@ Page({
   },
 // 编辑商品请求
   updateItemNote () {
+    const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
     const editDialogValueObj = this.data.editDialogValueObj
     const inputName = editDialogValueObj.inputName
@@ -84,13 +86,14 @@ Page({
 
     const appNote = inputValue
     const itemNo = this.data.data.itemNo
-    console.log(itemNo, appNote)
+    console.log(platform, token, username, supplierNo, itemNo, inputValue)
     API.updateItemNote({
       data: { platform, token, username, supplierNo, itemNo, appNote },
       success (res) {
         console.log(res)
-        if (res.code == 0) toast('编辑成功')
-        backPage()
+        if (res.code == 0) toast('编辑成功');
+        _this.setData({ isShowEditDialog: false })
+        setTimeout(() => { backPage() }, 800)
       }
     })
   },

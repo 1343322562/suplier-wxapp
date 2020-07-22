@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "GoodCard": "../../components/goodCard/goodCard"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "搜索",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#FF796D"	
+}

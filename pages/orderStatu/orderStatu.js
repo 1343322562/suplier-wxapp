@@ -264,8 +264,9 @@ Page({
 
   // 导航栏选择事件，传递给子组件
   selectNav(e) {
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    if (this.data.selectedNav == 3) this.searchOrderStatusData(platform, token, username, supplierNo)
     this.allSelected(true)  // 切换导航栏，使订单都为未选择状态
-
     console.log(e, this)
     let index = e.detail.index
     this.setData({ selectedNav: index, isAllSelected: false })
@@ -306,13 +307,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({ title: '请稍候..' })
+    options.nav != 3 && wx.showLoading({ title: '请稍候..' })
     console.log(options)
     let selectedNav = options.nav
     this.setData({ selectedNav })
   },
   
-  onShow: function () {
+  onShow: function (e) {
+    console.log(1)
+    if (this.data.selectedNav == 3) return
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     this.searchOrderStatusData(platform, token, username, supplierNo)
     

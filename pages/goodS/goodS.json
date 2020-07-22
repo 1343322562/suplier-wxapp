@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "SelectNavbar": "../../components/selectNavbar/selectNavbar",
+    "GoodCard": "../../components/goodCard/goodCard"
+  },
+  "navigationStyle": "custom"
+}
