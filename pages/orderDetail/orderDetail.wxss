@@ -1,4 +1,8 @@
 /* pages/orderDetail/orderDetail.wxss */
+page {
+  padding-bottom: 100rpx;
+}
+
 .top-container {
   background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E) ;
   font-size: 28rpx;

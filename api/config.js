@@ -1,9 +1,9 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'https://ch.zksr.cn/', 
+  baseURL: 'http://192.168.2.96:8087/zksr-match/', 
   // https://ch.zksr.cn/
-  // http://192.168.2.96:8086/zksr-match/
+  // http://192.168.2.96:8087/zksr-match/
   post (url, param) {
     this.ajax('post', url, param)
   },
