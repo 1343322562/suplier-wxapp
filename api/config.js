@@ -1,9 +1,10 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'http://192.168.2.96:8087/zksr-match/', 
+  baseURL: 'http://47.92.249.124:8081/zksr-match/', 
   // https://ch.zksr.cn/
   // http://192.168.2.96:8087/zksr-match/
+  // http://47.92.249.124:8081/zksr-match/
   post (url, param) {
     this.ajax('post', url, param)
   },
@@ -32,7 +33,12 @@ export default {
             title: '温馨提示',
             content: response.data.msg || response.data.message,
             success: () => {
-              if (!page) wx.navigateTo({ url: '../login/login' }) // 不是 login 页面，则跳转到登录页
+              if (response.data.msg == '您尚未登录或登录失效，请登录后查看！') {
+                wx.clearStorageSync()
+                wx.redirectTo({
+                  url: '../../pages/login/login',
+                })
+              }
               // getApp().backLogin()
               // wx.removeStorageSync('userObj')
               // wx.removeStorageSync('allPromotion')

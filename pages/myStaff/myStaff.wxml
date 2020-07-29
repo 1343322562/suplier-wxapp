@@ -21,7 +21,7 @@
     </view>
 
     <view class="item">
-      <view class="label">角色：</view>
+      <view class="label">角 色：</view>
       
       <view class="content">{{item.dutyName}} <image bindtap="callPhoneClick" wx:if="{{item.title == '联系方式'}}" src="../../images/ph.png" class="phone" /> </view>
     </view>
@@ -35,11 +35,11 @@
     <view class="item">
       <view class="label">状 态：</view>
       <view class="status" bindtap="roleSelect">
-        <view class="checkbox" data-items='{{[item, 1]}}'>
-          <view class="{{item.enabled == 1 ? 'selected-checkbox' : 'checkbox-item'}}" /> 启用
+        <view class="checkbox" data-items='{{[item, 1]}}' >
+          <view data-items='{{[item, 1]}}' class="{{item.enabled == 1 ? 'selected-checkbox' : 'checkbox-item'}}" /> 启用
         </view>
         <view class="checkbox content" data-items='{{[item, 0]}}'>
-          <view class="{{item.enabled == 0 ? 'selected-checkbox' : 'checkbox-item'}}" /> 禁用
+          <view data-items='{{[item, 1]}}' class="{{item.enabled == 0 ? 'selected-checkbox' : 'checkbox-item'}}" /> 禁用
         </view>
       </view>
     </view>

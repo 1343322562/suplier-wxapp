@@ -14,16 +14,165 @@ Page({
     // https://ch.zksr.cn/
     goodsData: [],
     isAllSelected: 0,        // 是否全选 1: 全选
+    pageSize: 10,
+    isShowEditPriceDialog: false,   // 显示修改价格 Dialog
+    editStockInputValue: {   // 修改库存 Dialog input val 数据
+      addNum: '',
+      subNum: '',
+      toNum: ''
+    },
+    editStockFocus: {
+      addNum: false,
+      subNum: false,
+      toNum: false
+    },
+    editPriceInputVal: {
+      price: '',     // 进价
+      salePrice: ''  // 售价 
+    },
+    inputActive: '',     //  修改框的选中态
+    currentStock: '',    //  当前商品库存
+    currentIndex: '',   //  当前选中商品(修改库存/价格)
+    isShowEditDialog: false,  // 是否显示 editDialog
     searchValue: ''        // 查询 input 的 value 值
   },
+  isShowEditDialogClick (e) {
+    console.log(e)
+    let index = e.target.dataset.index
+    let goodsData = this.data.goodsData
+    let currentStock = goodsData[index].stockQty
+    let isShowEditDialog = e.detail
+    this.setData({ isShowEditDialog, currentStock, currentIndex: index })
+  },
+// 修改库存 input 点击态
+  focusClick (e) {
+    let type = e.target.dataset.type
+    if (type == 'addNum') {
+      this.setData({ ['editStockFocus.addNum']: true, inputActive: 'addNum'})
+    } else if (type == 'subNum') {
+      this.setData({ ['editStockFocus.subNum']: true, inputActive: 'subNum'})
+    } else if (type == 'toNum') {
+      this.setData({ ['editStockFocus.toNum']: true, inputActive: 'toNum'})
+    }
+  },
+// 修改库存
+  editStockClick (e) {
+    console.log(e, this.data.editStockInputValue)
+    let type = e.target.dataset.type
+    let value = e.detail.value
+    let editStockInputValue = this.data.editStockInputValue
+  
+    if (type == 'addNum') {
+      this.setData({ ['editStockInputValue.subNum']: '', ['editStockInputValue.toNum']: ''})
+      this.setData({ ['editStockInputValue.addNum']: value, inputActive: 'addNum' })
+    } else if (type == 'subNum') {
+      this.setData({ ['editStockInputValue.addNum']: '', ['editStockInputValue.toNum']: '' })
+      this.setData({ ['editStockInputValue.subNum']: value, inputActive: 'subNum' })
+    } else if (type == 'toNum') {
+      this.setData({ ['editStockInputValue.subNum']: '', ['editStockInputValue.addNum']: '' })
+      this.setData({ ['editStockInputValue.toNum']: value, inputActive: 'toNum' })
+    }
+    console.log(1, this.data.inputActive)
+  },
+  // 修改库存请求
+  updateItemStock(stockQty, itemNo) {
+    const _this = this
+    console.log(stockQty, itemNo)
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.updateItemStock({
+      data: { platform, token, username, supplierNo, itemNo, stockQty },
+      success(res) {
+        console.log(res)
+        if (res.code == 0) toast('修改库存成功')
+        _this.supplierItemSearch({ status: this.data.selectedNav, condition:  _this.data.searchValue }, _this)
+      }
+    })
+  },
+// 确认修改库存
+  editConfirm (e) {
+    console.log(e)
+    let type = e.target.dataset.type
+    let editStockInputValue = this.data.editStockInputValue
 
+    let addNum = editStockInputValue.addNum
+    let subNum = editStockInputValue.subNum
+    let toNum = editStockInputValue.toNum
+    let currentStock = this.data.currentStock
+    let currentIndex = this.data.currentIndex
+    let goodsData = this.data.goodsData
+    let itemNo = goodsData[currentIndex].itemNo
+    console.log(addNum, subNum, toNum)
+    if (type == 0) {
+      this.setData({ isShowEditDialog: false })
+    } else if (type == 1){
+      if (addNum) {
+        this.updateItemStock(addNum, itemNo)
+      } else if (subNum) {
+        this.updateItemStock(0 - subNum, itemNo)
+      } else if (toNum) {
+        let currentStock = this.data.currentStock
+        this.updateItemStock(toNum - currentStock, itemNo)
+      }
+      this.setData({ isShowEditDialog: false })
+    }
+  },
+  // 显示修改商品 Dialog
+  showEditPriceDialogClick (e){
+    console.log(e)
+    let index = e.target.dataset.index
+    let goodsData = this.data.goodsData
+    let editPriceInputVal = { price: goodsData[index].price, salePrice: goodsData[index].salePrice }
+    this.setData({ editPriceInputVal, isShowEditPriceDialog: true, currentIndex: index})
+  },
+  // 确认修改价格
+  editPriceConfirm(e) {
+    let type = e.target.dataset.type
+    if (type == 0) return this.setData({ isShowEditPriceDialog: false })
+
+    let goodsData = this.data.goodsData
+    let editPriceInputVal = this.data.editPriceInputVal
+    let index = this.data.currentIndex
+    let goodsItem = goodsData[index]
+    console.log(goodsItem)
+    if (goodsItem.price == editPriceInputVal.price && goodsItem.salePrice == editPriceInputVal.salePrice){
+      return showModal({ content: '价格无改动，请重新输入' })
+    }
+    if (editPriceInputVal.salePrice < editPriceInputVal.price) return toast('售价需大于进价')
+    let itemNo = goodsItem.itemNo
+    this.updateItemPrice(itemNo, editPriceInputVal)
+    this.setData({ isShowEditPriceDialog: false })
+  },
+// 修改商品价格请求
+  updateItemPrice(itemNo, editPriceInputVal) {
+    const _this = this
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
+    const { price, salePrice } = { price: editPriceInputVal.price, salePrice: editPriceInputVal.salePrice }
+    API.updateItemPrice({
+      data: { platform, token, username, supplierNo, itemNo, price, salePrice },
+      success (res) {
+        console.log(res)
+        if (res.code == 0) toast('修改价格成功')
+        // 重新请求商品，刷新页面
+        _this.supplierItemSearch({ status: this.data.selectedNav, condition:  _this.data.searchValue }, _this)
+      }
+    })
+  },
+  // 价格 input 事件
+  priceInput(e) {
+    let type = e.currentTarget.dataset.type
+    let val = e.detail.value
+    if (type == 0) {
+      this.setData({ ['editPriceInputVal.salePrice']: val })
+    } else if (type == 1) {
+      this.setData({ ['editPriceInputVal.price']: val })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
   },
-
   // 搜索框数据绑定
   inputBindValue (e) {
     console.log(e)
@@ -65,6 +214,7 @@ Page({
 
   // 搜索商品
   searchOrder() {
+    this.data.pageSize = 10
     let value = this.data.searchValue
     const _this = this
 
@@ -213,7 +363,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    wx.showLoading({ title: '刷新中' })
+    let status = -1
+    let pageSize = this.data.pageSize + 10
+    this.data.pageSize = pageSize
+    this.supplierItemSearch({ condition: this.data.searchValue }, this, pageSize)
   },
 
   /**

@@ -91,6 +91,10 @@ Page({
       data: { platform, token, username, supplierNo, itemNo, appNote },
       success (res) {
         console.log(res)
+        // 返回上一页面 不会触发 onshow, 获取页面对象, 更新商品数据
+        let pages = getCurrentPages()
+        const goodPageIndex = pages.length - 2
+        pages[goodPageIndex].onPullDownRefresh()
         if (res.code == 0) toast('编辑成功');
         _this.setData({ isShowEditDialog: false })
         setTimeout(() => { backPage() }, 800)

@@ -28,6 +28,18 @@
   margin-left:15rpx; 
 }
 
+/* .img_box{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+  /* } */
+  .img_box image{
+    width: 300px;
+    height: 500px;
+  }
+
 /* 位置 */
 .localtion-info {
     display: flex;
@@ -61,8 +73,7 @@
 }
 
 .map {
-  height: 400rpx;
-  max-width: 700rpx;
-width: 94%;
-margin: 10rpx 3%;
+    height: 450rpx;
+    width: 98%;
+    margin: 9rpx 1%;    
 }

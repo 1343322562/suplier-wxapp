@@ -61,15 +61,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
-    // API.getSupplierEmployment({
-    //   data: { platform, token, username, supplierNo, duty: '1'},
-    //   success(res){
-    //     _this.setData({ receivedData: res.data })
-    //   }
-    // })
-    this.getSupplierEmployment(platform, token, username, supplierNo)
   },
 // 查询员工信息
   getSupplierEmployment(platform, token, username, supplierNo, index = false) {

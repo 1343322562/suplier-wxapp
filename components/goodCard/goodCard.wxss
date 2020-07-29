@@ -118,8 +118,8 @@ align-items: center;
 }
 .price-box .item .content{
   position: relative;
-  width: 150rpx;
 min-width: 170rpx;
+display: flex;
 }
 .profit-box {
   display: flex;
@@ -154,8 +154,6 @@ min-width: 170rpx;
   text-align: center;
   padding: 0 8rpx;
   border-radius: 5rpx;
-  position: absolute;
-  right: 0;
-  top: 0;
+  margin-left: 10rpx;
   white-space: nowrap;
 }

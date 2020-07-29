@@ -2,6 +2,9 @@ import { goPage, showModal } from "../../tool/tool.js"
 import API from '../../api/index.js'
 import { FetchDateLastMonth, FetchDateLastDay, tim } from '../../utils/date-format.js'
 import util from '../../utils/util.js' 
+
+let app = getApp()
+
 Page({
   data: {
     todaySaleData: [0,0,0],  // 当日销售数据 [金额, 订单数, 数量]
@@ -38,9 +41,9 @@ Page({
       bounding: APP.bounding
     })
   },
-  // 获取进入销售数据
-  getTodaySaleData() {
-    let saleTableData = this.data.saleTableData
+  // 获取今日销售数据
+  getTodaySaleData(saleTableData = this.data.saleTableData) {
+    console.log(saleTableData,'当日促销数据')
     let todaySaleData = [0, 0, 0]
     saleTableData.forEach((item, i) => {
       if (item.createDate == tim(0)) { 
@@ -64,13 +67,12 @@ Page({
     const supplierData = JSON.parse(options.data)
     console.log(supplierData, !wx.getStorageSync('authorizeObj'))
     this.authorize(supplierData) // 缓存 authorizeObj 信息
-    this.seachSaleData(0)
+    this.seachSaleData(0)   // 表格数据获取 并 计算当日销售数据
     this.getErpUrl() // 情求图片根路径
-    let roleNo = options.role
+    let roleNo = supplierData.roleNo
+  
     this.setData({ roleNo, shopData: supplierData })
 
-    // 计算当日销售数据
-    this.getTodaySaleData() 
   },
   // 请求图片根路径
   getErpUrl() {
@@ -80,6 +82,7 @@ Page({
       data: { platform, token, username, supplierNo },
       success(res) {
         console.log('图片路径请求结果:', res)
+        app.globalData.baseImgUrl = res.data
       }
     })
   },
@@ -118,6 +121,8 @@ Page({
         console.log(res,102)
         let saleTableData = res.data
         _this.setData({ saleTableData })
+        // 计算当日销售数据
+        _this.getTodaySaleData(saleTableData) 
       }
     })
   },

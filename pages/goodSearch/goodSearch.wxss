@@ -1,5 +1,7 @@
 /* pages/goodSearch/goodSearch.wxss */
-
+page {
+  padding-bottom: 150rpx;
+}
 .search-bar-container {
   display: flex;
   justify-content: space-around;
@@ -54,3 +56,91 @@
   justify-content: space-between;
   align-items: center;
 }
+
+
+  /* 修改 Dialog */
+
+  .edit-container {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .edit-dialog {
+    width: 410rpx;
+    min-height: 200rpx;
+    background-color: #fff;
+    border-radius: 15rpx;
+    padding: 10rpx 30rpx 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .edit-dialog  .title{
+    font-size: 33rpx;
+    color: #050505;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+  }
+  .edit-dialog  .input-item{
+    display: flex;
+    padding: 24rpx 0;
+  }
+  .edit-dialog  .input-item .label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 130rpx;
+  }
+
+  .edit-dialog  .input-item .label .checkbox{
+    height: 30rpx;
+    width: 30rpx;
+    border-radius: 50%;
+    border: 1rpx solid #C6C6C6;
+  }
+  .edit-dialog  .input-item .label .name{
+    font-size: 31rpx;
+    color: #686666;
+    white-space: nowrap;
+  }
+  .edit-dialog  .input-item input{
+    text-align: center;
+    width: 200rpx;
+    border: 1rpx solid #DCDCDC;
+    border-radius: 5rpx;
+    padding: 7rpx;
+    margin-left: 10rpx;
+  }
+
+  .current-stock {
+    display: flex;
+    align-items: center;
+    font-size: 31rpx;
+  }
+  .current-stock .label{
+    font-size: 31rpx;
+    color: #686666;
+  }
+
+  .current-stock .content{
+    color: #050505;
+  }
+  
+  .confirm-edit {
+    display: flex;
+    margin-top: 60rpx;
+    border-top: 1rpx solid #f5f5f5;
+    background-color: #fff;
+    width: 100%;
+  }
+  .confirm-edit button{
+  }

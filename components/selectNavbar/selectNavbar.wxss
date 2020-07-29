@@ -5,6 +5,12 @@
   position: relative;
 }
 
+.text {
+  height: 95%;
+  width: 150rpx;
+  margin: 0 auto;
+}
+
 .statu-navbar-box .item-box {
   position: fixed;
   width: 80%;
@@ -23,6 +29,8 @@
 
 .statu-navbar-box .item-box .item {
   padding: 0 20rpx;
+  flex: 1;
+  text-align: center;
 }
 
 .statu-navbar-box .item-box .selected {

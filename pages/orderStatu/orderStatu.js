@@ -237,6 +237,9 @@ Page({
 
   // 点击搜索
   seachSubmit() {
+    let orderData = this.data.orderData
+    if (orderData.length != 0) this.setData({ orderData: [] })
+    
     let { days, months, years, value} = this.data
     if (value[0] < value[3] && (value[1] < 11 || value[4] > 0)) return showModal({ content: '日期区间因在1个月之内' })
 
@@ -256,7 +259,7 @@ Page({
       return
     }
     wx.showLoading()
-    this.searchOrderStatusData(platform, token, username, supplierNo ,startDate, endDate, 1) 
+    setTimeout(() => this.searchOrderStatusData(platform, token, username, supplierNo ,startDate, endDate, 1))
     setTimeout(() => wx.hideLoading())
   },
 
@@ -418,6 +421,8 @@ Page({
       success(res) {
         if (res.code == 0) toast('更新状态成功')
         console.log(res)
+        const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+        _this.searchOrderStatusData(platform, token, username, supplierNo)
       },
       complete() {
         setTimeout(() => { wx.hideLoading() }, 500)

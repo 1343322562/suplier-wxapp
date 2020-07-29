@@ -12,7 +12,7 @@
 />
 <SelectNavbar 
   wx:if="{{selectedNav == 1}}"
-  itemStyle="border: 1px solid #f5f5f5;font-size: 26rpx;height: 70rpx;line-height: 70rpx;"
+  itemStyle="font-size: 26rpx;height: 70rpx;line-height: 70rpx;"
   bind:myevent="selectNav2" 
   selectItemArray="{{['全部订单','在线支付','现金支付']}}" 
   selectedNavIndex='{{selectedNav2}}' 
@@ -92,8 +92,9 @@
 <view class="print-order-box" wx:if="{{isShowCollectDialog}}" catchtap="closeDialogClick">
   <view class="print-order" catchtap="toPayClick">
     <view class="title">请选择收款方式</view>
-    <view class="btn wx" data-payType="0">微信收款</view>
-    <view class="btn zfb" data-payType="1">支付宝收款</view>
+    <!-- <view class="btn wx" data-payType="0">微信收款</view> -->
+    <!-- <view class="btn zfb" data-payType="1">支付宝收款</view> -->
+    <view class="btn wx" data-payType="0">在线支付</view>
     <view class="btn cash" data-payType="2">现金收款</view>
   </view>
 </view>

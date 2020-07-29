@@ -2,13 +2,14 @@
 import { goPage, toast, showModal } from '../../tool/tool.js'
 import API from '../../api/index.js'
 
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    basePicUrl: 'http://mmj.zksr.cn:8888/',
+    basePicUrl: '',
     // http://mmj.zksr.cn:8888/
     // http://39.98.164.194/upload/images/bdSupplierItem/
     // http://erp.yxdinghuo.com/
@@ -46,6 +47,11 @@ Page({
     inputActive: '',     //  修改框的选中态
     currentStock: '',    //  当前商品库存
     currentIndex: ''  //  当前选中商品(修改库存/价格)
+  },
+  // 跳转搜索页
+  toSearchPageClick () {
+    goPage('../goodSearch/goodSearch')
+    return
   },
   // 搜索框数据绑定
   inputBindValue (e) {
@@ -119,7 +125,7 @@ Page({
     if (goodsItem.price == editPriceInputVal.price && goodsItem.salePrice == editPriceInputVal.salePrice){
       return showModal({ content: '价格无改动，请重新输入' })
     }
-
+    if (editPriceInputVal.salePrice < editPriceInputVal.price) return toast('售价需大于进价')
     let itemNo = goodsItem.itemNo
     this.updateItemPrice(itemNo, editPriceInputVal)
     this.setData({ isShowEditPriceDialog: false })
@@ -137,7 +143,9 @@ Page({
     status = status > 0 ? status - 1 : ''
     if (index !== '') this.setData({ ['selecSliderObj.index']: index })
     if (ind !== '') {
-      currentSliderCls = this.data.slider[index].second[ind].clsNo
+      console.log(this.data.slider, index , ind)
+      let slider = this.data.slider
+      currentSliderCls = slider[index].second.length == 0 ? slider[index].clsNo : slider[index].second[ind].clsNo
       _this.setData({ ['selecSliderObj.ind']: ind, currentSliderCls })
       console.log(currentSliderCls)
     }
@@ -286,7 +294,7 @@ Page({
   // 修改库存请求
   updateItemStock(stockQty, itemNo) {
     const _this = this
-    console.log(stockQty, itemNo)
+    console.log(platform, token, username, supplierNo, itemNo, stockQty)
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.updateItemStock({
       data: { platform, token, username, supplierNo, itemNo, stockQty },
@@ -349,9 +357,14 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log(app)
+    this.setData({ basePicUrl: app.globalData.baseImgUrl }) // 配置图片根路径
     wx.showLoading({ title: '请稍候..' })
     const _this = this
     this.searchGoodsItemCls(_this) // 查询侧边栏
+  },
+  onShow: function () {
+    console.log('onshow')
   },
 
   // 查询(请求)商品
@@ -377,8 +390,8 @@ Page({
         goodsData.forEach((item, i) => {
           goodsData[i].checkbox = 0 
           let profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(4)  // 毛利率
-          goodsData[i].profit = profit == 1.0000 ? '100%' : (profit.slice(2)/100 + '%') 
-          goodsData[i].picUrl = basePicUrl + item.itemNo + '/' + item.picUrl  // 图片地址
+          goodsData[i].profit = profit == 1.0000 ? '100%' : (profit.slice(2)/100 + '%')
+          goodsData[i].picUrl = basePicUrl + 'upload/images/bdSupplierItem/' + item.itemNo + '/' + item.picUrl // 图片地址
           let month = item.modifyDate.slice(5,7)
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
@@ -413,9 +426,8 @@ Page({
         })
         console.log(firstCls)
         _this.setData({ slider: firstCls })
-
-        _this.supplierItemSearch({ status: 0, itemClsNo: firstCls[0].second[0].clsNo },  _this)
-        
+        let itemClsNo = firstCls[0].second.length == 0 ? firstCls[0].clsNo : firstCls[0].second[0].clsNo // 类别判断
+        _this.supplierItemSearch({ status: 0, itemClsNo },  _this)
       }
     })
   },

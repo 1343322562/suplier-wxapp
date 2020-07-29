@@ -7,7 +7,7 @@
   <view class="good-props-box">
     <view class="main-info">
       <view class="main">
-        <view class="name">{{goodsData.appNote}}) {{goodsData.itemName}}</view>
+        <view class="name"><text wx:if="{{goodsData.appNote}}">{{goodsData.appNote}})</text> {{goodsData.itemName}}</view>
         <view class="item">
           <view class="label">商品条码：</view>
           <view class="content">{{goodsData.itemSubno}}</view>

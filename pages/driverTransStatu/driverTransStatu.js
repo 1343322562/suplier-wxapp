@@ -19,19 +19,8 @@ Page({
       lackPrive: '1000',
       textArea: ''
     },    
-    data: [
-      { name: "下单时间", content: "05-05 08:06" },
-      { name: "数量", content: "5" },
-      { name: "装车时间", content: "05-05 09:06" },
-      { name: "金额", content: "￥80.56 (未付款)" },
-      { name: "店主留言", content: "尽快发货，谢谢！" }
-    ],
-    complateData: [
-      { name: "下单时间", content: "05-05 08:06" },
-      { name: "数量", content: "5" },
-      { name: "完成时间", content: "05-05 09:06" },
-      { name: "金额", content: "￥578" },
-    ],
+    data: [],
+    complateData: [],
     orderData: [],
     allSheetAmt: [0, [], 0], // 送货中底部结算区域
     currentIndex: '', // 当前收款的 item 项下标
@@ -57,6 +46,7 @@ Page({
   },
   // 提交 交款信息
   submitPaymentClick (e) {
+    const _this = this
     let type = e.target.dataset.type  // 0: 取消  1：提交
     if (type == 1) {
       const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
@@ -83,10 +73,10 @@ Page({
         },
         success (res) {
           console.log(res)
-          showModal({content: '付款成功'})
+          showModal({content: '交款成功'})
+          _this.searchOrderStatusData()
         }
       })
-      toast('交款成功')
     }
     this.setData({ isShowPaymentDialog: false })
   },
@@ -119,6 +109,7 @@ Page({
             data: { platform, token, username: routeSendMan,routeSendMan, supplierNo, payAmt, payWay: 'XJ', sheetNo },
             success(res) {
               if (res.code == 0) toast('现金收款成功')
+              _this.searchOrderStatusData()
             }
           })
         },
@@ -127,7 +118,7 @@ Page({
         }
       })
       this.setData({ isShowCollectDialog: false })
-    } else if (payType == 1 || payType == 0) {  // 线上付款 0: wx  1: zfb 
+    } else if (payType == 1 || payType == 0) {  // 线上付款 lcsb 扫呗 付款
       // goPage('../scanCodePay/scanCodePay?type=' + payType)
       this.scanCodePay(payType)
     }
@@ -139,85 +130,72 @@ Page({
     const orderData = this.data.orderData
     console.log(orderData[currentIndex], orderData, currentIndex)
     const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
-    const mdbh = orderData[currentIndex].branchNo // 门店编号
+    const mdbh = orderData[currentIndex].branchNo   // 门店编号
     const mdmc = orderData[currentIndex].branchName // 门店名称
     const payAmt = orderData[currentIndex].sheetAmt // 付款金额
-    const fhdh = orderData[currentIndex].sheetNo       // 发货单号
-    const onlinePayway = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
-
-    wx.scanCode({
-      onlyFromCamera: false,
-      success(res) {
-        console.log(res)
-        const authCode = res.result
-        let json = { onlinePayway, fhdh, mdbh, mdmc, payAmt, authCode, username: routeSendMan }
-        json = JSON.stringify(json)
-        console.log(139, {
-          platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
-          json
-        })
-        // wx.request({
-        //   url: 'http://192.168.2.96:8086/zksr-match/match_pay/getQrCodeUrl.do?onlinePayway=YSEWX&fhdh=ZC2006081823339815&mdbh=001000672389&mdmc=B2B【金牌】仁和爱便利店&payAmt=4&authCode=aHR0cHM6Ly93d3cuemdsdXNoYW5nLmNvbS8=&username=4567',
-        //   success(res) {
-        //     console.log(res)
-        //   }
-        // })
-        API.getQrCodeUrl({
-          data: {  
-            platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
-            json
-          },
-          success (res) {
-            console.log(res)
-            let data = res.data
-            data.onlinePayway = onlinePayway                   // 支付方式
-            data.sheetNo = orderData[currentIndex].sheetNo     // 单号
-            data.payAmt = payAmt                                // 支付金额
-            
-            if (res.code == -2) {
-              wx.showModal({
-                title: '提示',
-                content: res.message,
-                cancelText: '关闭支付',
-                confirmText: '继续操作',
-                success(e) {
-                  if (e.confirm) {
-                  } else if (e.cancel) {
-                    console.log(res)
-                    _this.closeOrder(data)
-                  }
-                },
-                fail(res) {
-                  console.log(res)
-                  
-                }
-              })
-              return
-            } 
-            data = JSON.stringify(data)
-            goPage('../paymentRes/paymentRes?data=' + data)
-          },
-          error(err){
-            console.log(err)
-            let data = res.data
-            data.onlinePayway = onlinePayway                    // 支付方式
-            data.sheetNo = orderData[currentIndex].sheetNo     // 单号
-            data = JSON.stringify(data)
-            goPage('../paymentRes/paymentRes?data=' + data)
-          },
-          complete(res) {
-
-          }
-        })
+    const fhdh = orderData[currentIndex].sheetNo    // 发货单号
+    const onlinePayways = 'lcsb'                     // 支付方式(扫呗)
+    // const onlinePayway = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
+    
+    let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan }
+    console.log(json)
+    json = JSON.stringify(json)
+    console.log({  
+      platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
+      json
+    })
+    API.getQrCodeUrl({
+      data: {  
+        platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
+        json
       },
-      error(res) {
-        console.log(res)
-        if (res) toast('二维码有误')
+      success (res) {
+        console.log('166' ,res)
+        let data = res.data
+        if (data == null) return showModal({ content: res.message })
+        
+        if (res.code == -2) {
+          wx.showModal({
+            title: '提示',
+            content: res.message,
+            cancelText: '关闭支付',
+            confirmText: '继续操作',
+            success(e) {
+              if (e.confirm) {
+              } else if (e.cancel) {
+                console.log(res)
+                _this.closeOrder(data)
+              }
+            },
+            fail(res) {
+              console.log(res)
+              
+            }
+          })
+          return
+        } 
+        console.log(onlinePayways)
+        data['onlinePayway'] = onlinePayways
+        data = JSON.stringify(data)
+        goPage('../paymentRes/paymentRes?data=' + data)
+      },
+      error(err){
+        console.log(err)
+        let data = res.data
+        data.onlinePayway = onlinePayways   // 支付方式
+        data.sheetNo = fhdh       // 单号
+        data.payAmt = payAmt      // 金额
+        data = JSON.stringify(data)
+        goPage('../paymentRes/paymentRes?data=' + data)
+      },
+      complete(res) {
+
       }
     })
   },
 
   closeOrder(data) {
+    const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     const routeSendMan = wx.getStorageSync('routeSendMan')
     let json = { sheetNo: data.sheetNo, onlinePayway: data.onlinePayway, outTradeNo: data.outTradeNo }     
@@ -228,10 +206,8 @@ Page({
       data: { platform, token, username: routeSendMan, supplierNo, sheetNo: data.sheetNo, routeSendMan, json },
       success(res) {
         console.log(res)
-        // this.setData({ isShowCollectDialog: true})
-        if (res.code != 10000) return toast(res.message)
+        _this.setData({ isShowCollectDialog: false})
         toast(res.message)
-
       },
       error(res) {
         console.log(res)
@@ -304,7 +280,7 @@ Page({
     console.log(e)
     const currentIndex = e.target.dataset.index 
     const acctFlag = e.target.dataset.acctflag
-    if (acctFlag == '2') return showModal({ tuitle: '提示',content: '已交款，无需再次交款'}) 
+    if (acctFlag == '2') return showModal({ tuitle: '提示', content: '已交款，无需再次交款'}) 
     this.setData({ isShowCollectDialog: true ,currentIndex })
   },
 
@@ -348,6 +324,9 @@ Page({
         _this.setData({ orderData })
         console.log(1)
         _this.resPrice(orderData)
+      },
+      complete() {
+        setTimeout(() => { wx.hideLoading() }, 400)
       }
     })
   },
@@ -383,7 +362,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.showLoading()
+    this.searchOrderStatusData()
   },
 
   /**

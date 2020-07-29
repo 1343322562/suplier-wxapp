@@ -3,7 +3,7 @@
 <Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText='返回'>
 	<view class="nav-seach-bar-box">
 		<image src='../../images/search.png' bindtap="searchOrder" />
-		<input type="text" class="nav-seach-bar" placeholder='请输入订单号或客户名称' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="搜索" bindconfirm="searchOrder" />
+		<input type="text" class="nav-seach-bar" placeholder='请输入订单号或客户名称' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="商品搜索" bindconfirm="searchOrder" bindtap="toSearchPageClick" />
 	</view>
 </Navbar>
 

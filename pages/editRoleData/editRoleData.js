@@ -1,10 +1,13 @@
 // pages/editRoleData/editRoleData.js
+var amapFile = require('../../libs/amap-wx.js');  // 导入 高德 
+import { toast } from '../../tool/tool.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    src: '',  // 高德地图链接
     fromData: { }, // 初始数据
     markers: {
       iconPath: "../../images/x.png",
@@ -21,7 +24,13 @@ Page({
       fillColor:'#f5f5f500' ,
       strokeWidth: 2,
       radius: 500
-    }
+    },
+    polygons: [{  /* 多边形 */
+      // 描边数组（经纬度）
+      points: [],
+      strokeColor: '#FF4F3F',
+      fillColor:'#FF4F3F30' , 
+    }]
   },
 
   // 计算区域经纬度
@@ -56,17 +65,83 @@ Page({
       }
     })
   },
+  // 用户授权 地理位置
+  userLocation() {
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success () {
+              // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+              // wx.userLocation()
+            }
+          })
+        }
+      }
+    })
+  },
+
+  // 绘制静态图(区域)
+  renderMapArea () {
+    var that = this;
+    var myAmapFun = new amapFile.AMapWX({key:"47e4309225f9a313e735cb704be23f65"});
+    wx.getSystemInfo({
+      success: function(data){
+        console.log('s', data)
+        var height = data.windowHeight-500;
+        var width = data.windowWidth-300;
+        var size = width + "*" + height;
+        myAmapFun.getStaticmap({
+          zoom: 8,
+          size: size,
+          scale: 2,
+          markers: "mid,0xFF0000,A:116.37359,39.92437;116.47359,39.92437",
+          success: function(data){
+            that.setData({
+              src: data.url
+            })
+          },
+          fail: function(info){
+            wx.showModal({title:info.errMsg})
+          }
+        })
+
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
+  },
+  // 闭合多边形
+  areaPolygonPoints (areaArr) {
+    let tempArr = []
+    areaArr.forEach((item, index) => {
+      let tempObj = {}
+      tempObj['longitude'] = item[0]
+      tempObj['latitude'] = item[1]
+      tempArr.push(tempObj)
+    })
+    console.log(tempArr)
+    return tempArr
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // this.userLocation()
+    // // 获取地图
+    // this.renderMapArea() // 绘制静态图(区域)
+
     let shopData = JSON.parse(options.shopData)
-    console.log(shopData)
+    let points // 多边形的经纬度数组
     if ('area' in shopData) {
       let areaArr = JSON.parse(shopData.area)
-      this.areaCricle(areaArr) // 计算区域经纬度
+      points = this.areaPolygonPoints(areaArr)
+      // this.areaCricle(areaArr) // 计算区域经纬度
     }
     this.setData({ 
+      ['polygons[0].points']: points,
       fromData: shopData, 
       ['markers.longitude']: Number(JSON.parse(shopData.position)[0]),
       ['markers.latitude']: Number(JSON.parse(shopData.position)[1])

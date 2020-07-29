@@ -51,10 +51,11 @@ Page({
 
   // 判断身份登录
   submit () {
+    const _this = this
     wx.showLoading({ mask: true, title: '登录中...' })
     let platform = this.data.selected
     let username = this.data.text
-    // if (platform == 2) this.getOpenId()
+    if (platform == 2) this.getOpenId() // openid 获取并储存 
     if (platform == '0' || platform == '1') {    // 老板 库管员
       let password = this.data.password
       if (username == '' || password == '') {
@@ -69,8 +70,11 @@ Page({
         success(res) {
           if (res.code == 0) {
             console.log(res.data)
+            let data = res.data
+            data.roleNo = _this.data.selected
+            console.log(data)
             wx.setStorage({ key: 'userObj', data: { username, password }})
-            goPage('../index/index?data=' + JSON.stringify(res.data))
+            goPage('../index/index?data=' + JSON.stringify(data))
           }
         },
         error(err){
@@ -133,7 +137,7 @@ Page({
   onLoad: function (options) {
     const { platform } = wx.getStorageSync('authorizeObj')
     if (platform >= 0) this.setData({ selected: platform })
-    this.getOpenId() // 获取openId 并储存
+    
     var day1 = new Date();
     day1.setTime(day1.getTime() - 24 * 60 * 60 * 1000);
     
@@ -146,7 +150,7 @@ Page({
     this.toLogin()
   },
   // 自动登录
-  toLogin () {
+  toLogin (_this = this) {
     const { platform, token } = wx.getStorageSync('authorizeObj')
     if (!token) return
     wx.showLoading({ mask: true, title: '自动登录中...' })
@@ -185,6 +189,7 @@ Page({
           if (res.code == 0) {
             console.log(res)
             let data = res.data
+            data.roleNo = _this.data.selected
             let { username, token, supplierNo, platform } = data
             wx.setStorageSync('authorizeObj', { username, token, supplierNo, platform })
             goPage('../index/index?data=' + JSON.stringify(res.data))

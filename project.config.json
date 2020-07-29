@@ -82,6 +82,19 @@
 					"pathName": "pages/goodS/goodS",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "paymentRes",
+					"pathName": "pages/paymentRes/paymentRes",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/goodSearch/goodSearch",
+					"pathName": "pages/goodSearch/goodSearch",
+					"scene": null
 				}
 			]
 		}

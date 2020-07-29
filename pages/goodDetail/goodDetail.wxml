@@ -156,7 +156,7 @@
   </view>
 
    <view class='good-props'>
-    <view wx:if="{{data.appNote}}" style="position: relative;" class="input-box" data-name='注解' data-inputName="appNote" bindtap="showEditDialogClick">
+    <view style="position: relative;" class="input-box" data-name='注解' data-inputName="appNote" bindtap="showEditDialogClick">
       <label>注解：</label>
       <input 
         type="number"
