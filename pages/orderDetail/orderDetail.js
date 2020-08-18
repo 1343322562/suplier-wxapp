@@ -175,7 +175,7 @@ Page({
       success(res) {
         if (res.code == 0 && printFlag == 1) {
           toast('出库成功')
-          backPage()
+          setTimeout(() => backPage(), 500)
         }
         console.log(res)
       },

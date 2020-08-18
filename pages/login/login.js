@@ -1,4 +1,4 @@
-import { goPage, showModal } from '../../tool/tool.js'
+import { goPage, showModal, toast } from '../../tool/tool.js'
 import API from '../../api/index.js'
 import { FetchDateLastMonth } from '../../utils/date-format.js' 
 import util  from '../../utils/util.js' 
@@ -68,7 +68,7 @@ Page({
       if (username == '' || password == '') {
         wx.hideLoading()
         console.log(1)
-        return showModal({ content: '账号不能为空' })
+        return toast('账号不能为空')
       }
       console.log(username, password, platform)
 

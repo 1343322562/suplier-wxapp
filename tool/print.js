@@ -26,10 +26,10 @@ export const printContentHandle = function (data, type) {
     content += `<N><L>支付方式：${item.payWay || '货到付款'}<L></N><BR>`
     content += `<B><L>客户备注：${item.mome || '无'}<L></B><BR><BR>`
     content += `<B><L>老板备注：${item.mome || '无'}<L></B><BR><BR>`
-    content += `<N><L> 如出库单数量有疑问请拨打：${item.branchTel}联系处理<L></N><BR><BR>`
+    content += `<N><L> 如出库单数量有疑问请拨打：${item.branchTel}联系处理<L></N><BR><BR><BR><BR>`
   })
   sheetNo = sheetNo.join(',')
-  content = `<C><QR180>订单号</QR></C><BR><BR>` + content // 二维码数据
+  content = `<L><QR120>订单号</QR></L><BR><BR>` + content // 二维码数据
   content += `</HB><C><B>完</B></C><BR><BR><BR><BR><BR><BR>`
   return content
 }

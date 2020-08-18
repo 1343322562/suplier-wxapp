@@ -329,7 +329,7 @@ Page({
     console.log(e)
     const currentIndex = e.target.dataset.index 
     const acctFlag = e.target.dataset.acctflag
-    if (acctFlag == '2') return showModal({ tuitle: '提示', content: '已交款，无需再次交款'}) 
+    if (acctFlag == '2') return toast('已交款，无需再次交款') 
     this.setData({ isShowCollectDialog: true ,currentIndex })
   },
 
