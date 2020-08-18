@@ -181,7 +181,7 @@ Page({
     wx.scanCode({
       success(res) {
         console.log('扫码信息', res)
-        authCode = res.rawData
+        authCode = res.result
         let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode, merchantTerminalId, userIp }
         json = JSON.stringify(json)
         API.getQrCodeUrl({
@@ -340,6 +340,7 @@ Page({
     wx.showLoading('请稍侯...')
     const _this = this
     getLocation({
+      this: _this,
       complete(res) {
         console.log(334,res)
         const { latitude, longitude } = res

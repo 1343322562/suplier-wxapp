@@ -129,7 +129,7 @@ Page({
         console.log(res)
         toast('订单已关闭')
         setTimeout(() => { 
-          wx.redirectTo({ url: '../driverTransStatu/driverTransStatu'})
+          backPage()
         }, 400)
       },
       error(res) {
@@ -158,7 +158,7 @@ Page({
           content: res.data.massge,
           confirmText: '确认',
           success(e){
-            // setTimeout(() => { backPage() }, 400)
+            if (res.code == 10000) _this.closeOrder()
           },
           fail(res) {
             console.log(res)
