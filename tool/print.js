@@ -7,10 +7,11 @@ export const printContentHandle = function (data, type) {
   let cDate = tim(0) + ' ' + timHMS() 
   console.log(cDate)
     //处理格式
-  content += `<C><B><BOLD>${ getApp().globalData.wareInfo.warehouse }配送单</BOLD></B></C><BR><BR>`
+  content += `<C><B><BOLD>配送单</BOLD></B></C><BR><BR>` // 不改
   data.forEach((item, index) => {
     console.log(item, getApp())
     sheetNo.push(item.sheetNo)
+    // content += `<L>前置仓名称：${getApp().globalData.wareInfo.warehouse}<BR></L>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate}<BR></L>`
     content += `<L>${sign=='重复打印' ? '补打' : '出库'}日期：${cDate}<BR></L>`
@@ -20,12 +21,12 @@ export const printContentHandle = function (data, type) {
     content += `<L><N>联系电话：${item.branchTel} </N><BR></L>`
     content += `<L>客户地址：${item.address}<BR></L>`
     content += `<C><N>————————————————————————</N><BR></C>`
-    content += `<N> 序列    条码            品名</N><BR>`
-    content += `<N> 单位    数量    原价    现价    合计     库位</N><BR>`
+    content += `<N> 序列      条码                品名</N><BR>`
+    content += `<N> 数量      原价      现价      合计      库位</N><BR>`
     content += `<C><N>-----------------------------------------------</N><BR></C>`
     item.details.forEach((good, i) => {
       content += `<N>【${i+1}】    ${good.itemSubno}      ${good.itemName.slice(0, 13)}</N><BR>`
-      content += `<N> ${good.unitNo}       ${good.realQty}      ${good.subAmt.toFixed(2)}    ${good.subAmt.toFixed(2)}    <BOLD>${(good.subAmt*good.realQty).toFixed(2)}</BOLD>     ${item.warehouse || '空'}</N><BR>${item.details.length == 1 ? '' : '<BR>'}`
+      content += `<N> ${good.realQty}/${good.unitNo}      ${good.subAmt.toFixed(2)}     ${good.subAmt.toFixed(2)}/${good.unitNo}    <BOLD>${(good.subAmt*good.realQty).toFixed(2)}</BOLD>      ${item.warehouse || '空'}</N><BR>${item.details.length == 1 ? '' : '<BR>'}`
     })
     content += `<C><N>————————————————————————</N><BR></C>`
     content += `<N><L>整单合计：${(item.sheetAmt).toFixed(2)}<L>                 <R>${item.supplyFlag}</R></N><BR>`
@@ -36,8 +37,8 @@ export const printContentHandle = function (data, type) {
     content += `<B><L>配送员：<N>________________</N><L></B><BR><BR>`
     content += `<L><HB>是否有冻品</HB>：    <B>□</B> <HB>是</HB>      <B>□</B> <HB>否</HB><L><BR><BR>`
     content += `<B><L>出货单备注：<L></B><BR>`
-    content += `<BR><N><L>    (客户备注):${item.mome || '无'}<L></N>`
-    content += `<BR><N><L>    (老板备注):${item.bossMome || '无'}<L></N><BR><BR>`
+    content += `<BR><N><L>    (客户备注):${item.mome || '无'}</L></N>`
+    content += `<BR><N><L>    (老板备注):${item.bossMome || '无'}</L></N><BR><BR>`
     content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
     content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
     content += `<BR><BR><N><C>================================================<C></N><BR><BR>`
@@ -75,7 +76,7 @@ export const printContentHandle = function (data, type) {
   sheetNo = sheetNo.join(',')
   console.log(sheetNo)
   content = `<C><QR140>${sheetNo}</QR></C><BR><BR>` + content // 二维码数据
-  content += `</HB><C><B>完</B></C><BR><BR><BR><BR><BR><BR>`
+  // content += `</HB><C><B>完</B></C><BR><BR><BR><BR><BR><BR>`
   return content
 }
 
