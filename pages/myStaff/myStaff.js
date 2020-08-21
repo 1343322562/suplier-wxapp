@@ -1,4 +1,4 @@
-import { goPage } from '../../tool/tool.js'
+import { goPage, toast } from '../../tool/tool.js'
 import API from '../../api/index.js'
 Page({
 
@@ -20,6 +20,7 @@ Page({
   // 修改员工状态 
   roleSelect(e) {
     console.log(e)
+    const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     let items = e.target.dataset.items[0]
     let statu = e.target.dataset.items[1]
@@ -31,11 +32,14 @@ Page({
         duty: items.duty,
         mobile: items.mobile,
         name: items.name,
-        enabled: statu
+        enabled: statu,
+        id: items.id
       },
       success(res){
         console.log(res)
-        this.setData({ receivedData: res.data })
+        if (res.code == 0) {
+          _this.getSupplierEmployment(platform, token, username, supplierNo)
+        }
       }
     })
 

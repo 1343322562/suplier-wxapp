@@ -16,10 +16,6 @@
     </view>
   </view>
   <view class="order-info">
-    <!-- <view class="item" wx:if="{{data.sheetQty}}">
-      <text class="label">订单数量：</text>
-      <text class="content">{{data.sheetQty}}</text>
-    </view> -->
     <image 
       class="suplierMemo" 
       src="../../images/memo.png" 
