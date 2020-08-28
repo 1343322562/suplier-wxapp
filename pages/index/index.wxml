@@ -2,7 +2,7 @@
 <!-- 商户卡片区域 -->
   <view class='shop-box' bindtap="toShopDataClick">
       <view class="left-info">
-        <image class="shop-pic" src="../../images/Default_Avatar.png" />
+        <image class="shop-pic" src="../../images/Default_Avatar@2x.png" />
         <view class="info-box">
           <view class="user-name">{{shopData.linkMan}} <text class="phone">{{shopData.supplierTel}}</text> </view>
           <view class="shop-name">{{shopData.supplierName}}</view>
