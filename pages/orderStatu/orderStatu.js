@@ -341,7 +341,7 @@ Page({
     console.log(startDate, endDate)
     const _this = this
     console.log(supplierNo, arguments)
-    let searchs = arguments[arguments.length - 1]
+    let searchs = arguments[arguments.length - 1] // 获取最后一个参数
     API.searchOrderStatusData({
       data:{ 
         supplierNo,
@@ -435,7 +435,6 @@ Page({
   print (e) {
     console.log(e)
     let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
-    // let res = e.target.dataset.res
     let orderData = this.data.orderData
     let sheetNo = ''  // 请求单号
     orderData.forEach((item,i) => {
@@ -451,7 +450,7 @@ Page({
     console.log(sheetNo, type)
     if (type == 1) return this.updateSheetStatus(sheetNo) // 直接出库
 
-    this.searchOrderDetailData(sheetNo) // 请求单据详情，并跳转蓝牙打印页
+    this.searchOrderDetailData(sheetNo) // 请求单据详情，并打印
     // if (res == 0) {
     //   this.setData({ printDialog: false })
     // } else if (res == 1) {
@@ -459,7 +458,7 @@ Page({
     //   this.setData({ printDialog: false })
     // }
   },
-  // 查询订单详情
+  // 查询订单详情, b并打印
   searchOrderDetailData(sheetNo) {
     const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
@@ -467,12 +466,47 @@ Page({
       data: { platform, token, username, supplierNo, sheetNo },
       success (res) {
         console.log(res)
-        let data = JSON.stringify(res.data)
-        
-        goPage('../booth/booth?data=' + data)
+        let data = res.data
+        _this.printOrder(data, sheetNo, _this) // 打印
       } 
     })
   },
+  // 打印订单
+  printOrder(data, sheetNo, _this = this) {
+    let content = [] // 打印内容
+    //处理格式
+    data.forEach((item, index) => {
+      const title = `<C><B>${item.branchName}</B></C><BR>`,
+            tel = `<HB><C>**${item.branchTel}**</C></HB>`,
+            line = `<C><BR>.............................................<BR></C>`,
+            status = `<C><N>----${item.supplyFlag}----</N><BR><BR></C>`,
+            orderNo = `<C><HB>${item.sheetNo}</HB><BR><BR></C>`,
+            lineTile = `<C><N>**********************详情**********************</N><BR></C>`
+      content.push(title + tel + line + status + orderNo + lineTile)
+      item.details.forEach(good => {
+        const goodsItem1 = `<N>${good.itemName}(${good.unitNo})</N><BR>`
+        const goodsItem2 = `<R><N>×${Number(good.realQty)}  ￥${(good.subAmt * good.realQty).toFixed(2)}</N><BR><BR></R>`
+        content.push(goodsItem1); content.push(goodsItem2)
+      })
+      const lines = `<C><N>************************************************</N><BR></C>`,
+            Amt = `<HB>合计：￥${(item.sheetAmt).toFixed(2)}</HB><BR>`,
+            num = `<HB>总数量： ${item.sheetQty.toFixed(2)}</HB><BR>`,
+            over = `</HB><C><B>完</B></C><BR><BR><BR><BR>`
+      content.push(lines + Amt + num + over)
+    })
+    content = content.join('')
+    console.log('content', content)
+    // 打印请求
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.print({
+      data: { platform, token, username, supplierNo ,printContent: content},
+      success(res) {
+        console.log(res)
+        toast(res.message)
+        if (res.code == '10000') _this.updateSheetStatus(sheetNo) // 更新订单状态
+      }
+    })
+  }, 
   // 请求司机信息
   getSupplierEmployment(){
     const _this = this

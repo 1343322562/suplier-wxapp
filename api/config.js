@@ -1,7 +1,7 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'http://47.92.249.124:8081/zksr-match/', 
+  baseURL: 'http://192.168.2.195:8087/zksr-match/', 
   // https://ch.zksr.cn/
   // http://192.168.2.96:8087/zksr-match/
   // http://47.92.249.124:8081/zksr-match/
@@ -35,7 +35,7 @@ export default {
             success: () => {
               if (response.data.msg == '您尚未登录或登录失效，请登录后查看！') {
                 wx.clearStorageSync()
-                wx.redirectTo({
+                wx.reLaunch({
                   url: '../../pages/login/login',
                 })
               }

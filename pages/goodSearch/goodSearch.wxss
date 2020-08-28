@@ -9,6 +9,12 @@ page {
   padding: 25rpx 0;
   border: 1rpx solid #ddd;
 }
+.null {
+  text-align: center;
+  font-size: 32rpx;
+  margin-top: 80rpx;
+  color: #666;
+}
 
 .nav-seach-bar-box {
   background: #fff;

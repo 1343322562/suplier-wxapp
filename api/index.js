@@ -36,5 +36,9 @@ export default {
   // match_finance
   searchOrderByCollectionFlag: (param) => ajax.post(`match_finance/searchOrderByCollectionFlag.do`, param),  // 查询收款信息
   collectionOrder: (param) => ajax.post(`match_finance/collectionOrder.do`, param),    // 确认收款
-  getCheckData: (param) => ajax.post(`match_finance/getCheckData.do`, param)           // 查询对账汇总
+  getCheckData: (param) => ajax.post(`match_finance/getCheckData.do`, param),           // 查询对账汇总
+
+  // print
+  addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机
+  print: (param) => ajax.post(`print/print.do`, param)     // 打印订单
 }

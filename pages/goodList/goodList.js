@@ -130,6 +130,10 @@ Page({
     this.updateItemPrice(itemNo, editPriceInputVal)
     this.setData({ isShowEditPriceDialog: false })
   },
+   //回到顶部
+   goTop: function (e) {  // 一键回到顶部
+      wx.pageScrollTo({ scrollTop: 0 })
+  },
   // 选择侧边栏
   selectSlider (e) {
     console.log(2)
@@ -149,7 +153,10 @@ Page({
       _this.setData({ ['selecSliderObj.ind']: ind, currentSliderCls })
       console.log(currentSliderCls)
     }
+    
+    wx.showLoading({ title: '请稍后...' })
     this.supplierItemSearch({ status, itemClsNo: currentSliderCls}, _this)
+    this.goTop()
   },
   // 跳转详情页
   toDetailClick (e) {
@@ -396,7 +403,7 @@ Page({
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
         _this.setData({ goodsData })
-        setTimeout(() => { wx.hideLoading() }, 800)
+        setTimeout(() => { wx.hideLoading() }, 200)
       },
       error(res) {
         console.log(res)
@@ -499,6 +506,7 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.searchValue) return
+    wx.showLoading({ title: '刷新中' })
     let pageSize = this.data.pageSize
     const _this = this
     let index = _this.data.selecSliderObj.index
@@ -519,5 +527,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
 })

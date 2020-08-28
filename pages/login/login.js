@@ -123,6 +123,7 @@ Page({
     console.log(e)
     let name = e.target.dataset.name
     let val = e.detail.value
+    if (val.includes(' ')) val = val.trim()
     if (name == 'text') {
       this.data.text = val
     } else if (name == 'password') {

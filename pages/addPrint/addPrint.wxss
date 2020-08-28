@@ -1,0 +1,39 @@
+/* pages/addPrint/addPrint.wxss */
+
+page{
+  height: 100vh;
+background-color: #eee;
+}
+
+.container {
+  padding-top: 100rpx;
+}
+
+.form {width: 90%;
+}
+.input-box {
+  background-color: #fff;
+  display: flex;
+align-items: center;
+height: 70rpx;
+border: 1px solid #888;
+margin-bottom: 25rpx;
+padding: 5rpx 25rpx;
+border-radius: 10rpx;
+font-size: 29rpx;
+
+  
+}
+.label{display: flex;
+}
+.n-red{
+  color: red;
+}
+
+.input-box input {
+  margin-left: 30rpx;
+
+}
+.form button {
+
+}

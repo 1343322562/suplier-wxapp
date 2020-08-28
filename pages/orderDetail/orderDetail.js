@@ -6,6 +6,7 @@ Page({
    */
   data: {
     supplyFlag: '',       // 当前订单状态
+    sheetNo: '',
     bounding: {},         // 胶囊信息
     detailData: {},       // 详细数据
     isShowEnterCarDialog: true, // 是否显示装车 Dialog
@@ -13,7 +14,9 @@ Page({
     isShowGoodDetailDialog: false,  // 是否显示 商品详情
     currentGoodIndex: ''   // 当前商品 index
   },
-
+  goAddPrintClick () {
+    goPage('../addPrint/addPrint')
+  },
   // 隐藏商品 Dialog
   hideDlalogClick () {
     this.setData({ isShowGoodDetailDialog: false })
@@ -42,9 +45,50 @@ Page({
   print () {
     console.log('dayin')
     let detailData = [this.data.detailData]
-    let data = JSON.stringify(detailData)
-    goPage('../booth/booth?data=' + data)
+    // let data = JSON.stringify(detailData)
+    // goPage('../booth/booth?data=' + data)
+    this.printOrder(detailData)
   },
+
+  // 打印订单
+  printOrder(data) {
+    console.log(data)
+    const _this = this
+    let content = [] // 打印内容
+    //处理格式
+    data.forEach((item, index) => {
+      console.log(item)
+      const title = `<C><B>${item.branchName}</B></C><BR>`,
+            tel = `<BOLD><C>**${item.branchTel}**</C></BOLD>`,
+            line = `<C><BR>.............................................<BR></C>`,
+            status = `<C><N>----${item.supplyFlag}----</N><BR><BR></C>`,
+            orderNo = `<C><HB>${item.sheetNo}</HB><BR><BR></C>`,
+            lineTile = `<C><N>**********************详情**********************</N><BR></C>`
+      content.push(title + tel + line + status + orderNo + lineTile)
+      item.details.forEach(good => {
+        const goodsItem1 = `<N>${good.itemName}(${good.unitNo})</N><BR>`
+        const goodsItem2 = `<R><N>×${Number(good.realQty)}  ￥${(good.subAmt * good.realQty).toFixed(2)}</N><BR><BR></R>`
+        content.push(goodsItem1); content.push(goodsItem2)
+      })
+      const lines = `<C><N>************************************************</N><BR></C>`,
+            Amt = `<HB>合计：￥${(item.sheetAmt).toFixed(2)}</HB><BR>`,
+            num = `<HB>总数量： ${item.sheetQty.toFixed(2)}</HB><BR>`,
+            over = `</HB><C><B>完</B></C><BR><BR><BR><BR>`
+      content.push(lines + Amt + num + over)
+    })
+    content = content.join('')
+    console.log('content', content)
+    // 打印请求
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.print({
+      data: { platform, token, username, supplierNo ,printContent: content},
+      success(res) {
+        console.log(res)
+        toast(res.message || res.msg)
+        if (res.code == '10000') _this.updateSheetStatus(1, _this.data.sheetNo)
+      }
+    })
+  }, 
 
   // 拨打电话
   callPhoneClick () {
@@ -83,6 +127,7 @@ Page({
   onLoad: function (options) {
     wx.showLoading({ title: '请稍候..' })
     let data = JSON.parse(options.data)
+    this.data.sheetNo = data.sheetNo
     console.log(data)
     // 更新订单状态(已查看)
     if (data.supplyFlag == 1) this.updateSheetStatus(0, data.sheetNo)

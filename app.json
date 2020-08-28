@@ -20,7 +20,8 @@
     "pages/booth/booth",
     "pages/paymentRes/paymentRes",
     "pages/goodSearch/goodSearch",
-    "pages/goodS/goodS"
+    "pages/goodS/goodS",
+    "pages/addPrint/addPrint"
   ],
   "permission": {
     "scope.userLocation": {

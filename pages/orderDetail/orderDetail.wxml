@@ -209,6 +209,8 @@
 
 <button wx:if="{{supplyFlag == 1 || supplyFlag == 2}}" bindtap="warehouseOut" style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin: 40rpx auto;background: linear-gradient(-120deg, #3BB0EC, #245EF7);" type='primary'>出库</button>
 
+<view bindtap="goAddPrintClick" wx:if="{{supplyFlag == 1 || supplyFlag == 2 || true}}" class="addPrint">添加打印设备</view>
+
 <button wx:if="{{supplyFlag == 3}}" bindtap="makeCar" style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin: 160rpx auto;background: linear-gradient(120deg, #FFB910, #FF8200);" type='primary'>装车</button>
 
 
@@ -228,3 +230,5 @@
   </view>
   </view>
 </view>
+
+<!-- <view class="addPrint">添加打印机</view> -->

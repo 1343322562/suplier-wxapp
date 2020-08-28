@@ -124,7 +124,9 @@ Page({
       success(res) {
         console.log(res)
         toast('订单已关闭')
-        setTimeout(() => { backPage('../driverTransStatu/driverTransStatu') }, 400)
+        setTimeout(() => { 
+          wx.redirectTo({ url: '../driverTransStatu/driverTransStatu'})
+        }, 400)
       },
       error(res) {
         console.log(res)
@@ -179,14 +181,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.closeOrder()
+    // this.closeOrder()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    this.closeOrder()
+    // this.closeOrder()
   },
 
   /**

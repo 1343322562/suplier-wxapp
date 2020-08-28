@@ -37,6 +37,12 @@
 		</view>
 		<!-- <view class="asd">asd</view> -->
 		<GoodCard wx:if="{{selectedNav == 0 || item.status != selectedNav - 1}}" isAllSelected="{{isAllSelected}}" wx:for="{{goodsData}}" wx:key="index" goodsData="{{item}}" index="{{index}}" />
+
+
+		<view class="null" style="margin: 40rpx auto 90rpx;" wx:if="{{goodsData.length%10 != 0}}">
+		———	已经到底了哟 ———
+		</view>
+		
 		<!-- <view class="dsa">dsa</view> -->
 
 		<!-- <view class="good-card-box">

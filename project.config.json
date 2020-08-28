@@ -9,7 +9,7 @@
 		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -94,6 +94,28 @@
 					"id": -1,
 					"name": "pages/goodSearch/goodSearch",
 					"pathName": "pages/goodSearch/goodSearch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderStatu/orderStatu",
+					"pathName": "pages/orderStatu/orderStatu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "addPrint",
+					"pathName": "pages/addPrint/addPrint",
+					"query": "",
 					"scene": null
 				}
 			]

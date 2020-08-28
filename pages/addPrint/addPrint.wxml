@@ -1,0 +1,20 @@
+<!--pages/addPrint/addPrint.wxml-->
+<view class="container">
+  <view class="form">
+    <view class="input-box">
+      <view class="label"><view class="n-red">*</view>打印机设备号:</view>
+      <input bindinput="bindInputValue" data-type="0" placeholder="输入打印机设备号" value="{{inputValue.machineNo}}"></input>
+    </view>
+    
+    <view class="input-box">
+      <view class="label"><view class="n-red">*</view>用户账号:</view>
+      <input bindinput="bindInputValue" data-type="1" placeholder="输入用户账号" value="{{inputValue.user}}"></input>
+    </view>
+    
+    <view class="input-box">
+      <view class="label"><view class="n-red">*</view>开发者密钥:</view>
+      <input bindinput="bindInputValue" data-type="2" placeholder="输入开发者密钥" value="{{inputValue.userKey}}"></input>
+    </view>
+    <button bindtap="addPrintClick" type="primary" style="margin: 0;width: 100%;margin-top: 100rpx;">保存</button>
+  </view>
+</view>
