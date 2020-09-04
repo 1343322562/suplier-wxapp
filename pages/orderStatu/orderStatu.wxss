@@ -20,7 +20,13 @@ page {
   justify-content: space-start;
   flex-wrap: wrap;
   width: 84%;
-  margin: 29px 0;
+  margin: 10rpx 0;
+}
+.print-order textarea{
+  border: 1rpx solid #aaa;
+  padding: 20rpx;
+  width: 80%;
+  height: 120rpx;
 }
 .car-tag {
   color: #BFBFBF;
@@ -30,7 +36,7 @@ page {
   font-size: 31rpx;
   text-align: center;
   border-radius: 6rpx;
-  margin-left: 25rpx;
+  margin: 10rpx 5rpx;
 }
 
 .selecedD{
@@ -101,8 +107,8 @@ page {
 .print-order-box {
   height: 100vh;
   width: 100%;
-  position: absolute;
-  z-index: 100;
+  position: fixed;
+  z-index: 9999;
   top: 0;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
@@ -116,9 +122,9 @@ page {
   padding: 0rpx 32rpx 28rpx;
   box-sizing: border-box;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 }
 
 .print-order .title {

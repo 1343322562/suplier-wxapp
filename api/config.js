@@ -25,7 +25,14 @@ export default {
         console.log(response, url)
         // if (response.statusCode == 404) return wx.showModal({ content: '请求丢失' })
         // const data = (typeof response === 'object' ? response.data : response)
-        if ((url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
+        if(url == 'match/supplierItemSearch.do'){
+          setTimeout(() => { wx.hideLoading()},800)
+          if (response.data.code == 0) {
+            param.success(response.data)
+          }
+        } else if (url == 'match/supplyOrderBySupplyType.do' && response.data.code == 1) {
+          toast('暂无订单数据')
+        } else if ((url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
           wx.setStorageSync('isWxLogin', true)
           setTimeout(() => { wx.hideLoading()},800)
           const page = getCurrentPages()[0].route.indexOf('login') // 获取当前页面栈。数组中第一个为首页，最后一个为当前页面。

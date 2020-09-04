@@ -1,4 +1,5 @@
 import { goPage, showModal, toast, backPage } from '../../tool/tool.js'
+import { printContentHandle } from '../../tool/print.js'
 import API from '../../api/index.js'
 Page({
   /**
@@ -42,46 +43,25 @@ Page({
     })
   },
   // 打印拣货单
-  print () {
+  print (e) {
+    const type = e.currentTarget.dataset.type || 0 // 0: 正常打印  1: 补打
     console.log('dayin')
     let detailData = [this.data.detailData]
     // let data = JSON.stringify(detailData)
     // goPage('../booth/booth?data=' + data)
-    this.printOrder(detailData)
+    this.printOrder(detailData, type)
   },
 
   // 打印订单
-  printOrder(data) {
+  printOrder(data, type) {
     console.log(data)
     const _this = this
-    let content = [] // 打印内容
-    //处理格式
-    data.forEach((item, index) => {
-      console.log(item)
-      const title = `<C><B>${item.branchName}</B></C><BR>`,
-            tel = `<BOLD><C>**${item.branchTel}**</C></BOLD>`,
-            line = `<C><BR>.............................................<BR></C>`,
-            status = `<C><N>----${item.supplyFlag}----</N><BR><BR></C>`,
-            orderNo = `<C><HB>${item.sheetNo}</HB><BR><BR></C>`,
-            lineTile = `<C><N>**********************详情**********************</N><BR></C>`
-      content.push(title + tel + line + status + orderNo + lineTile)
-      item.details.forEach(good => {
-        const goodsItem1 = `<N>${good.itemName}(${good.unitNo})</N><BR>`
-        const goodsItem2 = `<R><N>×${Number(good.realQty)}  ￥${(good.subAmt * good.realQty).toFixed(2)}</N><BR><BR></R>`
-        content.push(goodsItem1); content.push(goodsItem2)
-      })
-      const lines = `<C><N>************************************************</N><BR></C>`,
-            Amt = `<HB>合计：￥${(item.sheetAmt).toFixed(2)}</HB><BR>`,
-            num = `<HB>总数量： ${item.sheetQty.toFixed(2)}</HB><BR>`,
-            over = `</HB><C><B>完</B></C><BR><BR><BR><BR>`
-      content.push(lines + Amt + num + over)
-    })
-    content = content.join('')
-    console.log('content', content)
+    const printContent = printContentHandle(data, type) 
+    console.log('printContent', printContent)
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent: content},
+      data: { platform, token, username, supplierNo ,printContent },
       success(res) {
         console.log(res)
         toast(res.message || res.msg)
@@ -102,10 +82,11 @@ Page({
     let driverArr = this.data.driverArr
     let detailData = this.data.detailData
     let sheetNo = detailData.sheetNo  // 单号
-    let routeMan =       // 司机电话
+    let routeMan       // 司机电话
     driverArr.forEach((item, i) => {
       if (item.selected == 1) return routeMan = item.mobile
     })
+    if (!routeMan) return showModal({ content: '请选择正确的配送司机'})
 
     this.sheetEntrucking(sheetNo, routeMan)
   },

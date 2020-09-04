@@ -6,7 +6,7 @@ const years = []
 const months = []
 const days = []
 
-// 从 2020 年开始
+// 从 2019 年开始
 for (let i = 2019; i <= date.getFullYear(); i++) {
   years.push(i)
 }
@@ -48,8 +48,17 @@ Page({
   onLoad: function (options) {
     // 获取单据查询数据
     this.getCheckData()
+    // 获取时间选择器的默认选择时间，默认近一个月
+    this.pickerDefalutDate()
   },
-
+  // 获取时间选择器的默认选择时间，默认近一个月
+  pickerDefalutDate() {
+    let start = tim(30)
+    const y = Number(start.slice(0, 4)),
+          m = Number(start.slice(5, 7)),
+          d = Number(start.slice(8))
+    console.log(y,m,d)
+  },
   // 时间级联框，改变时触发
   bindChange (e) {
     let oldValue = this.data.value

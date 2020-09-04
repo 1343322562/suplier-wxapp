@@ -37,5 +37,6 @@ App({
     userInfo: null,
     bounding: wx.getMenuButtonBoundingClientRect(), // 胶囊信息
     baseImgUrl: 'http://47.92.249.124:8080/', // 图片根路径
+    wareInfo: {} // 仓库信息
   }
 })

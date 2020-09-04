@@ -1,3 +1,5 @@
+
+<wxs module="filters" src="../../tool/filter.wxs"></wxs>
 <!-- 导航栏 -->
 <Navbar 
   title='{{selectedNav == 0 ? "送货中" : "配送完成"}}'
@@ -75,7 +77,7 @@
     </view>
     <view class="payment-item">
       <label>差异金额：</label>
-      <input disabled value="{{paymentValueObj.actPrice > allSheetAmt[0] ? '0' : allSheetAmt[0] - paymentValueObj.actPrice}}"></input>
+      <input disabled value="{{filters.toFixed(paymentValueObj.actPrice > allSheetAmt[0] ? '0' : allSheetAmt[0] - paymentValueObj.actPrice)}}"></input>
     </view>
     <textarea bindinput="paymentValue" data-type="textArea" value="{{paymentValueObj.textArea}}" placeholder="请输入差异原因" focus="{{focus}}" />
     

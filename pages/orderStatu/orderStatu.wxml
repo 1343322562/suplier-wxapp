@@ -47,8 +47,6 @@
   <button class="btn" type="primary" size="mini" bindtap="seachSubmit">搜索</button>
 </view>
 
-<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 3}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "数量 ", content: "5"},{name: "完成时间", content: "05-08 09:06"},{name: "金额 ", content: "￥ 300.26"}]}}' 
-/> -->
 
 <!-- 时间选择区域 -->
 <view class="selecter-time-conainer" wx:if="{{selected && selectedNav == 3}}">
@@ -95,16 +93,10 @@
   allCheckbox="{{isAllSelected}}"
   data-index="{{index}}"
   bind:myCheckbox="{{myCheckbox}}"
+  isShowMemoIcon="{{true}}"
 >
   <view wx:if="{{item.supplyFlag == 31}}" class="backCar" catchtap="backCar" data-index="{{index}}">撤销装车</view>
 </AccountCard>
-
-<!-- <AccountCard 
-  bindtap='toGoodDetailClick'
-  data='{{[{name: "数量", content: "10"},{name: "金额", content: "￥320 (已付款)"},{name: "下单时间", content: "05-03 08:03"},{name: "店主留言", content: "尽快发货 , 谢谢 ! ! ."}]}}' 
-  wx:if="{{selectedNav == 0}}"  
-  checkbox="{{1}}"
-/> -->
 
 <OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 0}}" data='{{newOrderInfo}}'  catch:tap='allSelected'>
   <view class="print-btn-box">
@@ -112,8 +104,6 @@
     <button catch:tap='print' data-type="1" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(17deg,#285dee, #45abdf);border-radius: 90rpx 90rpx 10rpx 10rpx;">出库</button>
   
   </view>
-  <!-- <button catch:tap='print' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abdf);">打印</button> -->
-  <!-- // showPrintDialog -->
 </OrderStatuBottom>
 
 <!-- 1：待装车 -->
@@ -123,16 +113,6 @@
 </OrderStatuBottom>
 
 <!-- 2：已装车 -->
-
-<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 2}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "装车时间", content: "05-03 08:03"},{name: "金额 ", content: "￥ 300.26"},{name: "数量 ", content: "5"},{name: "店主留言", content: "尽快发货谢谢"}]}}' checkbox="{{3}}"
->
-  <view class="backCar">撤销装车</view>
-</AccountCard> -->
-
-<!-- <AccountCard bindtap='toGoodDetailClick' wx:if="{{selectedNav == 2}}"  data='{{[{name: "司机姓名", content: "张三丰  137 5556 5548"},{name: "下单时间", content: "05-07"},{name: "装车时间", content: "05-03 08:03"},{name: "金额 ", content: "￥ 300.26"},{name: "数量 ", content: "5"},{name: "店主留言", content: "尽快发货谢谢"}]}}' checkbox="{{3}}"
->
-  <view class="backCar">撤销装车</view>
-</AccountCard> -->
 
 <BillBottom wx:if="{{selectedNav == 2}}" billData="{{comeCarInfo}}" />
 
@@ -190,6 +170,20 @@
     <view class="print-confirm" bindtap="entetCarClick">
       <view class="cancle" data-type="0">取消</view>
       <view class="confirm" data-type="1" >确定</view>
+    </view>
   </view>
+</view>
+
+<!-- 填写店老板备注 Dialog -->
+<view class="print-order-box" wx:if="{{isShowMemoDialog}}">
+  <view class="print-order" >
+    <view class="title">填写备注</view>
+    <textarea value="{{memoValue}}" bindinput="bindMemoInput"></textarea>
+    
+
+    <view class="print-confirm" bindtap="memoDialogClick">
+      <view class="cancle" data-type="0">取消</view>
+      <view class="confirm" data-type="1" >确定</view>
+    </view>
   </view>
 </view>

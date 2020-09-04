@@ -1,4 +1,4 @@
-import { goPage, showModal, toast } from '../../tool/tool.js'
+import { goPage, showModal, toast, getLocation } from '../../tool/tool.js'
 import API from '../../api/index.js'
 import { tim } from '../../utils/date-format.js'
 Page({
@@ -24,7 +24,9 @@ Page({
     orderData: [],
     allSheetAmt: [0, [], 0], // 送货中底部结算区域
     currentIndex: '', // 当前收款的 item 项下标
-    billData: [0,0,0] // 送货中的结算底边栏信息
+    billData: [0,0,0], // 送货中的结算底边栏信息
+    // 经纬度
+    location: { latitude: '', longitude: '' }
   },
   // 绑定交款 input
   paymentValue (e) {
@@ -95,6 +97,7 @@ Page({
   toPayClick (e) {
     console.log(e)
     const currentIndex = Number(this.data.currentIndex)
+    const _this = this
     let orderData = this.data.orderData             
     let payAmt = orderData[currentIndex].sheetAmt   // 支付金额
     let sheetNo = orderData[currentIndex].sheetNo   // 单号
@@ -291,15 +294,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const { latitude, longitude } = getLocation()
+    this.data.location = { latitude, longitude }
     this.searchOrderStatusData()
     this.resPrice(this.data.orderData)
-
   },
   
   // 查询订单
   searchOrderStatusData(startDate = tim(7), endDate = tim(0)) {
     const _this = this
     const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
+    const { latitude, longitude } = this.data.location
     const selectedNav = this.data.selectedNav
     let selectedNav2 = this.data.selectedNav2
     const supplyFlag = selectedNav == 0 ? '31' : '5'         // 状态 31 配送中     5 已完成
@@ -315,12 +320,13 @@ Page({
     API.searchOrderStatusData({
       data: {
         platform, token, routeSendMan, username: routeSendMan,supplierNo, startDate, endDate,
+        latitude, longitude,
         supplyFlag,
         payWay: selectedNav2 || null  // 支付方式 XJ 现金  ONLINE在线支付
       },
       success (res) {
         console.log(res, 654)
-        let orderData = res.data
+        let orderData = res.data.reverse()
         orderData.forEach((item, i) => {
           orderData[i].createDate = orderData[i].createDate.slice(0, 19)
         })
@@ -328,7 +334,9 @@ Page({
         console.log(1)
         _this.resPrice(orderData)
       },
-      complete() {
+      complete(res) {
+        const orderData = _this.data.orderData
+        if ((res.data.code == 1 || res.data.msg == "暂无订单数据") && orderData.length != 0) _this.setData({ orderData: [] })  
         setTimeout(() => { wx.hideLoading() }, 400)
       }
     })
@@ -344,7 +352,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

@@ -185,9 +185,9 @@ border-radius: 6rpx;
   padding: 0rpx 32rpx 28rpx;
   box-sizing: border-box;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 }
 
 .print-order .title {
@@ -207,7 +207,7 @@ border-radius: 6rpx;
   font-size: 31rpx;
   text-align: center;
   border-radius: 6rpx;
-
+  margin: 10rpx 5rpx;
 }
 
 .selecedD{
@@ -279,4 +279,13 @@ border-radius: 6rpx;
   width: 120rpx;
   padding: 15rpx 20rpx;
   background: linear-gradient(120deg, #FFB910, #FF8200);
+  z-index: 99;
+}
+
+.d-container{
+  display: flex;
+  justify-content: space-start;
+  flex-wrap: wrap;
+  width: 84%;
+  margin: 10rpx 0;
 }

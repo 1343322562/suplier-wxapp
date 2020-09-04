@@ -1,8 +1,7 @@
 import { goPage, showModal, toast } from '../../tool/tool.js'
-
+import { printContentHandle } from '../../tool/print.js'
 import { tim } from '../../utils/date-format.js'
 import API from '../../api/index.js'
-
 const date = new Date()
 const years = []
 const months = []
@@ -49,6 +48,8 @@ Page({
     orderNum: [{supplyFlag:"1",supplierNo:"2019052501",totalOrder:1}], // 订单前三天内订单状态数量
     orderData: [],
     isShowEnterCarDialog: false,
+    isShowMemoDialog: false, // 备注框
+    memoValue: '',
     driverArr: [], // 司机信息
     // 新订单结算信息
     newOrderInfo: [0,0,0],
@@ -59,6 +60,16 @@ Page({
     // 已完成结算信息
     successCarInfo: [0,0],
     searchValue: ''  // 搜索框的值
+  },
+  bindMemoInput(e) {
+    let memoValue = e.detail.value
+    this.setData({ memoValue })
+  },
+  memoDialogClick(e) {
+    const type = e.target.dataset.type
+    if(type == 0) return this.setData({ isShowMemoDialog: false })
+
+    // API.
   },
   // 搜索框 value 绑定
   inputBindValueClick (e) {
@@ -473,33 +484,12 @@ Page({
   },
   // 打印订单
   printOrder(data, sheetNo, _this = this) {
-    let content = [] // 打印内容
-    //处理格式
-    data.forEach((item, index) => {
-      const title = `<C><B>${item.branchName}</B></C><BR>`,
-            tel = `<HB><C>**${item.branchTel}**</C></HB>`,
-            line = `<C><BR>.............................................<BR></C>`,
-            status = `<C><N>----${item.supplyFlag}----</N><BR><BR></C>`,
-            orderNo = `<C><HB>${item.sheetNo}</HB><BR><BR></C>`,
-            lineTile = `<C><N>**********************详情**********************</N><BR></C>`
-      content.push(title + tel + line + status + orderNo + lineTile)
-      item.details.forEach(good => {
-        const goodsItem1 = `<N>${good.itemName}(${good.unitNo})</N><BR>`
-        const goodsItem2 = `<R><N>×${Number(good.realQty)}  ￥${(good.subAmt * good.realQty).toFixed(2)}</N><BR><BR></R>`
-        content.push(goodsItem1); content.push(goodsItem2)
-      })
-      const lines = `<C><N>************************************************</N><BR></C>`,
-            Amt = `<HB>合计：￥${(item.sheetAmt).toFixed(2)}</HB><BR>`,
-            num = `<HB>总数量： ${item.sheetQty.toFixed(2)}</HB><BR>`,
-            over = `</HB><C><B>完</B></C><BR><BR><BR><BR>`
-      content.push(lines + Amt + num + over)
-    })
-    content = content.join('')
-    console.log('content', content)
+    const printContent = printContentHandle(data) // 处理打印格式
+    console.log('printContent', printContent)
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent: content},
+      data: { platform, token, username, supplierNo ,printContent},
       success(res) {
         console.log(res)
         toast(res.message)

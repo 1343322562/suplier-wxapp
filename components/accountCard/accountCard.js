@@ -24,6 +24,10 @@ Component({
       type: Boolean,
       value: true
     },
+    isShowMemoIcon: {
+      type: Boolean,
+      value: false
+    },
     index: Number
   },
 
@@ -54,6 +58,10 @@ Component({
       let index = e.target.dataset.index
       page.myCheckbox(checkbox, index)
       // this.setData({ checkbox: checkbox })
+    },
+    showMemoDialogClick() {
+      let page = getCurrentPages().reverse()[0]
+      page.setData({ isShowMemoDialog: true })
     }
   }
 })

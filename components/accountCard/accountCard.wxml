@@ -20,6 +20,12 @@
       <text class="label">订单数量：</text>
       <text class="content">{{data.sheetQty}}</text>
     </view> -->
+    <image 
+      class="suplierMemo" 
+      src="../../images/memo.png" 
+      wx:if="{{isShowMemoIcon}}"
+      catch:tap="showMemoDialogClick"
+    />
     <view class="item" wx:if="{{data.sheetAmt}}">
       <text class="label">金额：</text>
       <text class="content">￥{{data.sheetAmt}} </text>
@@ -44,5 +50,9 @@
       <text class="label">备注：</text>
       <text class="content">{{data.memo}}</text>
     </view>
+    <!-- <view class="item">
+      <text class="label">备注：</text>
+      <text class="content">{{data.memo}}</text>
+    </view> -->
   </view>
 </view>

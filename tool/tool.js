@@ -23,6 +23,8 @@ export const showModal = (obj) => {
   wx.showModal({
     title: obj.title || '提示',
     content: obj.content,
+    cancelText: obj.cancel || '取消',
+    confirmText: obj.confirm || '确定',
     success(res) {
       if (res.confirm) {
         'success' in obj && obj.success()
@@ -33,4 +35,45 @@ export const showModal = (obj) => {
   })
 }
 
-
+export const getLocation = () => {
+  let obj = {}
+  wx.getSetting({
+    success(res) {
+      console.log(res)
+      if (!res.authSetting['scope.userLocation']) {
+        wx.authorize({
+          scope: 'scope.userLocation',
+          success (res) {
+            console.log( '获取授权信息啦',res)
+          },
+          fail(res) {
+            console.log('调取失败' ,res)
+            wx.showModal({
+              title: '提示',
+              content: '检测到您的定位信息关闭，请开启定位',
+              cancelText: '关闭',
+              confirmText: '前往开启',
+              success(res) {
+                console.log(res)
+                if (res.confirm) {
+                  wx.openSetting({
+                    success(res) {
+                      console.log('openSetting', res)
+                    }
+                  })
+                }
+              }
+            })
+          }
+        })
+      } else {
+        wx.getLocation({
+          success(res) {
+            obj = res
+          }
+        })
+      }
+    }
+  })
+  return obj
+}
