@@ -28,6 +28,42 @@ Page({
     // 经纬度
     location: { latitude: '', longitude: '' }
   },
+  // 拉起扫码并装车
+  pullCodeClick() {
+    const _this = this
+    const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
+    wx.scanCode({
+      success(res) {
+        wx.showLoading({ title: '请稍候...' })
+        const sheetNo = res.result
+        API.sheetEntrucking({
+          data: { 
+            platform, 
+            token, 
+            username: routeSendMan, 
+            routeMan: routeSendMan, 
+            supplierNo,
+            sheetNo
+          },
+          success(res) {
+            console.log(res)
+            if (res.code != 0) return
+            toast(res.msg)
+            _this.searchOrderStatusData()
+          }
+        })
+      }
+    })
+  },
+  // 跳转司机地图页面
+  toDeiverMapClick(e) {
+    console.log(e)
+    const x = e.currentTarget.dataset.itemdata.xlocationLat
+    const y = e.currentTarget.dataset.itemdata.ylocationLng
+    // const sheetNo = e.currentTarget.dataset.sheetNo
+    const currentLocation = JSON.stringify(this.data.location)
+    goPage('../driverMap/driverMap?currentLocation='+currentLocation+'&x='+x+'&y='+y)
+  },
   // 绑定交款 input
   paymentValue (e) {
     console.log(e)
@@ -294,10 +330,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { latitude, longitude } = getLocation()
-    this.data.location = { latitude, longitude }
-    this.searchOrderStatusData()
-    this.resPrice(this.data.orderData)
+    const _this = this
+    getLocation({
+      complete(res) {
+        console.log(334,res)
+        const { latitude, longitude } = res
+        _this.data.location = { latitude, longitude }
+        _this.searchOrderStatusData()
+        _this.resPrice(_this.data.orderData)
+      }
+    })
   },
   
   // 查询订单
@@ -320,7 +362,8 @@ Page({
     API.searchOrderStatusData({
       data: {
         platform, token, routeSendMan, username: routeSendMan,supplierNo, startDate, endDate,
-        latitude, longitude,
+        x: latitude,
+        y: longitude,
         supplyFlag,
         payWay: selectedNav2 || null  // 支付方式 XJ 现金  ONLINE在线支付
       },
@@ -329,6 +372,7 @@ Page({
         let orderData = res.data.reverse()
         orderData.forEach((item, i) => {
           orderData[i].createDate = orderData[i].createDate.slice(0, 19)
+          orderData[i].distance = item.distance < 0 ? (item.distance*1000)+'m' : item.distance+'km' 
         })
         _this.setData({ orderData })
         console.log(1)

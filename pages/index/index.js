@@ -146,7 +146,9 @@ Page({
       goPage('../goodList/goodList')
     } else if (toPageName == 'driver') {
       goPage('../driverTransStatu/driverTransStatu')
-    }
+    } else if (toPageName == 'recharge') {
+      goPage('../recharge/recharge')
+    } 
   },
 
   getUserInfo: function(e) {

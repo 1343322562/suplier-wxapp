@@ -46,9 +46,14 @@
   wx:key='index' 
   wx:for='{{orderData}}' 
   data='{{item}}' 
-  checkbox="{{3}}" 
+  checkbox="{{3}}"
+  bindtap="toDeiverMapClick"
+  data-itemData="{{item}}"
 >
-  <view bindtap="transportEndClick" data-index="{{index}}" class="transportEnd" data-acctFlag="{{item.acctFlag}}" wx:if="{{item.supplyFlag == 31}}">送货完成</view>
+  <view catchtap="transportEndClick" data-index="{{index}}" class="transportEnd" data-acctFlag="{{item.acctFlag}}" wx:if="{{item.supplyFlag == 31}}">
+  送货完成
+  <view class="distance">{{item.distance}}</view>
+  </view>
 </AccountCard>
 
 <!-- 配送完成 -->
@@ -101,3 +106,9 @@
   </view>
 </view>
 <!-- <BillBottom itemStyle="flex-direction: column;align-items: end;" wx:if="{{selectedNav == 0}}" billData="{{[2, 28, 40000]}}" /> -->
+
+<image 
+  src="../../images/code.png"
+  class="scan-code"
+  catchtap="pullCodeClick"
+/>

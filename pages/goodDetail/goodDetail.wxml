@@ -167,6 +167,18 @@
         <image class="edit-icon" src="../../images/edit.png"></image>
       </input>
     </view>
+
+    <view style="position: relative;" class="input-box" data-name='库位号' data-inputName="wareLocatorNo" bindtap="showEditDialogClick">
+      <label>库位号：</label>
+      <input 
+        type="number"
+        bindinput='bindInputData' 
+        disabled
+        value='{{data.wareLocatorNo}}'
+      >
+        <image class="edit-icon" src="../../images/edit.png"></image>
+      </input>
+    </view>
   </view>
 
   <view class='good-pic'>

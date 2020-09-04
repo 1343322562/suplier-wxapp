@@ -49,7 +49,8 @@ Page({
     orderData: [],
     isShowEnterCarDialog: false,
     isShowMemoDialog: false, // 备注框
-    memoValue: '',
+    memoIndex: '', // 当前所选择的memo框的商品 index
+    memoValue: '',  // 备注框 input value
     driverArr: [], // 司机信息
     // 新订单结算信息
     newOrderInfo: [0,0,0],
@@ -65,11 +66,27 @@ Page({
     let memoValue = e.detail.value
     this.setData({ memoValue })
   },
+  // 修改老版备注
   memoDialogClick(e) {
     const type = e.target.dataset.type
-    if(type == 0) return this.setData({ isShowMemoDialog: false })
+    const _this = this
+    if(type == 0) return this.setData({ isShowMemoDialog: false }) // 取消
 
-    // API.
+    const { orderData, memoValue, memoIndex } = this.data
+    const sheetNo = orderData[memoIndex].sheetNo
+    const oldMemoValue = orderData[memoIndex].bossMemo
+    if (oldMemoValue == memoValue) return toast('请输入新备注')
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    API.updateSheetMemo({
+      data: { platform, token, username, supplierNo, memo: memoValue, sheetNo },
+      success(res) {
+        console.log(res, sheetNo)
+        toast(res.msg)
+        if (res.code == 0) {
+          _this.setData({ isShowMemoDialog: false, [`orderData[${memoIndex}].bossMemo`]: memoValue, memoValu: '' })
+        }
+      }
+    })
   },
   // 搜索框 value 绑定
   inputBindValueClick (e) {
@@ -249,7 +266,6 @@ Page({
   // 点击搜索
   seachSubmit() {
     let orderData = this.data.orderData
-    if (orderData.length != 0) this.setData({ orderData: [] })
     
     let { days, months, years, value} = this.data
     if (value[0] < value[3] && (value[1] < 11 || value[4] > 0)) return showModal({ content: '日期区间因在1个月之内' })
@@ -270,6 +286,7 @@ Page({
       return
     }
     wx.showLoading()
+    if (orderData.length != 0) this.setData({ orderData: [] })
     setTimeout(() => this.searchOrderStatusData(platform, token, username, supplierNo ,startDate, endDate, 1))
     setTimeout(() => wx.hideLoading())
   },

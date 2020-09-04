@@ -65,6 +65,10 @@
     <image class="img" data-name="driver" src='../../images/nav_dai@2x.png' />
     <view class="text">配送状态</view>
   </view>
+  <view class="item" wx:if="{{roleNo == 0}}">
+    <image class="img" data-name="recharge" src='../../images/nav_new_order@2x.png' />
+    <view class="text">消费充值</view>
+  </view>
 </view>
 
 <!-- 销售数据区域 -->

@@ -20,7 +20,9 @@
     "pages/paymentRes/paymentRes",
     "pages/goodSearch/goodSearch",
     "pages/goodS/goodS",
-    "pages/addPrint/addPrint"
+    "pages/addPrint/addPrint",
+    "pages/driverMap/driverMap",
+    "pages/recharge/recharge"
   ],
   "permission": {
     "scope.userLocation": {

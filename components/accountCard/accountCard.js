@@ -28,7 +28,7 @@ Component({
       type: Boolean,
       value: false
     },
-    index: Number
+    index: Number,
   },
 
   /**
@@ -59,9 +59,12 @@ Component({
       page.myCheckbox(checkbox, index)
       // this.setData({ checkbox: checkbox })
     },
-    showMemoDialogClick() {
+    showMemoDialogClick(e) {
+      console.log(e)
+      let memoIndex = e.currentTarget.dataset.i
       let page = getCurrentPages().reverse()[0]
-      page.setData({ isShowMemoDialog: true })
+      let data = this.data.data
+      page.setData({ isShowMemoDialog: true, memoIndex, memoValue: data.bossMemo })
     }
   }
 })

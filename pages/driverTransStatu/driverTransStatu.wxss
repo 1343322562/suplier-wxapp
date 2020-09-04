@@ -1,7 +1,7 @@
 /* pages/driverTransStatu/driverTransStatu.wxss */
 
 page{
-  padding-bottom: 100rpx;
+  padding-bottom: 200rpx;
 }
 .transportEnd {
     background: #FF4E3E;
@@ -13,6 +13,10 @@ width: 140rpx;
 text-align: center;
 border-radius: 50rpx;
 flex-direction: column
+}
+
+.distance{
+  color: #333333;
 }
 
 /* 收款 Dialog */
@@ -119,4 +123,16 @@ padding: 20rpx 0;
   color: #FF4E3E;
   width: 50%;
   text-align: center;
+}
+
+.scan-code {
+  background: linear-gradient(to bottom right, #fbb381, #FF5E4E);
+  position: fixed;
+  bottom: 140rpx;
+  right: 20rpx;
+  height: 65rpx;
+  width: 65rpx;
+  border-radius: 50%;
+  padding: 15rpx;
+  opacity: .8;
 }

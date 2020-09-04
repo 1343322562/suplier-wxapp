@@ -17,6 +17,9 @@ export default {
   updateItemStatus: (param) => ajax.post(`match/updateItemStatus.do`, param),        // 上下架
   updateItemPrice: (param) => ajax.post(`match/updateItemPrice.do`, param),          // 修改商品价格
   updateItemStock: (param) => ajax.post(`match/updateItemStock.do`, param),          // 修改商品库存
+  updateSheetMemo: (param) => ajax.post(`/match/updateSheetMemo.do`, param),         // 修改老版备注
+  updateWareLocatorNo: (param) => ajax.post(`/match/updateWareLocatorNo.do`, param),         // 修改商品库位信息
+  
 
 
   submitReceiveOrder: (param) => ajax.post(`match/submitReceiveOrder.do`, param),   // 司机收货

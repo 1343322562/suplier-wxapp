@@ -398,7 +398,7 @@ Page({
           goodsData[i].checkbox = 0 
           let profit = ((goodsData[i].salePrice - goodsData[i].price) / goodsData[i].salePrice).toFixed(4)  // 毛利率
           goodsData[i].profit = profit == 1.0000 ? '100%' : (profit.slice(2)/100 + '%')
-          goodsData[i].picUrl = basePicUrl + 'upload/images/bdSupplierItem/' + item.itemNo + '/' + item.picUrl // 图片地址
+          goodsData[i].picUrl = basePicUrl + '/upload/images/bdSupplierItem/' + item.itemNo + '/' + item.picUrl // 图片地址
           let month = item.modifyDate.slice(5,7)
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })

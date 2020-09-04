@@ -35,18 +35,19 @@ export const showModal = (obj) => {
   })
 }
 
-export const getLocation = () => {
+export const getLocation = (params) => {
   let obj = {}
   wx.getSetting({
     success(res) {
-      console.log(res)
       if (!res.authSetting['scope.userLocation']) {
         wx.authorize({
           scope: 'scope.userLocation',
           success (res) {
+            params.complete(res)
             console.log( '获取授权信息啦',res)
           },
           fail(res) {
+            params.complete(res)
             console.log('调取失败' ,res)
             wx.showModal({
               title: '提示',
@@ -68,8 +69,13 @@ export const getLocation = () => {
         })
       } else {
         wx.getLocation({
+          type: 'gcj02',
+          altitude: 'true',
+          isHighAccuracy: true,
+          highAccuracyExpireTime: 4000,
           success(res) {
-            obj = res
+            console.log(res)
+            params.complete(res)
           }
         })
       }

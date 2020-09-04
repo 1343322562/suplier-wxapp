@@ -25,6 +25,7 @@ Page({
   },
 // 绑定 Dialog 信息
   commitEditData (e) {
+    console.log(e)
     let inputValue = e.detail.value
     this.setData({ ['editDialogValueObj.inputValue']: inputValue })
     const editDialogValueObj = this.data.editDialogValueObj
@@ -86,20 +87,37 @@ Page({
 
     const appNote = inputValue
     const itemNo = this.data.data.itemNo
-    console.log(platform, token, username, supplierNo, itemNo, inputValue)
-    API.updateItemNote({
-      data: { platform, token, username, supplierNo, itemNo, appNote },
-      success (res) {
-        console.log(res)
-        // 返回上一页面 不会触发 onshow, 获取页面对象, 更新商品数据
-        let pages = getCurrentPages()
-        const goodPageIndex = pages.length - 2
-        pages[goodPageIndex].onPullDownRefresh()
-        if (res.code == 0) toast('编辑成功');
-        _this.setData({ isShowEditDialog: false })
-        setTimeout(() => { backPage() }, 800)
-      }
-    })
+    console.log({platform, token, username, supplierNo, itemNo, inputValue, inputName})
+    if (inputName == 'wareLocatorNo') {  // 修改库位
+      API.updateWareLocatorNo({
+        data: { platform, token, username, supplierNo, itemNo, [inputName]: inputValue },
+        success(res) {
+          console.log(res)
+          toast(res.msg)
+          if (res.code != 0) return
+          let pages = getCurrentPages()
+          const goodPageIndex = pages.length - 2
+          pages[goodPageIndex].onPullDownRefresh()
+          _this.setData({ isShowEditDialog: false })
+          setTimeout(() => { backPage() }, 800)
+        }
+      })
+    } else if (inputName == 'appNote') { // 修改注解
+      API.updateItemNote({ 
+        data: { platform, token, username, supplierNo, itemNo, [inputName]: inputValue },
+        success (res) {
+          console.log(res)
+          // 返回上一页面 不会触发 onshow, 获取页面对象, 更新商品数据
+          let pages = getCurrentPages()
+          const goodPageIndex = pages.length - 2
+          pages[goodPageIndex].onPullDownRefresh()
+          if (res.code == 0) toast('编辑成功');
+          setTimeout(() => { backPage() }, 800)
+          _this.setData({ isShowEditDialog: false })
+        }
+      })
+    }
+    
   },
 
 // 上下架
