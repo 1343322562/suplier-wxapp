@@ -1,5 +1,3 @@
-var QRCode = require('../utils/weapp-qrcode.js')
-
 // 处理打印格式
 export const printContentHandle = function (data, type) {
   let content = '' // 打印内容
@@ -12,7 +10,7 @@ export const printContentHandle = function (data, type) {
     sheetNo.push(item.sheetNo)
     content += `<L>单号：${item.sheetNo}<BR></L>`
     content += `<L>打印时间：${sign || item.createDate}</L>`
-    content += `<L><BR>编号：${item.branchNo}   店名：<BOLD>${item.branchName}</BOLD><BR></L>`
+    content += `<L><BR>编号：${item.branchNo || ''}   店名：<BOLD>${item.branchName}</BOLD><BR></L>`
     content += `<L><N>联系人：${'黄老板'}   联系电话：${item.branchTel} </N><BR></L>` // ${item.supplyFlag}
     content += `<L>地址:${item.address}<BR></L>`
     content += `<C><N>————————————————————————</N><BR></C>`
@@ -28,7 +26,7 @@ export const printContentHandle = function (data, type) {
     content += `<N><L>支付方式：${item.payWay || '货到付款'}<L></N><BR>`
     content += `<B><L>客户备注：${item.mome || '无'}<L></B><BR><BR>`
     content += `<B><L>老板备注：${item.mome || '无'}<L></B><BR><BR>`
-    content += `<N><L>   如出库单数量有疑问请拨打：${item.branchTel}联系处理<L></N><BR><BR>`
+    content += `<N><L> 如出库单数量有疑问请拨打：${item.branchTel}联系处理<L></N><BR><BR>`
   })
   sheetNo = sheetNo.join(',')
   content = `<C><QR180>订单号</QR></C><BR><BR>` + content // 二维码数据

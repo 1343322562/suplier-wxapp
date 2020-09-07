@@ -6,7 +6,7 @@
 </view>
 
 <view class='list'>
-  <view class='li' wx:for="{{data}}" wx:key="index">
+  <view class='li' wx:for="{{data}}" bindtap="toDetail" wx:key="index" data-index="{{index}}">
     <view class='item' >
       <text class='type'>{{item.memo || '取消大苏打'}}</text>
       <text class='right'>{{item.createDate || '2020-02-02 15:2:2'}}</text>

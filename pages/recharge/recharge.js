@@ -1,5 +1,6 @@
 import API from '../../api/index.js'
 import { goPage, showModal, toast, backPage } from '../../tool/tool.js'
+import { tim } from '../../utils/date-format.js'
 Page({
 
   /**
@@ -8,12 +9,29 @@ Page({
   data: {
     data: [{}]
   },
-
+  // 跳转消费详情页
+  toDetail(e) {
+    // const { index } = e.currentTarget.dataset
+    // let { data } = this.data
+    // let no = data[index].no
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj'),
+          _this = this
+    API.accountFlow({
+      data: { platform, token, username, supplierNo, startDate: tim(30), endDate: tim(0) },
+      success(res) {
+        console.log(res)
+        if (res.code == 0) {
+          let data = res.data
+          _this.setData({ data })
+        }
+      }
+    })
   },
 
   /**

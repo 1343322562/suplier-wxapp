@@ -39,7 +39,11 @@ export default {
   // match_finance
   searchOrderByCollectionFlag: (param) => ajax.post(`match_finance/searchOrderByCollectionFlag.do`, param),  // 查询收款信息
   collectionOrder: (param) => ajax.post(`match_finance/collectionOrder.do`, param),    // 确认收款
-  getCheckData: (param) => ajax.post(`match_finance/getCheckData.do`, param),           // 查询对账汇总
+  getCheckData: (param) => ajax.post(`match_finance/getCheckData.do`, param),          // 查询对账汇总
+  accountFlow: (param) => ajax.post(`match_finance/accountFlow.do`, param),   // 查询消费列表数据 supplierNo,startDate,endDate
+  settleDetail: (param) => ajax.post(`match_finance/settleDetail.do`, param), // 查询消费详情 supplierNo ,operDate
+  settleFlow: (param) => ajax.post(`match_finance/settleFlow.do`, param),     // 查询消费商品详情 supplierNo, sheetNo  
+  
 
   // print
   addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机
