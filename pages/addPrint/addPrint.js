@@ -41,6 +41,7 @@ Page({
   addPrintClick () {
     console.log(this.data)
     const { user, userKey, machineNo } = this.data.inputValue
+    const _this = this
     console.log(!user, !userKey, !machineNo)
     if(!user) return toast('请输入用户账号')
     if(!userKey) return toast('请输入开发者密钥')
@@ -53,9 +54,7 @@ Page({
         console.log(res)
         if (res.code == 10000) {
           toast(res.message)
-          let allPrint = wx.getStorageSync('allPrint')
-          allPrint = allPrint ? `${machineNo},${allPrint}` : `${machineNo}`
-          wx.setStorageSync('allPrint', allPrint)
+          _this.cachePrintNo(machineNo)
           backPage()
         } else {
           toast('添加失败')
@@ -63,6 +62,13 @@ Page({
       },
       complete() { wx.hideLoading() }
     })
+  },
+
+  // 缓存打印设备号码
+  cachePrintNo(printNo) {
+    let allPrint = wx.getStorageSync('allPrint')
+    allPrint = allPrint ? `${printNo},${allPrint}` : `${printNo}`
+    wx.setStorage('allPrint', allPrint)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
