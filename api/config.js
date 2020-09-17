@@ -1,11 +1,12 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'http://192.168.2.195:8087/zksr-match/', 
+  baseURL: 'http://175.6.24.175:8080/', 
   // https://ch.zksr.cn/
-  // http://192.168.2.96:8087/zksr-match/
+  // http://192.168.2.96:8087/zksr-match/  文艺
   // http://192.168.2.195:8087/zksr-match/
   // http://47.92.249.124:8081/zksr-match/
+  // http://175.6.24.175:8080/    中科
   post (url, param) {
     this.ajax('post', url, param)
   },
@@ -13,6 +14,9 @@ export default {
     this.ajax('get', url, param)
   },
   ajax(type, url, param) {
+    wx.showLoading({
+      title: '请稍后...',
+    })
     let requestObj = param.data || {}
     let request = {
       url: this.baseURL + url,
@@ -34,6 +38,7 @@ export default {
         } else if (url == 'match/supplyOrderBySupplyType.do' && response.data.code == 1) {
           toast('暂无订单数据')
         } else if ((url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
+          if (response.data.code == 1) return toast(response.data.msg)
           wx.setStorageSync('isWxLogin', true)
           setTimeout(() => { wx.hideLoading()},800)
           const page = getCurrentPages()[0].route.indexOf('login') // 获取当前页面栈。数组中第一个为首页，最后一个为当前页面。
@@ -65,7 +70,10 @@ export default {
         }
       },
       fail: param.error || function () { wx.hideLoading(); wx.showModal({ content: '请求超时，请检查网络重试' }) },
-      complete: param.complete
+      complete: function (res) {
+        wx.hideLoading()
+        'complete' in param && param.complete(res)
+      }
     }
     wx.request(request)
   }

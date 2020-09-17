@@ -139,6 +139,7 @@ Page({
     let sheetNo = orderData[currentIndex].sheetNo   // 单号
     let payType = e.target.dataset.paytype
     if (payType == 2) {                         // 现金收款 2
+      console.log('asdas',564)
       showModal({
         title: '提示',
         content: '本次收款 ￥' + payAmt,

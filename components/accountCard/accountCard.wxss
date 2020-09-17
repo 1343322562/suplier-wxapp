@@ -2,6 +2,7 @@
 .collect-statu-card {
   width: 100%;
   border-top: 7rpx solid #f5f5f5;
+  background-color: #fff;
 }
 .suplierMemo {
   position: absolute;

@@ -171,7 +171,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    const selectedNav = this.data.selectedNav
+    if (selectedNav == 0 || selectedNav == 3) {
+      this.searchOrderStatusData()
+    } else if (selectedNav == 1){
+      this.searchOrderByCollectionFlag(0)
+    } else if (selectedNav == 2) {
+      this.searchOrderByCollectionFlag(1)
+    }
   },
 
   /**

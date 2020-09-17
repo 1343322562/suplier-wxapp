@@ -1,6 +1,6 @@
 <!--components/textItems/textItems.wxml-->
 <view class="order-remarks" style="{{boxStyle}}">
-  <view class="item" style="{{itemStyle}}" wx:for="{{texrItemData}}">
+  <view class="item" style="{{itemStyle}}" wx:for="{{texrItemData}}" wx:key="index">
     <view class="label" style="{{labelStyle}}">{{item.label}}</view>
     <view class="content" style="{{contentStyle}}">{{item.content}}</view>
     <slot />

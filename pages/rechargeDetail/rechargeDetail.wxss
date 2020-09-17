@@ -1,0 +1,109 @@
+/* pages/rechargeDetail/rechargeDetail.wxss */
+.title {
+  font-size: 34rpx;
+  padding: 5rpx 20rpx;
+}
+.content-box{
+  width: 94%;
+  padding: 15rpx 2%;
+  position: relative;  
+}
+.sign {
+  background-color: #ff6658;
+  height: 50rpx;
+  width: 14rpx;
+  position: absolute;
+  top: 5rpx;
+  left: 0;
+}
+.top {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 20rpx;
+}
+
+/* 商品详情 */
+.goods-card-box {
+  padding: 20rpx 3%;
+  width: 94%;display: flex;
+  justify-content: flex-start;
+  border-top: 5rpx solid #f6f6f6;
+  border-bottom: 5rpx solid #f6f6f6;
+  position: relative;
+  transition: transform 1.5s .2s;
+}
+.goods-card-box .image-box image{
+  height: 120rpx;
+  width: 120rpx;
+  background: url("data:image/jpg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCABkAGQDAREAAhEBAxEB/8QAGwABAAMBAQEBAAAAAAAAAAAAAAMEBgUHAgj/xAAwEAABAwICCQMCBwAAAAAAAAAAAQIDBAUREhQWITFBUVSS4QYjYUJxEyIyM4GRwf/EABgBAQEBAQEAAAAAAAAAAAAAAAABAwIE/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAESAhH/2gAMAwEAAhEDEQA/AP1YehkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFugt09xlWOFG7NrnLsREJblJE9xstTbWtfJlexVwzM5/OInWnVjmlQAAAAAAAA6NptT7pK9qLljan5n79vBCW5WRWrKOahmWGZMHJuXgqc0HPSK5R3PTdzhoZZo51ytlwwfwxTHf/AGcd8rKv+ortSz0ejwyNkc5UVVbtRETbvJxytrKGjkAAAAAABLBTyVMzIYkxe5cEQ5HoNvoY7dSshj4bXO5rxUytaPm426G5Q5JEwcn6XpvaolyWMJW0U1DMsMyYLwXgqc0NuemasUSRxPlz5WOdlTM7DgicQIwAAAAAAANp6dtWiQ6RKnvyJsRfpaY99OpHeOVAKdfb4bjAsUqfZyb0Us6yvjC1VsqKSqbTuZi564MVNz/sbc9MstlabUy3UmRyNdK/9xefx9jG3TWRk71bVttUqMb7L9rF/wA/g15unFjmnSAAAAA7np21aZPpEqexEuxF+t3g476WRtjJ0AAAEbo2uc1ytRVbuVd6ASAUrnQsuFK+F2xd7XcncC83JXn0sT4JXxSJhI1cFT5N3CMAAAAaGn9TpSwshiokSNqYImfwZ4XSbXB/Rt7/AAMLs1wf0be/wMGzXB/Rt7/AwbNcH9G3v8DBs1wf0be/wMGzXB/Rt7/AwbNcH9G3v8DBtx7rcW3KZs2j/hSYYOVHY48uB3JlLVAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==");
+  background-size: 100%;
+}
+.goods-card-box .good-detail {
+  width: 100%;
+  font-size: 29rpx;
+}
+
+.good-detail .table-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table-name {
+  line-height: 29rpx;
+  width: 58%;
+}
+.table-item .allPrice{
+  color: #FF4E3E;
+  width: 25%;
+}
+.table-item .num{
+  color: #5C5C5C;
+  width: 11%;
+}
+
+
+.print-order-box {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.print-order {
+  width: 570rpx;
+  background-color: #fff;
+  padding: 40rpx 32rpx 15rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.print-order .good-info{
+  padding: 15rpx;
+  border-radius: 15rpx;
+}
+.print-order .good-info .title{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size: 31rpx;
+  padding: 0;
+}
+
+.detail-title{
+  position: absolute;
+  background: linear-gradient(to bottom right, #3BB0EC, #245EF7);
+  color: #fff;
+  padding: 15rpx 25rpx;
+  top: -20rpx;
+  right: -20rpx;
+  border-radius: 0rpx 25rpx 0rpx 25rpx;
+}

@@ -1,0 +1,79 @@
+<Navbar 
+  title='消费详情'
+  background='#ff6658' 
+  leftIconText="返回"
+  isShowLeftIcon="{{true}}"
+/>
+
+<!-- <view class="sign top" /><view class="title top">消费信息</view> -->
+<view 
+  class="content-box" 
+  wx:for="{{settleData}}" 
+  wx:key="index"  
+  bindtap="showGoodDetail" 
+  data-sheetNo="{{item.sheetNo}}" 
+  data-sheetAmt="{{item.sheetAmt}}"
+>
+  <view class="sign top"/>
+  <TextItems 
+    labelStyle="color: #666666;"  
+    contentStyle="color: #222222;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"
+    texrItemData="{{[{label: '', content: item.sheetNo}]}}" 
+  />
+  <TextItems 
+    texrItemData="{{[{label: '商品数量：', content: item.totalQty}, {label: '消费金额：', content: '￥' + item.consumeAmt}]}}"
+    contentStyle="color: #FF4E3E; white-space: nowrap;"
+    labelStyle="color: #666666;"
+  />
+  <TextItems 
+    texrItemData="{{[{label: '订单总额：', content: '￥' + item.sheetAmt}]}}"
+    contentStyle="color: #FF4E3E; white-space: nowrap;"
+    labelStyle="color: #666666;"
+  />
+</view>
+
+<view class="print-order-box" wx:if="{{ isShowGoodsDetailDialog && goodsList.length}}" catchtap="hideGoodsDialog">
+  <view class="print-order" >
+    <view class="detail-title">商品详情</view>
+    <view class="good-info" wx:for="{{goodsList}}" wx:key="index">
+      <view class="title">{{item.itemName}}</view>
+      <TextItems 
+        texrItemData="{{[{label: '扣率：', content: item.itemSupRate + '%'}, {label: '金额：', content: '￥' + item.consumeAmt}]}}"
+        contentStyle="color: #FF4E3E; white-space: nowrap;"
+        labelStyle="color: #666666;"
+      />
+    </view>
+  </view>
+</view>
+
+<!-- 
+<view class="sign top" /><view class="title top">商品列表</view>
+<view class="content-box">
+  <view class="goods-card-box" > -->
+<!-- wx:for="{{detailData.details}}" wx:key="index" bindtap="showGoodDetailCardClick" data-currentIndex="{{index}} -->
+    <!-- <block>
+      <view class="good-detail">
+        <view class="table-item">
+          <view class="table-name">
+            <TextItems 
+              boxStyle="border: 0rpx;"
+              itemStyle="font-size: 28rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right: 0rpx;" 
+              labelStyle="color: #5C5C5C;"  
+              contentStyle="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width: 420rpx;"
+              texrItemData="{{[{label: '', content: 'itemName'}]}}" 
+            />
+            <TextItems 
+              boxStyle="border: 0rpx;"
+              itemStyle="font-size: 28rpx;letter-spacing: 0rpx;padding:8rpx 0;" 
+              labelStyle="color: #5C5C5C;"  
+              texrItemData="{{[{label: '条码：', content: '854684684asd86'}]}}" 
+            />
+          </view>
+          <view class="num"> {{50}}</view>
+          <view class="allPrice"> {{'￥'+'88999.00'}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view> -->
+

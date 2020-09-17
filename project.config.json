@@ -129,6 +129,41 @@
 					"id": -1,
 					"name": "pages/recharge/recharge",
 					"pathName": "pages/recharge/recharge",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/recharge/recharge",
+					"pathName": "pages/recharge/recharge",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/rechargeDetail/rechargeDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "addPrint",
+					"pathName": "pages/addPrint/addPrint",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rechargeDetail/rechargeDetail",
+					"pathName": "pages/rechargeDetail/rechargeDetail",
 					"scene": null
 				}
 			]

@@ -1,9 +1,9 @@
 var filters = {    
   toFixed: function (value) {       
-      return value.toFixed(2)
+      return value.toFixed(2)   // 保留两位小数
   },
   toStr: function (value) {       
-      return value.toString()
+      return value.toString() 
   },
   toNum: function (value) {       
       return value.toNumber()
@@ -13,5 +13,5 @@ var filters = {
 module.exports = {   
   toFixed: filters.toFixed,
   toStr: filters.toStr,
-  toNum: filters.toNum,//暴露接口调用
+  toNum: filters.toNum,
 }

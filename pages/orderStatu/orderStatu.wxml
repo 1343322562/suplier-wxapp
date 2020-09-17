@@ -24,7 +24,10 @@
   selectedNavIndex='{{selectedNav}}' 
 />
 
-
+<view class="default-area">
+  <image class="default-area-image" src="../../images/none.png" />
+  <view class="default-area-text">此分类暂无订单数据~~~</view>
+</view>
 
 
 <!-- 0：新订单 -->
@@ -100,7 +103,7 @@
 
 <OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 0}}" data='{{newOrderInfo}}'  catch:tap='allSelected'>
   <view class="print-btn-box">
-    <button catch:tap='print' data-type="0" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abde);border-radius: 10rpx 10rpx 90rpx 90rpx;margin-bottom: 5rpx;">打印</button>
+    <button catch:tap='print' data-type="0" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abde);border-radius: 10rpx 10rpx 90rpx 90rpx;margin-bottom: 5rpx;">发货</button>
     <button catch:tap='print' data-type="1" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(17deg,#285dee, #45abdf);border-radius: 90rpx 90rpx 10rpx 10rpx;">出库</button>
   
   </view>
@@ -115,48 +118,6 @@
 <!-- 2：已装车 -->
 
 <BillBottom wx:if="{{selectedNav == 2}}" billData="{{comeCarInfo}}" />
-
-
-
-<!-- 拣货单打印区域 -->
-<view class="print-order-box" wx:if="{{printDialog}}">
-  <view class="print-order">
-    <view class="title">XXX平台拣货单</view>
-    <view class="order-info">
-      <view class="label">客户：</view>
-      <view class="content">胜利路 - A点</view>
-    </view>
-    <view class="order-info">
-      <view class="label">单号：</view>
-      <view class="content">20200507161725632</view>
-    </view>
-    
-    <view class="line">******************************************************************</view>
-    <view class="good-info-box">
-      <view class="good-info">
-      <view class="label">沙宣洗发水750ml</view>
-      <view class="content">x2瓶</view>
-    </view>
-     <view class="good-info">
-      <view class="label">沙宣洗发水750ml沙宣洗发水750ml沙宣洗发水750ml</view>
-      <view class="content">x2瓶</view>
-    </view>
-    </view>
-    <view class="line">******************************************************************</view>
-    <view class="res-number">
-      <view class="label">总数量：</view>
-      <view class="content">6</view>
-    </view>
-    
-    <view class="sign">拣货人签字：</view>
-
-    
-  <view class="print-confirm" bindtap="print">
-    <view class="cancle" data-res="0">取消</view>
-    <view class="confirm" data-res="1" >确定</view>
-  </view>
-  </view>
-</view>
 
 <!-- 选择司机 Dialog -->
 <view class="print-order-box" wx:if="{{ selectedNav == 1 && isShowEnterCarDialog}}">

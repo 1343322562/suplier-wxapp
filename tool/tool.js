@@ -20,11 +20,12 @@ export const toast = (title = '完成') => {
 
 export const showModal = (obj) => {
   obj.title = '提示'
+  console.log(1)
   wx.showModal({
     title: obj.title || '提示',
     content: obj.content,
-    cancelText: obj.cancel || '取消',
-    confirmText: obj.confirm || '确定',
+    cancelText: '取消',
+    confirmText: '确定',
     success(res) {
       if (res.confirm) {
         'success' in obj && obj.success()

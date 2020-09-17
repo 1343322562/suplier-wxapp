@@ -25,10 +25,6 @@ Page({
       subNum: '',
       toNum: ''
     },
-    slider:[
-      {a: '休闲零食', t: ['冰棒', '辣条']},
-      {a: '休闲零食', t: ['冰棒', '辣条']}
-    ], // 侧边栏
     currentSliderCls: '',    // 当前所选中的类别编号
     isShowEditPriceDialog: false,   // 显示修改价格 Dialog
     editStockFocus: {
@@ -333,7 +329,7 @@ Page({
     let itemNo = goodsData[currentIndex].itemNo
     console.log(addNum, subNum, toNum)
     if (type == 0) {
-      this.setData({ isShowEditDialog: false })
+      this.setData({ isShowEditDialog: false, editStockInputValue: '', inputActive: '' })
     } else if (type == 1){
       if (addNum) {
         this.updateItemStock(addNum, itemNo)
@@ -343,7 +339,7 @@ Page({
         let currentStock = this.data.currentStock
         this.updateItemStock(toNum - currentStock, itemNo)
       }
-      this.setData({ isShowEditDialog: false })
+      this.setData({ isShowEditDialog: false, editStockInputValue: '', inputActive: '' })
     }
   },
 // 全选
@@ -379,7 +375,7 @@ Page({
     const basePicUrl = this.data.basePicUrl
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     console.log(obj, supplierNo)
-
+    console.log(123,obj.itemClsNo)
     API.supplierItemSearch({
       data: {
         platform, token, username, supplierNo,
@@ -392,7 +388,7 @@ Page({
         modifyDate: 'modifyDate' in obj ? obj.modifyDate : ''
       },
       success(res){
-        console.log(res)
+        console.log(res, obj.itemClsNo)
         let goodsData = res.data.itemData
         goodsData.forEach((item, i) => {
           goodsData[i].checkbox = 0 
@@ -422,6 +418,7 @@ Page({
         let data = res.data
         let firstCls = data.firstCls
         let secondCls = data.secondCls
+        let currentSliderCls
 
         firstCls.forEach((item,i) => {
           firstCls[i].second = []
@@ -432,7 +429,12 @@ Page({
           })
         })
         console.log(firstCls)
-        _this.setData({ slider: firstCls })
+        if (firstCls[0].second.length == 0) {
+          currentSliderCls = firstCls[0].clsNo
+        } else {
+          currentSliderCls = firstCls[0].second[0].clsNo
+        }
+        _this.setData({ slider: firstCls, currentSliderCls })
         let itemClsNo = firstCls[0].second.length == 0 ? firstCls[0].clsNo : firstCls[0].second[0].clsNo // 类别判断
         _this.supplierItemSearch({ status: 0, itemClsNo },  _this)
       }
@@ -512,7 +514,7 @@ Page({
     let index = _this.data.selecSliderObj.index
     let ind = _this.data.selecSliderObj.ind
     let slider = _this.data.slider
-    
+    let itemClsNo = slider[index].second.length == 0 ? slider[index].clsNo : slider[index].second[ind].clsNo
     // 重新请求商品，刷新页面
     _this.supplierItemSearch({
       status: this.data.selectedNav,

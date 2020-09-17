@@ -26,6 +26,10 @@
   selectedNavIndex='{{selectedNav}}' 
 />
 
+<view class="default-area">
+  <image class="default-area-image" src="../../images/none.png" />
+  <view class="default-area-text">此分类暂无订单数据~~~</view>
+</view>
 
 <!-- 0：未交款 3.在线支付-->
 <AccountCard

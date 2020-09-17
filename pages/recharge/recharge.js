@@ -7,14 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    data: [{}]
+    data: []
   },
   // 跳转消费详情页
   toDetail(e) {
     // const { index } = e.currentTarget.dataset
     // let { data } = this.data
-    // let no = data[index].no
+    // let itemNo = data[index].no
+    // goPage('../rechargeDetail/rechargeDetail&itemNo=' + itemNo)
+
     
+    goPage('../rechargeDetail/rechargeDetail')
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,6 +31,9 @@ Page({
         console.log(res)
         if (res.code == 0) {
           let data = res.data
+          data.detail.forEach(item => {
+            item.operDate = item.operDate.slice(0, 19)
+          })
           _this.setData({ data })
         }
       }

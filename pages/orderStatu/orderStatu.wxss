@@ -1,7 +1,7 @@
 /* pages/orderStatu/orderStatu.wxss */
 
 page {
-  padding-bottom: 100rpx; 
+  padding-bottom: 250rpx; 
 }
 .nav-seach-bar {
   width: 330rpx;
@@ -251,6 +251,7 @@ border-radius: 50rpx;
   padding: 13rpx 3%;
   width: 94;
   border-bottom: 8rpx solid #f5f5f5;
+  background-color: #fff;
 }
 .select-time-box .icon{
   height: 31rpx;

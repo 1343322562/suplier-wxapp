@@ -22,7 +22,8 @@
     "pages/goodS/goodS",
     "pages/addPrint/addPrint",
     "pages/driverMap/driverMap",
-    "pages/recharge/recharge"
+    "pages/recharge/recharge",
+    "pages/rechargeDetail/rechargeDetail"
   ],
   "permission": {
     "scope.userLocation": {
