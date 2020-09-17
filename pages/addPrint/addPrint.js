@@ -53,6 +53,9 @@ Page({
         console.log(res)
         if (res.code == 10000) {
           toast(res.message)
+          let allPrint = wx.getStorageSync('allPrint')
+          allPrint = allPrint ? `${machineNo},${allPrint}` : `${machineNo}`
+          wx.setStorageSync('allPrint', allPrint)
           backPage()
         } else {
           toast('添加失败')
