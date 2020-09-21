@@ -174,8 +174,8 @@ Page({
     const mdmc = orderData[currentIndex].branchName // 门店名称
     const payAmt = orderData[currentIndex].sheetAmt // 付款金额
     const fhdh = orderData[currentIndex].sheetNo    // 发货单号
-    const onlinePayways = 'lcsb'                     // 支付方式(扫呗)
-    // const onlinePayway = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
+    // const onlinePayways = 'lcsb'                     // 支付方式(扫呗)
+    const onlinePayways = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
     
     let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan }
     console.log(json)
