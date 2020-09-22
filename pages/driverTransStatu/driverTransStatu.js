@@ -176,51 +176,54 @@ Page({
     const fhdh = orderData[currentIndex].sheetNo    // 发货单号
     // const onlinePayways = 'lcsb'                     // 支付方式(扫呗)
     const onlinePayways = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
+    let authCode
+    wx.scanCode({
+      success(res) {
+        console.log('扫码信息', res)
+        authCode = res.rawData
+        let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode }
+        console.log(json)
+        json = JSON.stringify(json)
+        console.log({ platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json })
+        API.getQrCodeUrl({
+          data: {  
+            platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json
+          },
+          success (res) {
+            console.log('166' ,res)
+            let data = res.data
+            if (data == null) return showModal({ content: res.message })
+            
+            if (res.code == -2) {
+              wx.showModal({
+                title: '提示',
+                content: res.message,
+                cancelText: '关闭支付',
+                confirmText: '继续操作',
+                success(e) {
+                  if (e.confirm) {
+                  } else if (e.cancel) {
+                    console.log(res)
+                    _this.closeOrder(data)
+                  }
+                },
+                fail(res) {
+                  console.log(res)
+                  
+                }
+              })
+              return
+            } 
+          }
+        })
     
-    let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan }
-    console.log(json)
-    json = JSON.stringify(json)
-    console.log({  
-      platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
-      json
-    })
-    API.getQrCodeUrl({
-      data: {  
-        platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan,
-        json
-      },
-      success (res) {
-        console.log('166' ,res)
-        let data = res.data
-        if (data == null) return showModal({ content: res.message })
-        
-        if (res.code == -2) {
-          wx.showModal({
-            title: '提示',
-            content: res.message,
-            cancelText: '关闭支付',
-            confirmText: '继续操作',
-            success(e) {
-              if (e.confirm) {
-              } else if (e.cancel) {
-                console.log(res)
-                _this.closeOrder(data)
-              }
-            },
-            fail(res) {
-              console.log(res)
-              
-            }
-          })
-          return
-        } 
-        console.log(onlinePayways)
-        data['onlinePayway'] = onlinePayways
-        data['sheetNo'] = fhdh
-        data['payAmt'] = payAmt
-        console.log('data',data)
-        data = JSON.stringify(data)
-        goPage('../paymentRes/paymentRes?data=' + data)
+        // console.log(onlinePayways)
+        // data['onlinePayway'] = onlinePayways
+        // data['sheetNo'] = fhdh
+        // data['payAmt'] = payAmt
+        // console.log('data',data)
+        // data = JSON.stringify(data)
+        // goPage('../paymentRes/paymentRes?data=' + data)
       },
       error(err){
         console.log(err)
