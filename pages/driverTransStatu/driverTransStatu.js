@@ -1,4 +1,4 @@
-import { goPage, showModal, toast, getLocation } from '../../tool/tool.js'
+import { goPage, showModal, toast, getLocation, getIP } from '../../tool/tool.js'
 import API from '../../api/index.js'
 import { tim } from '../../utils/date-format.js'
 Page({
@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userIp: '', // 用户当前 IP 地址
     selectedNav: 0,          // 导航栏当前选中项
     selectedNav2: 0,         // 订单分类 0：全部 1.在线支付 2.现金支付
     isShowCollectDialog: false,  // 收款 Dialog
@@ -167,28 +168,24 @@ Page({
   scanCodePay(payType) {
     const _this = this
     const currentIndex = Number(this.data.currentIndex)
-    const orderData = this.data.orderData
-    console.log(orderData[currentIndex], orderData, currentIndex)
+    const { orderData, userIp } = this.data  // 订单数据， 用户当前 IP 地址
+    const merchantTerminalId = wx.getSystemInfoSync().system // 用户当前设备号
     const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
     const mdbh = orderData[currentIndex].branchNo   // 门店编号
     const mdmc = orderData[currentIndex].branchName // 门店名称
     const payAmt = orderData[currentIndex].sheetAmt // 付款金额
     const fhdh = orderData[currentIndex].sheetNo    // 发货单号
     // const onlinePayways = 'lcsb'                     // 支付方式(扫呗)
-    const onlinePayways = payType == 0 ? 'YSEWX' : 'YSEZFB' // 支付方式
+    const onlinePayways = payType == 0 ? 'YEEWX' : 'YEEZFB' // 支付方式
     let authCode
     wx.scanCode({
       success(res) {
         console.log('扫码信息', res)
         authCode = res.rawData
         let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode }
-        console.log(json)
         json = JSON.stringify(json)
-        console.log({ platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json })
         API.getQrCodeUrl({
-          data: {  
-            platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json
-          },
+          data: { platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json, merchantTerminalId, userIp },
           success (res) {
             console.log('166' ,res)
             let data = res.data
@@ -342,6 +339,12 @@ Page({
         _this.data.location = { latitude, longitude }
         _this.searchOrderStatusData()
         _this.resPrice(_this.data.orderData)
+      }
+    })
+    
+    getIP({
+      complete(ip) {
+        _this.data.userIp = ip
       }
     })
   },
