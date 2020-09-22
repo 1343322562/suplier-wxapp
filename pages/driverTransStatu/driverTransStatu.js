@@ -158,7 +158,7 @@ Page({
         }
       })
       this.setData({ isShowCollectDialog: false })
-    } else if (payType == 1 || payType == 0) {  // 线上付款 lcsb 扫呗 付款
+    } else if (payType == 1 || payType == 0) { 
       // goPage('../scanCodePay/scanCodePay?type=' + payType)
       this.scanCodePay(payType)
     }
