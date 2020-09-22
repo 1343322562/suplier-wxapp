@@ -137,8 +137,8 @@ Page({
   searchOrderClick () {
     const _this = this
     const resData = this.data.resData
-    const onlinePayway = resData.onlinePayway   // 支付方式
-    const outTradeNo = resData.outTradeNo       // 支付请求订单号
+    const onlinePayway = resData.onlinePayway                 // 支付方式
+    const outTradeNo = resData.outTradeNo || resData.sheetNo  // 支付请求订单号
     const routeSendMan = wx.getStorageSync('routeSendMan')
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     let json = { onlinePayway, outTradeNo }

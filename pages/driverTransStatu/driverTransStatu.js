@@ -214,13 +214,13 @@ Page({
           }
         })
     
-        // console.log(onlinePayways)
-        // data['onlinePayway'] = onlinePayways
-        // data['sheetNo'] = fhdh
-        // data['payAmt'] = payAmt
-        // console.log('data',data)
-        // data = JSON.stringify(data)
-        // goPage('../paymentRes/paymentRes?data=' + data)
+        console.log(onlinePayways)
+        data['onlinePayway'] = onlinePayways
+        data['sheetNo'] = fhdh
+        data['payAmt'] = payAmt
+        console.log('data',data)
+        data = JSON.stringify(data)
+        goPage('../paymentRes/paymentRes?data=' + data)
       },
       error(err){
         console.log(err)
