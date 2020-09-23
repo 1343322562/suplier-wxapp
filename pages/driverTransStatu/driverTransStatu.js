@@ -333,6 +333,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading('请稍侯...')
     const _this = this
     getLocation({
       complete(res) {
