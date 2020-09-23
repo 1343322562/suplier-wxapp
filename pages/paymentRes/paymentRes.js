@@ -99,13 +99,13 @@ Page({
   onLoad: function (options) {
     console.log(options)
     let resData = JSON.parse(options.data)
-    let qrUrl = resData.qrUrl
+    // let qrUrl = resData.qrUrl
     
-    var size = this.setCanvasSize(); //动态设置画布大小
-    var initUrl = this.data.placeholder;
-    // this.createQrCode(initUrl, "mycanvas", size.w, size.h); // 初始二维码
+    // var size = this.setCanvasSize(); //动态设置画布大小
+    // var initUrl = this.data.placeholder;
+    // // this.createQrCode(initUrl, "mycanvas", size.w, size.h); // 初始二维码
 
-    this.formSubmit(qrUrl) // 生成二维码
+    // this.formSubmit(qrUrl) // 生成二维码
     this.setData({ resData })
   },
 

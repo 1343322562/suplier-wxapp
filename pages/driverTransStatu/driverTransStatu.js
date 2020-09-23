@@ -182,10 +182,10 @@ Page({
       success(res) {
         console.log('扫码信息', res)
         authCode = res.rawData
-        let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode }
+        let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode, merchantTerminalId, userIp }
         json = JSON.stringify(json)
         API.getQrCodeUrl({
-          data: { platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json, merchantTerminalId, userIp },
+          data: { platform, token, username: routeSendMan, supplierNo, fhdh, routeSendMan, json },
           success (res) {
             console.log('166' ,res)
             let data = res.data
@@ -210,17 +210,19 @@ Page({
                 }
               })
               return
-            } 
+            }
+            
+            console.log(onlinePayways)
+            let datas = {}
+            datas['outTradeNo'] = data.outTradeNo
+            datas['onlinePayway'] = onlinePayways
+            datas['sheetNo'] = fhdh
+            datas['payAmt'] = payAmt
+            console.log('datas',datas)
+            datas = JSON.stringify(datas)
+            goPage('../paymentRes/paymentRes?data=' + datas)
           }
         })
-    
-        console.log(onlinePayways)
-        data['onlinePayway'] = onlinePayways
-        data['sheetNo'] = fhdh
-        data['payAmt'] = payAmt
-        console.log('data',data)
-        data = JSON.stringify(data)
-        goPage('../paymentRes/paymentRes?data=' + data)
       },
       error(err){
         console.log(err)
