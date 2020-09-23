@@ -116,15 +116,15 @@ Page({
   closeOrder() {
     const resData = this.data.resData   
     const sheetNo = resData.sheetNo             // 单号
-    const onlinePayway = resData.onlinePayway || 'lcsb'   // 支付方式
+    const onlinePayway = resData.onlinePayway   // 支付方式
     const outTradeNo = resData.outTradeNo       // 支付请求订单号
     let json = { sheetNo, onlinePayway, outTradeNo }
     json = JSON.stringify(json)
     const _this = this
-    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    const { platform, token, username, supplierNo, routeSendMan } = wx.getStorageSync('authorizeObj')
     const { routeSendMan } = wx.getStorageSync('routeSendMan')
     API.closeQrPay({
-      data: { platform, token, username, supplierNo, sheetNo, routeSendMan, json },
+      data: { platform, token, username: routeSendMan, supplierNo, sheetNo, routeSendMan, json },
       success(res) {
         console.log(res)
         toast('订单已关闭')

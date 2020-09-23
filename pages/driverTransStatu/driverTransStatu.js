@@ -201,7 +201,12 @@ Page({
                   if (e.confirm) {
                   } else if (e.cancel) {
                     console.log(res)
-                    _this.closeOrder(data)
+                    let datas = {
+                      sheetNo: fhdh,
+                      onlinePayway: onlinePayways,
+                      outTradeNo: data.outTradeNo
+                    }
+                    _this.closeOrder(datas)
                   }
                 },
                 fail(res) {
@@ -248,7 +253,7 @@ Page({
     json = JSON.stringify(json)
 
     API.closeQrPay({
-      data: { platform, token, username: routeSendMan, supplierNo, sheetNo: data.sheetNo, routeSendMan, json },
+      data: { platform, token, username: username, supplierNo, sheetNo: data.sheetNo, routeSendMan, json },
       success(res) {
         console.log(res)
         _this.setData({ isShowCollectDialog: false})
