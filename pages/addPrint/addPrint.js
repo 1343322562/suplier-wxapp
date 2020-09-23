@@ -43,13 +43,13 @@ Page({
     const { user, userKey, machineNo } = this.data.inputValue
     const _this = this
     console.log(!user, !userKey, !machineNo)
-    if(!user) return toast('请输入用户账号')
-    if(!userKey) return toast('请输入开发者密钥')
+    // if(!user) return toast('请输入用户账号')
+    // if(!userKey) return toast('请输入开发者密钥')
     if(!machineNo) return toast('请输入打印设备号码')
     wx.showLoading({ title: '保存中...' })
     const { supplierNo } = wx.getStorageSync('authorizeObj')
     API.addPrinters({
-      data: { userName: user, userKey, printerSn: machineNo, supplierNo },
+      data: { printerSn: machineNo, supplierNo },
       success(res) {
         console.log(res)
         if (res.code == 10000) {
