@@ -38,6 +38,6 @@
 </view> -->
 
 <view class="container">
-  <button bindtap="closeOrder" style="padding: 38rpx;height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 2rpx;letter-spacing: 4rpx;margin-top: 15rpx;background: linear-gradient(to bottom right, #FFB910, #FF8200);" type='primary'>返回</button>
+  <button bindtap="backPage" style="padding: 38rpx;height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 2rpx;letter-spacing: 4rpx;margin-top: 15rpx;background: linear-gradient(to bottom right, #FFB910, #FF8200);" type='primary'>返回</button>
   <button bindtap="searchOrderClick" style="padding: 38rpx;height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 2rpx;letter-spacing: 4rpx;margin-top: 40rpx;background: linear-gradient(to bottom right, #FFB910, #FF8200);" type='primary'>点击查询支付结果</button>
 </view>

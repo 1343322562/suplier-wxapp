@@ -109,6 +109,10 @@ Page({
     this.setData({ resData })
   },
 
+  backPage() {
+    backPage()
+  },
+
   closeOrder() {
     const resData = this.data.resData   
     const sheetNo = resData.sheetNo             // 单号
@@ -154,7 +158,7 @@ Page({
           content: res.data.massge,
           confirmText: '确认',
           success(e){
-            setTimeout(() => { backPage() }, 400)
+            // setTimeout(() => { backPage() }, 400)
           },
           fail(res) {
             console.log(res)
