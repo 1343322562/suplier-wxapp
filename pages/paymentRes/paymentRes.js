@@ -145,7 +145,7 @@ Page({
     json = JSON.stringify(json)
     console.log(platform, token, username, supplierNo, routeSendMan, json)
     API.queryQrPay({
-      data: { platform, token, username: routeSendMan, supplierNo, routeSendMan, json},
+      data: { platform, token, username: routeSendMan, supplierNo, routeSendMan, json },
       success(res) {
         console.log(res)
         wx.showModal({
