@@ -66,8 +66,8 @@ Page({
 
   // 缓存打印设备号码
   cachePrintNo(printNo) {
-    let allPrint = wx.getStorageSync('allPrint')
-    allPrint = allPrint ? `${printNo},${allPrint}` : `${printNo}`
+    let allPrint = wx.getStorageSync('allPrint') || []
+    allPrint.unshift(printNo)
     wx.setStorage('allPrint', allPrint)
   },
   /**

@@ -487,12 +487,6 @@ Page({
     if (type == 1) return this.updateSheetStatus(sheetNo) // 直接出库
 
     this.searchOrderDetailData(sheetNo) // 请求单据详情，并打印
-    // if (res == 0) {
-    //   this.setData({ printDialog: false })
-    // } else if (res == 1) {
-    //   console.log('打印')
-    //   this.setData({ printDialog: false })
-    // }
   },
   // 查询订单详情, b并打印
   searchOrderDetailData(sheetNo, printNo) {
