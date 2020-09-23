@@ -5,7 +5,8 @@
     "SelectNavbar": "../../components/selectNavbar/selectNavbar",
     "OrderStatuBottom": "../../components/orderStatuBottom/orderStatuBottom",
     "BillBottom": "../../components/BillBottom/BillBottom",
-    "SaleDataTable": "../../components/SaleDataTable/SaleDataTable"
+    "SaleDataTable": "../../components/SaleDataTable/SaleDataTable",
+    "SelectPrint": "../../components/selectPrint/selectPrint"
   },
   "navigationStyle": "custom"
 }

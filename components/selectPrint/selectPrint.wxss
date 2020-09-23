@@ -11,6 +11,13 @@
   z-index: 10;
 }
 
+.title {
+  text-align: center;
+  font-size: 35rpx;
+  font-weight: bold;
+
+}
+
 .print-dialog {
   height: 650rpx;
   width: 500rpx;

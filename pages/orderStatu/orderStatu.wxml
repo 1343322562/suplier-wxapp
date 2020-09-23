@@ -103,7 +103,7 @@
 
 <OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 0}}" data='{{newOrderInfo}}'  catch:tap='allSelected'>
   <view class="print-btn-box">
-    <button catch:tap='print' data-type="0" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abde);border-radius: 10rpx 10rpx 90rpx 90rpx;margin-bottom: 5rpx;">发货</button>
+    <button catch:tap='showSelectPrint' data-type="0" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abde);border-radius: 10rpx 10rpx 90rpx 90rpx;margin-bottom: 5rpx;">发货</button>
     <button catch:tap='print' data-type="1" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(17deg,#285dee, #45abdf);border-radius: 90rpx 90rpx 10rpx 10rpx;">出库</button>
   
   </view>
@@ -148,3 +148,6 @@
     </view>
   </view>
 </view>
+
+<!-- 选择打印机 -->
+<SelectPrint list="{{printList || ['s']}}" isShow="{{isShowSelectDialog || true}}" bind:printEvent="selectPrintEvent" />

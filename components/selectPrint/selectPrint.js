@@ -6,17 +6,18 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    list: Array
+    list: Array,
+    isShow: Boolean
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    isShow: true
   },
   attached() {
     let list = this.data.list.length ? this.data.list : wx.getStorageSync('allPrint')
+    console.log(list)
     let tempArr = []
     list.forEach((item,index) => {
       let tempObj = {}
@@ -44,7 +45,9 @@ Component({
         }
       })
       console.log(printNo)
-      if (!printNo) toast ('请选择打印机')
+      if (!printNo) return toast ('请选择打印机')
+      
+      this.triggerEvent('printEvent', { printNo: printNo}) 
     },
     hide() {
       this.setData({ isShow: false })
