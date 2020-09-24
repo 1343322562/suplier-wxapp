@@ -2,8 +2,10 @@ import { goPage, showModal } from '../../tool/tool.js'
 import API from '../../api/index.js'
 import { FetchDateLastMonth } from '../../utils/date-format.js' 
 import util  from '../../utils/util.js' 
+const app = getApp()
 Page({
   data: {
+    state: 0, // 当前的状态(0正常 | 1审核)
     selected: 0, // 当前选择的角色
     text: '',    // 账号
     password: '' // 密码
@@ -131,23 +133,33 @@ Page({
     }
     console.log(this.data.text)
   },
-
+  // state: 1 过审
+  getCurrentState() {
+    const _this = this
+    wx.request({
+      url: 'https://mmj.zksr.cn/zksrb2b-web/supasd.json',
+      method: 'POST',
+      header: { 'content-type': 'application/json' },
+      dataType: 'json',
+      data: {},
+      success(res) {
+        console.log(res)
+        const { state } = res.data.data
+        if (state == 1) _this.setData({ state: 1 })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     const { platform } = wx.getStorageSync('authorizeObj')
-    if (platform >= 0) this.setData({ selected: platform })
+    if (platform >= 0) this.setData({ selected: platform }) // 以前客户保存的角色
     
-    var day1 = new Date();
-    day1.setTime(day1.getTime() - 24 * 60 * 60 * 1000);
-    
-    
-    var s1 = day1.getFullYear() + "-" + (day1.getMonth() + 1) + "-" + day1.getDate();
-    console.log(s1)
     let userObj = wx.getStorageSync('userObj')
     userObj && this.setData({ text: userObj.username, password: userObj.password })
     console.log(userObj,this.data.text, this.data.password)
+    this.getCurrentState() // 获取当前的登录状态（正常 | 审核）
     this.toLogin()
   },
   // 自动登录

@@ -121,8 +121,8 @@ Page({
     let json = { sheetNo, onlinePayway, outTradeNo }
     json = JSON.stringify(json)
     const _this = this
-    const { platform, token, username, supplierNo, routeSendMan } = wx.getStorageSync('authorizeObj')
-    const { routeSendMan } = wx.getStorageSync('routeSendMan')
+    const { platform, token, supplierNo, routeSendMan } = wx.getStorageSync('authorizeObj')
+    // const { routeSendMan } = wx.getStorageSync('routeSendMan')
     API.closeQrPay({
       data: { platform, token, username: routeSendMan, supplierNo, sheetNo, routeSendMan, json },
       success(res) {

@@ -9,22 +9,24 @@
 />
 
 <view class='login-container'>
-  <view class="selecter-title">请选择登录角色</view>
-  <!-- 角色选择区域 -->
-  <view class="select-box" bindtap='roleSelect'>
-    <view class="checkbox"  data-selecter='0'>
-        <view class="{{selected == 0 ? 'selected-checkbox' : 'checkbox-item'}}"/>
-        老板
+  <block wx:if="{{state != 1}}">
+    <view class="selecter-title">请选择登录角色</view>
+    <!-- 角色选择区域 -->
+    <view class="select-box" bindtap='roleSelect' wx:if="{{state != 1}}">
+      <view class="checkbox"  data-selecter='0'>
+          <view class="{{selected == 0 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+          老板
+      </view>
+      <view class="checkbox" data-selecter='1'>
+          <view class="{{selected == 1 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+          库管员
+      </view>
+      <view class="checkbox" data-selecter='2'>
+          <view class="{{selected == 2 ? 'selected-checkbox' : 'checkbox-item'}}"/>
+          司机
+      </view>
     </view>
-    <view class="checkbox" data-selecter='1'>
-        <view class="{{selected == 1 ? 'selected-checkbox' : 'checkbox-item'}}"/>
-        库管员
-    </view>
-    <view class="checkbox" data-selecter='2'>
-        <view class="{{selected == 2 ? 'selected-checkbox' : 'checkbox-item'}}"/>
-        司机
-    </view>
-  </view>
+  </block>
 
   <!-- 表单区域 -->
   <form class="login-form">
