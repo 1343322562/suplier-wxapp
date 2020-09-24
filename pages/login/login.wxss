@@ -85,6 +85,7 @@ page{
   width: 32rpx;
   top: 25rpx;
   right: 35rpx;
+  z-index: 99;
 }
 
 .login-btn {

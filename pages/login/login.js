@@ -8,7 +8,8 @@ Page({
     state: 0, // 当前的状态(0正常 | 1审核)
     selected: 0, // 当前选择的角色
     text: '',    // 账号
-    password: '' // 密码
+    password: '', // 密码
+    isShowPassword: false // 是否显示密码
   },
 
   // 选择角色 
@@ -18,7 +19,11 @@ Page({
       selected
     })
   },
-
+  // 密码是否显示切换
+  switchPassword () {
+    const isShowPassword = !this.data.isShowPassword
+    this.setData({ isShowPassword })
+  },
   getOpenId () {
     wx.login({
       success(res) {
