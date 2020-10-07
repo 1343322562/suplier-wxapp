@@ -58,6 +58,7 @@ Page({
     const _this = this
     const printContent = printContentHandle(data, type) 
     console.log('printContent', printContent)
+    return
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({

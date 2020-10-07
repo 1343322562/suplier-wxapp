@@ -1,4 +1,19 @@
 import { tim, timHMS } from '../utils/date-format.js'
+
+let contentHandle = {
+  unit(e) {
+    if (e.length >= 8) return 
+    e = e.toString()
+    let len = 8 - e.length // 空格长度
+    for(let i = 0; i <= len-1; i++) {
+      e += ' ' 
+    }
+    console.log(e, e.length)
+    return e
+  },
+}
+
+
 // 处理打印格式
 export const printContentHandle = function (data, type) {
   let content = '' // 打印内容
@@ -11,7 +26,7 @@ export const printContentHandle = function (data, type) {
   data.forEach((item, index) => {
     console.log(item, getApp())
     sheetNo.push(item.sheetNo)
-    content += `<L>前置仓名称：${getApp().globalData.wareInfo.warehouse}<BR></L>`
+    content += `<L>前置仓名称：${getApp().globalData.wareInfo.warehouse || getApp().globalData.wareInfo.supplierName}<BR></L>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate}<BR></L>`
     content += `<L>${sign=='重复打印' ? '补打' : '出库'}日期：${cDate}<BR></L>`
@@ -26,7 +41,7 @@ export const printContentHandle = function (data, type) {
     content += `<C><N>-----------------------------------------------</N><BR></C>`
     item.details.forEach((good, i) => {
       content += `<N>【${i+1}】    ${good.itemSubno}      ${good.itemName.slice(0, 13)}</N><BR>`
-      content += `<N> ${good.realQty}/${good.unitNo}      ${good.subAmt.toFixed(2)}     ${good.subAmt.toFixed(2)}/${good.unitNo}    <BOLD>${(good.subAmt*good.realQty).toFixed(2)}</BOLD>      ${item.warehouse || '空'}</N><BR>${item.details.length == 1 ? '' : '<BR>'}`
+      content += `<N> ${contentHandle.unit(good.realQty+'/'+good.unitNo)}${contentHandle.unit(good.subAmt.toFixed(2))}${contentHandle.unit(good.subAmt.toFixed(2)+'/'+good.unitNo)}<BOLD>${contentHandle.unit((good.subAmt*good.realQty).toFixed(2))}</BOLD>${item.warehouse || '空'}</N><BR>${item.details.length == 1 ? '' : '<BR>'}`
     })
     content += `<C><N>————————————————————————</N><BR></C>`
     content += `<N><L>整单合计：${(item.sheetAmt).toFixed(2)}<L>                 <R>${item.supplyFlag}</R></N><BR>`
@@ -39,7 +54,7 @@ export const printContentHandle = function (data, type) {
     // content += `<B><L>出货单备注：<L></B><BR>`
     content += `<BR><B><L>客户备注:${item.mome || '无'}</L></B>`
     content += `<BR><B><L>老板备注:${item.bossMome || '无'}</L></B><BR><BR>`
-    content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
+    // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
     content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
     content += `<BR><BR><N><C>================================================<C></N><BR><BR>`
 
@@ -63,7 +78,7 @@ export const printContentHandle = function (data, type) {
     content += `<B><L>实收金额:<HB>￥</HB><N>_____________</N><L></B><N> 无修改不用填</N><BR><BR>`
     
     content += `<B><L>客户签收:<N>__________________</N><L></B><BR><BR>`
-    content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
+    // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
     content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N><BR><BR>`
     
     content += `<L><HB>是否有冻品</HB>：    <B>□</B> <HB>是</HB>      <B>□</B> <HB>否</HB><L><BR><BR>`
