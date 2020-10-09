@@ -1,4 +1,4 @@
-import { goPage, showModal } from '../../tool/tool.js'
+import { goPage, showModal, toast } from '../../tool/tool.js'
 import API from '../../api/index.js'
 import { FetchDateLastMonth } from '../../utils/date-format.js' 
 import util  from '../../utils/util.js' 
@@ -59,21 +59,21 @@ Page({
   // 判断身份登录
   submit () {
     const _this = this
+    let openid = wx.getStorageSync('openId')
     wx.showLoading({ mask: true, title: '登录中...' })
     let platform = this.data.selected
     let username = this.data.text
-    if (platform == 2) this.getOpenId() // openid 获取并储存 
     if (platform == '0' || platform == '1') {    // 老板 库管员
       let password = this.data.password
       if (username == '' || password == '') {
         wx.hideLoading()
         console.log(1)
-        return showModal({ content: '账号不能为空' })
+        return toast('账号不能为空')
       }
       console.log(username, password, platform)
 
       API.toLogin({
-        data: { username, password, platform },
+        data: { username, password, platform, openid },
         success(res) {
           if (res.code == 0) {
             console.log(res.data)
@@ -98,7 +98,6 @@ Page({
       let routeSendMan = this.data.text
       wx.showLoading({ mask: true, title: '登录中...' })
       wx.setStorage({key: 'routeSendMan', data: routeSendMan})
-      let openid = wx.getStorageSync('openid')
       API.toLogin({
         data: { openid, platform, username},
         success(res) {
@@ -158,24 +157,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getOpenId() // openid 获取并储存 
     const { platform } = wx.getStorageSync('authorizeObj')
     if (platform >= 0) this.setData({ selected: platform }) // 以前客户保存的角色
-    
     let userObj = wx.getStorageSync('userObj')
     userObj && this.setData({ text: userObj.username, password: userObj.password })
     console.log(userObj,this.data.text, this.data.password)
     this.getCurrentState() // 获取当前的登录状态（正常 | 审核）
-    this.toLogin()
+    setTimeout(() => this.toLogin(), 500)
   },
   // 自动登录
   toLogin (_this = this) {
     const { platform, token } = wx.getStorageSync('authorizeObj')
     if (!token) return
     wx.showLoading({ mask: true, title: '自动登录中...' })
+    const openid = wx.getStorageSync('openId')
 
     if (platform == 2) {
       const { routeSendMan } = wx.getStorageSync('authorizeObj')
-      const openid = wx.getStorageSync('openid')
       console.log(wx.getStorageSync('authorizeObj'))
       API.toLogin({
         data: { platform, username: routeSendMan, token, openid },
@@ -201,7 +200,7 @@ Page({
       const { token, supplierNo } = wx.getStorageSync('authorizeObj')
       const { username, password } = wx.getStorageSync('userObj')
       API.toLogin({
-        data: { platform, username, password },
+        data: { platform, username, password, openid },
         success(res) {
           console.log( platform, username)
           if (res.code == 0) {
