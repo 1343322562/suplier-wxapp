@@ -19,12 +19,13 @@ Page({
     isAllSelected: 0,        // 是否全选 1: 全选
     isShowEditDialog: false,  // 是否显示 editDialog
     goodsData: [],           // 商品数据
-    searchValue: '',            // 查询 input 的 value 值
     editStockInputValue: {   // 修改库存 Dialog input val 数据
       addNum: '',
       subNum: '',
       toNum: ''
     },
+    isShowBottomNull: false,
+    isShowBottomLoading: false, // 是否显示底部加载中区域
     currentSliderCls: '',    // 当前所选中的类别编号
     isShowEditPriceDialog: false,   // 显示修改价格 Dialog
     editStockFocus: {
@@ -48,26 +49,6 @@ Page({
   toSearchPageClick () {
     goPage('../goodSearch/goodSearch')
     return
-  },
-  // 搜索框数据绑定
-  inputBindValue (e) {
-    console.log(e)
-    let value = e.detail.value
-    this.setData({ searchValue: value })
-  },
-  searchOrder() {
-    let value = this.data.searchValue
-    let index = this.data.selecSliderObj.index
-    let ind = this.data.selecSliderObj.ind
-    let slider = this.data.slider
-    const _this = this
-
-    // 重新请求商品，刷新页面
-    _this.supplierItemSearch({
-      status: _this.data.selectedNav,
-      itemClsNo: slider[index].second[ind].clsNo,
-      condition: value
-    }, _this)
   },
   // 修改商品价格请求
   updateItemPrice(itemNo, editPriceInputVal) {
@@ -133,7 +114,7 @@ Page({
   // 选择侧边栏
   selectSlider (e) {
     console.log(2)
-    this.setData({goodsData: [], pageSize: 10})
+    this.setData({goodsData: [], pageSize: 10, isShowBottomLoading: false, isShowBottomNull: false})
     const _this = this
     let data = e.target.dataset
     let index = 'one' in data ? data.one : ''
@@ -372,6 +353,7 @@ Page({
 
   // 查询(请求)商品
   supplierItemSearch(obj, _this = this, pageSize) {
+    wx.showLoading('加载中...')
     const basePicUrl = this.data.basePicUrl
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     console.log(obj, supplierNo)
@@ -398,11 +380,19 @@ Page({
           let month = item.modifyDate.slice(5,7)
           goodsData[i].modifyMonth = month >= 10 ? month : month.slice(1)    // 最后修改的月份                         
         })
-        _this.setData({ goodsData })
-        setTimeout(() => { wx.hideLoading() }, 200)
+        console.log(403, goodsData.length, _this.data.goodsData.length, _this.data.isShowBottomLoading)
+        console.log(goodsData.length-10 != _this.data.goodsData.length, _this.data.goodsData.length != 10 , goodsData.length%10 != 0)
+        if (goodsData.length-10 != _this.data.goodsData.length && _this.data.goodsData.length != 10) {
+          console.log(321)
+          _this.setData({ goodsData, isShowBottomLoading: false, isShowBottomNull: true })
+        } else {
+          _this.setData({ goodsData }) 
+        }
       },
       error(res) {
         console.log(res)
+      },
+      complete() {
         wx.hideLoading()
       }
     })
@@ -507,7 +497,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.searchValue) return
+    console.log(1)
     wx.showLoading({ title: '刷新中' })
     let pageSize = this.data.pageSize
     const _this = this
@@ -521,7 +511,7 @@ Page({
       itemClsNo: slider[index].second[ind].clsNo,
     }, _this ,pageSize)
     pageSize = pageSize + 10
-    this.setData({ pageSize })
+    this.setData({ pageSize, isShowBottomLoading: true })
   },
 
   /**

@@ -94,14 +94,14 @@
           itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
           labelStyle="color: #5C5C5C;"  
           contentStyle="white-space: nowrap;"
-          texrItemData="{{[{label: '包装规格：', content:detailData.details[currentGoodIndex].itemSize}, {label: '要货数量：', content:detailData.details[currentGoodIndex].realQty +detailData.details[currentGoodIndex].unitNo}]}}" 
+          texrItemData="{{[{label: '包装规格：', content:detailData.details[currentGoodIndex].itemSize}]}}" 
         />
         <TextItems 
           boxStyle="border: 0rpx;"
           itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding:8rpx 0;margin-right:50rpx;" 
           labelStyle="color: #5C5C5C;"  
-          contentStyle="color: #FF4E3E;"
-          texrItemData="{{[{label: '单价：', content: '￥'+detailData.details[currentGoodIndex].validPrice}]}}" 
+          contentStyle="color: #FF4E3E;white-space: nowrap;"
+          texrItemData="{{[{label: '单价：', content: '￥'+detailData.details[currentGoodIndex].validPrice}, {label: '要货数量：', content:detailData.details[currentGoodIndex].realQty +detailData.details[currentGoodIndex].unitNo}]}}" 
         />
         <TextItems 
           boxStyle="border: 0rpx;"

@@ -1,7 +1,7 @@
 <!--pages/orderStatu/orderStatu.wxml-->
 <!-- 导航栏区域 -->
 <Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText='返回'>
-  <view class="nav-seach-bar-box">
+  <!-- <view class="nav-seach-bar-box">
     <image src='../../images/search.png' bindtap="searchOrder"/>
     <input 
       type="text"
@@ -13,7 +13,7 @@
       confirm-type="搜索"
       bindconfirm="searchOrder"
     />
-  </view>
+  </view> -->
 </Navbar>
 
 <!-- 订单状态导航栏 -->

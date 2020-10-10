@@ -128,7 +128,7 @@ export function tim(currentDay) {
   var tragetTime = new Date(time);
   var month = tragetTime.getMonth();
   var day = tragetTime.getDate();
-  tragetTime = tragetTime.getFullYear() + "-" + (tragetTime.getMonth() > 9 ? (tragetTime.getMonth() + 1) : "0" + (tragetTime.getMonth() + 1)) + "-" + (tragetTime.getDate() > 9 ? (tragetTime.getDate()) : "0" + (tragetTime.getDate()));
+  tragetTime = tragetTime.getFullYear() + "-" + (tragetTime.getMonth() >= 9 ? (tragetTime.getMonth() + 1) : "0" + (tragetTime.getMonth() + 1)) + "-" + (tragetTime.getDate() > 9 ? (tragetTime.getDate()) : "0" + (tragetTime.getDate()));
   console.log(tragetTime, '这是一周前日期，格式为2010-01-01')
   return tragetTime;
 }

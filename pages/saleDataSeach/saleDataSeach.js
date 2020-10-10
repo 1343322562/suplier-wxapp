@@ -74,6 +74,9 @@ Page({
       success(res) {
         console.log(res)
         _this.setData({ saleTableData: res.data })
+      },
+      complete(res) {
+        console.log(res)
       }
     })
   },

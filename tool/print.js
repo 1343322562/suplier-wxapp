@@ -55,7 +55,7 @@ export const printContentHandle = function (data, type) {
     content += `<L><HB>是否有冻品</HB>：    <B>□</B> <HB>是</HB>      <B>□</B> <HB>否</HB><L><BR><BR>`
     // content += `<B><L>出货单备注：<L></B><BR>`
     content += `<BR><B><L>客户备注:${item.mome || '无'}</L></B>`
-    content += `<BR><B><L>老板备注:${item.bossMome || '无'}</L></B><BR><BR>`
+    content += `<BR><B><L>老板备注:${item.bossMemo || '无'}</L></B><BR><BR>`
     // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
     content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
     content += `<BR><BR><N><C>================================================<C></N><BR><BR>`

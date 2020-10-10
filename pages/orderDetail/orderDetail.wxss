@@ -269,7 +269,7 @@ border-radius: 6rpx;
   border-radius: 0rpx 25rpx 0rpx 25rpx;
 }
 .addPrint {
-  position: absolute;
+  position: fixed;
   bottom: 40rpx;
   right: 60rpx;
   width: 105rpx;

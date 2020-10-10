@@ -161,10 +161,10 @@ page {
 }
 .sale-nav-box .time-box .time{
   
-  padding: 0 5rpx;
+  padding: 0 40rpx;
   height: 70rpx;
   line-height: 70rpx;
-  letter-spacing: 2rpx;
+  letter-spacing: 1rpx;
 }
 
 .sale-nav-box .time-box .active{
@@ -172,7 +172,7 @@ page {
   line-height: 70rpx;
   letter-spacing: 1rpx;
   color: #ff5a00;
-  padding: 0 5rpx;
+  padding: 0 40rpx;
   border-bottom: 4rpx solid #ff5a00;
 }
 

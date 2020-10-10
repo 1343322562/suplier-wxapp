@@ -242,7 +242,6 @@ Page({
     })
     if (!isShow) return showModal({content: '请选择需要装车的订单'})
     this.getSupplierEmployment()
-    this.setData({ isShowEnterCarDialog: true })
   },
   // 选择司机
   selectDriver(e) {
@@ -514,7 +513,7 @@ Page({
       }
     })
   }, 
-  // 请求司机信息
+  // 请求司机信息 
   getSupplierEmployment(){
     const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
@@ -522,12 +521,14 @@ Page({
       data: { platform, token, username, supplierNo, duty: 2 },
       success (res) {
         console.log(res)
-        let data = res.data
-        let driverArr = []
-        data.forEach(item => {
-          if (item.enabled == 1 && item.duty == 2) driverArr.push(item)
-        })
-        _this.setData({ driverArr })
+        if (res.code == 0) {
+          let data = res.data
+          let driverArr = []
+          data.forEach(item => {
+            if (item.enabled == 1 && item.duty == 2) driverArr.push(item)
+          })
+          _this.setData({ driverArr, isShowEnterCarDialog: true })
+        }
       }
     })
   },

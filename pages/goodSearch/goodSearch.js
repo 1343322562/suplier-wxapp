@@ -36,6 +36,14 @@ Page({
     isShowEditDialog: false,  // 是否显示 editDialog
     searchValue: ''        // 查询 input 的 value 值
   },
+  // 跳转详情页
+  toDetailClick (e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.gooditem
+    let goodsData = this.data.goodsData
+    let data = JSON.stringify(goodsData[index]) 
+    goPage('../goodDetail/goodDetail?data=' + data)
+  },
   isShowEditDialogClick (e) {
     console.log(e)
     let index = e.target.dataset.index
