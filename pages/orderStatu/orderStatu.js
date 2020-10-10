@@ -529,6 +529,9 @@ Page({
           })
           _this.setData({ driverArr, isShowEnterCarDialog: true })
         }
+      },
+      complete(res) {
+        if (res.code != 0) return toast('暂无员工数据')
       }
     })
   },

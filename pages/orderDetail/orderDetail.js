@@ -200,6 +200,7 @@ Page({
     })
   },
   makeCar(){
+    if (!this.data.driverArr.length) return toast('暂无司机信息')
     this.setData({ isShowEnterCarDialog: true })
   },
 

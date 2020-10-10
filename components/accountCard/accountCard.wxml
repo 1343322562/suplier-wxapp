@@ -35,6 +35,10 @@
       <text class="" wx:if="{{data.acctFlag == 2}}">(已付款)</text>
       <text class="" wx:if="{{data.acctFlag == 3}}">(付款中)</text>
     </view>
+    <!-- <view class="item" wx:if="{{data.sheetQty}}">
+      <text class="label">数量：</text>
+      <text class="content">{{data.sheetQty}}</text>
+    </view> -->
     <view class="item" wx:if="{{data.sendMan}}">
       <text class="label">司机：</text>
       <text class="content">{{data.sendMan}}</text>

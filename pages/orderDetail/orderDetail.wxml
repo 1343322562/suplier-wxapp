@@ -1,5 +1,5 @@
 <!--pages/orderDetail/orderDetail.wxml-->
-<Navbar  class='navbar' title='订单详情' background='transform' />
+<Navbar  class='navbar' title='订单详情' background='rgb(249, 119, 109)' />
 <!-- linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E) -->
 <view class='top-container' style="padding-top: {{bounding.top + bounding.height + 5}}px;" >
   <view class="custom-info-box">
@@ -146,7 +146,7 @@
 
 
 <!-- 选择司机 Dialog -->
-<view class="print-order-box" wx:if="{{ supplyFlag == 3 && isShowEnterCarDialog}}">
+<view class="print-order-box" wx:if="{{ supplyFlag == 3 && isShowEnterCarDialog && driverArr.length}}">
   <view class="print-order" >
     <view class="title">请选择配送司机</view>
     <view bindtap="selectDriver" class="d-container">
