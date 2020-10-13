@@ -1,12 +1,12 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'http://192.168.2.96:8087/zksr-match/',
+  baseURL: 'https://qzc.yxdinghuo.com/',
   // https://ch.zksr.cn/
   // http://192.168.2.96:8087/zksr-match/  文艺
   // http://192.168.2.195:8087/zksr-match/
   // http://47.92.249.124:8081/zksr-match/
-  // http://qzc.yxdinghuo.com/    中科
+  // https://qzc.yxdinghuo.com/    中科
   // http://39.98.164.194:8087/
   post (url, param) {
     this.ajax('post', url, param)

@@ -2,9 +2,10 @@ import { tim, timHMS } from '../utils/date-format.js'
 
 let contentHandle = {
   unit(e, strLength = 9) {
-    if (e.length >= strLength) return 
+    // if (e.length >= strLength) return 
     e = e.toString()
     let len = strLength - e.length // 空格长度
+    if (e.length >= strLength) len = 1
     for(let i = 0; i <= len-1; i++) {
       e += ' ' 
     }
@@ -34,7 +35,7 @@ export const printContentHandle = function (data, type) {
     content += `<L>复打日期：${cDate}<BR></L>`
     // content += `<L>编    号：${item.branchNo || ''}</L>`
     content += `<L>店    名：<BOLD>${item.branchName}</BOLD><BR></L>`
-    content += `<L><N>联 系 人：${'黄老板'}</N><BR></L>`
+    content += `<L><N>联 系 人：${item.branchMan}</N><BR></L>`
     content += `<L><N>联系电话：${item.branchTel} </N><BR></L>`
     content += `<L>客户地址：${item.address}<BR></L>`
     content += `<C><N>————————————————————————</N><BR></C>`
@@ -42,7 +43,7 @@ export const printContentHandle = function (data, type) {
     content += `<N> 数量      原价      现价      合计      备注</N><BR>`
     content += `<C><N>-----------------------------------------------</N><BR></C>`
     item.details.forEach((good, i) => {
-      content += `<N>【${i+1}】    ${good.itemSubno}      ${good.itemName.slice(0, 11)}</N><BR>`
+      content += `<N>【${i+1}】    ${contentHandle.unit(good.itemSubno, 19)}${good.itemName.slice(0, 9)}</N><BR>`
       content += `<N> <BOLD>${contentHandle.unit(good.realQty+good.unitNo, 7)}</BOLD>${contentHandle.unit(good.subAmt.toFixed(2), 10)}<BOLD>${contentHandle.unit(good.subAmt.toFixed(2)+'/'+good.unitNo, 11)}</BOLD>${contentHandle.unit((good.subAmt*good.realQty).toFixed(2), 10)}${item.warehouse || '空'}</N><BR><BR>`
     })
     content += `<C><N>————————————————————————</N><BR></C>`
@@ -58,7 +59,7 @@ export const printContentHandle = function (data, type) {
     content += `<BR><B><L>客户备注:${item.mome || '无'}</L></B>`
     content += `<BR><B><L>老板备注:${item.bossMemo || '无'}</L></B><BR><BR>`
     // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
-    content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
+    // content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
     content += `<BR><BR><N><C>================================================<C></N><BR><BR>`
 
 
@@ -66,10 +67,10 @@ export const printContentHandle = function (data, type) {
     content += `<BR><BR><B><C>签收回执单<C></B><BR><BR>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate}<BR></L>`
-    content += `<L>${sign=='重复打印' ? '补打' : '出库'}日期：${cDate}<BR><BR></L>`
+    content += `<L>复打日期：${cDate}<BR><BR></L>`
   
     content += `<L>店    名：<BOLD>${item.branchName}</BOLD><BR></L>`
-    content += `<L><N>联 系 人：${'黄老板'}</N><BR></L>` // ${item.supplyFlag}
+    content += `<L><N>联 系 人：${item.branchMan}</N><BR></L>` // ${item.supplyFlag}
     content += `<L><N>联系电话：${item.branchTel} </N><BR></L>` // ${item.supplyFlag}
     content += `<L>客户地址：${item.address}<BR><BR></L>`
   
