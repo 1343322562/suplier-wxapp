@@ -181,7 +181,7 @@ Page({
     wx.scanCode({
       success(res) {
         console.log('扫码信息', res)
-        authCode = res.rawData
+        authCode = res.result
         let json = { onlinePayway: onlinePayways, fhdh, mdbh, mdmc, payAmt, username: routeSendMan, authCode, merchantTerminalId, userIp }
         json = JSON.stringify(json)
         API.getQrCodeUrl({
@@ -327,9 +327,37 @@ Page({
   // 点击确认送货完成，弹出收款 Dialog
   transportEndClick (e) {
     console.log(e)
+    const { platform, token, routeSendMan, supplierNo } = wx.getStorageSync('authorizeObj')
     const currentIndex = e.target.dataset.index 
     const acctFlag = e.target.dataset.acctflag
-    if (acctFlag == '2') return showModal({ tuitle: '提示', content: '已交款，无需再次交款'}) 
+    const { orderData } = this.data
+    const item = orderData[currentIndex]
+    console.log(item)
+    const _this = this
+    // if (acctFlag == '2') return showModal({ tuitle: '提示', content: '已交款，无需再次交款'})
+    if (acctFlag == '2'){ // 在线支付,已交款的情况
+      wx.showModal({
+        title: '提示',
+        content: '确认配送完成?',
+        cancelText: '未送到',
+        confirmText: '已配送',
+        success(e) {
+          if (e.confirm) {
+            API.submitReceiveOrder({
+              data: { platform, token, username: routeSendMan,routeSendMan, supplierNo, payAmt: item.sheetAmt, payWay: item.onlinePayway, sheetNo: item.sheetNo },
+              success(res) {
+                if (res.code == 0) toast('操作成功')
+                _this.searchOrderStatusData()
+              },
+              fail(res) {
+                toast('操作失败,请稍后重试')
+              }
+            })
+          }
+        }
+      })
+      return
+    }
     this.setData({ isShowCollectDialog: true ,currentIndex })
   },
 
@@ -375,11 +403,11 @@ Page({
     })
     API.searchOrderStatusData({
       data: {
-        platform, token, routeSendMan, username: routeSendMan,supplierNo, startDate, endDate,
+        platform, token, routeSendMan, username: routeSendMan, supplierNo, startDate, endDate,
         x: latitude,
         y: longitude,
         supplyFlag,
-        payWay: selectedNav2 || null  // 支付方式 XJ 现金  ONLINE在线支付
+        payWay: selectedNav2 || null  // 支付方式 XJ 现金  ONLINE 在线支付
       },
       success (res) {
         console.log(res, 654)

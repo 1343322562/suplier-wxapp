@@ -158,7 +158,9 @@ Page({
           content: res.data.massge,
           confirmText: '确认',
           success(e){
-            // setTimeout(() => { backPage() }, 400)
+            if (res.code == 10000) {
+              setTimeout(() => { backPage() }, 300)
+            }
           },
           fail(res) {
             console.log(res)
