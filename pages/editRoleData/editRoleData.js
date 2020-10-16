@@ -1,6 +1,6 @@
 // pages/editRoleData/editRoleData.js
 var amapFile = require('../../libs/amap-wx.js');  // 导入 高德 
-import { toast } from '../../tool/tool.js'
+import { toast, goPage } from '../../tool/tool.js'
 Page({
 
   /**
@@ -32,7 +32,9 @@ Page({
       fillColor:'#FF4F3F30' , 
     }]
   },
-
+  toRegister() {
+    goPage('../bossRegister/readyRegister/readyRegister')
+  },
   // 计算区域经纬度
   areaCricle(areaArr) {
     let areaArrLong = [Number(areaArr[0][0]), Number(areaArr[1][0]), Number(areaArr[2][0]), Number(areaArr[3][0])]

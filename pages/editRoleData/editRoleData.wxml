@@ -1,5 +1,6 @@
 <Navbar title='个人资料' background='#fff' leftIconStyle='black' titleStyle='color: #000;' leftIconText='返回' />
 
+<view class="to-register" bindtap="toRegister">前往商户注册>></view>
 <view class="form-box">
   <view class="item">
     <label>姓 名：</label>
