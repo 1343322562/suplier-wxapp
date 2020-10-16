@@ -34,8 +34,8 @@ Page({
           API.getOpenId({
             data: {
               code: res.code,
-              appId: "wx214f112d62d0a7cc",
-              secret: "934f7412723d20bfbe31361fc0223c47"
+              appId: "wx56422cd818402e49",
+              secret: "bb4ef1ebfc4dfc2fa27fe74ec12fd67b"
             },
             success(res) {
               const openId = res.data
