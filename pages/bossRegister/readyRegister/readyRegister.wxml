@@ -1,0 +1,50 @@
+<!-- 导航栏 -->
+<Navbar 
+  leftIconText='返回'
+  title="注册须知" 
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+/>
+
+
+<view class="container">
+<!-- 告示 -->
+  <view class="notice">
+    <view class="content c-1">注册前请准备好以下</view>
+    <view class="content c-2">几种图片资料</view>
+    <view class="content c-3">(建议准备齐全后进行申请操作)</view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">①</view>
+        <view class="text">法定代表人银行卡正面照</view>
+      </view>
+      <view class="info">
+        请上传法定代表人银行卡卡号面照片, 需清晰、完整、无遮挡
+      </view>
+    </view>
+    <view class="right">
+      <image src="../../../images/bank-pos.jpg" />
+      <view class="sign">例</view>
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">①</view>
+        <view class="text">法定代表人银行卡正面照</view>
+      </view>
+      <view class="info">
+        请上传法定代表人银行卡卡号面照片, 需清晰、完整、无遮挡
+      </view>
+    </view>
+    <view class="right">
+      <image src="../../../images/bank-pos.jpg" />
+      <view class="sign">例</view>
+    </view>
+  </view>
+</view>
+
+<view class="btn" bindtap="toRegister">前往注册</view>

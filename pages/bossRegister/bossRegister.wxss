@@ -1,0 +1,61 @@
+/* pages/bankCarCommit/bankCarCommit.wxss */
+.boss-register-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f5f5f5;
+  position: absolute;
+}
+
+.item {
+  width: 100%;
+  margin-top: 15rpx;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+}
+
+.item .title {
+  display: flex;
+  align-items: center;
+  color: #333333;
+}
+
+.item .title .content{
+  color: #999999;
+  /* color: #ff8200; */
+}
+
+.item .images {
+  width: 550rpx;
+  margin: 30rpx 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.item .images .none{
+  height: 171rpx;
+  width: 280rpx;
+  border-radius: 10rpx;
+  border: 1rpx dashed #888888;
+}
+
+
+.item .images .add {
+  height: 145rpx;
+  width: 145rpx;
+  padding: 15rpx;
+  border: 1rpx solid #ff8200;
+  border-radius: 10rpx;
+}
+
+.btn {
+  height: 75rpx;
+  text-align: center;
+  font-size: 29rpx;
+  line-height: 75rpx;
+  margin: 50rpx auto;
+  color: #fff;
+  width: 500rpx;
+  background: linear-gradient(to bottom right, rgb(255,183,0), rgb(255,130,0));
+  border-radius: 40rpx;
+}

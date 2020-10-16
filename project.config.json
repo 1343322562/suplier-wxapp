@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -166,6 +166,14 @@
 					"id": -1,
 					"name": "pages/rechargeDetail/rechargeDetail",
 					"pathName": "pages/rechargeDetail/rechargeDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "pages/bossRegister/readyRegister/readyRegister",
+					"pathName": "pages/bossRegister/readyRegister/readyRegister",
+					"query": "",
 					"scene": null
 				}
 			]

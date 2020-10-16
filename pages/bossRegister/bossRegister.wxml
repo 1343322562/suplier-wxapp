@@ -1,0 +1,32 @@
+<!-- 导航栏 -->
+<Navbar 
+  leftIconText='返回'
+  title="注册" 
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+/>
+
+<view class="boss-register-container">
+  <view class="item">
+    <view class="title">
+      <view class="label">法定代表人银行卡正面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images">
+       <image class="add" src="../../images/add.png" />
+       <view class="none" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">
+      <view class="label">法定代表人银行卡正面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images">
+       <image class="add" bindtap="upImage" src="../../images/add.png" />
+       <view class="none" />
+    </view>
+  </view>
+
+  <view class="btn" bindtap="submit">提交</view>
+</view>
