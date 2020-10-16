@@ -29,8 +29,8 @@
       <text class='right'></text>
     </view>
     <view class='item' >
-      <text class='sheetNo'>{{item.operDate || '2020-02-02 15:2:2'}}</text>
-      <text class='right money'>消费金额: {{item.busiAmt || '-13156'}}</text>
+      <text class='sheetNo'>{{item.operDate}}</text>
+      <text class='right money'>消费金额: {{item.busiAmt}}</text>
     </view>
   </view>
 </view>

@@ -59,7 +59,7 @@ Page({
   // 判断身份登录
   submit () {
     const _this = this
-    let openid = wx.getStorageSync('openId')
+    let openId = wx.getStorageSync('openId')
     wx.showLoading({ mask: true, title: '登录中...' })
     let platform = this.data.selected
     let username = this.data.text
@@ -73,7 +73,7 @@ Page({
       console.log(username, password, platform)
 
       API.toLogin({
-        data: { username, password, platform, openid },
+        data: { username, password, platform, openId },
         success(res) {
           if (res.code == 0) {
             console.log(res.data)
@@ -99,9 +99,9 @@ Page({
       wx.showLoading({ mask: true, title: '登录中...' })
       wx.setStorage({key: 'routeSendMan', data: routeSendMan})
       API.toLogin({
-        data: { openid, platform, username},
+        data: { openId, platform, username},
         success(res) {
-          console.log(openid, platform, username)
+          console.log(openId, platform, username)
           if (res.code == 0) {
             console.log(res)
             let data = res.data
@@ -171,13 +171,13 @@ Page({
     const { platform, token } = wx.getStorageSync('authorizeObj')
     if (!token) return
     wx.showLoading({ mask: true, title: '自动登录中...' })
-    const openid = wx.getStorageSync('openId')
+    const openId = wx.getStorageSync('openId')
 
     if (platform == 2) {
       const { routeSendMan } = wx.getStorageSync('authorizeObj')
       console.log(wx.getStorageSync('authorizeObj'))
       API.toLogin({
-        data: { platform, username: routeSendMan, token, openid },
+        data: { platform, username: routeSendMan, token, openId },
         success(res) {
           if (res.code == 0) {
             console.log(res.data)
@@ -200,7 +200,7 @@ Page({
       const { token, supplierNo } = wx.getStorageSync('authorizeObj')
       const { username, password } = wx.getStorageSync('userObj')
       API.toLogin({
-        data: { platform, username, password, openid },
+        data: { platform, username, password, openId },
         success(res) {
           console.log( platform, username)
           if (res.code == 0) {

@@ -8,6 +8,16 @@
   padding: 15rpx 2%;
   position: relative;  
 }
+.date {
+  padding: 18rpx 35rpx;
+  font-size: 29rpx;
+  background-color: rgb(252, 233, 237);
+  color: rgb(197, 43, 37);
+  border-radius: 15rpx;
+  margin: 20rpx 25rpx 0;
+  font-weight: bold;
+
+}
 .sign {
   background-color: #ff6658;
   height: 50rpx;

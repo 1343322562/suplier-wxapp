@@ -10,7 +10,8 @@ Page({
     settleData: [],                 // 消费详情
     isShowGoodsDetailDialog: false, 
     goodsList: [],     // 商品列表
-    currentSettleObj: {}
+    currentSettleObj: {},
+    operDate: '' // 消费日期
   },
   showGoodDetail(e) {
     let sheetNo = e.currentTarget.dataset.sheetno
@@ -18,15 +19,16 @@ Page({
     this.getSettleFlow(sheetNo)
   },
   // 获取消费详情
-  getSettleDetail() {
+  getSettleDetail(operDate) {
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     const _this = this
     API.settleDetail({
-      data: { platform, token, username, supplierNo, operDate: tim(0) },
+      data: { platform, token, username, supplierNo, operDate: operDate || tim(0) },
       success(res) {
         console.log(res)
         let settleData = res.data
         // settleData = settleData.slice(0, 20)
+        if (!settleData.length) toast('暂无详情数据')
         _this.setData({ settleData })
       }
     })
@@ -52,7 +54,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    this.getSettleDetail() // 获取消费详情
+    const operDate = options.operDate || tim(0)
+    this.setData({ operDate })
+    this.getSettleDetail(operDate) // 获取消费详情
   },
 
   /**

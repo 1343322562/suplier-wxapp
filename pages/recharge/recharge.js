@@ -11,13 +11,14 @@ Page({
   },
   // 跳转消费详情页
   toDetail(e) {
-    // const { index } = e.currentTarget.dataset
-    // let { data } = this.data
-    // let itemNo = data[index].no
+    const { index } = e.currentTarget.dataset
+    let { data } = this.data
+    console.log(data, index)
+    let operDate = data.detail[index].operDate.slice(0, 10)
     // goPage('../rechargeDetail/rechargeDetail&itemNo=' + itemNo)
 
     
-    goPage('../rechargeDetail/rechargeDetail')
+    goPage('../rechargeDetail/rechargeDetail?operDate=' + operDate)
   },
   /**
    * 生命周期函数--监听页面加载

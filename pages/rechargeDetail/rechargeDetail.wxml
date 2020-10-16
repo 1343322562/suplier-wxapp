@@ -6,6 +6,8 @@
 />
 
 <!-- <view class="sign top" /><view class="title top">消费信息</view> -->
+<view class="date">消费日期: {{ operDate }}</view>
+
 <view 
   class="content-box" 
   wx:for="{{settleData}}" 
