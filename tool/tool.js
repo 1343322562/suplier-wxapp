@@ -11,11 +11,13 @@ export const backPage = (delta = 1) => {
 }
 
 export const toast = (title = '完成') => {
-  wx.showToast({
-    title: title,
-    icon: 'none',
-    duration: 1500
-  });
+  setTimeout(() => {
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      duration: 1600
+    });
+  },300)
 }
 
 export const showModal = (obj) => {
