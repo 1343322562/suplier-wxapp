@@ -395,12 +395,7 @@ Page({
     if (selectedNav == 1 && selectedNav2 != 0) { 
       selectedNav2 = selectedNav2 == 1 ? 'ONLINE'  : 'XJ'
     } else { selectedNav2 = null }
-    console.log({
-      platform, token, routeSendMan, supplierNo, startDate, endDate,
-      routeSendMan,
-      supplyFlag,
-      payWay: selectedNav2 || null
-    })
+
     API.searchOrderStatusData({
       data: {
         platform, token, routeSendMan, username: routeSendMan, supplierNo, startDate, endDate,
@@ -423,7 +418,7 @@ Page({
       complete(res) {
         const orderData = _this.data.orderData
         if ((res.data.code == 1 || res.data.msg == "暂无订单数据") && orderData.length != 0) _this.setData({ orderData: [] })  
-        setTimeout(() => { wx.hideLoading() }, 400)
+        setTimeout(() => { wx.hideLoading() }, 280)
       }
     })
   },
