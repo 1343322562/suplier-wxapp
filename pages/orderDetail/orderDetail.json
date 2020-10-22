@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "Navbar": "../../components/Navbar/Navbar",
-    "TextItems": "../../components/textItems/textItems"
+    "TextItems": "../../components/textItems/textItems",
+    "SelectPrint": "../../components/selectPrint/selectPrint"
   },
   "navigationStyle": "custom"
 }

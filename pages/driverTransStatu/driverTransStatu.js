@@ -368,6 +368,7 @@ Page({
     wx.showLoading('请稍侯...')
     const _this = this
     getLocation({
+      this: _this,
       complete(res) {
         console.log(334,res)
         const { latitude, longitude } = res

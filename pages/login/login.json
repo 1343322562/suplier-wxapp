@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "Navbar": "../../components/Navbar/Navbar",
-    "CheckBox": "../../components/CheckBox/checkBox"
+    "CheckBox": "../../components/CheckBox/checkBox",
+    "SelectPrint": "../../components/selectPrint/selectPrint"
   },
   "navigationStyle": "custom"
   

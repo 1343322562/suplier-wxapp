@@ -49,9 +49,12 @@ Page({
     orderData: [],
     isShowEnterCarDialog: false,
     isShowMemoDialog: false, // 备注框
+    isShowSelectDialog: false,  // 打印机选择框
+    sheetNo: '', // 当前需要打印的订单号
     memoIndex: '', // 当前所选择的memo框的商品 index
     memoValue: '',  // 备注框 input value
     driverArr: [], // 司机信息
+    printList: '', // 打印设备列表
     // 新订单结算信息
     newOrderInfo: [0,0,0],
     // 待装车结算信息
@@ -340,7 +343,7 @@ Page({
     options.nav != 3 && wx.showLoading({ title: '请稍候..' })
     console.log(options)
     let selectedNav = options.nav
-    this.setData({ selectedNav })
+    this.setData({ selectedNav , printList: wx.getStorageSync('allPrint')})
   },
   
   onShow: function (e) {
@@ -456,12 +459,8 @@ Page({
       }
     })
   },
-
-
-  // 打印单据 ,跳转链接蓝牙页面(或出库)
-  print (e) {
-    console.log(e)
-    let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
+  // 获取选中订单号 (需要打印的)
+  getSheetNo () {
     let orderData = this.data.orderData
     let sheetNo = ''  // 请求单号
     orderData.forEach((item,i) => {
@@ -473,20 +472,23 @@ Page({
         }
       }
     })
+    return sheetNo
+  },
+
+  // 打印单据 ,跳转链接蓝牙页面(或出库)
+  print (e) {
+    console.log(e)
+    let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
+    let sheetNo = this.getSheetNo() // 获取当前选中单号
+
     if (sheetNo == '') return showModal({ content: '请选择单据' }) 
     console.log(sheetNo, type)
     if (type == 1) return this.updateSheetStatus(sheetNo) // 直接出库
 
     this.searchOrderDetailData(sheetNo) // 请求单据详情，并打印
-    // if (res == 0) {
-    //   this.setData({ printDialog: false })
-    // } else if (res == 1) {
-    //   console.log('打印')
-    //   this.setData({ printDialog: false })
-    // }
   },
   // 查询订单详情, b并打印
-  searchOrderDetailData(sheetNo) {
+  searchOrderDetailData(sheetNo, printNo) {
     const _this = this
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj') 
     API.searchOrderDetailData({
@@ -494,18 +496,30 @@ Page({
       success (res) {
         console.log(res)
         let data = res.data
-        _this.printOrder(data, sheetNo, _this) // 打印
+        _this.printOrder(data, sheetNo, _this, printNo) // 打印
       } 
     })
   },
+  // 显示选择 打印机 Dialog
+  showSelectPrint () {
+    const { printList } = this.data
+    if (!printList) return toast('请添加打印设备')
+    this.setData({ isShowSelectDialog: true })
+  },
+  // 选择完设备，并打印
+  selectPrintEvent(e) {
+    const { printNo } = e.detail
+    const sheetNo = this.getSheetNo()
+    this.searchOrderDetailData(sheetNo, printNo) // 请求单据详情，并打印
+  },
   // 打印订单
-  printOrder(data, sheetNo, _this = this) {
+  printOrder(data, sheetNo, _this = this, printNo) {
     const printContent = printContentHandle(data) // 处理打印格式
     console.log('printContent', printContent)
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent},
+      data: { platform, token, username, supplierNo ,printContent, printNo},
       success(res) {
         console.log(res)
         toast(res.message)

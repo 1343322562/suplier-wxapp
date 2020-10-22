@@ -40,8 +40,10 @@ export const showModal = (obj) => {
 
 export const getLocation = (params) => {
   let obj = {}
+  const _this = params.this
   wx.getSetting({
     success(res) {
+      console.log(res)
       if (!res.authSetting['scope.userLocation']) {
         wx.authorize({
           scope: 'scope.userLocation',
@@ -53,6 +55,7 @@ export const getLocation = (params) => {
             params.complete(res)
             console.log('调取失败' ,res)
             wx.showModal({
+              showCancel: false,
               title: '提示',
               content: '检测到您的定位信息关闭，请开启定位',
               cancelText: '关闭',
@@ -71,14 +74,27 @@ export const getLocation = (params) => {
           }
         })
       } else {
+        wx.showLoading()
         wx.getLocation({
           type: 'gcj02',
           altitude: 'true',
           isHighAccuracy: true,
-          highAccuracyExpireTime: 4000,
+          // highAccuracyExpireTime: 3000,
           success(res) {
             console.log(res)
             params.complete(res)
+          },
+          fail(res) {
+            console.log(res)
+            wx.showModal({
+              showCancel: false,
+              title: '您手机定位功能没有开启',
+              content: '请在系统设置中打开定位服务',
+              confirmText: '已开启',
+              success() {
+                _this.onLoad()
+              }
+            })
           }
         })
       }

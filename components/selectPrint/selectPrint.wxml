@@ -1,0 +1,19 @@
+<view class="mark" catchtap="hide" wx:if="{{isShow}}">
+  <view class="print-dialog">
+    <view class="title">请选择打印设备</view>
+    <view class="list">
+      <view 
+        class="item {{item.select ? 'act' : ''}}" 
+        wx:for="{{list}}" 
+        wx:key="index"
+        catchtap="selectPrint"
+        data-index="{{index}}"
+        data-select="{{item.select}}"
+      >
+        <view>设备号：</view>
+        <view>{{item.printNo}}</view>
+      </view>
+    </view>
+    <view class='btn' catchtap="confirm">打印</view>
+  </view>
+</view>

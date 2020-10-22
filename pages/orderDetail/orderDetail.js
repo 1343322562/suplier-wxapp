@@ -12,8 +12,10 @@ Page({
     detailData: {},       // 详细数据
     isShowEnterCarDialog: true, // 是否显示装车 Dialog
     driverArr: [],        // 司机信息
+    isShowSelectDialog: true, // 显示选择打印设备 Dialog 
+    printList: [],        // 打印设备列表
     isShowGoodDetailDialog: false,  // 是否显示 商品详情
-    currentGoodIndex: ''   // 当前商品 index
+    currentGoodIndex: ''  // 当前商品 index
   },
   goAddPrintClick () {
     goPage('../addPrint/addPrint')
@@ -53,7 +55,7 @@ Page({
   },
 
   // 打印订单
-  printOrder(data, type) {
+  printOrder(data, type, printNo) {
     console.log(data)
     const _this = this
     const printContent = printContentHandle(data, type) 
@@ -61,7 +63,7 @@ Page({
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent },
+      data: { platform, token, username, supplierNo ,printContent, printNo },
       success(res) {
         console.log(res)
         toast(res.message || res.msg)
@@ -122,9 +124,24 @@ Page({
     // 获取当前订单状态
     let { supplyFlag } = data
     console.log(options)
-    this.setData({ supplyFlag })
+    this.setData({ supplyFlag, printList: wx.getStorageSync('allPrint') })
     // 获取订单详情
     this.getOrderDetail(data.sheetNo)
+  },
+
+  // 显示选择 打印机 Dialog
+  showSelectPrint () {
+    const { printList } = this.data
+    if (!printList) return toast('请添加打印设备')
+    this.setData({ isShowSelectDialog: true })
+  },
+
+  // 选择完设备，并打印
+  selectPrintEvent(e) {
+    console.log('dayin')
+    const { printNo } = e.detail
+    let detailData = [this.data.detailData]
+    this.printOrder(detailData, 1, printNo)
   },
 
   // 装车请求
