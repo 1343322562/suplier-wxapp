@@ -478,6 +478,7 @@ Page({
   // 打印单据 ,跳转链接蓝牙页面(或出库)
   print (e) {
     console.log(e)
+
     let type = e.target.dataset.type  // 0: 打印 1：不打印，直接出库
     let sheetNo = this.getSheetNo() // 获取当前选中单号
 
@@ -502,7 +503,7 @@ Page({
   },
   // 显示选择 打印机 Dialog
   showSelectPrint () {
-    const { printList } = this.data
+    const printList = wx.getStorageSync('allPrint')
     if (!printList) return toast('请添加打印设备')
     this.setData({ isShowSelectDialog: true })
   },
@@ -516,6 +517,7 @@ Page({
   printOrder(data, sheetNo, _this = this, printNo) {
     const printContent = printContentHandle(data) // 处理打印格式
     console.log('printContent', printContent)
+    console.log(printNo)
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({

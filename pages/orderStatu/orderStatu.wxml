@@ -149,4 +149,4 @@
 </view>
 
 <!-- 选择打印机 -->
-<SelectPrint list="{{printList || ['sasd']}}" isShow="{{isShowSelectDialog || true}}" bind:printEvent="selectPrintEvent" />
+<SelectPrint isShow="{{isShowSelectDialog}}" bind:printEvent="selectPrintEvent" />

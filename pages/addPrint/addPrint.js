@@ -56,6 +56,7 @@ Page({
           toast(res.message)
           _this.cachePrintNo(machineNo)
           backPage()
+          backPage()
         } else {
           toast('添加失败')
         }
@@ -66,9 +67,15 @@ Page({
 
   // 缓存打印设备号码
   cachePrintNo(printNo) {
+    console.log(1000, printNo)
     let allPrint = wx.getStorageSync('allPrint') || []
     allPrint.unshift(printNo)
-    wx.setStorage('allPrint', allPrint)
+    console.log(allPrint)
+    wx.setStorageSync({
+      key: 'allPrint',
+      data: allPrint
+    })
+    wx.setStorageSync('allPrint', allPrint)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

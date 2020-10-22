@@ -12,7 +12,7 @@ Page({
     detailData: {},       // 详细数据
     isShowEnterCarDialog: true, // 是否显示装车 Dialog
     driverArr: [],        // 司机信息
-    isShowSelectDialog: true, // 显示选择打印设备 Dialog 
+    isShowSelectDialog: false, // 显示选择打印设备 Dialog 
     printList: [],        // 打印设备列表
     isShowGoodDetailDialog: false,  // 是否显示 商品详情
     currentGoodIndex: ''  // 当前商品 index
@@ -46,12 +46,8 @@ Page({
   },
   // 打印拣货单
   print (e) {
-    const type = e.currentTarget.dataset.type || 0 // 0: 正常打印  1: 补打
-    console.log('dayin')
-    let detailData = [this.data.detailData]
-    // let data = JSON.stringify(detailData)
-    // goPage('../booth/booth?data=' + data)
-    this.printOrder(detailData, type)
+    this.setData({ isShowSelectDialog: true })
+    // this.printOrder(detailData, type)
   },
 
   // 打印订单
@@ -131,7 +127,8 @@ Page({
 
   // 显示选择 打印机 Dialog
   showSelectPrint () {
-    const { printList } = this.data
+    const printList = wx.getStorageSync('allPrint')
+    this.setData({ printList })
     if (!printList) return toast('请添加打印设备')
     this.setData({ isShowSelectDialog: true })
   },
@@ -191,7 +188,7 @@ Page({
       data: { platform, token, username, supplierNo, sheetNo, printFlag},
       success(res) {
         if (res.code == 0 && printFlag == 1) {
-          toast('出库成功')
+          toast()
           backPage()
         }
         console.log(res)

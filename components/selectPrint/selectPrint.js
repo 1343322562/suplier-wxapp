@@ -6,7 +6,6 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    list: Array,
     isShow: Boolean
   },
 
@@ -14,19 +13,24 @@ Component({
    * 组件的初始数据
    */
   data: {
+    list: []
   },
   attached() {
     let list = this.data.list.length ? this.data.list : wx.getStorageSync('allPrint')
     console.log(list)
     let tempArr = []
-    list.forEach((item,index) => {
+    list.length && list.forEach((item,index) => {
       let tempObj = {}
       tempObj.printNo = item
       tempObj.select = false
       tempArr.push(tempObj)
     })
     console.log(tempArr)
+    this.data.list = tempArr
+    console.log(JSON.stringify(this.data.list))
     this.setData({ list: tempArr })
+    console.log(JSON.stringify(this.data.list))
+    console.log(this, this.data)
   },
   /**
    * 组件的方法列表
@@ -34,7 +38,12 @@ Component({
   methods: {
     selectPrint(e) {
       let { index, select } = e.currentTarget.dataset
-      this.setData({ [`list[${index}].select`]: !select })
+      const { list } = this.data
+      list.forEach(item => {
+        item.select = false
+      })
+      list[index].select = true
+      this.setData({ list })
     },
     confirm() {
       let { list } = this.data
