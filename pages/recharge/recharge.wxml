@@ -6,7 +6,6 @@
   isShowLeftIcon="{{true}}"
 />
 <view class='head head-col'>
-
   <!-- <view class='reconciliation' bindtap='goPage'>充值</view> -->
   <view>
     <view class='title'>账户余额(元)</view>
@@ -20,6 +19,7 @@
     <view class='title'>消费金额(元)</view>
     <view class='money'>{{data.master.consumeAmt}}</view>
   </view>
+  <view bindtap="toRecharge" class="recharge">去充值</view>
 </view>
 
 <view class='list'>

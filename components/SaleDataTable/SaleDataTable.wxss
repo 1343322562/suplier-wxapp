@@ -21,6 +21,10 @@
   padding-bottom: 0;
 }
 
+.table-box:nth-child(even) {
+  background-color: #eee;
+}
+
 .table-box .item{
   color: #808080;
   height: 64rpx;

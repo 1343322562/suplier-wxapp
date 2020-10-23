@@ -25,7 +25,8 @@
     "pages/recharge/recharge",
     "pages/rechargeDetail/rechargeDetail",
     "pages/bossRegister/bossRegister",
-    "pages/bossRegister/readyRegister/readyRegister"
+    "pages/bossRegister/readyRegister/readyRegister",
+    "pages/rechargePay/rechargePay"
   ],
   "permission": {
     "scope.userLocation": {

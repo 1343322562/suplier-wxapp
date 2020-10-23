@@ -175,6 +175,12 @@
 					"pathName": "pages/bossRegister/readyRegister/readyRegister",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rechargePay/rechargePay",
+					"pathName": "pages/rechargePay/rechargePay",
+					"scene": null
 				}
 			]
 		}

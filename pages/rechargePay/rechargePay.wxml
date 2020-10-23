@@ -1,0 +1,13 @@
+
+
+<Navbar 
+  title='充值'
+  background='#ff6658' 
+  leftIconText="返回"
+  isShowLeftIcon="{{true}}"
+/>
+
+
+<input type="number" bindinput="bindInputValue" value="{{amt}}" placeholder="请输入充值金额"></input>
+
+<button type="primary">确定</button>

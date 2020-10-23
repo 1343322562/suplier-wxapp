@@ -1,0 +1,14 @@
+/* pages/rechargePay/rechargePay.wxss */
+page{
+  background-color: #eee;
+}
+input {
+  margin: 120rpx auto 50rpx;
+  width: 450rpx;
+  padding: 18rpx 35rpx;
+  font-size: 33rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 12rpx;
+  
+}
