@@ -144,3 +144,12 @@ export function timHMS() {
   if (Number(s) < 10) s = '0' + s 
   return `${h}:${m}:${s}`
 }
+
+// 获取随机数(1~10)  num: 获取长度
+export function getRandomNum(len) {
+  let num = ''
+  for(let i = 0; i < len; i++) {
+    num += Math.ceil(Math.random()*10) 
+  }
+  return num
+}

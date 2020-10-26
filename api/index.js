@@ -35,7 +35,8 @@ export default {
   getQrCodeUrl: (param) => ajax.post(`match_pay/getQrCodeUrl.do`, param),  // 二维码收款  closeQrPay
   closeQrPay: (param) => ajax.post(`match_pay/closeQrPay.do`, param),      // 关闭收款订单
   queryQrPay: (param) => ajax.post(`match_pay/queryQrPay.do`, param),      // 司机收款支付查询
-  
+  getMiniPayParameters: (param) => ajax.post(`match_pay/getMiniPayParameters.do`, param),  // 老板充值
+
   // match_finance
   searchOrderByCollectionFlag: (param) => ajax.post(`match_finance/searchOrderByCollectionFlag.do`, param),  // 查询收款信息
   collectionOrder: (param) => ajax.post(`match_finance/collectionOrder.do`, param),    // 确认收款

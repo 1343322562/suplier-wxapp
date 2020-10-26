@@ -4,17 +4,17 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
-		"postcss": true,
+		"enhance": false,
+		"postcss": false,
 		"preloadBackgroundData": false,
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
+		"showShadowRootInWxmlPanel": false,
 		"scopeDataCheck": false,
 		"uglifyFileName": false,
 		"checkInvalidKey": true,
@@ -27,8 +27,8 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.13.2",
