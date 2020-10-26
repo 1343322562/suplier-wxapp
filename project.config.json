@@ -27,11 +27,11 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.0",
+	"libVersion": "2.13.2",
 	"appid": "wx56422cd818402e49",
 	"projectname": "wxapp",
 	"debugOptions": {

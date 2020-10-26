@@ -24,8 +24,8 @@ export const showModal = (obj) => {
   wx.showModal({
     title: obj.title || '提示',
     content: obj.content,
-    cancelText: '取消',
-    confirmText: '确定',
+    cancelText: obj.cancelText || '取消',
+    confirmText: obj.confirmText || '确定',
     success(res) {
       if (res.confirm) {
         'success' in obj && obj.success()

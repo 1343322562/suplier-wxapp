@@ -33,16 +33,96 @@
   <view class="register-info-item">
     <view class="left">
       <view class="title">
-        <view class="index">①</view>
-        <view class="text">法定代表人银行卡正面照</view>
+        <view class="index">②</view>
+        <view class="text">法定代表人身份证人像面照</view>
       </view>
       <view class="info">
-        请上传法定代表人银行卡卡号面照片, 需清晰、完整、无遮挡
+        请上传法定代表人身份证人像面照片, 需清晰、完整、无遮挡
       </view>
     </view>
     <view class="right">
-      <image src="../../../images/bank-pos.jpg" />
+      <image src="../../../images/id-card1.png" />
       <view class="sign">例</view>
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">③</view>
+        <view class="text">法定代表人身份证国徽面照</view>
+      </view>
+      <view class="info">
+        请上传法定代表人身份证国徽面照片, 需清晰、完整、无遮挡
+      </view>
+    </view>
+    <view class="right">
+      <image src="../../../images/id-card2.png" />
+      <view class="sign">例</view>
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">④</view>
+        <view class="text">手持身份证人像面照</view>
+      </view>
+      <view class="info">
+        请上传法定代表人手持身份证国徽面照片, 需清晰、完整、无遮挡
+      </view>
+    </view>
+    <view class="right">
+      <image src="../../../images/id-card3.png" />
+      <view class="sign">例</view>
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">⑤</view>
+        <view class="text">经营店门头照</view>
+      </view>
+      <view class="info">
+        请上传经营店门头照片, 需清晰、完整、无遮挡
+      </view>
+    </view>
+    <view class="right">
+      <image src="../../../images/mt.png" />
+      <view class="sign">例</view>
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">⑥</view>
+        <view class="text">场景照</view>
+      </view>
+      <view class="info">
+        请上传经营状态下门店场景照片, 需清晰、视角明亮
+      </view>
+    </view>
+    <view class="right">
+      <!-- <image src="../../../images/id-card3.png" /> -->
+      <!-- <view class="sign">例</view> -->
+    </view>
+  </view>
+
+  <view class="register-info-item">
+    <view class="left">
+      <view class="title">
+        <view class="index">⑦</view>
+        <view class="text">经营场所照</view>
+      </view>
+      <view class="info">
+        请上传门店场景照片, 需清晰、视角明亮
+      </view>
+    </view>
+    <view class="right">
+      <!-- <image src="../../../images/id-card3.png" /> -->
+      <!-- <view class="sign">例</view> -->
     </view>
   </view>
 </view>
