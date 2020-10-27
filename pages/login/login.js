@@ -227,6 +227,12 @@ Page({
       
     }
   },
+  // 去充值
+  toRecharge() {
+    let username = this.data.text
+    if (!username) return toast('充值前请输入账号')
+    goPage('../rechargePay/rechargePay')
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -25,7 +25,20 @@
 
   <view class='form'>
     <view class='name'>*省市区</view>
-    <picker 
+    <picker       
+      style="flex: 1;"
+      mode="multiSelector" 
+      bindchange="bindMultiPickerChange" 
+      bindcolumnchange="bindMultiPickerColumnChange" 
+      value="{{areaIndex}}" 
+      range="{{area}}"
+    >
+      <view class="picker">
+        {{area[0][areaIndex[0]]}}，{{area[1][areaIndex[1]]}}，{{area[2][areaIndex[2]]}}
+      </view>
+    </picker>
+
+    <!-- <picker 
       style="flex: 1;"
       mode="region" 
       bindchange="bindRegionChange" 
@@ -35,16 +48,16 @@
       <view class="picker">
         {{region[0]}}，{{region[1]}}，{{region[2]}}
       </view>
-    </picker>
+    </picker> -->
   </view>
 
   <view class='form'>
     <view class='name'>*商户详细地址</view>
-    <input data-label="merAddress" value="{{inputValue.merAddress}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入本人手机号"/>
+    <input data-label="merAddress" value="{{inputValue.merAddress}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入商户详细地址"/>
   </view>
   <view class='form'>
     <view class='name'>*邮箱</view>
-    <input data-label="mail" value="{{inputValue.mail}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入本人手机号"/>
+    <input data-label="mail" value="{{inputValue.mail}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入邮箱"/>
   </view>
 
 </block>

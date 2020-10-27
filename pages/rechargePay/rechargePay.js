@@ -47,7 +47,8 @@ Page({
   selectAmt(e) {
     console.log(e)
     const { type } = e.target.dataset
-    this.setData({ type, amt: '' })
+    const { tagArray } = this.data
+    this.setData({ type, amt: tagArray[type - 1] })
   },
 
   submit() {
@@ -78,16 +79,15 @@ Page({
     let requestObj = {
       code,             // 授权码
       pay_amt,          // 充值金额
-      username,
-      body: '老版余额充值', // 描述
-      out_trade_no: `ZC${tim(0).replace(/-/, '')}${getRandomNum(6)}`,    // 订单号      
+      body: '老板余额充值', // 描述
+      out_trade_no: `CZ${tim(0).replace(/-/g, '')}${getRandomNum(6)}`,    // 订单号      
       userIp: this.data.userIp,
-      dc_branch_no: app.globalData,  // 配送中心编号 
       supplier_no: supplierNo,       // 入驻商编号
+      username,
       platform, 
       token,
     }
-    console.log(`ZC${tim(0).replace(/-/g, '')}${getRandomNum(6)}`)
+    console.log(`CZ${tim(0).replace(/-/g, '')}${getRandomNum(6)}`)
     API.getMiniPayParameters({
       data: requestObj,
       success(res) {

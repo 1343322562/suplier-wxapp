@@ -1,4 +1,6 @@
-// pages/bankCarCommit/bankCarCommit.js
+import { goPage, showModal, toast, getLocation, getIP } from '../../tool/tool.js'
+import API from '../../api/index.js'
+
 Page({
 
   /**
@@ -6,7 +8,9 @@ Page({
    */
   data: {
     step: 0, // 步骤 0: 基本信息以及银行卡信息填写  1: 上传照片
-    region: ['广西壮族自治区', '南宁市', '兴宁区'],
+    areaCode: '',
+    area: [[], ['请选择省'], ['请选择市']],   // 省市区
+    areaIndex: [0, 0, 0],
     customItem: '全部',
     inputValue: {
       /* 基本信息 */
@@ -27,32 +31,116 @@ Page({
       yeeBankCity: '',      // 开户市 
     }
   },
+  bindMultiPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      areaIndex: e.detail.value
+    })
+    this.data.areaIndex = e.detail.value 
+    this.getBankCity()
+  },
+  bindMultiPickerColumnChange(e){
+    console.log(e)
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.userObj = wx.getStorageSync('authorizeObj')
+    this.getBankProvince() // 获取省份
   },
-  // 是否信息填写完整
+  // 省
+  getBankProvince() {
+    const { platform, token, username, supplierNo } = this.userObj
+    const _this = this
+    API.getBankProvince({
+      data: { platform, token, username, supplierNo },
+      success(res) {
+        console.log(res)
+        if (res.code == 0) {
+          let data = res.data
+          let provinceArr = ['请选择']
+          data.forEach((item) => {
+            provinceArr.push(item.province)
+          })
+          _this.setData({ [`area[0]`]: provinceArr })
+        }
+      }
+    })
+  },
+  // 市
+  getBankCity() {
+    const { platform, token, username, supplierNo } = this.userObj
+    const { area, areaIndex } = this.data
+    console.log(area, areaIndex)
+    if (areaIndex == 0) return
+    const province = area[0][areaIndex]
+    API.getBankCity({
+      data: { platform, token, username, supplierNo, data: province },
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+  // 表单验证
   isAdopt(obj) {
-    let info
+    let info = ''
     for (let key in obj) {
       switch (key) {
         case 'legalName':
+          if (!obj[key] && !(obj[key].length > 1) && !(obj[key].length < 5)) {
+            info = '请填写正确的姓名'
+          }
+          break;
+        case 'legalIdCard':
+          if (obj[key].length != 18) {
+            info = '请填写正确的身份号码'
+          }
+          break;
+        case 'merLegalPhone':
+          if (obj[key].length != 11) {
+            info = '请填写正确的手机号'
+          }  
+          break;
+        case ('merProvince' || 'merCity' || 'merDistrict'):
+          if (!obj[key]) {
+            info = '请选择正确的省市区'
+          }
+          break;
+        case 'merAddress':
+          if (!obj[key]) {
+            info = '请填写详细地址'
+          }
+          break;
+        case 'mail':
+          if (!obj[key]) {
+            info = '请填写邮箱'
+          }
+          break;
+        case 'cardNo':
+          if (obj[key].length != 18 && obj[key].length != 16 && obj[key].length != 17) {
+            info = '请填写正确的银行卡号'
+          }
+          break;
+        case 'headBankCode':
+          if (!obj[key]) {
+            info = '请填写开户银行编号'
+          }
+          break;
+        case 'bankCode':
+          if (!obj[key]) {
+            info = '请填写开户银行支行编号'
+          }
+          break;
+        case 'yeeBankProvince':
+          if (!obj[key]) {
+            info = '请填写开户银行支行编号'
+          }
           break;
       }
-      if (key == 'legalName'){
-        if (!obj[key] && !(obj[key].length > 1) && !(obj[key].length < 5)) {
-          info = '请填写正确的姓名'
-        }
-      } else if (key == 'legalIdCard') {
-        if (obj[key].length != 18) {
-          info = '请填写正确的身份号码'
-        }
-      } else if (key == 'merLegalPhone') {
-      }
     }
+    return info
   },
   bindInputValue (e) {
     console.log(e)
@@ -77,7 +165,9 @@ Page({
           merAddress: inputValue.merAddress,
           mail: inputValue.mail
         }
-        let isAdopt = isAdopt()
+        let adoptInfo = this.isAdopt(basicObj)
+        console.log(adoptInfo)
+        if (adoptInfo) return toast(adoptInfo)
         return this.setData({ step: 1 }) 
       case 1:
         // 银行卡以及开户信息
@@ -114,13 +204,6 @@ Page({
     })
   },
 
-  // 省市区选择
-  bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
-    })
-  },
   uploadImg(url) {
     // wx.uploadFile({
     //   url: '',

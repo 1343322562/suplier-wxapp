@@ -48,5 +48,16 @@ export default {
 
   // print
   addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机
-  print: (param) => ajax.post(`print/print.do`, param)     // 打印订单
+  print: (param) => ajax.post(`print/print.do`, param),     // 打印订单
+
+  // yeepay
+  getBankProvince: (param) => ajax.post(`yeepay/getBankProvince.do`, param),   // 获取省
+  /* data 省 */
+  getBankCity: (param) => ajax.post(`yeepay/getBankCity.do`, param),             // 获取市
+  /* data 市 */ 
+  getBankDistrict: (param) => ajax.post(`yeepay/getBankDistrict.do`, param),     // 获取区
+  getYeepayBank: (param) => ajax.post(`yeepay/getYeepayBank.do`, param),     // 获取银行
+  /* yeeBankProvince 省  yeeBankCity 市 data 银行 */ 
+  getYeeBankSubbranch: (param) => ajax.post(`yeepay/getYeeBankSubbranch.do`, param)     // 获取银行支行
+
 }
