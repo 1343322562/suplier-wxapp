@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    intoWay: '', // 进入页面方式 1: 由登录界面进入  '': 正常充值页进入
     tagArray: [5000, 8000, 10000, 20000, 50000, 100000],
     type: '', // 选择的金额
     amt: '',
@@ -40,6 +41,8 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options)
+    this.data.intoWay = options.type
     console.log(getApp().globalData)
     this.repeatGetIp() // 获取用户 IP 地址
   },
@@ -76,13 +79,15 @@ Page({
   },
   rechargePay(code, pay_amt) {
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    const { intoWay } = this.data
+    console.log(intoWay)
     let requestObj = {
       code,             // 授权码
-      pay_amt,          // 充值金额
+      pay_amt: 0.01,          // 充值金额
       body: '老板余额充值', // 描述
       out_trade_no: `CZ${tim(0).replace(/-/g, '')}${getRandomNum(6)}`,    // 订单号      
       userIp: this.data.userIp,
-      supplier_no: supplierNo,       // 入驻商编号
+      supplier_no: supplierNo || username,       // 入驻商编号
       username,
       platform, 
       token,
@@ -103,12 +108,22 @@ Page({
               console.log(ret)
               showModal({
                 content: `支付成功 \b 充值金额：${pay_amt}`,
-                success() { wx.redirectTo({ url: '/pages/index/index' }) },
-                cancel() { wx.redirectTo({ url: '/pages/index/index' }) }
+                showCancel: false,
+                success() {
+                  if (intoWay == 1) {
+                    wx.redirectTo({ url: '/pages/login/login' })
+                    wx.clearStorageSync('authorizeObj')
+                    return
+                  }
+                  wx.redirectTo({ url: '/pages/index/index' }) 
+                }
               })
             },
             fail: (ret) => {
-              this.errorMsg('支付已取消')
+              showModal({
+                content: '支付已取消',
+                showCancel: false
+              })
             }
           })
         }

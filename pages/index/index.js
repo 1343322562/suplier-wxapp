@@ -64,9 +64,8 @@ Page({
       })
       return
     }
-    const supplierData = JSON.parse(options.data)
+    const supplierData = JSON.parse(options.data) || app.globalData.wareInfo
     console.log(supplierData, !wx.getStorageSync('authorizeObj'))
-    app.globalData.wareInfo = supplierData
     this.authorize(supplierData) // 缓存 authorizeObj 信息
     this.seachSaleData(0)   // 表格数据获取 并 计算当日销售数据
     this.getErpUrl() // 情求图片根路径
