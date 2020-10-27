@@ -25,30 +25,24 @@
 
   <view class='form'>
     <view class='name'>*省市区</view>
-    <picker       
+    <!-- <picker       
       style="flex: 1;"
       mode="multiSelector"
       bindchange="bindMultiPickerChange" 
       bindcolumnchange="bindMultiPickerColumnChange" 
       value="{{areaIndex}}" 
       range="{{area}}"
+      range-key="place"
     >
       <view class="picker">
-        {{area[0][areaIndex[0]]}}，{{area[1][areaIndex[1]]}}，{{area[2][areaIndex[2]]}}
+        {{area[0][areaIndex[0]].place}}，{{area[1][areaIndex[1]].place}}，{{area[2][areaIndex[2]].place}}
       </view>
-    </picker>
-
-    <!-- <picker 
-      style="flex: 1;"
-      mode="region" 
-      bindchange="bindRegionChange" 
-      value="{{region}}" 
-      custom-item="{{customItem}}"
-    >
+    </picker> -->
+    <picker style="flex: 1;" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
       <view class="picker">
         {{region[0]}}，{{region[1]}}，{{region[2]}}
       </view>
-    </picker> -->
+    </picker>
   </view>
 
   <view class='form'>
@@ -74,23 +68,39 @@
 
 
   <view class='form'>
-    <view class='name'>*银行卡开户省</view>
-    <input data-label="yeeBankProvince" value="{{inputValue.yeeBankProvince}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户省份"/>
+    <view class='name'>*开户行省市区</view>
+    
+    <picker       
+      style="flex: 1;"
+      mode="multiSelector"
+      bindcolumnchange="bindAreaPickerColumnChange" 
+      value="{{areaIndex}}" 
+      range="{{area}}"
+      range-key="place"
+    >
+      <view class="picker">
+        {{area[0][areaIndex[0]].place}}，{{area[1][areaIndex[1]].place}}，{{area[2][areaIndex[2]].place}}
+      </view>
+    </picker>
+    <!-- <input data-label="yeeBankProvince" value="{{inputValue.yeeBankProvince}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户省份"/> -->
   </view>
 
-  <view class='form'>
+  <!-- <view class='form'>
     <view class='name'>*银行卡开户市</view>
     <input data-label="yeeBankCity" value="{{inputValue.yeeBankCity}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户市区"/>
+  </view> -->
+
+  <view class='form'>
+    <view class='name'>*开户行</view>
+    <input data-label="headBankCode" value="{{inputValue.headBankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户银行"/>
+    <view class="bank-info" wx:if="{{bankSelectArr.length}}">
+      <view wx:for="{{bankSelectArr}}" bindtap="selectHeadBank" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
+    </view>
   </view>
 
   <view class='form'>
-    <view class='name'>*开户行编号</view>
-    <input data-label="headBankCode" value="{{inputValue.headBankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户银行编号"/>
-  </view>
-
-  <view class='form'>
-    <view class='name'>*开户行支行编号</view>
-    <input data-label="bankCode" value="{{inputValue.bankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户行支行编号"/>
+    <view class='name'>*开户行支行</view>
+    <input data-label="bankCode" value="{{inputValue.bankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户行支行"/>
   </view>
 
 </block>
@@ -99,12 +109,13 @@
 <!-- 照片上传 -->
 
 <view class="boss-register-container" wx:if="{{step == 2}}">
+  <view class="span">照片上传</view>
   <view class="item">
     <view class="title">
-      <view class="label">法定代表人银行卡人像面照：</view>
+      <view class="label"><view class="span-index">①</view>法定代表人身份证人像面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images">
+    <view class="images" bindtap="upImage">
        <image class="add" src="../../images/add.png" />
        <view class="none" />
     </view>
@@ -112,10 +123,10 @@
   
   <view class="item">
     <view class="title">
-      <view class="label">法定代表人银行卡国徽面照：</view>
+      <view class="label"><view class="span-index">②</view>法定代表人身份证国徽面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images">
+    <view class="images" bindtap="upImage">
        <image class="add" bindtap="upImage" src="../../images/add.png" />
        <view class="none" />
     </view>
@@ -123,10 +134,21 @@
 
   <view class="item">
     <view class="title">
-      <view class="label">手持身份证人像面照：</view>
+      <view class="label"><view class="span-index">③</view>手持身份证人像面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images">
+    <view class="images" bindtap="upImage">
+       <image class="add" src="../../images/add.png" />
+       <view class="none" />
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">④</view>法人银行卡正面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images" bindtap="upImage">
        <image class="add" src="../../images/add.png" />
        <view class="none" />
     </view>
@@ -134,10 +156,10 @@
   
   <view class="item">
     <view class="title">
-      <view class="label">经营店门头照：</view>
+      <view class="label"><view class="span-index">⑤</view>经营店门头照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images">
+    <view class="images" bindtap="upImage">
        <image class="add" bindtap="upImage" src="../../images/add.png" />
        <view class="none" />
     </view>
@@ -145,21 +167,21 @@
 
   <view class="item">
     <view class="title">
-      <view class="label">场景照：需清晰、视角明亮</view>
-      <view class="content"> </view>
-    </view>
-    <view class="images">
-       <image class="add" src="../../images/add.png" />
-       <view class="none" />
-    </view>
-  </view>
-  
-  <view class="item">
-    <view class="title">
-      <view class="label">经营场所照：</view>
+      <view class="label"><view class="span-index">⑥</view>场景照：</view>
       <view class="content"> 需清晰、视角明亮</view>
     </view>
-    <view class="images">
+    <view class="images" bindtap="upImage">
+       <image class="add" src="../../images/add.png" />
+       <view class="none" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">⑦</view>经营场所照：</view>
+      <view class="content"> 需清晰、视角明亮</view>
+    </view>
+    <view class="images" bindtap="upImage">
        <image class="add" bindtap="upImage" src="../../images/add.png" />
        <view class="none" />
     </view>
