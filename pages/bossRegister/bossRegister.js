@@ -9,9 +9,12 @@ Page({
   data: {
     step: 0, // 步骤 0: 基本信息以及银行卡信息填写  1: 上传照片
     areaCode: '',
+    customItem: '全部',
+    /* picker */
     area: [[], ['请选择省'], ['请选择市']],   // 省市区
     areaIndex: [0, 0, 0],
-    customItem: '全部',
+    bank: [],
+    bankIndex: [],
     inputValue: {
       /* 基本信息 */
       legalName: '',     // 法人姓名
@@ -32,15 +35,42 @@ Page({
     }
   },
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      areaIndex: e.detail.value
-    })
-    this.data.areaIndex = e.detail.value 
-    this.getBankCity()
+    console.log('picker发送选择改变，携带值为', e.detail.value, e)
+    this.setData({ areaIndex: e.detail.value })
   },
   bindMultiPickerColumnChange(e){
     console.log(e)
+    const { column, value } = e.detail
+    const _this = this
+    this.setData({ [`areaIndex[${column}]`]: value })
+    switch(column) {
+      case 0:
+        this.setData({ [`areaIndex[0]`]: value })
+        if (this.provincePickerTimer) clearTimeout(this.provincePickerTimer)
+        this.provincePickerTimer = setTimeout(() => {
+          _this.getBankCity(value)
+        }, 800)
+        break;
+      case 1:
+        if (this.cityPickerTimer) clearTimeout(this.cityPickerTimer)
+        this.cityPickerTimer = setTimeout(() => {
+          _this.getBankDistrict(value)
+        }, 500)
+        break;
+      case 2:
+        this.setData({ [`areaIndex[2]`]: value })
+    }
+  },
+
+  getYeepayBank() {
+    const { platform, token, username, supplierNo } = this.userObj
+    const _this = this
+    API.getYeepayBank({
+      data: { platform, token, username, supplierNo },
+      success(res) {
+        console.log(res)
+      }
+    }) 
   },
 
   /**
@@ -49,6 +79,7 @@ Page({
   onLoad: function (options) {
     this.userObj = wx.getStorageSync('authorizeObj')
     this.getBankProvince() // 获取省份
+    this.getYeepayBank() // 获取开户行
   },
   // 省
   getBankProvince() {
@@ -60,29 +91,62 @@ Page({
         console.log(res)
         if (res.code == 0) {
           let data = res.data
-          let provinceArr = ['请选择']
+          let provinceArr = []
           data.forEach((item) => {
             provinceArr.push(item.province)
           })
+          _this.data.area[0] = provinceArr
           _this.setData({ [`area[0]`]: provinceArr })
+          _this.getBankCity()
         }
       }
     })
   },
   // 市
-  getBankCity() {
+  getBankCity(index = 0) {
     const { platform, token, username, supplierNo } = this.userObj
-    const { area, areaIndex } = this.data
-    console.log(area, areaIndex)
-    if (areaIndex == 0) return
-    const province = area[0][areaIndex]
+    const { area } = this.data
+    const _this = this
+    const province = area[0][index]
     API.getBankCity({
       data: { platform, token, username, supplierNo, data: province },
       success(res) {
         console.log(res)
+        if (res.code == 0) {
+          let data = res.data
+          let cityArr = []
+          data.forEach((item) => {
+            cityArr.push(item.city)
+          })
+          _this.data.area[1] = cityArr
+          _this.setData({ [`area[1]`]: cityArr })
+          _this.getBankDistrict()
+        }
       }
     })
   },
+  // 区 
+  getBankDistrict(index = 0) {
+    const { platform, token, username, supplierNo } = this.userObj
+    const { area } = this.data
+    const _this = this
+    const city = area[1][index]
+    API.getBankDistrict({
+      data: { platform, token, username, supplierNo, data: city }, 
+      success(res) {
+        console.log(res)
+        if (res.code == 0) {
+          let data = res.data
+          let districtArr = []
+          data.forEach((item) => {
+            districtArr.push(item.district)
+          })
+          _this.setData({ [`area[2]`]: districtArr })
+        }
+      }
+    })
+  },
+
   // 表单验证
   isAdopt(obj) {
     let info = ''
@@ -142,6 +206,7 @@ Page({
     }
     return info
   },
+  
   bindInputValue (e) {
     console.log(e)
     const { label } = e.currentTarget.dataset
@@ -151,26 +216,26 @@ Page({
   },
   // 下一步
   runStep() {
-    const { inputValue } = this.data
-    switch (this.data.step) { // 前往下一步
-      case 0:
-        // 基本信息 
+    const { inputValue, area, areaIndex } = this.data
+    switch (this.data.step) {
+      case 0:                   
+      /* 基本信息 */
         const basicObj = {
           legalName: inputValue.legalName,
           legalIdCard: inputValue.legalIdCard,
           merLegalPhone: inputValue.merLegalPhone,
-          merProvince: inputValue.merProvince,
-          merCity: inputValue.merCity,
-          merDistrict: inputValue.merDistrict,
+          merProvince: area[0][areaIndex[0]],  // 省
+          merCity: area[1][areaIndex[1]],      // 市
+          merDistrict: area[2][areaIndex[2]],  // 区
           merAddress: inputValue.merAddress,
           mail: inputValue.mail
         }
         let adoptInfo = this.isAdopt(basicObj)
         console.log(adoptInfo)
-        if (adoptInfo) return toast(adoptInfo)
-        return this.setData({ step: 1 }) 
-      case 1:
-        // 银行卡以及开户信息
+        // if (adoptInfo) return toast(adoptInfo)
+        return this.setData({ step: 1 })
+      case 1:           
+      /* 银行卡以及开户信息 */ 
         const bankObj = {
           cardNo: inputValue.cardNo,
           headBankCode: inputValue.headBankCode,
@@ -178,6 +243,9 @@ Page({
           yeeBankProvince: inputValue.yeeBankProvince,
           yeeBankCity: inputValue.yeeBankCity
         }
+        let adoptInfo2 = this.isAdopt(bankObj)
+        console.log(adoptInfo2)
+        if (adoptInfo2) return toast(adoptInfo2)
         return this.setData({ step: 2 }) 
     }
   },

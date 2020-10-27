@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    intoWay: '', // 进入页面方式 1: 由登录界面进入  '': 正常充值页进入
+    intoWay: '', // 进入页面方式 1: 由登录界面进入  '': 正常充值页进入   2： 余额不足进入
     tagArray: [5000, 8000, 10000, 20000, 50000, 100000],
     type: '', // 选择的金额
     amt: '',
@@ -43,6 +43,12 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.data.intoWay = options.type
+    if (options.type == 2) {
+      showModal({
+        content: '余额不足，请及时充值',
+        showCancel: false
+      })
+    }
     console.log(getApp().globalData)
     this.repeatGetIp() // 获取用户 IP 地址
   },
@@ -110,7 +116,7 @@ Page({
                 content: `支付成功 \b 充值金额：${pay_amt}`,
                 showCancel: false,
                 success() {
-                  if (intoWay == 1) {
+                  if (intoWay == 1 || intoWay == 2) {
                     wx.redirectTo({ url: '/pages/login/login' })
                     wx.clearStorageSync('authorizeObj')
                     return

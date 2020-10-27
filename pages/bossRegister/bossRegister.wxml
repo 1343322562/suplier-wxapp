@@ -27,7 +27,7 @@
     <view class='name'>*省市区</view>
     <picker       
       style="flex: 1;"
-      mode="multiSelector" 
+      mode="multiSelector"
       bindchange="bindMultiPickerChange" 
       bindcolumnchange="bindMultiPickerColumnChange" 
       value="{{areaIndex}}" 
