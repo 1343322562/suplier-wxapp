@@ -84,9 +84,9 @@
   
 }
 
-.bank-info{position: absolute;
+.bank-info{
+  position: absolute;
   background-color: #ffffff;
-  border: 1rpx solid #999;
   top: 85rpx;
   border-top-color: #fff;
   width: 400rpx;
@@ -95,7 +95,8 @@
   border-radius: 6rpx;
   padding: 10rpx;
   height: 200rpx;
-  overflow-y: scroll; 
+  overflow-y: scroll;
+  box-shadow: 0 5rpx 25rpx #ff820050;
 }
 .bank-info .bank-item{
   padding: 12rpx 16rpx;

@@ -25,24 +25,25 @@
 
   <view class='form'>
     <view class='name'>*省市区</view>
-    <!-- <picker       
+    <picker       
+      data-type="0"
       style="flex: 1;"
       mode="multiSelector"
-      bindchange="bindMultiPickerChange" 
-      bindcolumnchange="bindMultiPickerColumnChange" 
-      value="{{areaIndex}}" 
-      range="{{area}}"
+      bindcolumnchange="bindAreaPickerColumnChange" 
+      value="{{basicAreaIndex}}" 
+      range="{{basicArea}}"
       range-key="place"
     >
-      <view class="picker">
-        {{area[0][areaIndex[0]].place}}，{{area[1][areaIndex[1]].place}}，{{area[2][areaIndex[2]].place}}
+      <view class="picker" data-type="0" bindtap="pickerClick">
+        {{basicArea[0][basicAreaIndex[0]].place}}，{{basicArea[1][basicAreaIndex[1]].place}}，{{basicArea[2][basicAreaIndex[2]].place}}
       </view>
-    </picker> -->
-    <picker style="flex: 1;" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    </picker>
+
+    <!-- <picker data-type="0" style="flex: 1;" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
       <view class="picker">
         {{region[0]}}，{{region[1]}}，{{region[2]}}
       </view>
-    </picker>
+    </picker> -->
   </view>
 
   <view class='form'>
@@ -71,6 +72,7 @@
     <view class='name'>*开户行省市区</view>
     
     <picker       
+      data-type="1"
       style="flex: 1;"
       mode="multiSelector"
       bindcolumnchange="bindAreaPickerColumnChange" 
@@ -78,7 +80,7 @@
       range="{{area}}"
       range-key="place"
     >
-      <view class="picker">
+      <view class="picker" data-type="1" bindtap="pickerClick">
         {{area[0][areaIndex[0]].place}}，{{area[1][areaIndex[1]].place}}，{{area[2][areaIndex[2]].place}}
       </view>
     </picker>
@@ -94,13 +96,16 @@
     <view class='name'>*开户行</view>
     <input data-label="headBankCode" value="{{inputValue.headBankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户银行"/>
     <view class="bank-info" wx:if="{{bankSelectArr.length}}">
-      <view wx:for="{{bankSelectArr}}" bindtap="selectHeadBank" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
+      <view wx:for="{{bankSelectArr}}" bindtap="selectHeadBank" data-type="0" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
     </view>
   </view>
 
   <view class='form'>
     <view class='name'>*开户行支行</view>
     <input data-label="bankCode" value="{{inputValue.bankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户行支行"/>
+    <view class="bank-info" wx:if="{{subBankSelectArr.length}}">
+      <view wx:for="{{subBankSelectArr}}" bindtap="selectHeadBank" data-type="1" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
+    </view>
   </view>
 
 </block>
