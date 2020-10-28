@@ -17,6 +17,7 @@ let contentHandle = {
 
 // 处理打印格式
 export const printContentHandle = function (data, type) {
+  console.log(getApp().globalData.wareInfo)
   let content = '' // 打印内容
   let sign = type == 1 ? '重复打印' : ''
   let sheetNo = []
@@ -29,7 +30,7 @@ export const printContentHandle = function (data, type) {
   data.forEach((item, index) => {
     console.log(item, getApp())
     sheetNo.push(item.sheetNo)
-    // content += `<L>前置仓名称：${getApp().globalData.wareInfo.warehouse || getApp().globalData.wareInfo.supplierName}<BR></L>`
+    content += `<L>站    点：${getApp().globalData.wareInfo.supplierName || getApp().globalData.wareInfo.warehouse}<BR></L>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate.slice(0, 19)}<BR></L>`
     content += `<L>复打日期：${cDate}<BR></L>`
@@ -44,7 +45,7 @@ export const printContentHandle = function (data, type) {
     content += `<C><N>-----------------------------------------------</N><BR></C>`
     item.details.forEach((good, i) => {
       content += `<N>【${i+1}】    ${contentHandle.unit(good.itemSubno, 19)}${good.itemName.slice(0, 9)}</N><BR>`
-      content += `<N> <BOLD>${contentHandle.unit(good.realQty+good.unitNo, 7)}</BOLD>${contentHandle.unit(good.orgiPrice.toFixed(2), 10)}<BOLD>${contentHandle.unit(good.subAmt.toFixed(2)+'/'+good.unitNo, 11)}</BOLD>${contentHandle.unit((good.subAmt*good.realQty).toFixed(2), 10)}${item.warehouse || '空'}</N><BR><BR>`
+      content += `<N> <BOLD>${contentHandle.unit(good.realQty+good.unitNo, 7)}</BOLD>${contentHandle.unit(good.OrgiPrice.toFixed(2), 10)}<BOLD>${contentHandle.unit(good.subAmt.toFixed(2)+'/'+good.unitNo, 11)}</BOLD>${contentHandle.unit((good.subAmt*good.realQty).toFixed(2), 10)}${item.warehouse || '空'}</N><BR><BR>`
     })
     content += `<C><N>————————————————————————</N><BR></C>`
     // content += `<N><L>整单合计：${(item.sheetAmt).toFixed(2)}<L>                 <R>${item.supplyFlag}</R></N><BR>`
@@ -58,9 +59,10 @@ export const printContentHandle = function (data, type) {
     // content += `<B><L>出货单备注：<L></B><BR>`
     content += `<BR><B><L>客户备注:${item.mome || '无'}</L></B>`
     content += `<BR><B><L>老板备注:${item.bossMemo || '无'}</L></B><BR><BR>`
+    content += `<BR><BR><N><L>客服电话:<BOLD>0771-3836383</BOLD> (周一至周六行政班时间联系)<L></N>`
     // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
     // content += `<N><L>如有冻品,请开箱确认完好后再签字!!<L></N>`
-    content += `<BR><BR><N><C>================================================<C></N><BR><BR>`
+    content += `<BR><N><C>================================================<C></N><BR><BR>`
 
 
     // 回执单
