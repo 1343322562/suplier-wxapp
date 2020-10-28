@@ -78,16 +78,17 @@ Page({
         if (this.provincePickerTimer) clearTimeout(this.provincePickerTimer)
         this.provincePickerTimer = setTimeout(() => {
           _this.getBankCity(value, pickerType)
-        }, 800)
+        }, 600)
         break;
       case 1:
         if (this.cityPickerTimer) clearTimeout(this.cityPickerTimer)
         this.cityPickerTimer = setTimeout(() => {
           _this.getBankDistrict(value, pickerType)
-        }, 500)
+        }, 600)
         break;
     }
   },
+  
   // 获取支行
   getYeeBankSubbranch(bankName) {
     const { platform, token, username, supplierNo } = this.userObj
@@ -257,6 +258,7 @@ Page({
   // 表单验证
   isAdopt(obj) {
     let info = ''
+    const { inputValue, subBankDataObj, bankDataObj } = this.data
     for (let key in obj) {
       switch (key) {
         case 'legalName':
@@ -290,23 +292,23 @@ Page({
           }
           break;
         case 'cardNo':
-          if (obj[key].length != 18 && obj[key].length != 16 && obj[key].length != 17) {
+          if (obj[key].length != 18 && obj[key].length != 16 && obj[key].length != 17){
             info = '请填写正确的银行卡号'
           }
           break;
         case 'headBankCode':
-          if (!obj[key]) {
-            info = '请填写开户银行编号'
+          if (!obj[key] && inputValue[key] in bankDataObj) {
+            info = '请填写(选择)正确的开户行名称'
           }
           break;
         case 'bankCode':
-          if (!obj[key]) {
-            info = '请填写开户银行支行编号'
+          if (!obj[key] && inputValue[key] in subBankDataObj) {
+            info = '请填写(选择)正确的开户行支行名称'
           }
           break;
-        case 'yeeBankProvince':
-          if (!obj[key]) {
-            info = '请填写开户银行支行编号'
+        case ('yeeBankProvince' || 'yeeBankCity'):
+          if (!obj[key] && inputValue[key] in subBankDataObj) {
+            info = '请选择开户行所属省市区'
           }
           break;
       }
@@ -340,11 +342,12 @@ Page({
     console.log(e)
     const { label } = e.currentTarget.dataset
     const { value } = e.detail
+    console.log(this.data.bankCode ,value)
     if (label == 'headBankCode' && value.length >= 2 && value.length <= 5) {
       const bankSelectArr = this.bankArrHandle(value, 0)
       this.setData({ [`inputValue.${label}`]: value, bankSelectArr })
       return;
-    } else if (label == 'bankCode' && value.length > 2){
+    } else if (label == 'bankCode' && value.length >= 2 && this.data.inputValue.bankCode.length < value.length){
       const subBankSelectArr = this.bankArrHandle(value, 1)
       this.setData({ [`inputValue.${label}`]: value, subBankSelectArr })
       return;
