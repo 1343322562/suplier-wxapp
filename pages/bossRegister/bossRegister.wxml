@@ -48,11 +48,11 @@
 
   <view class='form'>
     <view class='name'>*商户详细地址</view>
-    <input data-label="merAddress" value="{{inputValue.merAddress}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入商户详细地址"/>
+    <input data-label="merAddress" value="{{inputValue.merAddress}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入商户详细地址"/>
   </view>
   <view class='form'>
     <view class='name'>*邮箱</view>
-    <input data-label="mail" value="{{inputValue.mail}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入邮箱"/>
+    <input data-label="mail" value="{{inputValue.mail}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入邮箱"/>
   </view>
 
 </block>
@@ -60,7 +60,7 @@
 <!-- 银行卡及开户信息 -->
 
 <block wx:if='{{step == 1}}'> 
-  <view class="span">银行卡及开户信息</view>
+  <view class="span">银行卡及开户信息 <view class="explain">(请按由上至下顺序填写)</view></view>
 
   <view class='form'>
     <view class='name'>*银行卡号</view>
