@@ -7,11 +7,12 @@ var filters = {
   },
   toNum: function (value) {       
       return value.toNumber()
-  },
+  }
 }
 
 module.exports = {   
   toFixed: filters.toFixed,
   toStr: filters.toStr,
   toNum: filters.toNum,
+  slice: filters.slice
 }

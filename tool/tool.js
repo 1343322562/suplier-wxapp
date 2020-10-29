@@ -103,3 +103,13 @@ export const getIP = (param) => {
     }
   });
 } 
+
+// 生成随机数
+export const mathRandom = (num = 1) => {
+  let str = ''
+  for (let i = 1; i <= num; i++) {
+    str += Math.floor(Math.random() * 10)
+  }
+  console.log(str)
+  return Number(str)
+} 

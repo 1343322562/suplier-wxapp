@@ -1,4 +1,5 @@
 
+import reqConfig from './api/config.js'
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -34,6 +35,7 @@ App({
     })
   },
   globalData: {
+    baseUrl: reqConfig.baseURL,
     ceshiData: false, // 当前是否是测试过审状态
     userInfo: null,
     bounding: wx.getMenuButtonBoundingClientRect(), // 胶囊信息

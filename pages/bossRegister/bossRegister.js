@@ -1,6 +1,6 @@
-import { goPage, showModal, toast, getLocation, getIP } from '../../tool/tool.js'
+import { goPage, showModal, toast, getLocation, mathRandom } from '../../tool/tool.js'
 import API from '../../api/index.js'
-
+const app = getApp()
 Page({
 
   /**
@@ -45,6 +45,17 @@ Page({
       bankCode: '',      // 开户支行编号
       yeeBankProvince: '',  // 开户省
       yeeBankCity: '',      // 开户市 
+    },
+
+    upLoaderBaseUrl: app.globalData.baseUrl,  // 图片根路径
+    imgData: {
+      picType000: '',    //身份证正面
+      picType030: '',    //身份证反面
+      picType033: '',    //手持身份证正面
+      picType050: '',    //场景照
+      picType051: '',    //经营场所照
+      picType034: '',    //门头照
+      picType035: '',    //银行卡的正面照
     }
   },
   pickerClick(e) {
@@ -149,6 +160,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData)
     this.userObj = wx.getStorageSync('authorizeObj')
     this.getBankProvince() // 获取省份
     this.getYeepayBank() // 获取开户行
@@ -262,7 +274,7 @@ Page({
     for (let key in obj) {
       switch (key) {
         case 'legalName':
-          if (!obj[key] && !(obj[key].length > 1) && !(obj[key].length < 5)) {
+          if (!obj[key]) {
             info = '请填写正确的姓名'
           }
           break;
@@ -292,6 +304,7 @@ Page({
           }
           break;
         case 'cardNo':
+          obj[key] = (obj[key]).replace(/·/g, '')
           if (obj[key].length != 18 && obj[key].length != 16 && obj[key].length != 17){
             info = '请填写正确的银行卡号'
           }
@@ -309,6 +322,41 @@ Page({
         case ('yeeBankProvince' || 'yeeBankCity'):
           if (!obj[key] && inputValue[key] in subBankDataObj) {
             info = '请选择开户行所属省市区'
+          }
+          break;
+        case ('picType000'):
+          if (!obj[key]) {
+            info = '请上传身份证正面照片'
+          }
+          break;
+        case ('picType030'):
+          if (!obj[key]) {
+            info = '请上传身份证国徽面照片'
+          }
+          break;
+        case ('picType033'):
+          if (!obj[key]) {
+            info = '请上传手持身份证正面照片'
+          }
+          break;
+        case ('picType050'):
+          if (!obj[key]) {
+            info = '请上传场景照片'
+          }
+          break;
+        case ('picType051'):
+          if (!obj[key]) {
+            info = '请上传经营场所照片'
+          }
+          break;
+        case ('picType034'):
+          if (!obj[key]) {
+            info = '请上传门头照片'
+          }
+          break;
+        case ('picType035'):
+          if (!obj[key]) {
+            info = '请上传银行卡正面照片'
           }
           break;
       }
@@ -341,7 +389,7 @@ Page({
   bindInputValue (e) {
     console.log(e)
     const { label } = e.currentTarget.dataset
-    const { value } = e.detail
+    let { value } = e.detail
     console.log(this.data.bankCode ,value)
     if (label == 'headBankCode' && value.length >= 2 && value.length <= 5) {
       const bankSelectArr = this.bankArrHandle(value, 0)
@@ -351,7 +399,15 @@ Page({
       const subBankSelectArr = this.bankArrHandle(value, 1)
       this.setData({ [`inputValue.${label}`]: value, subBankSelectArr })
       return;
-    }
+    } 
+    // else if (label == 'cardNo') {
+    //   const { cardNo } = this.data.inputValue
+    //   const tempVal = value.replace(/·/g, '')
+    //   console.log(tempVal, cardNo.length<value.length)
+    //   if (tempVal.length%4 == 0 && value.length>0 && tempVal.length != 16) {
+    //     value = value + '·'
+    //   }
+    // }
     this.setData({ [`inputValue.${label}`]: value, bankSelectArr: [] })
     console.log(label, value)
   },
@@ -392,7 +448,7 @@ Page({
         }
         let adoptInfo = this.isAdopt(basicObj)
         console.log(adoptInfo)
-        // if (adoptInfo) return toast(adoptInfo)
+        if (adoptInfo) return toast(adoptInfo)
         this.data.pickerType = 1
         // 用户未选择开户行省市区时，发起省市区请求
         if (!this.data.area[0].length) this.getBankProvince()
@@ -404,17 +460,45 @@ Page({
           headBankCode: inputValue.headBankCode,
           bankCode: inputValue.bankCode,
           yeeBankProvince: area[0][areaIndex[0]].provinceCode,
-          yeeBankCity: area[0][areaIndex[0]].cityCode
+          yeeBankCity: area[0][areaIndex[0]].cityCode  
         }
         let adoptInfo2 = this.isAdopt(bankObj)
         console.log(adoptInfo2)
-        // if (adoptInfo2) return toast(adoptInfo2)
+        if (adoptInfo2) return toast(adoptInfo2)
         return this.setData({ step: 2 }) 
     }
   },
   submit(e) {
-    console.log(this.data, 1, e)
-    console.log(2)
+    const { inputValue, imgData, basicArea, basicAreaIndex, bankDataObj, subBankDataObj, area, areaIndex } = this.data
+    const { supplierNo } = this.userObj
+    const isAdoptInfo = this.isAdopt(imgData)
+    if (isAdoptInfo) return toast(isAdoptInfo)
+    console.log(this.data)
+    let reqObj = {
+      dcBranchNo: '', // 配送中心编号
+      custType: '',   // O
+      legalName: inputValue.legalName,          // 法人姓名
+      merLegalPhone: inputValue.merLegalPhone,  // 法人手机号
+      legalIdCard: inputValue.legalIdCard,      // 法人证件号
+      merProvince: basicArea[0][basicAreaIndex[0]].provinceCode,  // 省
+      merCity: basicArea[1][basicAreaIndex[1]].cityCode,          // 市
+      merDistrict: basicArea[2][basicAreaIndex[2]].districtCode,  // 区
+      merAddress: inputValue.merAddress,  // 详细地址
+      cardNo: inputValue.cardNo.replace(/·/g, ''),          // 结算卡号
+      headBankCode: bankDataObj[inputValue.headBankCode].bankCode, // 开户银行编号
+      bankCode: subBankDataObj[inputValue.bankCode].subCode,       //  开户银行支行编号
+      yeeBankProvince: area[0][areaIndex[0]].provinceCode,  // 开户省
+      yeeBankCity: area[1][areaIndex[1]].cityCode,          // 开户市
+      mail: inputValue.mail,    // 邮箱
+      supplierNo,               // 入驻商编号
+    }
+    console.log(reqObj)
+    API.submitRegisterYeepay({
+      data: reqObj,
+      success(res) {
+        console.log(res)
+      } 
+    })
   },
 
   // 返回上一步
@@ -427,7 +511,8 @@ Page({
     this.setData({ step: step - 1 })
   },
   // 拍照\选择照片上传
-  upImage() {
+  upImage(e) {
+    const { imgname: imgName } = e.currentTarget.dataset 
     const _this = this
     wx.chooseImage({
       count: 1,
@@ -436,27 +521,25 @@ Page({
       success(res) {
         console.log(res)
         const tempFilePath = res.tempFilePaths[0]
-        _this.uploadImg(tempFilePath)
+        _this.uploadImg(tempFilePath, imgName, _this)
       }
     })
   },
 
-  uploadImg(url) {
+  uploadImg(url, imgName, _this = this) {
+    console.log(imgName, arguments)
+    const { supplierNo } = this.userObj
     wx.uploadFile({
-      url: 'http://192.168.2.96:8087/zksr-match/yeepay/uploadPicture.do',
+      url: `http://192.168.2.96:8087/zksr-match/yeepay/uploadPicture.do?supplierNo=${supplierNo}&imgName=${imgName}`,
       filePath: url,
       name: 'file',
-      formData: {
-        'user': 'test'
-      },
       success: (res) => {
-        console.log(res)
-        console.log(JSON.parse(res.data))
+        let data = JSON.parse(res.data)
+        _this.setData({ [`imgData.${imgName}`]: data.message + `?a=${mathRandom(6)}`  })
       },
       fail: (err) => {
         console.log(err)
-        hideLoading()
-        toast('选择图片失败!')
+        toast('上传图片失败, 请检查网络!')
       }
     })
   },

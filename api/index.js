@@ -58,6 +58,6 @@ export default {
   getBankDistrict: (param) => ajax.post(`yeepay/getBankDistrict.do`, param),     // 获取区
   getYeepayBank: (param) => ajax.post(`yeepay/getYeepayBank.do`, param),     // 获取银行
   /* yeeBankProvince 省  yeeBankCity 市 data 银行 */ 
-  getYeeBankSubbranch: (param) => ajax.post(`yeepay/getYeeBankSubbranch.do`, param)     // 获取银行支行
-
+  getYeeBankSubbranch: (param) => ajax.post(`yeepay/getYeeBankSubbranch.do`, param),     // 获取银行支行
+  submitRegisterYeepay: (param) => ajax.post(`yeepay/submitRegisterYeepay.do`, param)     // 提交注册信息
 }

@@ -1,3 +1,5 @@
+
+<wxs module="filters" src="../../tool/filter.wxs"></wxs>
 <!-- 导航栏 -->
 <Navbar 
   leftIconText='返回'
@@ -120,9 +122,10 @@
       <view class="label"><view class="span-index">①</view>法定代表人身份证人像面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType000" />
+       <view wx:if="{{!imgData.picType000}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType000}}" class="none" />
     </view>
   </view>
   
@@ -131,9 +134,10 @@
       <view class="label"><view class="span-index">②</view>法定代表人身份证国徽面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" bindtap="upImage" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images" >
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType030" />
+       <view wx:if="{{!imgData.picType030}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType030}}" class="none" />
     </view>
   </view>
 
@@ -142,9 +146,10 @@
       <view class="label"><view class="span-index">③</view>手持身份证人像面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images" >
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType033" />
+       <view wx:if="{{!imgData.picType033}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType033}}" class="none" />
     </view>
   </view>
 
@@ -153,9 +158,10 @@
       <view class="label"><view class="span-index">④</view>法人银行卡正面照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType035" />
+       <view wx:if="{{!imgData.picType035}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType035}}" class="none" />
     </view>
   </view>
   
@@ -164,9 +170,10 @@
       <view class="label"><view class="span-index">⑤</view>经营店门头照：</view>
       <view class="content"> 需清晰、完整、无遮挡</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" bindtap="upImage" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType034" />
+       <view wx:if="{{!imgData.picType034}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType034}}" class="none" />
     </view>
   </view>
 
@@ -175,9 +182,10 @@
       <view class="label"><view class="span-index">⑥</view>场景照：</view>
       <view class="content"> 需清晰、视角明亮</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType050" />
+       <view wx:if="{{!imgData.picType050}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType050}}" class="none" />
     </view>
   </view>
   
@@ -186,9 +194,10 @@
       <view class="label"><view class="span-index">⑦</view>经营场所照：</view>
       <view class="content"> 需清晰、视角明亮</view>
     </view>
-    <view class="images" bindtap="upImage">
-       <image class="add" bindtap="upImage" src="../../images/add.png" />
-       <view class="none" />
+    <view class="images">
+       <image class="add" bindtap="upImage" data-imgname="picType051" src="../../images/add.png" />
+       <view wx:if="{{!imgData.picType051}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType051}}" class="none" />
     </view>
   </view>
 

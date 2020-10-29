@@ -31,7 +31,7 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.13.2",
+	"libVersion": "2.12.2",
 	"appid": "wx56422cd818402e49",
 	"projectname": "wxapp",
 	"debugOptions": {
