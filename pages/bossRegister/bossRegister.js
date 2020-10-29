@@ -1,4 +1,4 @@
-import { goPage, showModal, toast, getLocation, mathRandom } from '../../tool/tool.js'
+import { goPage, showModal, toast, getLocation, mathRandom, backPage } from '../../tool/tool.js'
 import API from '../../api/index.js'
 const app = getApp()
 Page({
@@ -474,9 +474,10 @@ Page({
     const isAdoptInfo = this.isAdopt(imgData)
     if (isAdoptInfo) return toast(isAdoptInfo)
     console.log(this.data)
+    console.log(app.globalData.wareInfo)
     let reqObj = {
-      dcBranchNo: '', // 配送中心编号
-      custType: '',   // O
+      dcBranchNo: app.globalData.wareInfo.dcBranchNo, // 配送中心编号
+      custType: 'O',   // O
       legalName: inputValue.legalName,          // 法人姓名
       merLegalPhone: inputValue.merLegalPhone,  // 法人手机号
       legalIdCard: inputValue.legalIdCard,      // 法人证件号
@@ -491,12 +492,27 @@ Page({
       yeeBankCity: area[1][areaIndex[1]].cityCode,          // 开户市
       mail: inputValue.mail,    // 邮箱
       supplierNo,               // 入驻商编号
+
+      picType000: imgData.picType000.slice(8, 22),
+      picType030: imgData.picType030.slice(8, 22), 
+      picType033: imgData.picType033.slice(8, 22),
+      picType050: imgData.picType050.slice(8, 22),
+      picType051: imgData.picType051.slice(8, 22),
+      picType034: imgData.picType034.slice(8, 22),
+      picType035: imgData.picType035.slice(8, 22)
     }
     console.log(reqObj)
     API.submitRegisterYeepay({
       data: reqObj,
       success(res) {
         console.log(res)
+        showModal({
+          content: res.data || res.message,
+          showCancel: false,
+          success(res) {
+            backPage()
+          },
+        })
       } 
     })
   },
