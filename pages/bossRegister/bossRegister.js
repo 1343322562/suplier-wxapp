@@ -305,17 +305,17 @@ Page({
           break;
         case 'cardNo':
           obj[key] = (obj[key]).replace(/·/g, '')
-          if (obj[key].length != 18 && obj[key].length != 16 && obj[key].length != 17){
+          if (obj[key].length != 19 && obj[key].length != 16 && obj[key].length != 17){
             info = '请填写正确的银行卡号'
           }
           break;
         case 'headBankCode':
-          if (!obj[key] && inputValue[key] in bankDataObj) {
+          if (!obj[key] || !(obj[key] in bankDataObj)) {
             info = '请填写(选择)正确的开户行名称'
           }
           break;
         case 'bankCode':
-          if (!obj[key] && inputValue[key] in subBankDataObj) {
+          if (!obj[key] || !(obj[key] in subBankDataObj)) {
             info = '请填写(选择)正确的开户行支行名称'
           }
           break;
@@ -448,7 +448,7 @@ Page({
         }
         let adoptInfo = this.isAdopt(basicObj)
         console.log(adoptInfo)
-        if (adoptInfo) return toast(adoptInfo)
+        // if (adoptInfo) return toast(adoptInfo)
         this.data.pickerType = 1
         // 用户未选择开户行省市区时，发起省市区请求
         if (!this.data.area[0].length) this.getBankProvince()
@@ -464,7 +464,7 @@ Page({
         }
         let adoptInfo2 = this.isAdopt(bankObj)
         console.log(adoptInfo2)
-        if (adoptInfo2) return toast(adoptInfo2)
+        // if (adoptInfo2) return toast(adoptInfo2)
         return this.setData({ step: 2 }) 
     }
   },

@@ -19,6 +19,7 @@ export default {
   updateItemStock: (param) => ajax.post(`match/updateItemStock.do`, param),          // 修改商品库存
   updateSheetMemo: (param) => ajax.post(`/match/updateSheetMemo.do`, param),         // 修改老版备注
   updateWareLocatorNo: (param) => ajax.post(`/match/updateWareLocatorNo.do`, param),         // 修改商品库位信息
+  updateItemSort: (param) => ajax.post(`match/updateItemSort.do`, param),            // 修改商品排序  supplierNo,itemNo,sortNo
   
 
 
@@ -59,5 +60,5 @@ export default {
   getYeepayBank: (param) => ajax.post(`yeepay/getYeepayBank.do`, param),     // 获取银行
   /* yeeBankProvince 省  yeeBankCity 市 data 银行 */ 
   getYeeBankSubbranch: (param) => ajax.post(`yeepay/getYeeBankSubbranch.do`, param),     // 获取银行支行
-  submitRegisterYeepay: (param) => ajax.post(`yeepay/submitRegisterYeepay.do`, param)     // 提交注册信息
+  submitRegisterYeepay: (param) => ajax.post(`yeepay/submitRegisterYeepay.do`, param),     // 提交注册信息
 }
