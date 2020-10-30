@@ -44,6 +44,12 @@ Component({
       let page = getCurrentPages().reverse()[0]
       page.showEditPriceDialogClick(e)
     },
+    // 修改 排序
+    editSort(e) {
+      const { index } = e.currentTarget.dataset
+      let page = getCurrentPages().reverse()[0]
+      page.isShowSortDialogClick(index)
+    },
     // 修改库存
     editStock (e) {
       this.triggerEvent('isShowEditDialogClick', !this.data.isShowEditDialog)

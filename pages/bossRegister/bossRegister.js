@@ -448,7 +448,7 @@ Page({
         }
         let adoptInfo = this.isAdopt(basicObj)
         console.log(adoptInfo)
-        // if (adoptInfo) return toast(adoptInfo)
+        if (adoptInfo) return toast(adoptInfo)
         this.data.pickerType = 1
         // 用户未选择开户行省市区时，发起省市区请求
         if (!this.data.area[0].length) this.getBankProvince()
@@ -464,7 +464,7 @@ Page({
         }
         let adoptInfo2 = this.isAdopt(bankObj)
         console.log(adoptInfo2)
-        // if (adoptInfo2) return toast(adoptInfo2)
+        if (adoptInfo2) return toast(adoptInfo2)
         return this.setData({ step: 2 }) 
     }
   },
@@ -507,7 +507,7 @@ Page({
       success(res) {
         console.log(res)
         showModal({
-          content: res.data || res.message,
+          content: res.message || res.data,
           showCancel: false,
           success(res) {
             backPage()
