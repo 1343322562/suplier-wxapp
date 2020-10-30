@@ -57,23 +57,33 @@ Page({
 
   onLoad: function (options) {
     this.getBoundingInfo() //获取胶囊信息（自定义导航栏）  
-    if (!options.data) {
+    if (!options.data && !app.globalData.wareInfo) {
       showModal({
         title: '提示',
         content: '获取供应商数据失败，请刷新重试'
       })
       return
     }
-    const supplierData = JSON.parse(options.data)
+    const supplierData = JSON.parse(options.data) || app.globalData.wareInfo
     console.log(supplierData, !wx.getStorageSync('authorizeObj'))
-    app.globalData.wareInfo = supplierData
+    this.isShowRechargeDialog(supplierData.czAmt)  //  是否显示 充值 弹框， 低于 1000 再显示
     this.authorize(supplierData) // 缓存 authorizeObj 信息
     this.seachSaleData(0)   // 表格数据获取 并 计算当日销售数据
     this.getErpUrl() // 情求图片根路径
     let roleNo = supplierData.roleNo
   
     this.setData({ roleNo, shopData: supplierData })
-
+  },
+  //  是否显示 充值 弹框， 低于 1000 再显示
+  isShowRechargeDialog(czAmt) {
+    console.log(czAmt)
+    if (czAmt > 1000) return
+    showModal({
+      content: '余额不足 1000，请您及时充值',
+      success(){
+        goPage('../rechargePay/rechargePay')
+      }
+    })
   },
   // 请求图片根路径
   getErpUrl() {

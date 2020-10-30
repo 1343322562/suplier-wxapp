@@ -44,69 +44,27 @@
 		<view class="loading" wx:if="{{isShowBottomLoading}}">
 		  加载中....
 		</view>
-		
-		<!-- <view class="dsa">dsa</view> -->
-
-		<!-- <view class="good-card-box">
-      <view class="good-img-box">
-        <image src="../../images/goodImg.jpg"/>
-      </view>
-      <view class="good-props-box">
-        <view class="main-info">
-          <view class="main">
-            <view calss="name">蒙牛随变经典香草冰淇淋</view>
-            <view class="item">
-              <view class="label">商品条码：</view>
-              <view class="content">202002050929</view>
-            </view>
-          </view>
-          <view class="status">
-            <view class="content">未上架</view>
-            <radio value='all' style="transform:scale(.7);" color='#FF4E3E' checked='{{true}}' class="all-selected" />
-          </view>
-        </view>
-        <view class="good-price">
-          <view class="price-box">
-            <view class="item">
-              <view class="label">进货价：</view>
-              <view class="content">￥20</view>
-            </view>
-            <view class="item">
-              <view class="label">批发价：</view>
-              <view class="content">￥19 <view bindtap="edit" class="tag">修改</view></view>
-            </view>
-            <view class="item">
-              <view class="label">库 存：</view>
-              <view class="content">100 <view bindtap="edit" class="tag">修改</view></view>
-            </view>
-          </view>
-          <view class="profit-box">
-            <view class="item">
-              <view class="label">毛利率：</view>
-              <view class="content">20.21%</view>
-            </view> 
-          </view>
-        </view>
-        
-      </view>
-    </view> -->
 
 
 	</view>
 
-	<!-- 已上架 -->
-
-	<!-- <view class='right' wx:if="{{selectedNav == 1}}">
-    <GoodCard catch:tap="toDetailClick" isAllSelected="{{isAllSelected}}" goodsData="{{[{ name: '蒙牛随变经典香草冰淇淋', code: 202002050929, price1: '20', price2:'19', num: '100', profit: '20.20%', statu: 1}]}}"/>
-  </view> -->
-
-
-
-	<!-- 未上架 -->
-	<!-- <view catchtap="toDetailClick" class='right' wx:if="{{selectedNav == 2}}">
-    <GoodCard isAllSelected="{{isAllSelected}}"/>
-  </view> -->
-
+	<!-- 修改序号位 Dialog -->
+	<view class="edit-container" wx:if='{{isShowSortDialog}}'>
+		<view class="edit-dialog">
+			<view class="title">修改序位</view>
+			<view class="current-stock">
+				<view class="label">当前序位：</view>
+				<view class="content">{{goodsData[currentIndex].sortNo}}</view>
+			</view>
+			<view class="input-item">
+				<input type="number" bindinput="editSortNum" value="{{sortNum}}"  />
+			</view>
+			<view class="confirm-edit" bindtap="editSortConfirm">
+				<button  data-type="0" style="background:#fff;height: 90rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #676767;font-weight:400;width: 100%;">取消</button>
+				<button data-type="1" style="background:#fff;height: 90rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #08B018;font-weight:400;">确认</button>
+			</view>
+		</view>
+	</view>
 
 
 	<!-- 修库存改操作 Diolog -->
@@ -122,21 +80,21 @@
 					<image src="{{inputActive == 'addNum' ? '../../images/inpSelect.png' : ''}}" class="{{inputActive == 'addNum' ? 'inputActive' : ''}} checkbox" />
 					<view class="name">增加：</view>
 				</view>
-				<input bindtap="focusClick" focus="{{editStockFocus.addNum}}" bindinput="editStockClick" value="{{editStockInputValue.addNum}}" data-type="addNum" />
+				<input type="number" bindtap="focusClick" focus="{{editStockFocus.addNum}}" bindinput="editStockClick" value="{{editStockInputValue.addNum}}" data-type="addNum" />
 			</view>
 			<view class="input-item">
 				<view class="label">
 					<image src="{{inputActive == 'subNum' ? '../../images/inpSelect.png' : ''}}" class="{{inputActive == 'subNum' ? 'inputActive' : ''}} checkbox" />
 					<view class="name">减少：</view>
 				</view>
-				<input bindtap="focusClick" focus="{{editStockFocus.subNum}}" bindinput="editStockClick" value="{{editStockInputValue.subNum}}" data-type="subNum" />
+				<input type="number" bindtap="focusClick" focus="{{editStockFocus.subNum}}" bindinput="editStockClick" value="{{editStockInputValue.subNum}}" data-type="subNum" />
 			</view>
 			<view class="input-item">
 				<view class="label">
 					<image src="{{inputActive == 'toNum' ? '../../images/inpSelect.png' : ''}}" class="{{inputActive == 'toNum' ? 'inputActive' : ''}} checkbox" />
 					<view class="name">改为：</view>
 				</view>
-				<input bindtap="focusClick" focus="{{editStockFocus.toNum}}" bindinput="editStockClick" value="{{editStockInputValue.toNum}}" data-type="toNum" />
+				<input type="number" bindtap="focusClick" focus="{{editStockFocus.toNum}}" bindinput="editStockClick" value="{{editStockInputValue.toNum}}" data-type="toNum" />
 			</view>
 			<view class="confirm-edit" bindtap="editConfirm">
 				<button data-type="0" style="background:#fff;height: 90rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #676767;font-weight:400;width: 100%;">取消</button>

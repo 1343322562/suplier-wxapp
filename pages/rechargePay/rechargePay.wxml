@@ -1,0 +1,14 @@
+
+
+<Navbar 
+  title='充值'
+  background='#ff6658' 
+  leftIconText="返回"
+  isShowLeftIcon="{{true}}"
+/>
+<view class="select-amt" bindtap="selectAmt">
+  <view wx:for="{{tagArray}}" wx:key="index" class="{{type == index + 1 ? 'act' : 'tag'}}" data-type="{{index+1}}">{{item}}</view>
+</view>
+<input type="number" bindinput="bindInputValue" value="{{amt}}" placeholder="请输入充值金额"></input>
+
+<button bindtap="submit" type="primary">确定</button>

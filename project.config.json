@@ -6,15 +6,15 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
-		"postcss": true,
+		"enhance": false,
+		"postcss": false,
 		"preloadBackgroundData": false,
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
+		"showShadowRootInWxmlPanel": false,
 		"scopeDataCheck": false,
 		"uglifyFileName": false,
 		"checkInvalidKey": true,
@@ -31,8 +31,8 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.0",
-	"appid": "wx56422cd818402e49",
+	"libVersion": "2.12.2",
+	"appid": "wx214f112d62d0a7cc",
 	"projectname": "wxapp",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -166,6 +166,20 @@
 					"id": -1,
 					"name": "pages/rechargeDetail/rechargeDetail",
 					"pathName": "pages/rechargeDetail/rechargeDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "pages/bossRegister/readyRegister/readyRegister",
+					"pathName": "pages/bossRegister/readyRegister/readyRegister",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rechargePay/rechargePay",
+					"pathName": "pages/rechargePay/rechargePay",
 					"scene": null
 				}
 			]

@@ -1,0 +1,207 @@
+
+<wxs module="filters" src="../../tool/filter.wxs"></wxs>
+<!-- 导航栏 -->
+<Navbar 
+  leftIconText='返回'
+  title="注册" 
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+/>
+<!-- 基本信息 -->
+<block wx:if="{{step == 0}}">
+  <view class="span">基本信息</view>
+
+  <view class='form'>
+    <view class='name'>*姓名</view>
+    <input data-label="legalName" value="{{inputValue.legalName}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入法人姓名"/>
+  </view>
+
+  <view class='form'>
+    <view class='name'>*身份证号</view>
+    <input data-label="legalIdCard" value="{{inputValue.legalIdCard}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入对应身份证号"/>
+  </view>
+
+  <view class='form'>
+    <view class='name'>*手机号</view>
+    <input data-label="merLegalPhone" value="{{inputValue.merLegalPhone}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入本人手机号"/>
+  </view>
+
+  <view class='form'>
+    <view class='name'>*省市区</view>
+    <picker       
+      data-type="0"
+      style="flex: 1;"
+      mode="multiSelector"
+      bindcolumnchange="bindAreaPickerColumnChange" 
+      value="{{basicAreaIndex}}" 
+      range="{{basicArea}}"
+      range-key="place"
+    >
+      <view class="picker" data-type="0" bindtap="pickerClick">
+        {{basicArea[0][basicAreaIndex[0]].place}}，{{basicArea[1][basicAreaIndex[1]].place}}，{{basicArea[2][basicAreaIndex[2]].place}}
+      </view>
+    </picker>
+
+    <!-- <picker data-type="0" style="flex: 1;" mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker> -->
+  </view>
+
+  <view class='form'>
+    <view class='name'>*商户详细地址</view>
+    <input data-label="merAddress" value="{{inputValue.merAddress}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入商户详细地址"/>
+  </view>
+  <view class='form'>
+    <view class='name'>*邮箱</view>
+    <input data-label="mail" value="{{inputValue.mail}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入邮箱"/>
+  </view>
+
+</block>
+
+<!-- 银行卡及开户信息 -->
+
+<block wx:if='{{step == 1}}'> 
+  <view class="span">银行卡及开户信息 <view class="explain">(请按由上至下顺序填写)</view></view>
+
+  <view class='form'>
+    <view class='name'>*银行卡号</view>
+    <input data-label="cardNo" value="{{inputValue.cardNo}}" bindinput="bindInputValue" type="number" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡号"/>
+  </view>
+
+
+  <view class='form'>
+    <view class='name'>*开户行省市区</view>
+    
+    <picker       
+      data-type="1"
+      style="flex: 1;"
+      mode="multiSelector"
+      bindcolumnchange="bindAreaPickerColumnChange" 
+      value="{{areaIndex}}" 
+      range="{{area}}"
+      range-key="place"
+    >
+      <view class="picker" data-type="1" bindtap="pickerClick">
+        {{area[0][areaIndex[0]].place}}，{{area[1][areaIndex[1]].place}}，{{area[2][areaIndex[2]].place}}
+      </view>
+    </picker>
+    <!-- <input data-label="yeeBankProvince" value="{{inputValue.yeeBankProvince}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户省份"/> -->
+  </view>
+
+  <!-- <view class='form'>
+    <view class='name'>*银行卡开户市</view>
+    <input data-label="yeeBankCity" value="{{inputValue.yeeBankCity}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户市区"/>
+  </view> -->
+
+  <view class='form'>
+    <view class='name'>*开户行</view>
+    <input data-label="headBankCode" value="{{inputValue.headBankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户银行"/>
+    <view class="bank-info" wx:if="{{bankSelectArr.length}}">
+      <view wx:for="{{bankSelectArr}}" bindtap="selectHeadBank" data-type="0" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
+    </view>
+  </view>
+
+  <view class='form'>
+    <view class='name'>*开户行支行</view>
+    <input data-label="bankCode" value="{{inputValue.bankCode}}" bindinput="bindInputValue" type="text" placeholder-style="font-size: 31rpx;" placeholder="请输入银行卡开户行支行"/>
+    <view class="bank-info" wx:if="{{subBankSelectArr.length}}">
+      <view wx:for="{{subBankSelectArr}}" bindtap="selectHeadBank" data-type="1" data-index="{{index}}" wx:key="index" class="bank-item">{{item}}</view>
+    </view>
+  </view>
+
+</block>
+
+
+<!-- 照片上传 -->
+
+<view class="boss-register-container" wx:if="{{step == 2}}">
+  <view class="span">照片上传</view>
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">①</view>法定代表人身份证人像面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType000" />
+       <view wx:if="{{!imgData.picType000}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType000}}" class="none" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">②</view>法定代表人身份证国徽面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images" >
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType030" />
+       <view wx:if="{{!imgData.picType030}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType030}}" class="none" />
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">③</view>手持身份证人像面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images" >
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType033" />
+       <view wx:if="{{!imgData.picType033}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType033}}" class="none" />
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">④</view>法人银行卡正面照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType035" />
+       <view wx:if="{{!imgData.picType035}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType035}}" class="none" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">⑤</view>经营店门头照：</view>
+      <view class="content"> 需清晰、完整、无遮挡</view>
+    </view>
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType034" />
+       <view wx:if="{{!imgData.picType034}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType034}}" class="none" />
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">⑥</view>场景照：</view>
+      <view class="content"> 需清晰、视角明亮</view>
+    </view>
+    <view class="images">
+       <image class="add" src="../../images/add.png" bindtap="upImage" data-imgname="picType050" />
+       <view wx:if="{{!imgData.picType050}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType050}}" class="none" />
+    </view>
+  </view>
+  
+  <view class="item">
+    <view class="title">
+      <view class="label"><view class="span-index">⑦</view>经营场所照：</view>
+      <view class="content"> 需清晰、视角明亮</view>
+    </view>
+    <view class="images">
+       <image class="add" bindtap="upImage" data-imgname="picType051" src="../../images/add.png" />
+       <view wx:if="{{!imgData.picType051}}" class="none" />
+       <image wx:else src="{{upLoaderBaseUrl + imgData.picType051}}" class="none" />
+    </view>
+  </view>
+
+</view>
+
+<view class="btn" catchtap="backStep" wx:if="{{step != 0}}"> 上一步</view>
+<view class="btn" catchtap="{{step == 2 ? 'submit' : 'runStep'}}">{{step == 2 ? '提交' : '下一步'}}</view>

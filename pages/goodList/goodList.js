@@ -24,7 +24,8 @@ Page({
       subNum: '',
       toNum: ''
     },
-    isShowBottomNull: false,
+    isShowSortDialog: false,  // 序位 Dialog
+    isShowBottomNull: false, // 加载时触发
     isShowBottomLoading: false, // 是否显示底部加载中区域
     currentSliderCls: '',    // 当前所选中的类别编号
     isShowEditPriceDialog: false,   // 显示修改价格 Dialog
@@ -40,10 +41,20 @@ Page({
     selecSliderObj: {  // 选择侧边栏
       index: 0,  // 1
       ind: 0,    // 2
-    },         
+    },
+    sortNum: '',  // 序位   
     inputActive: '',     //  修改框的选中态
     currentStock: '',    //  当前商品库存
-    currentIndex: ''  //  当前选中商品(修改库存/价格)
+    currentIndex: ''  //  当前选中商品(修改库存/价格/序位)
+  },
+  // 序号位input 绑定
+  editSortNum(e) {
+    const { value } = e.detail
+    this.setData({ sortNum: value })
+  },
+  // 显示 修改序位框
+  isShowSortDialogClick(index) {
+    this.setData({ isShowSortDialog: true, currentIndex: index })
   },
   // 跳转搜索页
   toSearchPageClick () {
@@ -294,6 +305,30 @@ Page({
         }, _this)
       }
     })
+  },
+  // 确认修改序号位置
+  editSortConfirm (e) {
+    const { type } = e.target.dataset 
+    if (type == 0) {
+      this.setData({ isShowSortDialog: false })
+      return
+    } else if (type == 1) {
+      const _this = this
+      const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+      const { sortNum, goodsData, currentIndex } = this.data
+      console.log(goodsData, currentIndex)
+      const { itemNo } = goodsData[currentIndex]
+      if (goodsData.length < sortNum) return toast('超出商品数量范围')
+      API.updateItemSort({ 
+        data: { platform, token, username, supplierNo, itemNo, sortNo: sortNum },
+        success(res) {
+          console.log(res)
+          toast(res.msg)
+          _this.onReachBottom()
+          _this.setData({ isShowSortDialog: false })
+        }
+      })
+    }
   },
 // 确认修改库存
   editConfirm (e) {

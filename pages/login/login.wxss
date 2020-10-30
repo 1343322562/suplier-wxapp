@@ -12,7 +12,13 @@ page{
   flex-direction: column;
   letter-spacing: 1rpx;
 }
-
+.recharge{
+  color: #FF4E3E;
+  font-size: 28rpx;
+  position: absolute;
+  top: 720rpx;
+  right: 100rpx;
+}
 .selecter-title {
   color: #FF4E3E;
 }
@@ -83,9 +89,10 @@ page{
   position: absolute;
   height: 32rpx;
   width: 32rpx;
-  top: 25rpx;
-  right: 35rpx;
+  top: 0rpx;
+  right: 6rpx;
   z-index: 99;
+  padding: 28rpx;
 }
 
 .login-btn {

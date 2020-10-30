@@ -23,7 +23,10 @@
     "pages/addPrint/addPrint",
     "pages/driverMap/driverMap",
     "pages/recharge/recharge",
-    "pages/rechargeDetail/rechargeDetail"
+    "pages/rechargeDetail/rechargeDetail",
+    "pages/bossRegister/bossRegister",
+    "pages/bossRegister/readyRegister/readyRegister",
+    "pages/rechargePay/rechargePay"
   ],
   "permission": {
     "scope.userLocation": {
@@ -38,8 +41,8 @@
     "enablePullDownRefresh": true
   },
   "networkTimeout": {
-    "request": 5000,
-    "downloadFile": 5000
+    "request": 15000,
+    "downloadFile": 15000
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

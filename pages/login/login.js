@@ -29,7 +29,6 @@ Page({
       success(res) {
         if (res.code) {
           console.log(res.code)
-          
           // 发起网络请求
           API.getOpenId({
             data: {
@@ -81,7 +80,10 @@ Page({
             data.roleNo = _this.data.selected
             console.log(data)
             wx.setStorage({ key: 'userObj', data: { username, password }})
+            app.globalData.wareInfo = res.data
             goPage('../index/index?data=' + JSON.stringify(data))
+          } else if (res.code == -100) { // 跳转充值页 余额不足
+            _this.toRecharge(2)
           }
         },
         error(err){
@@ -199,18 +201,22 @@ Page({
     } else {
       const { token, supplierNo } = wx.getStorageSync('authorizeObj')
       const { username, password } = wx.getStorageSync('userObj')
+      console.log(100)
       API.toLogin({
         data: { platform, username, password, openId },
         success(res) {
+          console.log(res)
           console.log( platform, username)
           if (res.code == 0) {
-            console.log(res)
             let data = res.data
             data.roleNo = _this.data.selected
             let { username, token, supplierNo, platform } = data
             wx.setStorageSync('authorizeObj', { username, token, supplierNo, platform })
+            app.globalData.wareInfo = res.data
             goPage('../index/index?data=' + JSON.stringify(res.data))
             console.log(1)
+          } else if (res.code == -100) { // 跳转充值页 余额不足
+            _this.toRecharge(2)
           }
         },
         error(err) {
@@ -227,6 +233,13 @@ Page({
       })
       
     }
+  },
+  // 去充值
+  toRecharge(num = 1) {
+    let username = this.data.text
+    wx.setStorageSync('authorizeObj', { username })
+    if (!username) return toast('充值前请输入账号')
+    goPage('../rechargePay/rechargePay?type=' + num)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

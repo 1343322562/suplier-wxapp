@@ -22,12 +22,15 @@ export const toast = (title = '完成') => {
 
 export const showModal = (obj) => {
   obj.title = '提示'
+  let showCancel = true
+  if (typeof obj.showCancel == 'string' || typeof obj.showCancel == 'boolean') showCancel = obj.showCancel
   console.log(1)
   wx.showModal({
     title: obj.title || '提示',
     content: obj.content,
-    cancelText: '取消',
-    confirmText: '确定',
+    showCancel,
+    cancelText: obj.cancelText || '取消',
+    confirmText: obj.confirmText || '确定',
     success(res) {
       if (res.confirm) {
         'success' in obj && obj.success()
@@ -117,4 +120,14 @@ export const getIP = (param) => {
       param.complete(res.data.ip)
     }
   });
+} 
+
+// 生成随机数
+export const mathRandom = (num = 1) => {
+  let str = ''
+  for (let i = 1; i <= num; i++) {
+    str += Math.floor(Math.random() * 10)
+  }
+  console.log(str)
+  return Number(str)
 } 

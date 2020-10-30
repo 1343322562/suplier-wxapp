@@ -1,7 +1,7 @@
 import { toast } from "../tool/tool"
 
 export default {
-  baseURL: 'https://qzc.yxdinghuo.com/',
+  baseURL: 'http://192.168.2.96:8087/zksr-match/',
   // https://ch.zksr.cn/
   // http://192.168.2.96:8087/zksr-match/  文艺
   // http://192.168.2.195:8087/zksr-match/
@@ -28,17 +28,17 @@ export default {
       dataType: 'json',
       data: requestObj ,
       success:  (response) => {
-        console.log(response, url)
+        console.log(response, url, response.data.code == -100)
         // if (response.statusCode == 404) return wx.showModal({ content: '请求丢失' })
         // const data = (typeof response === 'object' ? response.data : response)
         if(url == 'match/supplierItemSearch.do'){
           setTimeout(() => { wx.hideLoading()},800)
-          if (response.data.code == 0) {
+          if (response.data.code == 0){ 
             param.success(response.data)
           }
         } else if (url == 'match/supplyOrderBySupplyType.do' && response.data.code == 1) {
           toast('暂无订单数据')
-        } else if ((url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
+        } else if (response.data.code != -100 && (url != 'match_pay/getQrCodeUrl.do' && url != 'match_pay/closeQrPay.do') && (!response.data || (response.data.code != 0 && response.data.code != 10000)) ) {
           if (response.data.code == 1) return toast(response.data.msg)
           wx.setStorageSync('isWxLogin', true)
           setTimeout(() => { wx.hideLoading()},800)

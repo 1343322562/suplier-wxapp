@@ -1,4 +1,12 @@
 /* pages/editRoleData/editRoleData.wxss */
+.to-register{
+    width: 90%;
+    padding: 8rpx 5%;
+    text-align: end;
+    background-color: #fadab7;
+
+    color: #e44c11;
+}
 .form-box {
     padding: 5rpx 3%;
     width: 94%;

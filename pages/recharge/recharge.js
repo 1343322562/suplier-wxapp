@@ -20,6 +20,10 @@ Page({
     
     goPage('../rechargeDetail/rechargeDetail?operDate=' + operDate)
   },
+  // 去充值
+  toRecharge() {
+    goPage('../rechargePay/rechargePay')
+  },
   /**
    * 生命周期函数--监听页面加载
    */

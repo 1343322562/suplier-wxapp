@@ -19,6 +19,7 @@ export default {
   updateItemStock: (param) => ajax.post(`match/updateItemStock.do`, param),          // 修改商品库存
   updateSheetMemo: (param) => ajax.post(`/match/updateSheetMemo.do`, param),         // 修改老版备注
   updateWareLocatorNo: (param) => ajax.post(`/match/updateWareLocatorNo.do`, param),         // 修改商品库位信息
+  updateItemSort: (param) => ajax.post(`match/updateItemSort.do`, param),            // 修改商品排序  supplierNo,itemNo,sortNo
   
 
 
@@ -35,7 +36,8 @@ export default {
   getQrCodeUrl: (param) => ajax.post(`match_pay/getQrCodeUrl.do`, param),  // 二维码收款  closeQrPay
   closeQrPay: (param) => ajax.post(`match_pay/closeQrPay.do`, param),      // 关闭收款订单
   queryQrPay: (param) => ajax.post(`match_pay/queryQrPay.do`, param),      // 司机收款支付查询
-  
+  getMiniPayParameters: (param) => ajax.post(`match_pay/getMiniPayParameters.do`, param),  // 老板充值
+
   // match_finance
   searchOrderByCollectionFlag: (param) => ajax.post(`match_finance/searchOrderByCollectionFlag.do`, param),  // 查询收款信息
   collectionOrder: (param) => ajax.post(`match_finance/collectionOrder.do`, param),    // 确认收款
@@ -47,5 +49,16 @@ export default {
 
   // print
   addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机
-  print: (param) => ajax.post(`print/print.do`, param)     // 打印订单
+  print: (param) => ajax.post(`print/print.do`, param),     // 打印订单
+
+  // yeepay
+  getBankProvince: (param) => ajax.post(`yeepay/getBankProvince.do`, param),   // 获取省
+  /* data 省 */
+  getBankCity: (param) => ajax.post(`yeepay/getBankCity.do`, param),             // 获取市
+  /* data 市 */ 
+  getBankDistrict: (param) => ajax.post(`yeepay/getBankDistrict.do`, param),     // 获取区
+  getYeepayBank: (param) => ajax.post(`yeepay/getYeepayBank.do`, param),     // 获取银行
+  /* yeeBankProvince 省  yeeBankCity 市 data 银行 */ 
+  getYeeBankSubbranch: (param) => ajax.post(`yeepay/getYeeBankSubbranch.do`, param),     // 获取银行支行
+  submitRegisterYeepay: (param) => ajax.post(`yeepay/submitRegisterYeepay.do`, param),     // 提交注册信息
 }
