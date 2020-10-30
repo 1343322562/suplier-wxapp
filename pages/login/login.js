@@ -163,7 +163,7 @@ Page({
     let userObj = wx.getStorageSync('userObj')
     userObj && this.setData({ text: userObj.username, password: userObj.password })
     console.log(userObj,this.data.text, this.data.password)
-    this.getCurrentState() // 获取当前的登录状态（正常 | 审核）
+    // this.getCurrentState() // 获取当前的登录状态（正常 | 审核）
     setTimeout(() => this.toLogin(), 500)
   },
   // 自动登录
