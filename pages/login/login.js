@@ -57,6 +57,7 @@ Page({
 
   // 判断身份登录
   submit () {
+    if(this.data.state == 2) return
     const _this = this
     let openId = wx.getStorageSync('openId')
     wx.showLoading({ mask: true, title: '登录中...' })
@@ -139,22 +140,6 @@ Page({
     }
     console.log(this.data.text)
   },
-  // state: 1 过审
-  getCurrentState() {
-    const _this = this
-    wx.request({
-      url: 'https://mmj.zksr.cn/zksrb2b-web/supasd.json',
-      method: 'POST',
-      header: { 'content-type': 'application/json' },
-      dataType: 'json',
-      data: {},
-      success(res) {
-        console.log(res)
-        const { state } = res.data.data
-        if (state == 1) _this.setData({ state: 1 })
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -165,11 +150,11 @@ Page({
     let userObj = wx.getStorageSync('userObj')
     userObj && this.setData({ text: userObj.username, password: userObj.password })
     console.log(userObj,this.data.text, this.data.password)
-    // this.getCurrentState() // 获取当前的登录状态（正常 | 审核）
     setTimeout(() => this.toLogin(), 500)
   },
   // 自动登录
   toLogin (_this = this) {
+    if(this.data.state == 2) return
     const { platform, token } = wx.getStorageSync('authorizeObj')
     if (!token) return
     wx.showLoading({ mask: true, title: '自动登录中...' })

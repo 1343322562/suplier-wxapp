@@ -17,9 +17,6 @@ Page({
     isShowGoodDetailDialog: false,  // 是否显示 商品详情
     currentGoodIndex: ''  // 当前商品 index
   },
-  goAddPrintClick () {
-    goPage('../addPrint/addPrint')
-  },
   // 隐藏商品 Dialog
   hideDlalogClick () {
     this.setData({ isShowGoodDetailDialog: false })

@@ -1,5 +1,6 @@
 import { goPage, showModal, toast, getLocation, mathRandom, backPage } from '../../tool/tool.js'
 import API from '../../api/index.js'
+import ajax from '../../api/config'
 const app = getApp()
 Page({
 
@@ -471,6 +472,7 @@ Page({
   submit(e) {
     const { inputValue, imgData, basicArea, basicAreaIndex, bankDataObj, subBankDataObj, area, areaIndex } = this.data
     const { supplierNo } = this.userObj
+    console.log(imgData.picType000.indexOf('?'), imgData.picType000, imgData.picType000.slice(8, imgData.picType000.indexOf('?')))
     const isAdoptInfo = this.isAdopt(imgData)
     if (isAdoptInfo) return toast(isAdoptInfo)
     console.log(this.data)
@@ -493,13 +495,13 @@ Page({
       mail: inputValue.mail,    // 邮箱
       supplierNo,               // 入驻商编号
 
-      picType000: imgData.picType000.slice(8, 22),
-      picType030: imgData.picType030.slice(8, 22), 
-      picType033: imgData.picType033.slice(8, 22),
-      picType050: imgData.picType050.slice(8, 22),
-      picType051: imgData.picType051.slice(8, 22),
-      picType034: imgData.picType034.slice(8, 22),
-      picType035: imgData.picType035.slice(8, 22)
+      picType000: imgData.picType000.slice(8, imgData.picType000.indexOf('?')),
+      picType030: imgData.picType030.slice(8, imgData.picType030.indexOf('?')), 
+      picType033: imgData.picType033.slice(8, imgData.picType033.indexOf('?')),
+      picType050: imgData.picType050.slice(8, imgData.picType050.indexOf('?')),
+      picType051: imgData.picType051.slice(8, imgData.picType051.indexOf('?')),
+      picType034: imgData.picType034.slice(8, imgData.picType034.indexOf('?')),
+      picType035: imgData.picType035.slice(8, imgData.picType035.indexOf('?'))
     }
     console.log(reqObj)
     API.submitRegisterYeepay({
@@ -545,11 +547,13 @@ Page({
   uploadImg(url, imgName, _this = this) {
     console.log(imgName, arguments)
     const { supplierNo } = this.userObj
+    console.log(`${ajax.baseURL}yeepay/uploadPicture.do`)
     wx.uploadFile({
-      url: `http://192.168.2.96:8087/zksr-match/yeepay/uploadPicture.do?supplierNo=${supplierNo}&imgName=${imgName}`,
+      url: `${ajax.baseURL}yeepay/uploadPicture.do?supplierNo=${supplierNo}&imgName=${imgName}`,
       filePath: url,
       name: 'file',
       success: (res) => {
+        console.log(res)
         let data = JSON.parse(res.data)
         _this.setData({ [`imgData.${imgName}`]: data.message + `?a=${mathRandom(6)}`  })
       },

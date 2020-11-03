@@ -89,7 +89,7 @@ Page({
     console.log(intoWay)
     let requestObj = {
       code,             // 授权码
-      pay_amt: 0.01,          // 充值金额
+      pay_amt,          // 充值金额
       body: '老板余额充值', // 描述
       out_trade_no: `CZ${tim(0).replace(/-/g, '')}${getRandomNum(6)}`,    // 订单号      
       userIp: this.data.userIp,

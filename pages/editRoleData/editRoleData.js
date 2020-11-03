@@ -1,12 +1,14 @@
 // pages/editRoleData/editRoleData.js
 var amapFile = require('../../libs/amap-wx.js');  // 导入 高德 
 import { toast, goPage } from '../../tool/tool.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    state: 0,
     src: '',  // 高德地图链接
     fromData: { }, // 初始数据
     markers: {
@@ -31,6 +33,9 @@ Page({
       strokeColor: '#FF4F3F',
       fillColor:'#FF4F3F30' , 
     }]
+  },
+  goAddPrintClick () {
+    goPage('../addPrint/addPrint')
   },
   toRegister() {
     goPage('../bossRegister/readyRegister/readyRegister')
@@ -131,6 +136,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ state: app.globalData.state })
     // this.userLocation()
     // // 获取地图
     // this.renderMapArea() // 绘制静态图(区域)

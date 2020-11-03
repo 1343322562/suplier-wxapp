@@ -2,6 +2,7 @@
 import reqConfig from './api/config.js'
 App({
   onLaunch: function () {
+    this.getCurrentState()
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
@@ -34,7 +35,24 @@ App({
       }
     })
   },
+  getCurrentState() {
+    const _this = this
+    wx.request({
+      url: 'https://mmj.zksr.cn/zksrb2b-web/supasd.json',
+      method: 'POST',
+      header: { 'content-type': 'application/json' },
+      dataType: 'json',
+      data: {},
+      success(res) {
+        console.log(res)
+        const { state } = res.data.data
+        _this.globalData.state = state
+        console.log(_this)
+      }
+    })
+  },
   globalData: {
+    state: 0,
     baseUrl: reqConfig.baseURL,
     ceshiData: false, // 当前是否是测试过审状态
     userInfo: null,

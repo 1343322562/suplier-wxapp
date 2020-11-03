@@ -1,6 +1,6 @@
 <Navbar title='个人资料' background='#fff' leftIconStyle='black' titleStyle='color: #000;' leftIconText='返回' />
 
-<view class="to-register" bindtap="toRegister">前往商户注册>></view>
+<view class="to-register" wx:if="{{state != 0}}" bindtap="toRegister">前往商户注册>></view>
 <view class="form-box">
   <view class="item">
     <label>姓 名：</label>
@@ -56,6 +56,8 @@
 
 <!-- <map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;"></map> -->
 <button bindtap="backLoginClick" style="height: 80rpx;width: 600rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 60rpx;background: linear-gradient(to bottom right, #FF796D, #FF4E3E);" type='primary'>退出登录</button>
+
+<button bindtap="goAddPrintClick" style="height: 80rpx;width: 400rpx;border-radius: 50rpx;font-weight: 400;font-size: 30rpx;line-height: 50rpx;letter-spacing: 4rpx;margin-top: 60rpx;background: linear-gradient(to bottom right, #FFB910, #FF8200);" type='primary'>添加打印设备</button>
 <!-- 
 <view class="img_box">
   <image src="{{src}}" />
