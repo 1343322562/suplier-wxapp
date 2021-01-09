@@ -48,7 +48,9 @@ export default {
   
 
   // print
-  addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机
+  addPrinters: (param) => ajax.post(`print/addPrinters.do`, param),    // 添加打印机 
+  findPrinter: (param) => ajax.post(`print/findPrinter.do`, param),    // 查询打印机 synCode  supplierNo   
+  delPrinters: (param) => ajax.post(`print/delPrinters.do`, param),    // 删除打印机 synCode  supplierNo   
   print: (param) => ajax.post(`print/print.do`, param),     // 打印订单
 
   // yeepay

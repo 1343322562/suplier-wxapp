@@ -33,3 +33,9 @@ page {
   width: 166rpx;
   color: #666;
 }
+
+
+.btn-hover {
+  transform: translate(2rpx, 2rpx);
+  opacity: .7;
+}

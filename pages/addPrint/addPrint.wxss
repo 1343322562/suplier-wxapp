@@ -10,8 +10,11 @@ background-color: #eee;
   justify-content: end;
 }
 
-.form {width: 90%;
-}
+.form {position: fixed;top: 0;bottom: 0;left: 0;right: 0;z-index: 10;background-color: #66666680;}
+.form .form-box {background-color: #f9f9f9;position: fixed;top: 250rpx;left: 50%;transform: translateX(-50%);width: 80%;padding: 30rpx 50rpx;border-radius: 20rpx;}
+.form .title { text-align: center; font-size: 34rpx;font-weight: bold;color: #333549;margin-bottom: 40rpx;}
+.form .closeDialog {border-radius: 50%;height: 45rpx;width: 45rpx;border: 1rpx solid #444444;font-size: 42rpx;text-align: center;line-height: 42rpx;position: absolute;top: 8rpx;right: 12rpx;color: #444444;}
+.closeDialog::after {}
 .input-box {
   background-color: #fff;
   display: flex;
@@ -21,9 +24,7 @@ border: 1px solid #888;
 margin-bottom: 25rpx;
 padding: 5rpx 25rpx;
 border-radius: 10rpx;
-font-size: 29rpx;
-
-  
+font-size: 25rpx;
 }
 .label{display: flex;
 }
@@ -33,15 +34,16 @@ font-size: 29rpx;
 
 .input-box input {
   margin-left: 30rpx;
-
+  font-size: 29rpx;
 }
-.form button {
+/* .form::before {content: "";position: fixed;top: 0;bottom: 0;left: 0;right: 0;z-index: 10;background-color: #66666680;} */
 
-}
 
-.all-print {width: 90%;padding: 0rpx 5% 40rpx;}
+
+.all-print {width: 90%;padding: 0rpx 5% 140rpx;}
 .all-print .item{position: relative;width: 88%;padding: 20rpx 6%;background: linear-gradient(to bottom right, #f1958b, #FF4E3E);border-radius: 25rpx;color: #f6f6f6;margin-bottom: 20 rpx;}
 .all-print .label{font-size: 27rpx;height: 54rpx;line-height: 54rpx;}
 .all-print .content{font-size: 34rpx;height: 54rpx;line-height: 54rpx;}
-.all-print image{height: 43rpx;width: 43rpx;position: absolute;top: 20rpx;right: 30rpx;border: 2rpx solid #f1f1f1;padding: 14rpx;border-radius: 50%;box-shadow: 0rpx 0rpx 20rpx #ffffff inset;}
+.all-print image{height: 43rpx;width: 43rpx;border: 2rpx solid #f1f1f1;padding: 14rpx;border-radius: 50%;box-shadow: 0rpx 0rpx 20rpx #ffffff inset;}
+.all-print .del {    top: 20rpx;position: absolute;right: 65rpx;height: 43rpx;width: 43rpx;}
 .all-print .index{    position: absolute;font-size: 23rpx;top: -10rpx;left: -10rpx;border-radius: 50%;border: 1rpx solid #fff;height: 35rpx;width: 35rpx;text-align: center;background-color: #fcbc47;}

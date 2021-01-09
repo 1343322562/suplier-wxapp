@@ -10,8 +10,7 @@ Page({
     allPrint: [],
     inputValue: {
       machineNo: '',    // 设备编号
-      user: '', // 用户名
-      userKey: '' // 开发者密钥
+      machineName: ''   // 设备名称
     }
   },
 
@@ -20,12 +19,40 @@ Page({
    */
   onLoad: function (options) {
     let allPrint = wx.getStorageSync('allPrint')
-    allPrint.length && this.setData({ allPrint })
+    this.findPrinter()
   },
+  // 查询打印设备
+  findPrinter() {
+    const { supplierNo } = wx.getStorageSync('authorizeObj')
+    const _this = this
+    API.findPrinter({
+      data: { supplierNo },
+      success(res) {
+        const data = res.data
+        _this.setData({ allPrint: data })
+      }
+    })
+  },
+  // 删除设备
+  delPrintNoClick(e) {
+    const { index } = e.currentTarget.dataset
+    const { allPrint } = this.data
+    showModal({
+      content: `确认删除此设备 ? 设备号 【${allPrint[index]}】`,
+      success() {
+        this.delPrinters(allPrint[index])
+      }
+    })
+  },
+  delPrinters() {
+    API.delPrinters({
+      data: {}
+    })
+  },
+  // 隐藏框
+  hideDialog() { this.setData({ isShowDialog: false }) },
   // 显示添加设备框
-  showAddPrintDialog() {
-    this.setData({ isShowDialog: true })
-  },
+  showAddPrintDialog() { this.setData({ isShowDialog: true }) },
   // 绑定输入框
   bindInputValue(e) {
     console.log(e)
@@ -37,26 +64,20 @@ Page({
         _this.setData({ ['inputValue.machineNo']: value })
         break;
       case 1:
-        _this.setData({ ['inputValue.user']: value })
-        break;
-      case 2:
-        _this.setData({ ['inputValue.userKey']: value })
+        _this.setData({ ['inputValue.machineName']: value })
         break;
     }
   },
   // 点击保存
   addPrintClick () {
     console.log(this.data)
-    const { user, userKey, machineNo } = this.data.inputValue
+    const { machineName, machineNo } = this.data.inputValue
     const _this = this
-    console.log(!user, !userKey, !machineNo)
-    // if(!user) return toast('请输入用户账号')
-    // if(!userKey) return toast('请输入开发者密钥')
     if(!machineNo) return toast('请输入打印设备号码')
     wx.showLoading({ title: '保存中...' })
     const { supplierNo } = wx.getStorageSync('authorizeObj')
     API.addPrinters({
-      data: { printerSn: machineNo, supplierNo },
+      data: { printerSn: machineNo, supplierNo, printerName: machineName },
       success(res) {
         console.log(res)
         if (res.code == 10000) {

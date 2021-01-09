@@ -3,27 +3,36 @@
   <view class="all-print">
     <view class="item" wx:for="{{allPrint}}" wx:key="index">
       <view class="label">设备号</view>
-      <view class="content">{{item}}</view>
-      <image src="../../images/delete.png" alt="" />
+      <view class="content">{{item.}}</view>
+      <view class="del" hover-class="btn-hover" hover-stay-time="100"><image src="../../images/delete.png" alt=""  bindtap="delPrintNoClick" data-index="{{index}}"/></view>
+      
       <view class="index">{{index + 1}}</view>
     </view>
   </view>
-  <button bindtap="showAddPrintDialog" type="primary" style="width: 80%;margin-bottom: 100rpx;margin-top: 40rpx;">添加打印设备</button>
-  <view class="form">
-    <view class="input-box">
-      <view class="label"><view class="n-red">*</view>打印机设备号:</view>
-      <input bindinput="bindInputValue" data-type="0" placeholder="输入打印机设备号" value="{{inputValue.machineNo}}"></input>
+  <button bindtap="showAddPrintDialog" type="primary" style="width: 80%;position: fixed;bottom: 60rpx;">添加打印设备</button>
+  <view class="form" wx:if="{{isShowDialog}}">
+    <view class="form-box">
+      <view class="title">添加设备</view>
+      <view class="input-box">
+        <view class="label"><view class="n-red">*</view>打印机设备号:</view>
+        <input bindinput="bindInputValue" data-type="0" placeholder-style="font-size: 24rpx;"  placeholder="输入打印机设备号" value="{{inputValue.machineNo}}"></input>
+      </view>
+      <view class="input-box">
+        <view class="label">设备名称(非必填):</view>
+        <input bindinput="bindInputValue" data-type="1" placeholder-style="font-size: 24rpx;" placeholder="输入打印机别名" value="{{inputValue.machineName}}"></input>
+      </view>
+      
+      <!-- <view class="input-box">
+        <view class="label"><view class="n-red">*</view>用户账号:</view>
+        <input bindinput="bindInputValue" data-type="1" placeholder="输入用户账号" value="{{inputValue.user}}"></input>
+      </view>
+      
+      <view class="input-box">
+        <view class="label"><view class="n-red">*</view>开发者密钥:</view>
+        <input bindinput="bindInputValue" data-type="2" placeholder="输入开发者密钥" value="{{inputValue.userKey}}"></input>
+      </view> -->
+      <button bindtap="addPrintClick" type="primary" style="margin: 0;width: 100%;margin-top: 100rpx;">保存</button>
+      <view class="closeDialog" bindtap="hideDialog">×</view>
     </view>
-    
-    <!-- <view class="input-box">
-      <view class="label"><view class="n-red">*</view>用户账号:</view>
-      <input bindinput="bindInputValue" data-type="1" placeholder="输入用户账号" value="{{inputValue.user}}"></input>
-    </view>
-    
-    <view class="input-box">
-      <view class="label"><view class="n-red">*</view>开发者密钥:</view>
-      <input bindinput="bindInputValue" data-type="2" placeholder="输入开发者密钥" value="{{inputValue.userKey}}"></input>
-    </view> -->
-    <button bindtap="addPrintClick" type="primary" style="margin: 0;width: 100%;margin-top: 100rpx;">保存</button>
   </view>
 </view>

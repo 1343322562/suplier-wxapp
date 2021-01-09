@@ -29,7 +29,8 @@ Page({
       platform: supplierData['platform'],
       token: supplierData['token'],
       username: supplierData['username'],
-      supplierNo: supplierData['supplierNo']
+      supplierNo: supplierData['supplierNo'],
+      synCode: supplierData['synCode']
     }
     wx.setStorageSync('authorizeObj', authorizeObj)
     console.log(1)

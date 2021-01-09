@@ -1,12 +1,13 @@
 import { toast } from "../tool/tool"
 export default {
-  baseURL: 'https://qzc.yxdinghuo.com/',
+  baseURL: 'http://192.168.2.7:8092/zksr-match/',
   // https://ch.zksr.cn/
   // http://192.168.2.96:8087/zksr-match/  文艺
   // http://vipp.free.vipnps.vip/zksr-match/
   // http://47.92.249.124:8081/zksr-match/
   // https://qzc.yxdinghuo.com/    怡兴
   // http://182.254.234.215:8086/zksr-match/  蒋旺
+  // http://192.168.2.7:8092/zksr-match/
   // http://39.98.164.194:8087/
   post (url, param) {
     this.ajax('post', url, param)
