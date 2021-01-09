@@ -1,5 +1,14 @@
 <!--pages/addPrint/addPrint.wxml-->
 <view class="container">
+  <view class="all-print">
+    <view class="item" wx:for="{{allPrint}}" wx:key="index">
+      <view class="label">设备号</view>
+      <view class="content">{{item}}</view>
+      <image src="../../images/delete.png" alt="" />
+      <view class="index">{{index + 1}}</view>
+    </view>
+  </view>
+  <button bindtap="showAddPrintDialog" type="primary" style="width: 80%;margin-bottom: 100rpx;margin-top: 40rpx;">添加打印设备</button>
   <view class="form">
     <view class="input-box">
       <view class="label"><view class="n-red">*</view>打印机设备号:</view>

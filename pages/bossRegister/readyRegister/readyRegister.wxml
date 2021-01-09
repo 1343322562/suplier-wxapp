@@ -3,10 +3,11 @@
   leftIconText='返回'
   title="注册须知" 
   background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  wx:if="{{r!=0}}"
 />
 
 
-<view class="container">
+<view class="container" wx:if="{{r!=0}}">
 <!-- 告示 -->
   <view class="notice">
     <view class="content c-1">注册商户前请准备好以下</view>
@@ -127,4 +128,4 @@
   </view>
 </view>
 
-<view class="btn" bindtap="toRegister">前往注册</view>
+<view class="btn" bindtap="toRegister" wx:if="{{r!=0}}">前往注册</view>

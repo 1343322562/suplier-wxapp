@@ -1,5 +1,5 @@
 import API from '../../api/index.js'
-import { showModal,backPage } from '../../tool/tool.js'
+import { showModal,backPage, toast } from '../../tool/tool.js'
 Page({
 
   /**
@@ -64,6 +64,11 @@ Page({
     const enabled = String(this.data.selected)
     const duty = String(this.data.role == "库管员" ? 1 : 2)
     const licensePlate = String(this.data.licensePlate)
+    if (!name) return toast('请填写员工姓名')
+    if (mobile.length != 11) return  toast('请填写正确手机号')
+    if (!duty) return  toast('请选择员工角色')
+    if (!password && duty == 1) return toast('请填写账户密码')
+    if (!licensePlate && duty == 2) return toast('请填写正确车牌')
     API.saveSupplierEmployment({
       data: { 
         platform, token, username, supplierNo,

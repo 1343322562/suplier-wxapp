@@ -53,6 +53,7 @@ App({
   },
   globalData: {
     state: 0,
+    synCode: '', // 来源平台, 登录成功时赋值,携带至所有接口
     baseUrl: reqConfig.baseURL,
     ceshiData: false, // 当前是否是测试过审状态
     userInfo: null,

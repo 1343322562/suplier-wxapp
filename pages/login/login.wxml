@@ -41,11 +41,24 @@
       value="{{text}}"
     >
     </input>
-    <input wx:if="{{selected==0 || selected==1}}"
+    <input wx:if="{{isShowPassword && (selected==0 || selected==1)}}"
       data-name='password'
       bindinput="binding"
       class="input"
-      type='{{isShowPassword ? "number" : "password"}}' 
+      type='number' 
+      placeholder='请输入密码'
+      placeholder-style='margin-left: 18rpx;'
+      maxlength='12'
+      value="{{password}}"
+    >
+      <image mode="aspectFit" class="switch-password" src='../../images/{{isShowPassword ? "login_pw_show.png" : "login_pw.png"}}' catchtap="switchPassword"/>
+    </input>
+    
+    <input wx:if="{{!isShowPassword && (selected==0 || selected==1)}}"
+      data-name='password'
+      bindinput="binding"
+      class="input"
+      type='password' 
       placeholder='请输入密码'
       placeholder-style='margin-left: 18rpx;'
       maxlength='12'

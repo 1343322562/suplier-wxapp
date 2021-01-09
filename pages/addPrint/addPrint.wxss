@@ -6,7 +6,8 @@ background-color: #eee;
 }
 
 .container {
-  padding-top: 100rpx;
+  padding-top: 20rpx;
+  justify-content: end;
 }
 
 .form {width: 90%;
@@ -37,3 +38,10 @@ font-size: 29rpx;
 .form button {
 
 }
+
+.all-print {width: 90%;padding: 0rpx 5% 40rpx;}
+.all-print .item{position: relative;width: 88%;padding: 20rpx 6%;background: linear-gradient(to bottom right, #f1958b, #FF4E3E);border-radius: 25rpx;color: #f6f6f6;margin-bottom: 20 rpx;}
+.all-print .label{font-size: 27rpx;height: 54rpx;line-height: 54rpx;}
+.all-print .content{font-size: 34rpx;height: 54rpx;line-height: 54rpx;}
+.all-print image{height: 43rpx;width: 43rpx;position: absolute;top: 20rpx;right: 30rpx;border: 2rpx solid #f1f1f1;padding: 14rpx;border-radius: 50%;box-shadow: 0rpx 0rpx 20rpx #ffffff inset;}
+.all-print .index{    position: absolute;font-size: 23rpx;top: -10rpx;left: -10rpx;border-radius: 50%;border: 1rpx solid #fff;height: 35rpx;width: 35rpx;text-align: center;background-color: #fcbc47;}

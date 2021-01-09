@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isShowDialog: false,
+    allPrint: [],
     inputValue: {
       machineNo: '',    // 设备编号
       user: '', // 用户名
@@ -17,7 +19,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let allPrint = wx.getStorageSync('allPrint')
+    allPrint.length && this.setData({ allPrint })
+  },
+  // 显示添加设备框
+  showAddPrintDialog() {
+    this.setData({ isShowDialog: true })
   },
   // 绑定输入框
   bindInputValue(e) {

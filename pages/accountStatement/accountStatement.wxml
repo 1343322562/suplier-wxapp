@@ -31,9 +31,9 @@
   <view class="default-area-text">此分类暂无订单数据~~~</view>
 </view>
 
-<!-- 0：未交款 3.在线支付-->
+<!-- 0：店家未付款（司机未交款） 3.在线支付-->
 <AccountCard
-  wx:if="{{(selectedNav == 0 && item.acctFlag == 0) || (selectedNav == 3 && item.payWay != null && item.payWay != 'XJ')}}"
+  wx:if="{{(selectedNav == 0 && (item.acctFlag == 0 || (item.acctFlag == 2 && item.tmsPayFlag == 0))) || (selectedNav == 3 && item.payWay != null && item.payWay != 'XJ')}}"
   wx:for="{{orderData}}"
   wx:key="index"
   data='{{item}}' 

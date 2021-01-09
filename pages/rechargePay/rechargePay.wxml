@@ -9,6 +9,9 @@
 <view class="select-amt" bindtap="selectAmt">
   <view wx:for="{{tagArray}}" wx:key="index" class="{{type == index + 1 ? 'act' : 'tag'}}" data-type="{{index+1}}">{{item}}</view>
 </view>
+
+<view class="selectSynCode"></view>
+
 <input type="number" bindinput="bindInputValue" value="{{amt}}" placeholder="请输入充值金额"></input>
 
 <button bindtap="submit" type="primary">确定</button>

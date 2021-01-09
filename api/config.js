@@ -1,5 +1,4 @@
 import { toast } from "../tool/tool"
-
 export default {
   baseURL: 'https://qzc.yxdinghuo.com/',
   // https://ch.zksr.cn/
@@ -7,6 +6,7 @@ export default {
   // http://vipp.free.vipnps.vip/zksr-match/
   // http://47.92.249.124:8081/zksr-match/
   // https://qzc.yxdinghuo.com/    怡兴
+  // http://182.254.234.215:8086/zksr-match/  蒋旺
   // http://39.98.164.194:8087/
   post (url, param) {
     this.ajax('post', url, param)
@@ -19,6 +19,7 @@ export default {
       title: '请稍后...',
     })
     let requestObj = param.data || {}
+    requestObj.synCode = getApp().globalData.synCode  // 来源平台
     let request = {
       url: this.baseURL + url,
       method: type,

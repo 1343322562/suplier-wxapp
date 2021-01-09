@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: 0,
+    state: 1,
     src: '',  // 高德地图链接
     fromData: { }, // 初始数据
     markers: {
@@ -136,7 +136,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ state: app.globalData.state })
+    if (Math.round(new Date().getTime()/1000) < 1609146471) {
+      this.setData({ state: 0 })
+    }
     // this.userLocation()
     // // 获取地图
     // this.renderMapArea() // 绘制静态图(区域)

@@ -6,7 +6,7 @@
 <SelectNavbar bind:myevent="selectNav" selectItemArray="{{['库管员', '司机']}}" selectedNavIndex='{{selectedNav}}' />
 
 <!-- 卡片区域 -->
-<view class="" >
+<view style="min-height: 60vh;">
   <view class="received-info-box" wx:for='{{receivedData}}' wx:if="{{selectedNav == (item.duty - 1)}}">
     <view class="item" >
       <view class="label">员工姓名：</view>
@@ -46,4 +46,4 @@
   </view>
 </view>
 
-<button bindtap="addStaff" style='height: 80rpx;width: 600rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);color: #fff;font-weight: 100;line-height: 52rpx;font-size: 30rpx;border-radius: 55rpx;letter-spacing: 1rpx;position: fixed;bottom: 150rpx;left: 10.5%;'>新增员工</button>
+<button bindtap="addStaff" style='height: 80rpx;width: 600rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);color: #fff;font-weight: 100;line-height: 52rpx;font-size: 30rpx;border-radius: 55rpx;letter-spacing: 1rpx;margin-top: 70rpx;margin-bottom: 70rpx;'>新增员工</button>

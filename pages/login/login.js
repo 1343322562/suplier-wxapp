@@ -137,6 +137,7 @@ Page({
       this.data.text = val
     } else if (name == 'password') {
       this.data.password = val
+      this.setData({ password: val })
     }
     console.log(this.data.text)
   },

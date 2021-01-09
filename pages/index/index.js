@@ -56,6 +56,7 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log(options)
     this.getBoundingInfo() //获取胶囊信息（自定义导航栏）  
     if (!options.data && !app.globalData.wareInfo) {
       showModal({
@@ -65,6 +66,8 @@ Page({
       return
     }
     const supplierData = JSON.parse(options.data) || app.globalData.wareInfo
+    console.log(supplierData)
+    app.globalData.synCode = supplierData.synCode
     console.log(supplierData, !wx.getStorageSync('authorizeObj'))
     this.isShowRechargeDialog(supplierData.czAmt)  //  是否显示 充值 弹框， 低于 1000 再显示
     this.authorize(supplierData) // 缓存 authorizeObj 信息

@@ -41,9 +41,9 @@
 		<view class="null" style="margin: 40rpx auto 90rpx;" wx:if="{{isShowBottomNull}}">
 		———	已经到底了哟 ———
 		</view>
-		<view class="loading" wx:if="{{isShowBottomLoading}}">
+		<!-- <view class="loading" wx:if="{{isShowBottomLoading}}">
 		  加载中....
-		</view>
+		</view> -->
 
 
 	</view>

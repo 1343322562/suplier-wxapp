@@ -116,6 +116,8 @@ border-left: 9rpx solid #aaa;
   flex: 1;
   display: block;
   margin-bottom: 99rpx;
+  margin-left: 170rpx;
+  max-width: 78%;
 }
 
 .good-card-box {
