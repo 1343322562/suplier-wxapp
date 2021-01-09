@@ -57,7 +57,6 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options)
     this.getBoundingInfo() //获取胶囊信息（自定义导航栏）  
     if (!options.data && !app.globalData.wareInfo) {
       showModal({
@@ -74,9 +73,19 @@ Page({
     this.authorize(supplierData) // 缓存 authorizeObj 信息
     this.seachSaleData(0)   // 表格数据获取 并 计算当日销售数据
     this.getErpUrl() // 情求图片根路径
+    this.getAllprint(supplierData.supplierNo) // 请求打印机
     let roleNo = supplierData.roleNo
   
     this.setData({ roleNo, shopData: supplierData })
+  },
+  // 请求打印机
+  getAllprint(supplierNo) {
+    API.findPrinter({
+      data: { supplierNo },
+      success(res) {
+        wx.setStorage({ key: 'allPrint', data: res.data })
+      }
+    })
   },
   //  是否显示 充值 弹框， 低于 1000 再显示
   isShowRechargeDialog(czAmt) {

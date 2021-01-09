@@ -2,8 +2,8 @@
 <view class="container">
   <view class="all-print">
     <view class="item" wx:for="{{allPrint}}" wx:key="index">
-      <view class="label">设备号</view>
-      <view class="content">{{item.}}</view>
+      <view class="label">编号: {{item.printerSn}}</view>
+      <view class="content">{{item.printerName}}</view>
       <view class="del" hover-class="btn-hover" hover-stay-time="100"><image src="../../images/delete.png" alt=""  bindtap="delPrintNoClick" data-index="{{index}}"/></view>
       
       <view class="index">{{index + 1}}</view>

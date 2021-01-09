@@ -19,7 +19,7 @@
     <image 
       class="suplierMemo" 
       src="../../images/memo.png" 
-      wx:if="{{isShowMemoIcon}}"
+      wx:if="{{isShowMemoIcon && data.supplyFlag != 5}}"
       catch:tap="showMemoDialogClick"
       data-i="{{index}}"
     />

@@ -18,18 +18,12 @@ Component({
   attached() {
     let list = this.data.list.length ? this.data.list : wx.getStorageSync('allPrint')
     console.log(list)
-    let tempArr = []
     list.length && list.forEach((item,index) => {
-      let tempObj = {}
-      tempObj.printNo = item
-      tempObj.select = false
-      tempArr.push(tempObj)
+      item.select = false
     })
-    console.log(tempArr)
-    this.data.list = tempArr
-    console.log(JSON.stringify(this.data.list))
-    this.setData({ list: tempArr })
-    console.log(JSON.stringify(this.data.list))
+    console.log(list)
+    this.data.list = list
+    this.setData({ list })
     console.log(this, this.data)
   },
   /**
@@ -50,13 +44,13 @@ Component({
       let printNo
       list.forEach(item => {
         if (item.select) {
-          printNo = printNo ? `${item.printNo},${printNo}` : item.printNo
+          printNo = item.printerSn
         }
       })
       console.log(printNo)
       if (!printNo) return toast ('请选择打印机')
       
-      this.triggerEvent('printEvent', { printNo: printNo}) 
+      this.triggerEvent('printEvent', { printNo: printNo }) 
     },
     hide() {
       this.setData({ isShow: false })

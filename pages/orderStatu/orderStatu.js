@@ -521,7 +521,7 @@ Page({
     // 打印请求
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent, printNo},
+      data: { platform, token, username, supplierNo ,printContent , printerSn: printNo},
       success(res) {
         console.log(res)
         toast(res.message)

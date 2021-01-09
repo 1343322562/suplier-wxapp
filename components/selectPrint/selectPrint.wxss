@@ -10,7 +10,13 @@
   align-items: center;
   z-index: 10;
 }
-
+.print-sn{
+  font-size: 26rpx;
+}
+.print-name {
+  font-size: 31rpx;
+  font-weight: bold;
+}
 .title {
   text-align: center;
   font-size: 35rpx;

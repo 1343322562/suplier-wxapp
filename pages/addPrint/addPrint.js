@@ -18,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let allPrint = wx.getStorageSync('allPrint')
     this.findPrinter()
   },
   // 查询打印设备
@@ -29,6 +28,7 @@ Page({
       data: { supplierNo },
       success(res) {
         const data = res.data
+        wx.setStorage({ key: 'allPrint', data: data })
         _this.setData({ allPrint: data })
       }
     })
@@ -37,16 +37,31 @@ Page({
   delPrintNoClick(e) {
     const { index } = e.currentTarget.dataset
     const { allPrint } = this.data
+    const _this = this
     showModal({
-      content: `确认删除此设备 ? 设备号 【${allPrint[index]}】`,
+      content: `确认删除此设备 ? 设备号 【${allPrint[index].printerSn}】`,
       success() {
-        this.delPrinters(allPrint[index])
+        _this.delPrinters(allPrint[index].printerSn, index)
       }
     })
   },
-  delPrinters() {
+  delPrinters(printerSn, index) {
+    const { supplierNo } = wx.getStorageSync('authorizeObj')
+    const _this = this
+    const { allPrint } = _this.data
     API.delPrinters({
-      data: {}
+      data: { supplierNo, printerSn },
+      success(res) {
+        console.log(res)
+        if (res.code === "10000") {
+          toast(res.message)
+          allPrint.splice(index, 1)
+          _this.setData({ allPrint })
+          wx.setStorage({ key: 'allPrint', data: allPrint })
+        } else {
+          toast(res.message)
+        }
+      }
     })
   },
   // 隐藏框
@@ -72,6 +87,7 @@ Page({
   addPrintClick () {
     console.log(this.data)
     const { machineName, machineNo } = this.data.inputValue
+    const { allPrint } = this.data
     const _this = this
     if(!machineNo) return toast('请输入打印设备号码')
     wx.showLoading({ title: '保存中...' })
@@ -82,7 +98,8 @@ Page({
         console.log(res)
         if (res.code == 10000) {
           toast(res.message)
-          _this.cachePrintNo(machineNo)
+          allPrint.push({ printerName: machineName, printerSn: machineNo})
+          wx.setStorage({ key: 'allPrint', data: allPrint })
           backPage()
           backPage()
         } else {

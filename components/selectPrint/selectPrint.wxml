@@ -10,8 +10,8 @@
         data-index="{{index}}"
         data-select="{{item.select}}"
       >
-        <view>设备号：</view>
-        <view>{{item.printNo}}</view>
+        <view class="print-name">{{item.printerName}}</view>
+        <view class="print-sn">设备号：{{item.printerSn}}</view>
       </view>
     </view>
     <view class='btn' catchtap="confirm">打印</view>

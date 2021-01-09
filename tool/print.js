@@ -17,6 +17,7 @@ let contentHandle = {
 
 // 处理打印格式
 export const printContentHandle = function (data, type) {
+  console.log(data)
   console.log(getApp().globalData.wareInfo)
   let content = '' // 打印内容
   let sign = type == 1 ? '重复打印' : ''
@@ -31,7 +32,7 @@ export const printContentHandle = function (data, type) {
     console.log(item, getApp())
     sheetNo.push(item.sheetNo)
     content += `<L>站    点：${getApp().globalData.wareInfo.supplierName || getApp().globalData.wareInfo.warehouse}<BR></L>`
-    content += `<L>业 务 员：${(item.salesName + '  ' + saleManTel) || ''}<BR></L>`
+    content += `<L>业 务 员：${(item.salesName + '  ' + item.saleManTel) || ''}<BR></L>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate.slice(0, 19)}<BR></L>`
     content += `<L>复打日期：${cDate}<BR></L>`
@@ -61,7 +62,7 @@ export const printContentHandle = function (data, type) {
     content += `<B><L>配送员：<N>________________</N><L></B><BR><BR>`
     content += `<L><HB>是否有冻品</HB>：    <B>□</B> <HB>是</HB>      <B>□</B> <HB>否</HB><L><BR><BR>`
     // content += `<B><L>出货单备注：<L></B><BR>`
-    content += `<BR><B><L>客户备注:${item.mome || '无'}</L></B>`
+    content += `<BR><B><L>客户备注:${item.memo || '无'}</L></B>`
     content += `<BR><B><L>老板备注:${item.bossMemo || '无'}</L></B><BR><BR>`
     content += `<BR><BR><N><L>客服电话:<BOLD>0771-3836383</BOLD> (周一至周六行政班时间联系)<L></N>`
     // content += `<N><L>温馨提示: 签收前,请确认整件数量即可,明细数量需在到货24小时内自行清点,少货差异请联系客服为您处理<L></N>`
@@ -73,7 +74,7 @@ export const printContentHandle = function (data, type) {
     content += `<BR><BR><B><C>签收回执单<C></B><BR><BR>`
     content += `<L>单    号：${item.sheetNo}<BR></L>`
     content += `<L>订单日期：${item.createDate}<BR></L>`
-    content += `<L>业 务 员：${(item.salesName + '  ' + saleManTel) || ''}<BR></L>`
+    content += `<L>业 务 员：${(item.salesName + '  ' + item.saleManTel) || ''}<BR></L>`
     content += `<L>复打日期：${cDate}<BR><BR></L>`
   
     content += `<L>店    名：<BOLD>${item.branchName}</BOLD><BR></L>`
