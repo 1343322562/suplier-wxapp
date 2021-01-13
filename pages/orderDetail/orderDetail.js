@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    authorizeObj: {},
     supplyFlag: '',       // 当前订单状态
     sheetNo: '',
     bounding: {},         // 胶囊信息
@@ -54,9 +55,9 @@ Page({
     const printContent = printContentHandle(data, type) 
     console.log('printContent', printContent)
     // 打印请求
-    const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
+    const { platform, token, username, supplierNo, synCode } = wx.getStorageSync('authorizeObj')
     API.print({
-      data: { platform, token, username, supplierNo ,printContent, printerSn: printNo },
+      data: { platform, token, username, supplierNo ,printContent, printerSn: printNo, synCode },
       success(res) {
         console.log(res)
         toast(res.message || res.msg)
@@ -101,8 +102,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.data)
     wx.showLoading({ title: '请稍候..' })
-    let data = JSON.parse(options.data)
+    let data = JSON.parse(decodeURIComponent(options.data))
+    console.log(data)
     this.data.sheetNo = data.sheetNo
     console.log(data)
     // 更新订单状态(已查看)
@@ -117,7 +120,7 @@ Page({
     // 获取当前订单状态
     let { supplyFlag } = data
     console.log(options)
-    this.setData({ supplyFlag, printList: wx.getStorageSync('allPrint') })
+    this.setData({ supplyFlag, printList: wx.getStorageSync('allPrint'), authorizeObj: wx.getStorageSync('authorizeObj') })
     // 获取订单详情
     this.getOrderDetail(data.sheetNo)
   },

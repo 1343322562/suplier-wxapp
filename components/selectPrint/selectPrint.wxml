@@ -10,7 +10,7 @@
         data-index="{{index}}"
         data-select="{{item.select}}"
       >
-        <view class="print-name">{{item.printerName}}</view>
+        <view class="print-name">{{item.printerName || index+1}}</view>
         <view class="print-sn">设备号：{{item.printerSn}}</view>
       </view>
     </view>

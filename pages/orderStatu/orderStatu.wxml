@@ -98,11 +98,11 @@
   bind:myCheckbox="{{myCheckbox}}"
   isShowMemoIcon="{{true}}"
 >
-  <view wx:if="{{item.supplyFlag == 31}}" class="backCar" catchtap="backCar" data-index="{{index}}">撤销装车</view>
+  <view wx:if="{{item.supplyFlag == 31 && authorizeObj.platform !== '1'}}" class="backCar" catchtap="backCar" data-index="{{index}}">撤销装车</view>
 </AccountCard>
 
 <OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 0}}" data='{{newOrderInfo}}'  catch:tap='allSelected'>
-  <view class="print-btn-box">
+  <view class="print-btn-box" wx:if="{{authorizeObj.platform !== '1'}}">
     <button catch:tap='showSelectPrint' data-type="0" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg,#285dee, #45abde);border-radius: 10rpx 10rpx 90rpx 90rpx;margin-bottom: 5rpx;">发货</button>
     <button catch:tap='print' data-type="1" style="border-radius: 2rpx;font-size:29rpx;font-weight: 100; color: #fff;line-height:50rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(17deg,#285dee, #45abdf);border-radius: 90rpx 90rpx 10rpx 10rpx;">出库</button>
   </view>
@@ -111,7 +111,7 @@
 <!-- 1：待装车 -->
 
 <OrderStatuBottom isAllSelected="{{isAllSelected}}" wx:if="{{selectedNav == 1}}" data='{{waitCarInfo}}' catch:tap="allSelected">
-  <button catch:tap='showEnterCarDialog' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg, #FF8200, #FFB910);">装车</button>
+  <button wx:if="{{authorizeObj.platform !== '1'}}" catch:tap='showEnterCarDialog' style="border-radius: 2rpx;font-size:30rpx;font-weight: 100; color: #fff;line-height:100rpx;margin:0;padding:0;width: 180rpx;height: 100rpx;background: linear-gradient(-17deg, #FF8200, #FFB910);">装车</button>
 </OrderStatuBottom>
 
 <!-- 2：已装车 -->

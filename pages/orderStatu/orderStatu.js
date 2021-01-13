@@ -31,6 +31,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    authorizeObj: {},
     selectedNav: 0,         // 导航栏当前选中项
     isAllSelected: false,     // 全选
     printDialog: false,
@@ -156,8 +157,10 @@ Page({
   toGoodDetailClick (e) {
     let index = e.target.dataset.index
     let orderData = this.data.orderData
+    console.log(orderData[index])
     let data = JSON.stringify(orderData[index])
-    goPage('../orderDetail/orderDetail?data=' + data) // 0: 新订单 1: 待装车 2: 已装车 3.....
+    console.log(data)
+    goPage('../orderDetail/orderDetail?data=' + encodeURIComponent(data)) // 0: 新订单 1: 待装车 2: 已装车 3.....
   },
 // 装车
   entetCarClick (e) {
@@ -343,7 +346,7 @@ Page({
     options.nav != 3 && wx.showLoading({ title: '请稍候..' })
     console.log(options)
     let selectedNav = options.nav
-    this.setData({ selectedNav , printList: wx.getStorageSync('allPrint')})
+    this.setData({ selectedNav , printList: wx.getStorageSync('allPrint'), authorizeObj: wx.getStorageSync('authorizeObj')})
   },
   
   onShow: function (e) {

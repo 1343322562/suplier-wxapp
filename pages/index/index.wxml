@@ -29,6 +29,7 @@
   </view>
 </view>
 
+<!-- <view class="user1-sign" wx:if="{{roleNo === '1'}}">库管员暂未开通订单操作, 只能查看订单详情以及状态</view> -->
 <!-- 导航 items 区域 -->
 
 <view class="nav-conainer" bindtap="toPage">
