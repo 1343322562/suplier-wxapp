@@ -82,6 +82,7 @@ Page({
             console.log(data)
             wx.setStorage({ key: 'userObj', data: { username, password }})
             app.globalData.wareInfo = res.data
+            app.globalData.synCode = res.data.synCode
             goPage('../index/index?data=' + JSON.stringify(data))
           } else if (res.code == -100) { // 跳转充值页 余额不足
             _this.toRecharge(2)
@@ -109,7 +110,7 @@ Page({
             console.log(res)
             let data = res.data
             let { username, token, supplierNo, platform } = data
-            
+            app.globalData.synCode = data.synCode
             wx.setStorageSync('authorizeObj', { routeSendMan: username, token, supplierNo, platform })
             goPage('../driverTransStatu/driverTransStatu')
             console.log(1)
@@ -172,6 +173,7 @@ Page({
             let { username, token, supplierNo, platform } = res.data
             wx.setStorageSync('authorizeObj', { routeSendMan: username, token, supplierNo, platform })
             wx.setStorage({ key: 'userObj', data: { username: routeSendMan } })
+            app.globalData.synCode = res.data.synCode
             goPage('../driverTransStatu/driverTransStatu')
           }
         },
@@ -198,10 +200,12 @@ Page({
             data.roleNo = _this.data.selected
             let { username, token, supplierNo, platform } = data
             wx.setStorageSync('authorizeObj', { username, token, supplierNo, platform })
+            app.globalData.synCode = res.data.synCode
             app.globalData.wareInfo = res.data
             goPage('../index/index?data=' + JSON.stringify(res.data))
             console.log(1)
           } else if (res.code == -100) { // 跳转充值页 余额不足
+            app.globalData.synCode = res.data.synCode
             _this.toRecharge(2)
           }
         },
