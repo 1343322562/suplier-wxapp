@@ -2,7 +2,7 @@
 <view class="collect-statu-card">
   <view class="shop">
     <image src="{{baseImgUrl + data.branchNo + '.jpg'}}" alt="../../images/def.png"/>
-    <view class="newOrder"  wx:if="{{data.supplyFlag == 1 && isShowNewOrderSign}}" />
+    <view class="newOrder"  wx:if="{{data.supplyFlag == 1}}" />
     <view class="shop-info">
       <view class="top">
         <view class="name">{{data.branchName}}</view>

@@ -128,4 +128,4 @@
   </view>
 </view>
 
-<view class="btn" bindtap="toRegister" wx:if="{{r!=0}}">前往注册</view>
+<view class="btn" bindtap="toRegister" wx:if="{{r != 0}}">前往注册</view>

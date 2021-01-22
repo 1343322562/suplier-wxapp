@@ -123,8 +123,8 @@
   contentStyle="color: #FF4E3E;"
 />
 <TextItems
-  wx:if="{{detailData.sheetAmt != detailData.orgiSheetAmt}}"
-  texrItemData="{{[{label: '应付金额：', content: '￥'+ (detailData.orgiSheetAmt || 0)}, {label: '优惠金额：', content:'￥' + (detailData.discountAmount || 0)}]}}"
+  wx:if="{{detailData.sheetAmt != detailData.orgiSheetAmt && detailData.orgiSheetAmt && detailData.discountAmount}}"
+  texrItemData="{{[{label: '应付金额：', content: '￥'+ (detailData.orgiSheetAmt || '')}, {label: '优惠金额：', content:'￥' + (detailData.discountAmount || '')}]}}"
   contentStyle="color: #FF4E3E;"
 />
 <TextItems texrItemData="{{[{label: '订单号：', content: detailData.sheetNo}]}}" >

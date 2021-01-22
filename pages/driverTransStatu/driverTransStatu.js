@@ -13,11 +13,11 @@ Page({
     isShowCollectDialog: false,  // 收款 Dialog
     isShowPaymentDialog: false,  // 交款 Dialog   
     paymentValueObj: {           // 交款 input value
-      date: '06-29',
-      driver: '张三丰',
-      shouldBePrice: '20000',
+      date: '',
+      driver: '',
+      shouldBePrice: '',
       actPrice: '',
-      lackPrive: '1000',
+      lackPrive: '',
       textArea: ''
     },    
     data: [],
@@ -122,9 +122,10 @@ Page({
   // 显示交款 Dialog
   showPaymentDialogClick () {
     const allSheetAmt = this.data.allSheetAmt
+    const sendMan = this.data.orderData[0].sendMan
     if (allSheetAmt[0] == 0) return showModal({ content: '总金额必须大于 0' })
-    
-    this.setData({ isShowPaymentDialog: true, ['paymentValueObj.date']: tim(0) })
+    console.log(this.data)
+    this.setData({ isShowPaymentDialog: true, ['paymentValueObj.date']: tim(0), ['paymentValueObj.driver']: sendMan })
   },
   // 关闭支付 Dialog
   closeDialogClick () {

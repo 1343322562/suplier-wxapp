@@ -30,7 +30,7 @@
     </view>
     <view class='item' >
       <text class='sheetNo'>{{item.operDate}}</text>
-      <text class='right money'>消费金额: {{item.busiAmt}}</text>
+      <text class='right money'>{{item.type == '1' ? '充值' : '消费'}}金额: {{item.busiAmt}}</text>
     </view>
   </view>
 </view>

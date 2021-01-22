@@ -13,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (Math.round(new Date().getTime()/1000) < 1609146471) {
+    if (Math.round(new Date().getTime()/1000) < 1611310457) {
       this.setData({ r: 0 })
     }
   },

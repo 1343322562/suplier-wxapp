@@ -52,7 +52,7 @@ Page({
   printOrder(data, type, printNo) {
     console.log(data)
     const _this = this
-    const printContent = printContentHandle(data, type) 
+    const printContent = printContentHandle(data, type)
     console.log('printContent', printContent)
     // 打印请求
     const { platform, token, username, supplierNo, synCode } = wx.getStorageSync('authorizeObj')

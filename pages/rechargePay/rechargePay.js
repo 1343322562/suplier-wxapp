@@ -1,4 +1,4 @@
-const { toast, getIP, showModal } = require("../../tool/tool")
+const { toast, getIP, showModal, backPage } = require("../../tool/tool")
 import API from '../../api/index.js'
 import { tim, getRandomNum } from '../../utils/date-format.js'
 // pages/rechargePay/rechargePay.js
@@ -121,7 +121,8 @@ Page({
                     wx.clearStorageSync('authorizeObj')
                     return
                   }
-                  wx.redirectTo({ url: '/pages/index/index' }) 
+                  backPage()
+                  // wx.redirectTo({ url: '/pages/index/index' }) 
                 }
               })
             },

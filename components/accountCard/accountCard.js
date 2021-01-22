@@ -16,10 +16,6 @@ Component({
       type: Boolean,
       value: false
     },
-    isShowNewOrderSign: {  // 未查看的新订单是否显示 红色标识
-      type: Boolean,
-      value: true
-    },
     isShowCheckbox: {  // 是否显示 radio
       type: Boolean,
       value: true
