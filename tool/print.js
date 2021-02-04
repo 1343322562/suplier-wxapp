@@ -48,6 +48,8 @@ export const printContentHandle = function (data, type) {
     item.details.forEach((good, i) => {
       console.log(8888, good.itemMemo)
       content += `<N>【${i+1}】    ${contentHandle.unit(good.itemSubno, 19)}${good.itemName.slice(0, 9)}</N><BR>`
+      if (good.itemName.length > 9) content += i >= 9 ? `<N>${contentHandle.unit('', 28)}${good.itemName.slice(9, 18)}</N><BR>` : `<N>${contentHandle.unit('', 27)}${good.itemName.slice(9, 19)}</N><BR>`
+      if (good.itemName.length > 19) content += i >= 9 ? `<N>${contentHandle.unit('', 28)}${good.itemName.slice(9, 18)}</N><BR>` : `<N>${contentHandle.unit('', 27)}${good.itemName.slice(19, 29)}</N><BR>`
       content += `<N> <BOLD>${contentHandle.unit(good.realQty+good.unitNo, 7)}</BOLD>${contentHandle.unit(good.OrgiPrice.toFixed(2), 10)}<BOLD>${contentHandle.unit(good.validPrice.toFixed(2)+'/'+good.unitNo, 11)}</BOLD>${contentHandle.unit(good.subAmt.toFixed(2), 10)}${('itemMemo' in good && good['itemMemo'] !== null && good.itemMemo.length > 3 && good.itemMemo.slice(0, 3)) || '空'}</N><BR><BR>`
     })
     content += `<C><N>————————————————————————</N><BR></C>`

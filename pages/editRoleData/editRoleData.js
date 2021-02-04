@@ -137,7 +137,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(Math.round(new Date().getTime()/1000))
-    if (Math.round(new Date().getTime()/1000) < 1611310457) {
+    if (Math.round(new Date().getTime()/1000) < 1612260013) {
       console.log(10)
       this.setData({ r: 0 })
     }

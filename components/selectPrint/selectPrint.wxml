@@ -2,7 +2,7 @@
   <view class="print-dialog">
     <view class="title">请选择打印设备</view>
     <view class="list">
-      <view 
+      <view
         class="item {{item.select ? 'act' : ''}}" 
         wx:for="{{list}}" 
         wx:key="index"

@@ -237,7 +237,7 @@ Page({
     const basePicUrl = this.data.basePicUrl
     const { platform, token, username, supplierNo } = wx.getStorageSync('authorizeObj')
     console.log(obj, supplierNo)
-
+    this.setData({ goodsData: [] })
     API.supplierItemSearch({
       data: {
         platform, token, username, supplierNo,

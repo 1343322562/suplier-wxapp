@@ -50,7 +50,8 @@ Page({
 
   // 打印订单
   printOrder(data, type, printNo) {
-    console.log(data)
+    console.log(this.data)
+    const { supplyFlag } = this.data.detailData
     const _this = this
     const printContent = printContentHandle(data, type)
     console.log('printContent', printContent)
@@ -61,7 +62,7 @@ Page({
       success(res) {
         console.log(res)
         toast(res.message || res.msg)
-        if (res.code == '10000') _this.updateSheetStatus(1, _this.data.sheetNo)
+        if (res.code == '10000' && (supplyFlag === '订单已提交' || supplyFlag === '订单拣货中')) _this.updateSheetStatus(1, _this.data.sheetNo)
       }
     })
   }, 
