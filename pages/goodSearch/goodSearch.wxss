@@ -148,5 +148,3 @@ page {
     background-color: #fff;
     width: 100%;
   }
-  .confirm-edit button{
-  }

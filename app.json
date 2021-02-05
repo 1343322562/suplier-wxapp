@@ -26,7 +26,15 @@
     "pages/rechargeDetail/rechargeDetail",
     "pages/bossRegister/bossRegister",
     "pages/bossRegister/readyRegister/readyRegister",
-    "pages/rechargePay/rechargePay"
+    "pages/rechargePay/rechargePay",
+    "pages/goodDetail2/goodDetail2",
+    "pages/rkDetail/rkDetail",
+    "pages/rk/rk",
+    "pages/selectCustom/selectCustom",
+    "pages/goodsList2/goodsList2",
+    "pages/confirmOrder/confirmOrder",
+    "pages/rkList/rkList",
+    "pages/unrkDetail/unrkDetail"
   ],
   "permission": {
     "scope.userLocation": {

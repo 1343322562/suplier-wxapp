@@ -6,7 +6,7 @@
 <view class="navbar-box" style="{{style}} height:{{bounding.top + bounding.height + 7}}px;background: {{background}};color: {{color}};">
   <view 
     class="title" 
-    style="margin-top:{{bounding.top}}px; height: {{bounding.height}}px; line-height:{{bounding.height}}px;"
+    style="margin-top:{{bounding.top+1}}px; height: {{bounding.height}}px; line-height:{{bounding.height}}px;"
   >
     <block wx:if="{{isShowLeftIcon}}">
       <image bindtap='backPage' class='back' src='../../images/back.png' wx:if='{{leftIconStyle != "black"}}'/>

@@ -22,9 +22,8 @@
 }
 
 .back-text {
-  left: 50rpx;
-height: auto;
-width: auto;
-top: -1rpx;
-
+  left: 62rpx;
+  height: auto;
+  width: auto;
+  top: 0rpx;
 }

@@ -1,0 +1,41 @@
+
+<Navbar
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  leftIconText='入库明细'
+/>
+
+<TextItems boxStyle="background-color:#fff;font-weight: bold;"  texrItemData="{{[{label: '单号：', content: 'PL65435618432516541' }]}}" />
+<TextItems boxStyle="background-color:#fff;font-weight: bold;"  texrItemData="{{[{label: '入库时间：', content: '2020-00-10 12:12:12'}]}}" />
+<TextItems texrItemData="{{[{label: '商品信息'}]}}" boxStyle="font-weight: bold;background-color:transparent;border: 0;" />
+
+
+<view class="list">
+  <view class="item">
+    <image></image>
+    <view class="info">
+      <view class="main-title">
+        <view class="name">黑人牙膏</view>
+        <view class="code">商品条码：56169684651658498</view>
+      </view>
+
+      <view class="props">
+        <view class="size">
+          <view class="label">商品规格：</view>
+          <view class="content">225g-1</view>
+        </view>
+        <view class="before-qty">
+          <view class="label">入库前数量：</view>
+          <view class="content">360指</view>
+        </view>
+        <view class="after-qty">
+          <view class="label">入库后数量：</view>
+          <view class="content">360指</view>
+        </view>
+        <view class="now-qty">
+          <view class="label">入库数量：</view>
+          <view class="content">+100</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

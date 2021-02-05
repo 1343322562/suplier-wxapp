@@ -1,0 +1,26 @@
+/* pages/goodDetail2/goodDetail2.wxss */
+page {
+  background-color: #f1f1f1;
+}
+
+.search-bar-container {display: flex;justify-content: space-around;align-items: center;padding: 25rpx 0;background-color: #fff;}
+.null {text-align: center;font-size: 32rpx;margin-top: 80rpx;color: #666;}
+nav-seach-bar {width: 400rpx;}
+.nav-seach-bar-box {background: #fff;height: 65rpx;width: 500rpx;border-radius: 5rpx;display: flex;justify-content: start;align-items: center;color: #181716;font-size: 31rpx;border: 1rpx solid #e6e6e6;padding: 5rpx 8rpx;flex: 1;margin: 0 32rpx;position: relative;}
+.nav-seach-bar-box image {height: 35rpx;width: 35rpx;margin: 0 15rpx 0 20rpx;}
+
+.list .item{background-color: #fff;margin-top: 12rpx;width: 96%;padding: 25rpx 2%;display: flex;}
+
+.list .item>image{background-color: #eee;height: 115rpx;width: 115rpx;}
+.list .item .info {flex: 1;padding-left: 20rpx;}
+.list .item .info .main-title{display: flex;justify-content: space-between;width: 100%;font-size: 30rpx;}
+.list .item .info .main-title image{height: 27rpx;width: 27rpx;margin-right: 8rpx;}
+.list .item .info .main-title .name {color: #000;font-weight: bold;}
+.list .item .info .props {width: 100%;font-size: 27rpx;}
+
+.list .item .info .props>view{display: flex;align-items: center;min-width: 50%;float: left;height: 42rpx;}
+.list .item .info .props .label{color: #888888;}
+.list .item .info .props .time .content{color: #444444;}
+.list .item .info .props .after-qty .content{color: #111111;font-weight: bold;}
+.list .item .info .props .before-qty .content{color: #111111;font-weight: bold;}
+.list .item .info .props .now-qty .content{color: rgb(247, 52, 52);}

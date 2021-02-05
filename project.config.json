@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": false,
     "postcss": false,
@@ -182,6 +182,55 @@
         {
           "name": "pages/addPrint/addPrint",
           "pathName": "pages/addPrint/addPrint",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "goodDetail2",
+          "pathName": "pages/goodDetail2/goodDetail2",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "rk",
+          "pathName": "pages/rk/rk",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "selectCustom",
+          "pathName": "pages/selectCustom/selectCustom",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "goodList",
+          "pathName": "pages/goodList/goodList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "goodsList2",
+          "pathName": "pages/goodsList2/goodsList2",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "confirmOrder",
+          "pathName": "pages/confirmOrder/confirmOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "rkList",
+          "pathName": "pages/rkList/rkList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "unrkDetail",
+          "pathName": "pages/unrkDetail/unrkDetail",
+          "query": "",
           "scene": null
         }
       ]

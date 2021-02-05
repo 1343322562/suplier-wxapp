@@ -1,0 +1,23 @@
+/* pages/selectCustom/selectCustom.wxss */
+
+.nav-custom-slot{position: absolute;top: 5rpx;left: 75rpx;left: 75rpx;display: flex;align-items: center;}
+.nav-seach-bar-box {background: #fff;height: 56rpx;width: 334rpx;border-radius: 50rpx;display: flex;justify-content: start;align-items: center;color: #181716;font-size: 28rpx;}
+
+.nav-seach-bar-box image {height: 28rpx;width: 28rpx;margin: 0 5rpx 0 20rpx;}
+
+.nav-scancode {height: 52rpx; width: 52rpx;margin-left: 35rpx;}
+.nav-seach-bar {width: 240rpx;}
+
+.list {width: 94%;padding: 0 3%;}
+.list .item {display: flex;align-items: flex-start;width: 100%;padding: 26rpx 5rpx;border-bottom: 1rpx solid #eee;}
+.list .item:last-child {border-bottom: 0;}
+.list .item .custom-img {height: 115rpx;width: 115rpx;background-color: #eee;border-radius: 10rpx;}
+.list .item .info{flex: 1;position: relative;margin-left: 18rpx;    padding: 6rpx 0;}
+.list .item .info .title{font-size: 30rpx;font-weight: bold;}
+.list .item .info .adress{color: #999999;display: flex;align-items: center;margin-top: 6rpx;}
+.list .item .info .adress .icon{height: 35rpx;width: 35rpx;   margin-right: 12rpx;}
+.list .item .checkbox{position: absolute;height: 43rpx;width: 43rpx;border-radius: 50%;right: -5px;top: 10rpx;padding: 25rpx;}
+
+.bottom {height: 125rpx;width: 100%;position: absolute;bottom: 0;background-color: #fff;display: flex;align-items: center;justify-content: center;    box-shadow: 0 -5rpx 25rpx #eee;}
+
+.bottom .btn {width: 500rpx;max-width: 68%;height: 72rpx;line-height: 72rpx;text-align: center;background: linear-gradient(to bottom right, #f1998f, #f83a28);color: #fff;border-radius: 36rpx;}

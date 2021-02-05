@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar",
+    "TextItems": "../../components/textItems/textItems"
+  },
+  "navigationStyle": "custom"
+}

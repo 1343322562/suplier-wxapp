@@ -1,0 +1,111 @@
+<Navbar
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  leftIconText='入库'
+/>
+
+
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;font-weight: bold;"
+  texrItemData="{{[{label: '品名：', content: '哇哈哈纯净水'}]}}" 
+/>
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;"
+  texrItemData="{{[{label: '规格：', content: '550ml*24瓶'}, {label: '单位：', content: '瓶'}]}}" 
+/>
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;font-weight: bold;"
+  texrItemData="{{[{label: '品名：', content: '哇哈哈纯净水'}]}}" 
+/>
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;font-weight: bold;"
+  texrItemData="{{[{label: '进价：', content: '￥'+'0.80'}]}}" 
+/>
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;font-weight: bold;"
+  texrItemData="{{[{label: '数量：', content: '230'}]}}" 
+/>
+<TextItems 
+  boxStyle="border: 0rpx;background: #fff;border: 1px solid #f8f8f8;"
+  itemStyle="font-size: 30rpx;letter-spacing: 0rpx;" 
+  labelStyle="color: #888888;"  
+  contentStyle="white-space: nowrap;font-weight: bold;"
+  texrItemData="{{[{label: '赠送数量：', content: 0}]}}" 
+/>
+
+
+<view class="btn-box" bindtap="btnClick">
+  <view class="btn cancel" data-type="0">取消</view>
+  <view class="btn confirm" data-type="1">确认入库</view>
+</view>
+
+
+<view class="print-order-box" wx:if="{{isShowDialog}}">
+  <view class="print-order" >
+    <view class="close" bindtap="closeExamineClick">×</view>
+    <view class="title">确认入库</view>
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;font-weight: bold;"
+      texrItemData="{{[{label: '品名：', content: '哇哈哈纯净水'}]}}" 
+    />
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;"
+      texrItemData="{{[{label: '规格：', content: '230ml/瓶'}]}}" 
+    />
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;"
+      texrItemData="{{[{label: '单位：', content: '瓶'}]}}" 
+    />
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;font-weight: bold;"
+      texrItemData="{{[{label: '进价：', content: '￥'+'230'}]}}" 
+    />
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;font-weight: bold;"
+      texrItemData="{{[{label: '数量：', content: '230'}]}}" 
+    />
+    <TextItems 
+      style="width: 100%;"
+      boxStyle="border: 0rpx;background: #fff;"
+      itemStyle="font-size: 30rpx;letter-spacing: 0rpx;padding: 15rpx;" 
+      labelStyle="color: #888888;"  
+      contentStyle="white-space: nowrap;font-weight: bold;"
+      texrItemData="{{[{label: '赠送数量：', content: '0'}]}}" 
+    />
+    <view class="examine" bindtap="examineClick">审核</view>
+  </view>
+</view>

@@ -1,0 +1,31 @@
+/* pages/confirmOrder/confirmOrder.wxss */
+page{background-color: #f1f1f1;}
+.list, .good-list {width: 94%;padding: 0 3%;background: #fff;}
+.list .item, .good-list .item{display: flex;align-items: flex-start;width: 100%;padding: 26rpx 5rpx;border-bottom: 1rpx solid #eee;position: relative;}
+.list .item:last-child,.good-list .item:last-child{border-bottom: 0;}
+.list .item .custom-img, .good-list .item .custom-img{height: 115rpx;width: 115rpx;background-color: #eee;border-radius: 10rpx;}
+.list .item .info, .good-list .item .info{flex: 1;position: relative;margin-left: 18rpx;    padding: 2rpx 0;}
+.list .item .info .title, .good-list .item .info .title{font-size: 30rpx;font-weight: bold;}
+.list .item .info .adress{color: #999999;display: flex;align-items: center;margin-top: 6rpx;}
+.list .item .info .adress .icon{height: 35rpx;width: 35rpx;   margin-right: 12rpx;}
+
+.good-list .item .info .props-item {display: flex;align-items: center;font-size: 27rpx;}
+.good-list .item .info .props-item .label{color: #888888;}
+.good-list .item .info .props-item .content{color: #333333;}
+
+.good-list .res {position: absolute;right: 12rpx;top: 50rpx;font-size: 27rpx;text-align: end;}
+.good-list .res .amt{color: #fa4b3e;}
+.good-list .res .qty{}
+
+.memo-box, .payway-box{padding: 20rpx 3%;width: 94%;margin-top: 8rpx;background-color: #fff;}
+.memo-box .title, .payway-box .title {font-size: 30rpx;font-weight: bold;}
+.memo-box textarea {padding: 25rpx;background-color: #f3f3f3;margin-top: 18rpx;border-radius: 15rpx;height: 115rpx;width: 100%;box-sizing: border-box;}
+
+.payway-box {display: flex;align-items: center;justify-content: space-between;}
+.payway-box .content {color: #888888;font-size: 30rpx;}
+
+.bottom {position: fixed;bottom: 0;padding: 20rpx 6%;align-items: center;display: flex;width: 88%;justify-content: space-between;background-color: #fff;}
+.bottom .btn{color: #fff;width: 180rpx;height: 66rpx;line-height: 66rpx;background: linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E);text-align: center;border-radius: 33rpx;margin-left: 50rpx;}
+.bottom .info .item{display: flex;align-items: center;}
+.bottom .info .label{color: #888888;}
+.bottom .info .pri .content{color: #fd5d52;font-weight: bold;}

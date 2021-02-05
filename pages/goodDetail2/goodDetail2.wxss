@@ -1,0 +1,21 @@
+/* pages/rkDetail/rkDetail.wxss */
+page {
+  background-color: #f1f1f1;
+}
+.list .item{background-color: #fff;margin-bottom: 12rpx;width: 96%;padding: 25rpx 2%;display: flex;}
+
+.list .item>image{background-color: #eee;height: 115rpx;width: 115rpx;}
+.list .item .info {flex: 1;padding-left: 20rpx;}
+.list .item .info .main-title{width: 100%;font-size: 30rpx;margin-bottom: 14rpx;}
+.list .item .info .main-title .code{font-size: 24rpx;color: #888888;}
+.list .item .info .main-title image{height: 27rpx;width: 27rpx;margin-right: 8rpx;}
+.list .item .info .main-title .name {color: #000;font-weight: bold;}
+.list .item .info .props {width: 100%;font-size: 27rpx;}
+
+.list .item .info .props>view{display: flex;align-items: center;min-width: 50%;float: left;height: 42rpx;}
+.list .item .info .props .size {width: 100%;}
+.list .item .info .props .size .content{color: #111111;font-weight: bold;} 
+.list .item .info .props .label{color: #888888;}
+.list .item .info .props .after-qty .content{color: #111111;font-weight: bold;}
+.list .item .info .props .before-qty .content{color: #111111;font-weight: bold;}
+.list .item .info .props .now-qty .content{color: rgb(247, 52, 52);}

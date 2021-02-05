@@ -1,0 +1,66 @@
+<Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText="确认订单"></Navbar>
+
+<view class="list">
+  <view class="item">
+    <image class="custom-img" src=""></image>
+    <view class="info">
+      <view class="title">客户可以i时候1</view>
+      <view class="adress">
+        <image class="icon" src="../../images/location.png"></image>
+        <view class="content">麓谷企业广场A2</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<TextItems 
+  style="width: 100%;"
+  boxStyle="border: 0rpx;"
+  itemStyle="color: #111;font-weight:bold;font-size: 15px;letter-spacing: 0px;padding: 9px 0;width: 100%;margin: 0;" 
+  texrItemData="{{[{label: '商品信息'}]}}" 
+/>
+
+<view class="good-list">
+  <view class="item">
+    <image class="custom-img" src=""></image>
+    <view class="info">
+      <view class="title">农夫山泉啦啦啦啦 100ml、</view>
+      <view class="props-item">
+        <view class="label">商品条码：</view>
+        <view class="content">201514585215</view>
+      </view>
+      <view class="props-item">
+        <view class="label">规格：</view>
+        <view class="content">250ml*24罐</view>
+      </view>
+    </view>
+    <view class="res">
+      <view class="amt">￥128</view>
+      <view class="qty">×2</view>
+    </view>
+  </view>
+</view>
+
+<view class="memo-box">
+  <view class="title">备注</view>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+</view>
+<view class="payway-box">
+  <view class="title">支付方式</view>
+  <view class="content">货到付款</view>
+</view>
+
+<view class="bottom">
+  <view class="info">
+    <view class="item">
+      <view class="label">出库数量：</view>
+      <view class="content">3</view>
+    </view>
+    
+    <view class="item pri">
+      <view class="label">出库金额：</view>
+      <view class="content">￥326</view>
+    </view>
+  </view>
+  <view class="btn" hover-class="btn-hover" hover-stay-time="80">去下单</view>
+</view>

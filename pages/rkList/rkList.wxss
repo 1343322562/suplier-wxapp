@@ -1,0 +1,11 @@
+/* pages/rkList/rkList.wxss */
+page {background-color: #f1f1f1;}
+.search-bar {background-color: #fff;padding: 20rpx 25rpx;margin-bottom: 8rpx;}
+.nav-seach-bar-box {    background: #fff;height: 56rpx;width: 94%;border: 1rpx solid #eee;display: flex;justify-content: space-between;align-items: center;color: #181716;font-size: 28rpx;padding: 8rpx 3%;}
+.nav-seach-bar-box image {height: 38rpx;width: 38rpx;margin: 0 5rpx 0 20rpx;}
+.nav-seach-bar {width: 85%;}
+.item {background-color: #fff;padding: 19rpx 3%;width: 94%;display: flex;align-items: center;justify-content: space-between;margin-bottom: 5rpx;}
+.item .num {font-weight: bold;font-size: 30rpx;}
+.item .time {color: #888888;font-size: 25rpx;}
+.item .status1 {color: #fd5d52;}
+.item .status2 {color: #03bd7d;}

@@ -1,0 +1,23 @@
+<Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText="入库"></Navbar>
+<view class="search-bar">
+  <view class="nav-seach-bar-box">
+    <input disabled type="text" class="nav-seach-bar" placeholder='请输入条码品名' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="商品搜索" bindconfirm="searchOrder" bindtap="toSearchPageClick" />
+    <image src='../../images/code1.png' bindtap="searchOrder" />
+  </view>
+</view>
+
+<TextItems 
+  style="width: 100%;"
+  boxStyle="border: 0rpx;background: #fff;position: relative;margin-bottom: 1rpx solid #eee;"
+  itemStyle="color: #222;font-size: 14px;font-weight: bold;letter-spacing: 0px;padding: 12px 0;width: 100%;margin: 0;" 
+  texrItemData="{{[{label: '单号：PL2156156465132'}]}}" 
+>
+  <view class="time">
+    <view class="day">2021-01-02</view>
+    <view class="date">18:10:10</view>
+  </view>
+</TextItems>
+
+<view class="list-item">
+  <view class=""></view>
+</view>

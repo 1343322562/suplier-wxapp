@@ -1,0 +1,45 @@
+<!--pages/goodDetail2/goodDetail2.wxml-->
+<Navbar
+  background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' 
+  leftIconText='入库明细'
+/>
+
+<view class="search-bar-container">
+	<view class="nav-seach-bar-box">
+		<image src='../../images/search.png' bindtap="searchOrder" />
+		<input type="text" class="nav-seach-bar" placeholder='请输入品名' placeholder-style='font-size: 26rpx;color: #999999;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="搜索" bindconfirm="searchOrder">
+    </input>
+    <button bindtap="searchClick" style="margin: 0 20px;position: absolute;top: 5px;right: 0;font-size: 24rpx;padding: 0 20rpx;z-index: 999999;" type="primary" size="mini">搜索</button>
+  </view>
+</view>
+
+<view class="list">
+  <view class="item">
+    <image></image>
+    <view class="info">
+      <view class="main-title">
+        <view class="name">黑人牙膏</view>
+        <image src="../../images/back2.png"></image>
+      </view>
+
+      <view class="props">
+        <view class="time">
+          <view class="label">入库时间：</view>
+          <view class="content">2021-01-01 10:20:01</view>
+        </view>
+        <view class="before-qty">
+          <view class="label">入库前数量：</view>
+          <view class="content">360指</view>
+        </view>
+        <view class="after-qty">
+          <view class="label">入库后数量：</view>
+          <view class="content">360指</view>
+        </view>
+        <view class="now-qty">
+          <view class="label">入库数量：</view>
+          <view class="content">+100</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+<Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)' leftIconText="入库"></Navbar>
+<view class="search-bar">
+  <view class="nav-seach-bar-box">
+    <input disabled type="text" class="nav-seach-bar" placeholder='请输入单号' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="商品搜索" bindconfirm="searchOrder" bindtap="toSearchPageClick" />
+    <image src='../../images/code1.png' bindtap="searchOrder" />
+  </view>
+</view>
+
+<view class="item">
+  <view class="info">
+    <view class="num">单号：PL5465496841</view>
+    <view class="time">2020-01-03 21:21:21</view>
+  </view>
+  <view class="status1">未入库</view>
+</view>

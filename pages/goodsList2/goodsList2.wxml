@@ -1,0 +1,85 @@
+<Navbar background='linear-gradient(to bottom right, rgb(241, 149, 139), #FF4E3E)'>
+  <view class="nav-custom-slot">
+    <view class="nav-seach-bar-box">
+      <image src='../../images/search.png' bindtap="searchOrder" />
+      <input disabled type="text" class="nav-seach-bar" placeholder='请输入商品条码' placeholder-style='font-size: 26rpx;' value="{{searchValue}}" bindinput="inputBindValue" confirm-type="商品搜索" bindconfirm="searchOrder" bindtap="toSearchPageClick" />
+    </view>
+  </view>
+	
+</Navbar>
+
+
+<view class="good-list-container">
+	<!-- 侧边栏 -->
+	<view class='slide-bar'>
+		<scroll-view style="height: 80vh;" scroll-y class="first-item" bindtap="selectSlider">
+			<block>
+				<view class="first {{index == selecSliderObj.index ? 'first-active' : ''}}">酒水饮料</view>
+				<view class="slider-transi {{index == selecSliderObj.index ? 'slider-transition' : ''}}">
+					<view class="second-item">
+						<view class="second">
+              564654
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+  </view>
+  <view class="right">
+    <view class="good-card-box">
+      <view class="good-img-box">
+        <image src="{{goodsData.picUrl}}" />
+      </view>
+      <view class="good-props-box">
+        <view class="main-info">
+          <view class="main">
+            <view class="name">{{goodsData.itemName || '农夫山泉啦啦啦啦啦啦啦'}}</view>
+            <view class="item">
+              <view class="label">商品条码：</view>
+              <view class="content">{{goodsData.itemSubno || 65454654564564}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="good-price">
+          <view class="price-box">
+            <view class="item">
+              <view class="label">批发价：</view>
+              <view class="content">￥{{goodsData.salePrice || 654}}
+              </view>
+            </view>
+            <view class="item">
+              <view class="label">规格：</view>
+              <view class="content">￥{{goodsData.price || 654}}</view>
+            </view>
+            <view class="item">
+              <view class="label">库 存：</view>
+              <view class="content">{{goodsData.stockQty || 464}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="addAndSub">
+          <image src="../../images/sub.png" class="sub"></image>
+          <input type="num"/>
+          <image src="../../images/add1.png" class="add"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="bottom">
+  <view class="info">
+    <view class="item">
+      <view class="label">出库数量：</view>
+      <view class="content">3</view>
+    </view>
+    
+    <view class="item pri">
+      <view class="label">出库金额：</view>
+      <view class="content">￥326</view>
+    </view>
+  </view>
+  <view class="btn" hover-class="btn-hover" hover-stay-time="80">去下单</view>
+</view>
